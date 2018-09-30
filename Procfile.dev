@@ -1,2 +1,2 @@
-api: rails s
-web: (HTTP_PROXY=http://localhost:3600 && cd client && yarn start)
+web: cd client && PORT=3000 npm start
+api: PORT=3001 && bundle exec rails s
