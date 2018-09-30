@@ -1,0 +1,11 @@
+{
+  "name": "encore",
+  "engines": {
+    "node": "6.3.1"
+  },
+  "scripts": {
+    "build": "cd client && yarn && yarn run build && cd ..",
+    "deploy": "cp -a client/build/. public/",
+    "postinstall": "yarn run build && yarn run deploy && echo 'Client built!'"
+  }
+}
