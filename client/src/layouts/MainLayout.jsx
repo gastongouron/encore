@@ -98,11 +98,12 @@ class MainLayout extends Component {
     return (
       <div>
         <MainAppBar
+          showMenuIconButton={false}
           title="encore"
           titleStyle={{fontSize: 28, fontWeight: 500}}
-          iconElementLeft={<Logo />}
+          // iconElementLeft={<Logo />}
           onTitleTouchTap={this.goHome}
-          onLeftIconButtonTouchTap={this.openDrawer}
+          // onLeftIconButtonTouchTap={this.openDrawer}
         >
           <MainToolbar>
             <ToolbarGroup>
