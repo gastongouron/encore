@@ -31,7 +31,7 @@ class Artists extends Component {
         if(this.props.data.loading) {
             return (<p>Loading</p>)
         } else {
-            const ArtistsItems = this.props.data.artists.map((data,i) => {
+            const ArtistsItems = this.props.data.artists_test.map((data,i) => {
                 return (<Artist key={i} index={i} data={data}></Artist>);
             });
             return (
