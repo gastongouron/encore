@@ -29,8 +29,20 @@ networkInterface.use([{
   applyMiddleware: addAuthorizationHeaderToRequest
 }]);
 
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: 'cache-and-network',
+    errorPolicy: 'ignore',
+  },
+  query: {
+    fetchPolicy: 'cache-and-network',
+    errorPolicy: 'all',
+  },
+}
+
 const apolloClient = new ApolloClient({
-  networkInterface: networkInterface
+  networkInterface: networkInterface,
+  defaultOptions: defaultOptions,
 });
 
 const history = createBrowserHistory();
@@ -60,7 +72,7 @@ const initStore = ({onRehydrationComplete}) => {
       'form'
     ]
   }, onRehydrationComplete);
-
+  
   return store;
 };
 

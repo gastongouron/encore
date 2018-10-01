@@ -5,7 +5,7 @@ import {logout} from 'react-devise/lib/actions';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
-import LogoIcon from 'material-ui/svg-icons/action/lightbulb-outline';
+// import LogoIcon from 'material-ui/svg-icons/action/lightbulb-outline';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {Notice} from '../shared';
 
@@ -24,12 +24,12 @@ const MainContainer = styled.div`
   padding: 20px;
 `;
 
-const Logo = styled(LogoIcon)`
-  height: 32px !important;
-  width: 32px !important;
-  color: ${({theme}) => theme.palette.alternateTextColor} !important;
-  padding: 6px !important;
-`;
+// const Logo = styled(LogoIcon)`
+//   height: 32px !important;
+//   width: 32px !important;
+//   color: ${({theme}) => theme.palette.alternateTextColor} !important;
+//   padding: 6px !important;
+// `;
 
 class UserMenuItem extends Component {
   state = {
@@ -108,8 +108,8 @@ class MainLayout extends Component {
           <MainToolbar>
             <ToolbarGroup>
               <MenuItem
-                containerElement={<Link to="/hello"/>}
-                primaryText="Hello"
+                containerElement={<Link to="/artists"/>}
+                primaryText="Artists"
                 style={{color: palette.alternateTextColor}}
               />
               <UserMenuItem

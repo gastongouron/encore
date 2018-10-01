@@ -2,6 +2,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :trackable, :validatable, :confirmable,
     :jwt_authenticatable, jwt_revocation_strategy: Devise::JWT::RevocationStrategies::Null #, :omniauthable
 
+  has_many :reviews
+  has_many :artists, through: :reviews
+
   def display_name
     [first_name, last_name].compact.join(' ')
   end
