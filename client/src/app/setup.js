@@ -4,12 +4,19 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import {persistStore, autoRehydrate} from 'redux-persist';
 import {reducer as formReducer} from 'redux-form';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import ApolloClient, {createNetworkInterface} from 'apollo-client';
+// import ApolloClient, {createNetworkInterface} from 'apollo-client';
 // import ReactDeviseMaterialUI from 'react-devise-material-ui';
-import {initReactDevise, addAuthorizationHeaderToRequest} from 'react-devise';
+// import {initReactDevise, addAuthorizationHeaderToRequest} from 'react-devise';
+import {initReactDevise} from 'react-devise';
 import reactDeviseReducers from 'react-devise/lib/reducers';
 import {Alert, UnstyledList, ViewHeading} from '../shared';
 import styled, {injectGlobal} from 'styled-components';
+
+
+import { ApolloClient } from 'apollo-client';
+import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
@@ -21,13 +28,13 @@ injectGlobal`
 
 injectTapEventPlugin();
 
-const networkInterface = createNetworkInterface({
-  uri: '/graphql'
-});
+// const networkInterface = createNetworkInterface({
+//   uri: '/graphql'
+// });
 
-networkInterface.use([{
-  applyMiddleware: addAuthorizationHeaderToRequest
-}]);
+// networkInterface.use([{
+//   applyMiddleware: addAuthorizationHeaderToRequest
+// }]);
 
 const defaultOptions = {
   watchQuery: {
@@ -41,8 +48,10 @@ const defaultOptions = {
 }
 
 const apolloClient = new ApolloClient({
-  networkInterface: networkInterface,
+  // networkInterface: networkInterface,
   defaultOptions: defaultOptions,
+  link: new HttpLink(),
+  cache: new InMemoryCache()
 });
 
 const history = createBrowserHistory();

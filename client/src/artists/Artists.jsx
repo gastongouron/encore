@@ -28,30 +28,38 @@ import { Query } from 'react-apollo'
 class Artists extends Component {
 
     render() {
-        if(this.props.data.loading) {
-            return (<p>Loading</p>)
-        } else {
-            const ArtistsItems = this.props.data.artists_test.map((data,i) => {
-                return (<Artist key={i} index={i} data={data}></Artist>);
-            });
-            return (
-                <div>
-                    <h1>Artists</h1>
-                    <table className="table table-striped table">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        { ArtistsItems }
-                        </tbody>
-                    </table>
-                </div>
-            );
-        }
+        return (
+            <div>
+                <Query query={artistListQuery}>
+                    {({ loading, error, data }) => {
+                          if (loading) return "Loading...";
+                          if (error) return `Error! ${error.message}`;
+                          const ArtistsItems = this.props.data.artists_test.map((data,i) => {
+                            return (<Artist key={i} index={i} data={data}></Artist>);
+                          });
+                          return (
+                            <div>
+                                <h1>Artists</h1>
+                                <table className="table table-striped table">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    { ArtistsItems }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                          );
+                        }}
+                </Query>
+             cool
+            </div>
+        )
     }
 }
 
