@@ -3,7 +3,7 @@ import {Switch} from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import Home from '../home/Home';
 import NotFound from '../app/NotFound';
-import Artists from '../artists/Artists';
+import ArtistsList from './artists/ArtistsList';
 import {authRoutes, PrivateRoute} from 'react-devise';
 import WithMainLayout from './WithMainLayout';
 
@@ -14,7 +14,7 @@ const Routes = () => {
   return (
     <Switch>
       {authRoutes({wrapper: WithMainLayout, notFoundComponent: AuthNotFound})}
-      <PrivateRoute exact path="/artists" layout={MainLayout} component={Artists} />
+      <PrivateRoute exact path="/artists" layout={MainLayout} component={ArtistsList} />
       <WithMainLayout exact path="/" component={Home} />
       <WithMainLayout component={NotFound} />
     </Switch>

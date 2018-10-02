@@ -6071,6 +6071,11 @@ react-event-listener@^0.4.5:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
+react-facebook-login@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/react-facebook-login/-/react-facebook-login-4.1.0.tgz#44492e60a17dc337438bc971b7ee04b96965b6e4"
+  integrity sha512-WRJ4ZojkTruG5Uz8Gnwrra8yys6upSuRuio3nXSfaQFCzcyLV6aK5N14adlLp177avq8whkHmt+nTbiEiuxjpQ==
+
 react-is@^16.3.2:
   version "16.5.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.5.2.tgz#e2a7b7c3f5d48062eb769fcb123505eb928722e3"

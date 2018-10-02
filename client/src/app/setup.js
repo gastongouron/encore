@@ -38,11 +38,11 @@ injectTapEventPlugin();
 
 const defaultOptions = {
   watchQuery: {
-    fetchPolicy: 'cache-and-network',
-    errorPolicy: 'ignore',
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'all',
   },
   query: {
-    fetchPolicy: 'cache-and-network',
+    fetchPolicy: 'no-cache',
     errorPolicy: 'all',
   },
 }
