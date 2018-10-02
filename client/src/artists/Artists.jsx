@@ -24,17 +24,21 @@ import {graphql} from 'react-apollo';
 import Artist from './Artist';
 import artistListQuery from './ArtistSchema';
 import { Query } from 'react-apollo'
+// import { apolloClient } from '../app/setup'
+
 
 class Artists extends Component {
-
     render() {
         return (
+
             <div>
                 <Query query={artistListQuery}>
                     {({ loading, error, data }) => {
+                          console.log(data)
+                          
                           if (loading) return "Loading...";
                           if (error) return `Error! ${error.message}`;
-                          const ArtistsItems = this.props.data.artists_test.map((data,i) => {
+                          const ArtistsItems = this.props.data.artists.map((data,i) => {
                             return (<Artist key={i} index={i} data={data}></Artist>);
                           });
                           return (
@@ -53,11 +57,9 @@ class Artists extends Component {
                                     </tbody>
                                 </table>
                             </div>
-
                           );
                         }}
                 </Query>
-             cool
             </div>
         )
     }

@@ -10,6 +10,7 @@ import WithMainLayout from './WithMainLayout';
 const AuthNotFound = () => <MainLayout><NotFound/></MainLayout>;
 
 const Routes = () => {
+  
   return (
     <Switch>
       {authRoutes({wrapper: WithMainLayout, notFoundComponent: AuthNotFound})}

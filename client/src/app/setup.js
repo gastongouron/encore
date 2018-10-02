@@ -5,7 +5,7 @@ import {persistStore, autoRehydrate} from 'redux-persist';
 import {reducer as formReducer} from 'redux-form';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 // import ApolloClient, {createNetworkInterface} from 'apollo-client';
-// import ReactDeviseMaterialUI from 'react-devise-material-ui';
+import ReactDeviseMaterialUI from 'react-devise-material-ui';
 // import {initReactDevise, addAuthorizationHeaderToRequest} from 'react-devise';
 import {initReactDevise} from 'react-devise';
 import reactDeviseReducers from 'react-devise/lib/reducers';
@@ -49,8 +49,10 @@ const defaultOptions = {
 
 const apolloClient = new ApolloClient({
   // networkInterface: networkInterface,
+  ssrMode: true,
+  shouldBatch: true,
   defaultOptions: defaultOptions,
-  link: new HttpLink(),
+  link: new HttpLink({ uri: '/graphql', fetch }),
   cache: new InMemoryCache()
 });
 
@@ -91,7 +93,7 @@ const AuthAlert = styled(Alert)`
 
 initReactDevise({
   viewPlugins: [
-    // ReactDeviseMaterialUI.plugin(),
+    ReactDeviseMaterialUI.plugin(),
     {
       Alert: AuthAlert,
       AuthLinksList: UnstyledList,

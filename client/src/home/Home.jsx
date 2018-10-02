@@ -13,6 +13,7 @@ const Home = ({currentUser, auth: {AuthLinks}}) => {
 };
 
 const mapStateToProps = state => {
+  console.log(state.currentUser)
   return {
     currentUser: state.currentUser
   };
