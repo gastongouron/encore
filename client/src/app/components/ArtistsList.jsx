@@ -4,14 +4,16 @@ import ArtistItem from './ArtistItem';
 import artistListQuery from '../queries/ArtistSchema';
 import { Query } from 'react-apollo'
 
+
 class Artists extends Component {
-    // constructor(){
-    //     super();
-    // }
+
+    constructor(props){
+        console.log(props)
+        super(props);
+    }
 
     render() {
         return (
-
             <div>
                 <Query query={artistListQuery}>
                     {({ loading, error, data }) => {

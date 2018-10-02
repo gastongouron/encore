@@ -9,8 +9,8 @@ rails db:setup
 rails secret | (read secret; echo DEVISE_JWT_SECRET_KEY="$secret" > .env)
 # Install client dependencies
 (cd client && yarn)
-# Run the app
-foreman start -f Procfile.dev
+# Run the app from app directory
+Rake start 
 ```
 
 ### A Note About Ports

@@ -5,6 +5,7 @@
   "dependencies": {
     "apollo-boost": "^0.1.16",
     "apollo-client": "1.9.3",
+    "immutability-helper": "^2.8.1",
     "material-ui": "^0.17.4",
     "react": "^15.5.4",
     "react-apollo": "^2.2.3",

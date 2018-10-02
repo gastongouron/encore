@@ -3,7 +3,8 @@ import {Switch} from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import Home from '../home/Home';
 import NotFound from '../app/NotFound';
-import ArtistsList from './artists/ArtistsList';
+import ArtistsList from './components/ArtistsList';
+// import NewArtist from './artists/NewArtist';
 import {authRoutes, PrivateRoute} from 'react-devise';
 import WithMainLayout from './WithMainLayout';
 

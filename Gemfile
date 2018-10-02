@@ -12,6 +12,12 @@ gem 'devise'
 gem 'devise-jwt'
 
 group :development, :test do
+  # graphiql group :
+  gem 'graphiql-rails'
+  gem 'sass-rails'
+  gem 'uglifier'
+  gem 'coffee-rails'
+
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails'
 end
