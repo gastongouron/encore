@@ -35,10 +35,9 @@ class Artists extends Component {
                 <Query query={artistListQuery}>
                     {({ loading, error, data }) => {
                           console.log(data)
-                          
                           if (loading) return "Loading...";
                           if (error) return `Error! ${error.message}`;
-                          const ArtistsItems = this.props.data.artists.map((data,i) => {
+                          const ArtistsItems = this.props.data.artists_test.map((data,i) => {
                             return (<Artist key={i} index={i} data={data}></Artist>);
                           });
                           return (

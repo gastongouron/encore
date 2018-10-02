@@ -17,7 +17,7 @@ import gql from 'graphql-tag';
 
 const artistListQuery = gql`
     query artistListQuery {
-	    artists {
+	    artists_test {
 	        id
 	        name
 	        description     
