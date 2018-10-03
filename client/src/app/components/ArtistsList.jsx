@@ -16,15 +16,14 @@ class Artists extends Component {
         console.log(this.props.data.artists)
         return (
             <div>
-{/*                <Query query={artistListQuery}>
+                <Query query={artistListQuery}>
                     {({ loading, error, data }) => {
-                          console.log(data)
-                          if (loading) return "Loading...";
-                          if (error) return `Error! ${error.message}`;
-                          const ArtistsItems = this.props.data.artists.map((data,i) => {
+                      if (loading) return "Loading...";
+                      if (error) return `Error! ${error.message}`;
+                      const ArtistsItems = this.props.data.artists.map((data,i) => {
                             return (<ArtistItem key={i} index={i} data={data}></ArtistItem>);
                           });
-                          return (
+                        return (
                             <div>
                                 <h1>Artists</h1>
                                 <table className="table table-striped table">
@@ -41,8 +40,10 @@ class Artists extends Component {
                                 </table> 
                             </div>
                           );
-                        }}
-                </Query>*/}
+                    }}
+                  </Query>
+
+
             </div>
         )
     }
