@@ -49,7 +49,7 @@ injectTapEventPlugin();
 
 const apolloClient = new ApolloClient({
   // networkInterface: networkInterface,
-  // ssrMode: false,
+  // ssrMode: true,
   // shouldBatch: true,
   // defaultOptions: defaultOptions,
   link: new HttpLink({ uri: '/graphql', fetch }),

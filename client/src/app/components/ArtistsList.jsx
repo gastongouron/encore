@@ -13,10 +13,10 @@ class Artists extends Component {
     }
 
     render() {
-        console.log(this.props.data.artists_test2)
+        console.log(this.props.data.artists)
         return (
             <div>
-                <Query query={artistListQuery} fetchpolicy="network-only">
+{/*                <Query query={artistListQuery}>
                     {({ loading, error, data }) => {
                           console.log(data)
                           if (loading) return "Loading...";
@@ -38,11 +38,11 @@ class Artists extends Component {
                                     <tbody>
                                     { ArtistsItems }
                                     </tbody>
-                                </table>
+                                </table> 
                             </div>
                           );
                         }}
-                </Query>
+                </Query>*/}
             </div>
         )
     }
