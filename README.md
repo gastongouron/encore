@@ -24,6 +24,10 @@ The api and the website will run on different ports. The port specified in the `
 
 If you want to change the ports locally, change both ```.foreman``` and ```./client/package.json``` to the same port.
 
+### A Note GraphQL
+
+In development mode, the api will serve a special route `localhost:3001/graphiql` to allow you interract with graphiql visual playground.
+
 ## Comments
 
 1. This app uses some bits that are not necessary for `react-devise` to function:
