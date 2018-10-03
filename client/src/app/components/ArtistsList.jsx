@@ -13,14 +13,15 @@ class Artists extends Component {
     }
 
     render() {
+        console.log(this.props.data.artists_test2)
         return (
             <div>
-                <Query query={artistListQuery}>
+                <Query query={artistListQuery} fetchpolicy="network-only">
                     {({ loading, error, data }) => {
                           console.log(data)
                           if (loading) return "Loading...";
                           if (error) return `Error! ${error.message}`;
-                          const ArtistsItems = this.props.data.artists_test.map((data,i) => {
+                          const ArtistsItems = this.props.data.artists.map((data,i) => {
                             return (<ArtistItem key={i} index={i} data={data}></ArtistItem>);
                           });
                           return (

@@ -36,22 +36,22 @@ injectTapEventPlugin();
 //   applyMiddleware: addAuthorizationHeaderToRequest
 // }]);
 
-const defaultOptions = {
-  watchQuery: {
-    fetchPolicy: 'no-cache',
-    errorPolicy: 'all',
-  },
-  query: {
-    fetchPolicy: 'no-cache',
-    errorPolicy: 'all',
-  },
-}
+// const defaultOptions = {
+//   watchQuery: {
+//     fetchPolicy: 'network-only',
+//     errorPolicy: 'all',
+//   },
+//   query: {
+//     fetchPolicy: 'network-only',
+//     errorPolicy: 'all',
+//   },
+// }
 
 const apolloClient = new ApolloClient({
   // networkInterface: networkInterface,
-  ssrMode: true,
-  shouldBatch: true,
-  defaultOptions: defaultOptions,
+  // ssrMode: false,
+  // shouldBatch: true,
+  // defaultOptions: defaultOptions,
   link: new HttpLink({ uri: '/graphql', fetch }),
   cache: new InMemoryCache()
 });
