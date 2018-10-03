@@ -10,10 +10,11 @@ gem 'pg'
 gem 'graphql'
 gem 'devise'
 gem 'devise-jwt'
+gem 'graphiql-rails'
 
 group :development, :test do
   # graphiql group :
-  gem 'graphiql-rails'
+
   gem 'sass-rails'
   gem 'uglifier'
   gem 'coffee-rails'
