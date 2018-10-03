@@ -6,7 +6,7 @@ class Artist extends Component {
             <tr>
                 <td>{this.props.index + 1}</td>
                 <td>{this.props.data.name}</td>
-                <td>{this.props.data.description} min</td>
+                <td>{this.props.data.description}</td>
             </tr>
         );
     }
