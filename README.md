@@ -41,9 +41,9 @@ If you want to change the ports locally, change both ```.foreman``` and ```./cli
 In development mode, the api will serve a special route `localhost:3001/graphiql` to allow you interract with graphiql visual playground.
 
 
-### GraphQL queries
+## GraphQL queries
 
-# All artists and their reviews bodies
+### All artists and their reviews bodies
 
 ```
 query rootQuery {
@@ -58,7 +58,7 @@ query rootQuery {
 }
 
 ```
-# All artists (should add limit for pagination?)
+###All artists (should add limit for pagination?)
 ```
 query rootQuery {
     artists {
@@ -70,7 +70,7 @@ query rootQuery {
 
 ```    
 
-# Query to get single artist information
+###Query to get single artist information
 
 ```
 query rootQuery {
@@ -82,7 +82,7 @@ query rootQuery {
 }
 ```
 
-# Query to have single artist info + reviews
+###Query to have single artist info + reviews
 
 ```
 query rootQuery {
@@ -98,7 +98,7 @@ query rootQuery {
 
 ```
 
-# Example artist profile: all reviews and their users for an artist.
+###Example artist profile: all reviews and their users for an artist.
 
 ```
 query rootQuery {
@@ -117,7 +117,7 @@ query rootQuery {
 }
 
 ```
-# To query all reviews (index) (should add limit for pagination?)
+###To query all reviews (index) (should add limit for pagination?)
 
 ```
 query rootQuery {
@@ -129,7 +129,7 @@ query rootQuery {
 }
 
 ```
-# To query one review by id
+###To query one review by id
 ```
 query rootQuery {
     review(id:41) {
@@ -141,7 +141,7 @@ query rootQuery {
 
 
 ```
-# Example user profile query: user info + all reviews and artists for an user whose id is 4
+###Example user profile query: user info + all reviews and artists for an user whose id is 4
 
 ```
 query rootQuery {
@@ -163,10 +163,10 @@ query rootQuery {
 }
 
 ```
-### GraphQL Mutations
+#####GraphQL Mutations
 
 
-# mutation for creating new review
+###mutation for creating new review
 
 ```
 mutation newReview {
@@ -183,7 +183,7 @@ mutation newReview {
     } 
 }
 ``` 
-# mutation for editing an existing review by review id
+###mutation for editing an existing review by review id
 
 ```
 mutation editReview {
@@ -199,7 +199,7 @@ mutation editReview {
 	} 
 }
 ``` 
-# mutation for deleting an existing review
+###mutation for deleting an existing review
 
 ```
 mutation deleteReview {
@@ -211,7 +211,7 @@ mutation deleteReview {
 }
 
 ```
-# mutation for search bar query
+###mutation for search bar query
 ``` 
 TODO
 
