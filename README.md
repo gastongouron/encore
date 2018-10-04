@@ -41,41 +41,51 @@ If you want to change the ports locally, change both ```.foreman``` and ```./cli
 In development mode, the api will serve a special route `localhost:3001/graphiql` to allow you interract with graphiql visual playground.
 
 
-## GraphQL queries
-
-```
+### GraphQL queries
 
 # All artists and their reviews bodies
-query artistsListWithReview {
+
+```
+query rootQuery {
     artists {
-	  	description
        	name
+	  	description
 		reviews {
            	body
+           	score
         }
     }
 }
 
+```
 # All artists (should add limit for pagination?)
-query artistListQuery {
+```
+query rootQuery {
     artists {
         id
         name
         description     
     }
 }
-    
+
+```    
+
 # Query to get single artist information
-query artistQuery {
+
+```
+query rootQuery {
     artist(id:1) {
 		id
    		name
    		description
     }
 }
+```
 
 # Query to have single artist info + reviews
-query artistQuery {
+
+```
+query rootQuery {
 	artist(id:1) {
 		id
    		name
@@ -86,8 +96,31 @@ query artistQuery {
 	}
 }
 
-# All reviews query (index) (should add limit for pagination?)
-query reviewListQuery {
+```
+
+# Example artist profile: all reviews and their users for an artist.
+
+```
+query rootQuery {
+   artist(id:4) {
+	  	description
+      	reviews {
+        	body
+        	score
+        	user_id
+    	}
+		users {
+			id
+        	first_name
+    	}
+  	}
+}
+
+```
+# To query all reviews (index) (should add limit for pagination?)
+
+```
+query rootQuery {
     reviews {
     	user_id
     	artist_id
@@ -95,21 +128,10 @@ query reviewListQuery {
     }
 }
 
-# all reviews for an user whose id is 4
+```
+# To query one review by id
+```
 query rootQuery {
-   user_reviews(id:4) {
-		first_name
-		last_name
-	    reviews {
-	      	body
-			score
-	    }
-  	}
-}
-
-
-# One review by id (useless?)
-query reviewQuery {
     review(id:41) {
         user_id
 		artist_id
@@ -117,11 +139,36 @@ query reviewQuery {
     }
 }
 
-```
-## GraphQL Mutations
 
 ```
+# Example user profile query: user info + all reviews and artists for an user whose id is 4
+
+```
+query rootQuery {
+   	user(id:4) {
+		first_name
+		last_name
+    	email
+      	reviews {
+        	body
+			score
+			artist_id
+        }
+		artists {
+			id
+        	name
+        	description
+    	}
+  	}
+}
+
+```
+### GraphQL Mutations
+
+
 # mutation for creating new review
+
+```
 mutation newReview {
     newReview(input: {
 		user_id: 1,
@@ -135,8 +182,10 @@ mutation newReview {
         }
     } 
 }
- 
+``` 
 # mutation for editing an existing review by review id
+
+```
 mutation editReview {
 	editReview(input: {
 		id: 1,
@@ -149,8 +198,10 @@ mutation editReview {
 	    }
 	} 
 }
- 
+``` 
 # mutation for deleting an existing review
+
+```
 mutation deleteReview {
 	deleteReview(input: {
 		id: 1
@@ -159,11 +210,9 @@ mutation deleteReview {
 	}
 }
 
-
+```
 # mutation for search bar query
-
-
-
 ``` 
+TODO
 
 ```
