@@ -47,143 +47,143 @@ In development mode, the api will serve a special route `localhost:3001/graphiql
 
 ```
 query rootQuery {
-    artists {
-       	name
-	  	description
+	artists {
+		name
+		description
 		reviews {
-           	body
-           	score
-        }
-    }
+			body
+			score
+		}
+	}
 }
 
 ```
-###All artists (should add limit for pagination?)
+### All artists (should add limit for pagination?)
 ```
 query rootQuery {
-    artists {
-        id
-        name
-        description     
-    }
+	artists {
+		id
+		name
+		description     
+	}
 }
 
 ```    
 
-###Query to get single artist information
-
-```
-query rootQuery {
-    artist(id:1) {
-		id
-   		name
-   		description
-    }
-}
-```
-
-###Query to have single artist info + reviews
+### Query to get single artist information
 
 ```
 query rootQuery {
 	artist(id:1) {
 		id
-   		name
-   		description
-   		reviews {
-        	body
-      	}
+		name
+		description
+	}
+}
+```
+
+### Query to have single artist info + reviews
+
+```
+query rootQuery {
+	artist(id:1) {
+		id
+		name
+		description
+		reviews {
+			body
+		}
 	}
 }
 
 ```
 
-###Example artist profile: all reviews and their users for an artist.
+### Example artist profile: all reviews and their users for an artist.
 
 ```
 query rootQuery {
-   artist(id:4) {
-	  	description
-      	reviews {
-        	body
-        	score
-        	user_id
-    	}
+	artist(id:4) {
+		description
+		reviews {
+			body
+			score
+			user_id
+		}
 		users {
 			id
-        	first_name
-    	}
-  	}
+			first_name
+		}
+	}
 }
 
 ```
-###To query all reviews (index) (should add limit for pagination?)
+### To query all reviews (index) (should add limit for pagination?)
 
 ```
 query rootQuery {
-    reviews {
-    	user_id
-    	artist_id
-		body
-    }
-}
-
-```
-###To query one review by id
-```
-query rootQuery {
-    review(id:41) {
-        user_id
+	reviews {
+		user_id
 		artist_id
-	    body
-    }
+		body
+	}
+}
+
+```
+### To query one review by id
+```
+query rootQuery {
+	review(id:41) {
+		user_id
+		artist_id
+		body
+	}
 }
 
 
 ```
-###Example user profile query: user info + all reviews and artists for an user whose id is 4
+### Example user profile query: user info + all reviews and artists for an user whose id is 4
 
 ```
 query rootQuery {
-   	user(id:4) {
+	user(id:4) {
 		first_name
 		last_name
-    	email
-      	reviews {
-        	body
+		email
+		reviews {
+			body
 			score
 			artist_id
-        }
+		}
 		artists {
 			id
-        	name
-        	description
-    	}
-  	}
+			name
+			description
+		}
+	}
 }
 
 ```
-#####GraphQL Mutations
+## GraphQL Mutations
 
 
-###mutation for creating new review
+### [C]reating new review mutation
 
 ```
 mutation newReview {
-    newReview(input: {
+	newReview(input: {
 		user_id: 1,
 		artist_id: 50,
     	body: "nice"   
-  	}) {
-      review {
-        artist_id
-		user_id
-     	body
-        }
-    } 
+	}) {
+		review {
+			artist_id
+			user_id
+			body
+		}
+	} 
 }
 ``` 
-###mutation for editing an existing review by review id
+### [U]pdating an existing review by review id
 
 ```
 mutation editReview {
@@ -191,22 +191,22 @@ mutation editReview {
 		id: 1,
 		body: "noice"   
 	}) {
-	  review {
-	    artist_id
-		user_id
-	 	body
-	    }
+		review {
+			artist_id
+			user_id
+			body
+		}
 	} 
 }
 ``` 
-###mutation for deleting an existing review
+### [D]eleting an existing review mutation
 
 ```
 mutation deleteReview {
 	deleteReview(input: {
 		id: 1
-    }) {
-		 id
+	}) {
+		id
 	}
 }
 
