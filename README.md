@@ -24,9 +24,6 @@ The api and the website will run on different ports. The port specified in the `
 
 If you want to change the ports locally, change both ```.foreman``` and ```./client/package.json``` to the same port.
 
-### A Note GraphQL
-
-In development mode, the api will serve a special route `localhost:3001/graphiql` to allow you interract with graphiql visual playground.
 
 ## Comments
 
@@ -39,3 +36,134 @@ In development mode, the api will serve a special route `localhost:3001/graphiql
   * [apollo](http://dev.apollodata.com/)
   * [styled-components](https://github.com/styled-components/styled-components)
 
+### A Note on GraphQL
+
+In development mode, the api will serve a special route `localhost:3001/graphiql` to allow you interract with graphiql visual playground.
+
+
+## GraphQL queries
+
+```
+
+# All artists and their reviews bodies
+query artistsListWithReview {
+    artists {
+	  	description
+       	name
+		reviews {
+           	body
+        }
+    }
+}
+
+# All artists (should add limit for pagination?)
+query artistListQuery {
+    artists {
+        id
+        name
+        description     
+    }
+}
+    
+# Query to get single artist information
+query artistQuery {
+    artist(id:1) {
+		id
+   		name
+   		description
+    }
+}
+
+# Query to have single artist info + reviews
+query artistQuery {
+	artist(id:1) {
+		id
+   		name
+   		description
+   		reviews {
+        	body
+      	}
+	}
+}
+
+# All reviews query (index) (should add limit for pagination?)
+query reviewListQuery {
+    reviews {
+    	user_id
+    	artist_id
+		body
+    }
+}
+
+# all reviews for an user whose id is 4
+query rootQuery {
+   user_reviews(id:4) {
+		first_name
+		last_name
+	    reviews {
+	      	body
+			score
+	    }
+  	}
+}
+
+
+# One review by id (useless?)
+query reviewQuery {
+    review(id:41) {
+        user_id
+		artist_id
+	    body
+    }
+}
+
+```
+## GraphQL Mutations
+
+```
+# mutation for creating new review
+mutation newReview {
+    newReview(input: {
+		user_id: 1,
+		artist_id: 50,
+    	body: "nice"   
+  	}) {
+      review {
+        artist_id
+		user_id
+     	body
+        }
+    } 
+}
+ 
+# mutation for editing an existing review by review id
+mutation editReview {
+	editReview(input: {
+		id: 1,
+		body: "noice"   
+	}) {
+	  review {
+	    artist_id
+		user_id
+	 	body
+	    }
+	} 
+}
+ 
+# mutation for deleting an existing review
+mutation deleteReview {
+	deleteReview(input: {
+		id: 1
+    }) {
+		 id
+	}
+}
+
+
+# mutation for search bar query
+
+
+
+``` 
+
+```
