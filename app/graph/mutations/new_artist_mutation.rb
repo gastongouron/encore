@@ -17,3 +17,4 @@ Mutations::NewArtistMutation = GraphQL::Relay::Mutation.define do
   })
 
 end
+  
