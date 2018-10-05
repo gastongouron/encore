@@ -31,7 +31,9 @@
     "semantic-ui-react": "^0.82.5",
     "styled-components": "^1.4.6"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.5"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

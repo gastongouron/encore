@@ -1,9 +1,28 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {withAuth} from 'react-devise';
-import {ViewHeading} from '../shared';
+import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { withAuth } from 'react-devise';
+import { ViewHeading } from '../shared';
+import { initArtists } from '../app/actions/artists'
 
-const Home = ({currentUser, auth: {AuthLinks}}) => {
+// class Home extends Component {
+//   constructor(props){
+//     super(props);
+//     props.initArtists();
+//   }
+  
+//   render(){
+//     return (
+//       <div>
+//         <ViewHeading>Welcome to encore</ViewHeading>
+//         <AuthLinks />
+//       </div>
+//     );
+//   }
+// }
+
+const Home = ({currentUser, auth: {AuthLinks}, initArtists}) => {
+  // console.log("--------- Home");
+  initArtists();
   return (
     <div>
       <ViewHeading>Welcome to encore</ViewHeading>
@@ -19,4 +38,10 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(withAuth(Home));
+const mapDispatchToProps = dispatch => {
+  return {
+      initArtists : () => dispatch(initArtists()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withAuth(Home));

@@ -1,14 +1,12 @@
 import {compose, createStore, combineReducers, applyMiddleware} from 'redux';
-import {routerReducer, routerMiddleware} from 'react-router-redux';
+import {routerMiddleware} from 'react-router-redux';
 import createBrowserHistory from 'history/createBrowserHistory';
 import {persistStore, autoRehydrate} from 'redux-persist';
-import {reducer as formReducer} from 'redux-form';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 // import ApolloClient, {createNetworkInterface} from 'apollo-client';
 import ReactDeviseMaterialUI from 'react-devise-material-ui';
 // import {initReactDevise, addAuthorizationHeaderToRequest} from 'react-devise';
 import {initReactDevise} from 'react-devise';
-import reactDeviseReducers from 'react-devise/lib/reducers';
 import {Alert, UnstyledList, ViewHeading} from '../shared';
 import styled, {injectGlobal} from 'styled-components';
 
@@ -16,6 +14,8 @@ import styled, {injectGlobal} from 'styled-components';
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+
+import reducers from './reducers';
 
 
 // eslint-disable-next-line no-unused-expressions
@@ -54,25 +54,22 @@ const apolloClient = new ApolloClient({
   // defaultOptions: defaultOptions,
   link: new HttpLink({ uri: '/graphql', fetch }),
   cache: new InMemoryCache()
-});
+}); 
+
+const middlewares = [routerMiddleware(history), apolloClient.middleware()];
 
 const history = createBrowserHistory();
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 let store;
 
 const initStore = ({onRehydrationComplete}) => {
   store = createStore(
-    combineReducers({
-      ...reactDeviseReducers,
-      form: formReducer,
-      router: routerReducer,
-      apollo: apolloClient.reducer()
-    }),
+    reducers(apolloClient),
     {},
-    compose(
+    composeEnhancers(
       applyMiddleware(
-        routerMiddleware(history),
-        apolloClient.middleware()
+        ...middlewares
       ),
       autoRehydrate()
     )

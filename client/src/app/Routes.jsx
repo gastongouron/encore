@@ -13,7 +13,7 @@ import Policy from './components/Policy'
 const AuthNotFound = () => <MainLayout><NotFound/></MainLayout>;
 
 const Routes = () => {
-  
+  console.log("Routes")
   return (
     <Switch>
       {authRoutes({wrapper: WithMainLayout, notFoundComponent: AuthNotFound})}
