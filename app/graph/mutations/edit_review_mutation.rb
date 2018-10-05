@@ -5,7 +5,6 @@ Mutations::EditReviewMutation = GraphQL::Relay::Mutation.define do
   input_field :id, !types.ID
   input_field :body, !types.String
 
-
   return_field :review, Types::ReviewType
 
   resolve -> (_, input, _) {

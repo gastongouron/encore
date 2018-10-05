@@ -173,7 +173,7 @@ mutation newReview {
 	newReview(input: {
 		user_id: 1,
 		artist_id: 50,
-    	body: "nice"   
+		body: "nice"   
 	}) {
 		review {
 			artist_id

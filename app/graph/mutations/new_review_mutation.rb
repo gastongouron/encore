@@ -9,11 +9,10 @@ Mutations::NewReviewMutation = GraphQL::Relay::Mutation.define do
   return_field :review, Types::ReviewType
 
   resolve(->(_, input, ctx){
-    # inputs = input.to_h
-    body = input.to_h["body"]
-    uid = input.to_h["user_id"]
-    aid = input.to_h["artist_id"]
-
+    inputs = input.to_h
+    body = inputs["body"]
+    uid = inputs["user_id"]
+    aid = inputs["artist_id"]
     review = Review.new(body: body, artist_id: aid, user_id: uid)
     review.save!
 

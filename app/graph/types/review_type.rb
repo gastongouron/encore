@@ -10,6 +10,4 @@ Types::ReviewType = GraphQL::ObjectType.define do
   field :artist, types[Types::ArtistType]
   field :user, types[Types::UserType]
 
-  # field :client_mutation_id, !types.String
-
 end
