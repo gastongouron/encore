@@ -4,9 +4,7 @@ import {graphql} from 'react-apollo';
 import { Query } from 'react-apollo';
 import {Button} from 'react-bootstrap';
 
-
-class Artist_detail extends Component {
-
+class ArtistDetail extends Component {
 
     render() {
         return (
@@ -42,4 +40,4 @@ class Artist_detail extends Component {
         );
     }
 }
-export default (Artist_detail);
+export default (ArtistDetail);

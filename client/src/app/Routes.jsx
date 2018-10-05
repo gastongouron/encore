@@ -7,7 +7,8 @@ import ArtistsList from './components/ArtistsList';
 // import NewArtist from './artists/NewArtist';
 import {authRoutes, PrivateRoute} from 'react-devise';
 import WithMainLayout from './WithMainLayout';
-import ArtistDetail from './components/Artist_detail';
+import ArtistDetail from './components/ArtistDetail';
+
 const AuthNotFound = () => <MainLayout><NotFound/></MainLayout>;
 
 const Routes = () => {
@@ -17,7 +18,7 @@ const Routes = () => {
       {authRoutes({wrapper: WithMainLayout, notFoundComponent: AuthNotFound})}
       <PrivateRoute exact path="/artists" layout={MainLayout} component={ArtistsList} />
       <WithMainLayout exact path="/" component={Home} />
-      <WithMainLayout exact path="/artists/:number"  component={ArtistDetail} data="5" />
+      <WithMainLayout exact path="/artists/:id"  component={ArtistDetail} data="5" />
       <WithMainLayout component={NotFound} />
     </Switch>
   );

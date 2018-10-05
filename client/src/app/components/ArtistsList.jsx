@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {graphql} from 'react-apollo';
-import ArtistItem from './ArtistItem';
 import artistListQuery from '../queries/ArtistSchema';
 import { Query } from 'react-apollo';
 import SmartDataTable from 'react-smart-data-table'
@@ -41,10 +40,8 @@ class Artists extends Component {
           }
           this.handleCheckboxChange = this.handleCheckboxChange.bind(this)
           this.onRowClick = this.onRowClick.bind(this)
-
     }
 
-    
     handleCheckboxChange() {
     const { showOnRowClick } = this.state
     this.setState({ showOnRowClick: !showOnRowClick })
@@ -72,12 +69,7 @@ class Artists extends Component {
                     {({ loading, error, data }) => {
                       if (loading) return <h1>"Loading..."</h1>;
                       if (error) return <h1>`Error! ${error.message}`</h1>;
-                      const ArtistsItems = this.props.data.artists.map((data,i) => {
-                            return (<ArtistItem key={i} index={i} data={data}></ArtistItem>);
-                          });
-
                           
-                      
                         return (
                             <div>
                                  <h1>Artists</h1>
@@ -90,22 +82,7 @@ class Artists extends Component {
                                     sortable
                                     onRowClick={this.onRowClick}
                                     perPage = {10}
-                                />
-                               
-                                
-                                {/* <table className="table table-striped table">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    { ArtistsItems }
-                                    </tbody>
-                                </table>  */}
-                                
+                                />                                
 
                             </div>
                           );
