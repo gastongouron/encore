@@ -18,7 +18,7 @@ const Routes = () => {
       {authRoutes({wrapper: WithMainLayout, notFoundComponent: AuthNotFound})}
       <PrivateRoute exact path="/artists" layout={MainLayout} component={ArtistsList} />
       <WithMainLayout exact path="/" component={Home} />
-      <WithMainLayout exact path="/artists/:id"  component={ArtistDetail} data="5" />
+      <WithMainLayout exact path="/artists/:id"  component={ArtistDetail} />
       <WithMainLayout component={NotFound} />
     </Switch>
   );

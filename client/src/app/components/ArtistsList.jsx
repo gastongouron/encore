@@ -3,8 +3,7 @@ import {graphql} from 'react-apollo';
 import artistListQuery from '../queries/ArtistSchema';
 import { Query } from 'react-apollo';
 import SmartDataTable from 'react-smart-data-table'
-import {Route} from 'react-router-dom';
-import Routes from '../Routes';
+
 const sematicUI = {
     segment: 'ui basic segment',
     message: 'ui message',
@@ -39,14 +38,13 @@ class Artists extends Component {
             showOnRowClick: true,
           }
           this.handleCheckboxChange = this.handleCheckboxChange.bind(this)
-          this.onRowClick = this.onRowClick.bind(this)
     }
 
     handleCheckboxChange() {
     const { showOnRowClick } = this.state
     this.setState({ showOnRowClick: !showOnRowClick })
     }
-    onRowClick(event, { rowData, rowIndex, tableData }) {
+    onRowClick = (event, { rowData, rowIndex, tableData }) => {
         const { showOnRowClick } = this.state
         if (showOnRowClick) {
           const { name, description, id } = rowData
@@ -77,7 +75,7 @@ class Artists extends Component {
                                 <SmartDataTable
                                    
                                     data={this.props.data.artists}
-                                    name='test-table'
+                                    name='artists-table'
                                     className={sematicUI.table}
                                     sortable
                                     onRowClick={this.onRowClick}
@@ -87,7 +85,7 @@ class Artists extends Component {
                             </div>
                           );
                     }}
-                  </Query>
+                </Query>
             </div>
         )
     }
