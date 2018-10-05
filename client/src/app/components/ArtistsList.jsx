@@ -65,7 +65,7 @@ class Artists extends Component {
         console.log(this.props.data.artists)
         return (
             <div>
-                <Query query={artistListQuery}>
+                <Query query={artistListQuery} fetchPolicy='network-only'>
                     {({ loading, error, data }) => {
                       if (loading) return <h1>"Loading..."</h1>;
                       if (error) return <h1>`Error! ${error.message}`</h1>;
