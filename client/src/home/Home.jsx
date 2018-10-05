@@ -4,22 +4,6 @@ import { withAuth } from 'react-devise';
 import { ViewHeading } from '../shared';
 import { initArtists } from '../app/actions/artists'
 
-// class Home extends Component {
-//   constructor(props){
-//     super(props);
-//     props.initArtists();
-//   }
-  
-//   render(){
-//     return (
-//       <div>
-//         <ViewHeading>Welcome to encore</ViewHeading>
-//         <AuthLinks />
-//       </div>
-//     );
-//   }
-// }
-
 const Home = ({currentUser, auth: {AuthLinks}, initArtists}) => {
   // console.log("--------- Home");
   initArtists();
