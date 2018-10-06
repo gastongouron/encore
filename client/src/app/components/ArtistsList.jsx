@@ -48,7 +48,7 @@ class Artists extends Component {
         if (this.props.artists.artists.length > 0)
             return;
         this.props.loadingArtists();
-        this.props.client.networkInterface.query({query: artistListQuery})
+        this.props.client.networkInterface.query({query: artistListQuery, fetchPolicy: 'network-only'})
         .then(
             (res) => {
                 console.log("componentWillMount componentWillMount", res);
@@ -133,7 +133,8 @@ class Artists extends Component {
 // export default graphql(artistListQuery)(Artists);
 
 const mapStateToProps = state => {
-    return { artists: state.artists };
+    return { artists: state.artists
+    };
 };
 
 const mapDispatchToProps = dispatch => {

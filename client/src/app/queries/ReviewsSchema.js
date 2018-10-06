@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
-const reviewListQuery = (gql`
-    query reviewListQuery($id: ID!) {
+const artistDetailQuery = (gql`
+    query artistDetailQuery($id: ID!) {
 	    artist(id: $id) {
 	        id
 	        name
@@ -13,4 +13,4 @@ const reviewListQuery = (gql`
     }
 `);
 
-export default reviewListQuery
+export default artistDetailQuery
