@@ -29,3 +29,23 @@ export function initArtistDetail() {
       newReview
     }
   }
+
+  export function selectReview(review){
+    return {
+      type: 'SELECT_REVIEW',
+      review
+    }
+  }
+
+  export function updateReview(review) {
+    return {
+      type: 'UPDATE_REVIEW',
+      review
+    }
+  }
+  export function deleteReview(review){
+    return {
+      type: 'DELETE_REVIEW',
+      review
+    }
+  }

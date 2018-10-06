@@ -5,26 +5,39 @@ import {connect} from "react-redux"
 import { withApollo } from 'react-apollo'
 import artistDetailQuery from '../queries/ReviewsSchema'
 import newReviewMutation from '../mutations/newReview'
+import updateMutation from '../mutations/updateReview'
+import deleteMutation from '../mutations/deleteReview'
 import {Button,Modal,FormControl,FormGroup,ControlLabel} from 'react-bootstrap';
 import './modal.css';
-import {initArtistDetail, loadingArtistDetail, failedArtistDetail, setArtistDetail, addNewReview} from '../actions/artistDetail'
+import {
+    initArtistDetail, 
+    loadingArtistDetail, 
+    failedArtistDetail, 
+    setArtistDetail, 
+    addNewReview,
+    selectReview,
+    updateReview,
+    deleteReview
+} from '../actions/artistDetail'
 class ArtistDetail extends Component {
     static val1;
     constructor(props){
         console.log(props)
         super(props);
-        this.handleShow = this.handleShow.bind(this);
-        this.handleClose = this.handleClose.bind(this);
+        this.handleModalNewShow = this.handleModalNewShow.bind(this);
+        this.handleModalNewClose = this.handleModalNewClose.bind(this);
+        this.handleModalUpdateShow = this.handleModalUpdateShow.bind(this);
+        this.handleModalUpdateClose = this.handleModalUpdateClose.bind(this);
         this.state = {
-            show: false,
-            enabledButton: true
+            showModalNew: false,
+            showModalUpdate: false,
+            enabledButton: true,
+            selected:null
           };
     };
     
     componentWillMount(){
         console.log(" artist componentWillMount=================", this.props);
-        // if(this.props.artistDetail.artistDetail.length > 0)
-        //     return;
         this.props.loadingArtistDetail();
         console.log(" artist componentWillMount^^^^^^^^^^^^^^^^^", this.props.match.params.id);
         this.props.client.query({query: artistDetailQuery, variables: {id: this.props.match.params.id}, fetchPolicy: 'network-only'})
@@ -40,14 +53,25 @@ class ArtistDetail extends Component {
             }
         );
     }
-    handleClose() {
-        this.setState({ show: false });
-      }
+    handleModalNewClose() {
+        this.setState({ showModalNew: false });
+    }
     
-      handleShow() {
-        this.setState({ show: true });
+    handleModalNewShow() {
+        this.setState({ showModalNew: true });
         
-      }
+    }
+
+    handleModalUpdateClose() {
+        this.setState({ showModalUpdate: false });
+    }
+    
+    handleModalUpdateShow(review){
+        console.log('selected', review);
+        this.props.selectReview(review);
+        this.setState({selected:review});
+        this.setState({ showModalUpdate: true });
+    }
     
     checkEnableNewReview = (reviews) => {
         console.log("length ++++++++++++",  reviews.length)
@@ -63,19 +87,26 @@ class ArtistDetail extends Component {
         console.log("renderReviews**************", reviews);
         if (reviews.length > 0) {      
             return reviews.map((review, index) => (
-                    <ListGroupItem key={index}>{review.body}</ListGroupItem>
-                    
+                <ListGroupItem key={index} 
+                onClick={
+                    review.user_id==this.props.userInfo.user_id
+                    ?()=>this.handleModalUpdateShow(review)
+                    :null} disabled={review.user_id==this.props.userInfo.user_id?false:true}>{review.body}</ListGroupItem>
+                
             ));
         }
         else return null;
     }
     handleChange(e){
         ArtistDetail.val1 = e.target.value;
-        console.log("this is onChange",ArtistDetail.val1);
+    }
+
+    handleUpdateChange(e){
+        this.setState({selected:{...this.state.selected, body:e.target.value}})
     }
     onSave(e){
         
-        this.setState({ show: false });
+        this.setState({ showModalNew: false });
 
         if(ArtistDetail.val1===undefined||ArtistDetail.val1.trim()===''){
             console.log("length is 0----------------------")
@@ -99,6 +130,49 @@ class ArtistDetail extends Component {
                 }
             );
         }
+
+    }
+
+    onUpdate(e) {
+        this.setState({ showModalUpdate: false });
+        let {selected} = this.state;
+        const val = selected.body;
+        if(val===''){
+            console.log("length is 0----------------------")
+        } else {
+            console.log("current selectedis@@@@@@@@@@@@@@@@@@@@@@@@", selected)
+            this.props.client.mutate(
+                {mutation: updateMutation,
+                 variables: {id: selected.id, body:val}})
+            .then(
+                (res) => {
+                    const updatedArr = res.data.editReview.review
+                    console.log("updatedreview !!!!!!!!!!!!!!!!!!!!!!!!", updatedArr);
+                    this.props.updateReview(updatedArr)
+                },
+                (err) => {
+                    console.log("newreview !!!!!!!!!!!!!!!!!!!!!!!!", err);
+                }
+            );
+        }
+    }
+    onDelete(e) {
+        this.setState({ showModalUpdate: false });
+        let {selected} = this.state;
+        console.log("current selectedis@@@@@@@@@@@@@@@@@@@@@@@@", selected)
+        this.props.client.mutate(
+            {mutation: deleteMutation,
+             variables: {id: selected.id}})
+        .then(
+            (res) => {
+                console.log("delete review result is !!!!!!!!!!!!!!!!!!!!!!!!", res);
+                this.props.deleteReview(selected)
+                this.setState({enabledButton: true})
+            },
+            (err) => {
+                console.log("delete review error msg is !!!!!!!!!!!!!!!!!!!!!!!!", err);
+            }
+        );
 
     }
     render() {
@@ -128,11 +202,11 @@ class ArtistDetail extends Component {
                                             </div>
                                             <div style={{float:"right", marginBottom: "10px"}}>
                                                     { enabledButton ?
-                                                        <Button  onClick={this.handleShow} bsStyle="primary">New review</Button>
+                                                        <Button  onClick={this.handleModalNewShow} bsStyle="primary">New review</Button>
                                                         :
-                                                        <Button  onClick={this.handleShow} bsStyle="primary" disabled>New review</Button>
+                                                        <Button  onClick={this.handleModalNewShow} bsStyle="primary" disabled>New review</Button>
                                                     }                                               
-                                                    <Modal  show={this.state.show} onHide={this.handleClose}>
+                                                    <Modal  show={this.state.showModalNew} onHide={this.handleModalNewClose}>
                                                         <Modal.Header closeButton>
                                                             <Modal.Title>New review</Modal.Title>
                                                         </Modal.Header>
@@ -155,9 +229,39 @@ class ArtistDetail extends Component {
                                                         </Modal.Body>
                                                         <Modal.Footer>
                                                             <Button bsStyle="primary" onClick={(e)=>this.onSave(e)}>Save</Button>
-                                                            <Button onClick={this.handleClose}>Close</Button>
+                                                            <Button onClick={this.handleModalNewClose}>Close</Button>
                                                         </Modal.Footer>
                                                     </Modal>
+
+                                                    <Modal  show={this.state.showModalUpdate} onHide={this.handleModalUpdateClose}>
+                                                        <Modal.Header closeButton>
+                                                            <Modal.Title>Edit Review</Modal.Title>
+                                                        </Modal.Header>
+
+                                                        <Modal.Body>
+                                                            <form>
+                                                            <FormGroup
+                                                                controlId="formBasicText"
+                                                                
+                                                                >
+                                                                <ControlLabel>Edit your for this artist</ControlLabel>
+                                                                <FormControl
+                                                                    type="text"
+                                                                    value = {this.state.selected!==null?this.state.selected.body:''}
+                                                                    placeholder="Enter review"
+                                                                    onChange = {(e)=>this.handleUpdateChange(e)}
+                                                                />
+                                                                
+                                                                </FormGroup>
+                                                            </form>
+                                                        </Modal.Body>
+                                                        <Modal.Footer>
+                                                            <Button bsStyle="danger" onClick={(e)=>this.onDelete(e)}>Delete</Button>
+                                                            <Button bsStyle="primary" onClick={(e)=>this.onUpdate(e)}>Update</Button>
+                                                            <Button onClick={this.handleModalUpdateClose}>Close</Button>
+                                                        </Modal.Footer>
+                                                    </Modal>
+
                                             </div>
                                         </div>
                                 
@@ -168,8 +272,6 @@ class ArtistDetail extends Component {
                                             {this.renderReviews(this.props.artistDetail.artistDetail.reviews)}
                                         </ListGroup>
                                     </div>
-                                    
-            
                                 </div>
 
                 }        
@@ -190,7 +292,10 @@ const mapDispatchToProps = dispatch => {
         loadingArtistDetail : () => dispatch(loadingArtistDetail()),
         failedArtistDetail : (message) => dispatch(failedArtistDetail(message)),
         setArtistDetail : (artistDetail) => dispatch(setArtistDetail(artistDetail)),
-        addNewReview : (newReview) => dispatch(addNewReview(newReview))
+        addNewReview : (newReview) => dispatch(addNewReview(newReview)),
+        selectReview: (review) =>  dispatch(selectReview(review)),
+        updateReview: (review) => dispatch(updateReview(review)),
+        deleteReview: (review) => dispatch(deleteReview(review))
     };
 };
 // export default ArtistDetail;

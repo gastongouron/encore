@@ -43,7 +43,7 @@ class Artists extends Component {
 
     }
 
-	componentWillMount(){	
+	componentWillMount(){
         console.log(" componentWillMount ---------", this.props);
         if (this.props.artists.artists.length > 0)
             return;
