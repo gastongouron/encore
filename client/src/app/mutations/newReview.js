@@ -9,8 +9,8 @@ const newReviewMutation = (gql`
         })
         {
             review{
+                id
                 user_id
-                artist_id
                 body
             }
             

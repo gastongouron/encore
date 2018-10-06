@@ -7,7 +7,7 @@ import artistDetailQuery from '../queries/ReviewsSchema'
 import newReviewMutation from '../mutations/newReview'
 import {Button,Modal,FormControl,FormGroup,ControlLabel} from 'react-bootstrap';
 import './modal.css';
-import {initArtistDetail, loadingArtistDetail, failedArtistDetail, setArtistDetail} from '../actions/artistDetail'
+import {initArtistDetail, loadingArtistDetail, failedArtistDetail, setArtistDetail, addNewReview} from '../actions/artistDetail'
 class ArtistDetail extends Component {
     static val1;
     constructor(props){
@@ -16,14 +16,15 @@ class ArtistDetail extends Component {
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.state = {
-            show: false
+            show: false,
+            enabledButton: true
           };
     };
     
     componentWillMount(){
         console.log(" artist componentWillMount=================", this.props);
-        if(this.props.artistDetail.artistDetail.length > 0)
-            return;
+        // if(this.props.artistDetail.artistDetail.length > 0)
+        //     return;
         this.props.loadingArtistDetail();
         console.log(" artist componentWillMount^^^^^^^^^^^^^^^^^", this.props.match.params.id);
         this.props.client.query({query: artistDetailQuery, variables: {id: this.props.match.params.id}, fetchPolicy: 'network-only'})
@@ -31,7 +32,7 @@ class ArtistDetail extends Component {
             (res) => {
                 console.log("artistDetail componentwillMount+++++++++++++++++", res);
                 this.props.setArtistDetail(res.data.artist);
-
+                this.checkEnableNewReview(res.data.artist.reviews)
             },
             (err) => {
                 console.log("artistDetail componentwillMount****************", err)
@@ -39,12 +40,6 @@ class ArtistDetail extends Component {
             }
         );
     }
-
-
-     
-
-
-
     handleClose() {
         this.setState({ show: false });
       }
@@ -54,12 +49,22 @@ class ArtistDetail extends Component {
         
       }
     
+    checkEnableNewReview = (reviews) => {
+        console.log("length ++++++++++++",  reviews.length)
+        for (var i = 0; i < reviews.length; i++) {
+            console.log("user id for this artist is ^^^^^^^^^^^^^^^", reviews[i].user_id)
+            if(reviews[i].user_id == this.props.userInfo.user_id){
+                this.setState({enabledButton: false});
+            }
+        }
+    }
    
     renderReviews = (reviews) => {
         console.log("renderReviews**************", reviews);
         if (reviews.length > 0) {      
             return reviews.map((review, index) => (
-                <ListGroupItem key={index}>{review.body}</ListGroupItem>
+                    <ListGroupItem key={index}>{review.body}</ListGroupItem>
+                    
             ));
         }
         else return null;
@@ -80,31 +85,25 @@ class ArtistDetail extends Component {
             this.props.client.mutate({mutation: newReviewMutation, variables: {user_id: this.props.userInfo.user_id, artist_id: this.props.match.params.id, body: ArtistDetail.val1}})
             .then(
                 (res) => {
-                    console.log("newreview !!!!!!!!!!!!!!!!!!!!!!!!", res);
+                    const newArr = res.data.newReview.review
+                    console.log("newreview !!!!!!!!!!!!!!!!!!!!!!!!", newArr);
+
+                    this.props.addNewReview(newArr)
+                    // this.props.artistDetail.artistDetail.reviews = [...this.props.artistDetail.artistDetail.reviews, newArr]
                     
-                    // this.props.setArtistDetail(res.data.artist);
-    
+                    console.log("newreview ****************************", this.props.artistDetail.artistDetail.reviews);
+                    this.setState({enabledButton: false});
                 },
                 (err) => {
-                    console.log("newreview !!!!!!!!!!!!!!!!!!!!!!!!", err)
-                    // this.props.failedArtistDetail(err.data);
+                    console.log("newreview !!!!!!!!!!!!!!!!!!!!!!!!", err);
                 }
             );
-            // <Mutation mutation = {newReviewMutation} variables = {{user_id: 1, artist_id: 1, body: "nice artist"}}>
-            // {({loading, error, data}) => {
-            //     if(loading) return <h1>creating new review...</h1>;
-            //     if(error) return <h1>`Error! ${error.message}`</h1>;
-            //     console.log("Mutation review----------", data);
-            // }
-
-            // }
-
-            // </Mutation>
         }
 
     }
     render() {
-        console.log("render id--------", this.props.match.params.id)
+        const {enabledButton} = this.state
+        console.log("render id--------", this.props.match.params.id, enabledButton)
         return (
             <div className="row" style={{margin: "20px"}}>
 
@@ -115,7 +114,9 @@ class ArtistDetail extends Component {
                             this.props.artistDetail.error ?
                                 <h1>Error...</h1>
                                 :
+
                                 <div className="col-md-3">
+                                
                                 <h2>{this.props.artistDetail.artistDetail.name}</h2>
                                     <form>
                                         <div className="formGroup">
@@ -126,33 +127,37 @@ class ArtistDetail extends Component {
                                                 <label>{this.props.artistDetail.artistDetail.description}</label>
                                             </div>
                                             <div style={{float:"right", marginBottom: "10px"}}>
-                                                <Button  onClick={this.handleShow} bsStyle="primary" >New review</Button>
-                                                <Modal  show={this.state.show} onHide={this.handleClose}>
-                                                    <Modal.Header closeButton>
-                                                        <Modal.Title>New review</Modal.Title>
-                                                    </Modal.Header>
-                                                    <Modal.Body>
-                                                        <form>
-                                                        <FormGroup
-                                                            controlId="formBasicText"
-                                                            
-                                                            >
-                                                            <ControlLabel>Enter your review for this artist</ControlLabel>
-                                                            <FormControl
-                                                                type="text"
+                                                    { enabledButton ?
+                                                        <Button  onClick={this.handleShow} bsStyle="primary">New review</Button>
+                                                        :
+                                                        <Button  onClick={this.handleShow} bsStyle="primary" disabled>New review</Button>
+                                                    }                                               
+                                                    <Modal  show={this.state.show} onHide={this.handleClose}>
+                                                        <Modal.Header closeButton>
+                                                            <Modal.Title>New review</Modal.Title>
+                                                        </Modal.Header>
+                                                        <Modal.Body>
+                                                            <form>
+                                                            <FormGroup
+                                                                controlId="formBasicText"
                                                                 
-                                                                placeholder="Enter review"
-                                                                onChange = {(e)=>this.handleChange(e)}
-                                                            />
-                                                            
-                                                            </FormGroup>
-                                                        </form>
-                                                    </Modal.Body>
-                                                    <Modal.Footer>
-                                                        <Button bsStyle="primary" onClick={(e)=>this.onSave(e)}>Save</Button>
-                                                        <Button onClick={this.handleClose}>Close</Button>
-                                                    </Modal.Footer>
-                                                </Modal>
+                                                                >
+                                                                <ControlLabel>Enter your review for this artist</ControlLabel>
+                                                                <FormControl
+                                                                    type="text"
+                                                                    
+                                                                    placeholder="Enter review"
+                                                                    onChange = {(e)=>this.handleChange(e)}
+                                                                />
+                                                                
+                                                                </FormGroup>
+                                                            </form>
+                                                        </Modal.Body>
+                                                        <Modal.Footer>
+                                                            <Button bsStyle="primary" onClick={(e)=>this.onSave(e)}>Save</Button>
+                                                            <Button onClick={this.handleClose}>Close</Button>
+                                                        </Modal.Footer>
+                                                    </Modal>
                                             </div>
                                         </div>
                                 
@@ -168,67 +173,7 @@ class ArtistDetail extends Component {
                                 </div>
 
                 }        
-                {/* <Query query={reviewListQuery} variables={{id: this.props.match.params.id}} fetchPolicy='network-only'>
-                    {({ loading, error, data }) => {
-
-                        if (loading) return <h1>"Loading..."</h1>;
-                        if (error) return <h1>`Error! ${error.message}`</h1>;
-                        console.log("Query ----------", data);
-                        return (
-                            <div className="col-md-3">
-                            <h2>{data.artist.name}</h2>
-                                <form>
-                                    <div className="formGroup">
-                                        <label>{data.artist.name}</label>
-                                    </div>
-                                    <div>
-                                        <div className="formGroup" style={{float:"left"}}>
-                                            <label>{data.artist.description}</label>
-                                        </div>
-                                        <div style={{float:"right", marginBottom: "10px"}}>
-                                            <Button  onClick={this.handleShow} bsStyle="primary" >New review</Button>
-                                            <Modal  show={this.state.show} onHide={this.handleClose}>
-                                                <Modal.Header closeButton>
-                                                    <Modal.Title>New review</Modal.Title>
-                                                </Modal.Header>
-                                                <Modal.Body>
-                                                    <form>
-                                                    <FormGroup
-                                                        controlId="formBasicText"
-                                                        
-                                                        >
-                                                        <ControlLabel>Enter your review for this artist</ControlLabel>
-                                                        <FormControl
-                                                            type="text"
-                                                            
-                                                            placeholder="Enter review"
-                                                            onChange = {(e)=>this.handleChange(e)}
-                                                        />
-                                                        
-                                                        </FormGroup>
-                                                    </form>
-                                                </Modal.Body>
-                                                <Modal.Footer>
-                                                    <Button bsStyle="primary" onClick={(e)=>this.onSave(e)}>Save</Button>
-                                                    <Button onClick={this.handleClose}>Close</Button>
-                                                </Modal.Footer>
-                                            </Modal>
-                                        </div>
-                                    </div>
-                            
-                                    <br/>
-                                </form>
-                                <div style={{width:"100%",float:"left"}}>
-                                    <ListGroup>
-                                        {this.renderReviews(data.artist.reviews)}
-                                    </ListGroup>
-                                </div>
-                                
-        
-                            </div>
-                        );
-                    }}
-                </Query> */}
+                
             </div>
         );
     }
@@ -244,7 +189,8 @@ const mapDispatchToProps = dispatch => {
         initArtistDetail : () => dispatch(initArtistDetail()),
         loadingArtistDetail : () => dispatch(loadingArtistDetail()),
         failedArtistDetail : (message) => dispatch(failedArtistDetail(message)),
-        setArtistDetail : (artistDetail) => dispatch(setArtistDetail(artistDetail))
+        setArtistDetail : (artistDetail) => dispatch(setArtistDetail(artistDetail)),
+        addNewReview : (newReview) => dispatch(addNewReview(newReview))
     };
 };
 // export default ArtistDetail;

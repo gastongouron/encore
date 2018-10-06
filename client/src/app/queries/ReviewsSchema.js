@@ -7,7 +7,9 @@ const artistDetailQuery = (gql`
 	        name
 			description
 			reviews {
+				id
 				body
+				user_id
 			}
 	    }
     }

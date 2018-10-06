@@ -23,3 +23,9 @@ export function initArtistDetail() {
       artistDetail
     }
   }
+  export function addNewReview(newReview){
+    return {
+      type: 'ADD_NEW_REVIEW',
+      newReview
+    }
+  }

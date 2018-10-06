@@ -2,7 +2,8 @@ const initialState = {
     loading: false,
     error: false,
     message: '',
-    artistDetail: []
+    artistDetail: [],
+    newReview:[]
 }
 
 export default (state = initialState, action) => {
@@ -28,6 +29,18 @@ export default (state = initialState, action) => {
                 error: false,
                 loading: false,
                 artistDetail: action.artistDetail
+            }
+        case 'ADD_NEW_REVIEW':
+            console.log('new', action.newReview);
+            let {reviews=[]} = state.artistDetail;
+            let artistDetail = {...state.artistDetail};
+            artistDetail.reviews = [...reviews, action.newReview];
+            return {
+                ...state,
+                error: false,
+                artistDetail,
+                newReview: action.newReview
+
             }
         default:
             return state;
