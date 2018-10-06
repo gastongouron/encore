@@ -40,6 +40,11 @@ class ArtistDetail extends Component {
         );
     }
 
+
+     
+
+
+
     handleClose() {
         this.setState({ show: false });
       }
