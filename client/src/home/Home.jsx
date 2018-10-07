@@ -5,7 +5,7 @@ import { ViewHeading } from '../shared';
 import { initArtists } from '../app/actions/artists'
 
 const Home = ({currentUser, auth: {AuthLinks}, initArtists}) => {
-  // console.log("--------- Home");
+  // console.log("--------- Home");          
   initArtists();
   return (
     <div>

@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 // import {graphql} from 'react-apollo';
 import  { withApollo } from 'react-apollo'
 import SmartDataTable from 'react-smart-data-table'
-import artistListQuery from '../queries/ArtistSchema'
-import {initArtists, loadingArtists, failedArtists, setArtists} from '../actions/artists'
+import artistListQuery from '../../queries/ArtistSchema'
+import {initArtists, loadingArtists, failedArtists, setArtists} from '../../actions/artists'
 
 
 const sematicUI = {
@@ -30,16 +30,13 @@ class Artists extends Component {
         super(props);
 
         this.state = {
-            useApi: false,
-            apiData: '',
-            apiIdx: -1,
             numResults: 10,
-            data: [],
+            mDate: this.props.artists.artists,
             filterValue: '',
             perPage: 0,
             showOnRowClick: true,
           }
-          this.handleCheckboxChange = this.handleCheckboxChange.bind(this)
+          this.handleOnChange = this.handleOnChange.bind(this)
 
     }
 
@@ -65,7 +62,9 @@ class Artists extends Component {
         const { showOnRowClick } = this.state
         this.setState({ showOnRowClick: !showOnRowClick })
     }
-
+    handleOnChange({ target: { name, value } }) {
+        this.setState({ [name]: value })
+      }
     onRowClick = (event, { rowData, rowIndex, tableData }) => {
         const { showOnRowClick } = this.state
         if (showOnRowClick) {
@@ -81,6 +80,9 @@ class Artists extends Component {
     }
 
     render() {
+        const {
+            filterValue, mDate
+          } = this.state
         return (
             <div>
                 {
@@ -92,45 +94,34 @@ class Artists extends Component {
                         :
                             <div>
                                 <h1>Artists</h1>
-
-                                <SmartDataTable
-                                    data={this.props.artists.artists}
-                                    name='artists-table'
-                                    className={sematicUI.table}
-                                    sortable
-                                    onRowClick={this.onRowClick}
-                                    perPage = {10}
-                                />
+                                <div className={sematicUI.segment}>
+                                    <div className={sematicUI.input}>
+                                        <input
+                                        type='text'
+                                        name='filterValue'
+                                        
+                                        placeholder='Filter results...'
+                                        onChange={this.handleOnChange}
+                                        />
+                                        <i className={sematicUI.searchIcon} />
+                                    </div>
+                                    </div>
+                                    <SmartDataTable
+                                        data={mDate}
+                                        name='artists-table'
+                                        dataKey=''
+                                        className={sematicUI.table}
+                                        sortable
+                                        filterValue={filterValue}
+                                        onRowClick={this.onRowClick}
+                                        perPage = {10}
+                                    />
                             </div>
                 }
-                {/* <Query query={artistListQuery} fetchPolicy='network-only'>
-                    {({ loading, error, data }) => {
-                    if (loading) return <h1>"Loading..."</h1>;
-                    if (error) return <h1>`Error! ${error.message}`</h1>;
-                          
-                    return (
-                        <div>
-                            <h1>Artists</h1>
-
-                            <SmartDataTable
-                                
-                                data={this.props.data.artists}
-                                name='artists-table'
-                                className={sematicUI.table}
-                                sortable
-                                onRowClick={this.onRowClick}
-                                perPage = {10}
-                            />
-                        </div>
-                    );
-                    }}
-                </Query> */}
             </div>
         )
     }
 }
-
-// export default graphql(artistListQuery)(Artists);
 
 const mapStateToProps = state => {
     return { artists: state.artists
