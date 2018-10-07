@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable, :recoverable, :trackable, :validatable, :confirmable,
-    :jwt_authenticatable, jwt_revocation_strategy: Devise::JWT::RevocationStrategies::Null #, :omniauthable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable
+    :jwt_authenticatable, jwt_revocation_strategy: Devise::JWT::RevocationStrategies::Null
 
   has_many :reviews
   has_many :artists, through: :reviews
@@ -18,6 +18,5 @@ class User < ApplicationRecord
       displayName: display_name
     }
   end
-
 
 end
