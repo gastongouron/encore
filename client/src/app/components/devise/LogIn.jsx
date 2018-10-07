@@ -44,7 +44,7 @@ const Login = ({currentUser, doLogin, location: {state: {alert, from: {pathname:
     return doLogin(data);
   };
   if (currentUser.isLoggedIn) {
-    return <Redirect to={returnTo || '/'} />;
+    return <Redirect to={returnTo || '/artists'} />;
   }
   const {auth: {AuthLinks, viewPlugin: {View, Heading, Alert}}} = rest;
   return (

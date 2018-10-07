@@ -10,7 +10,7 @@ const SignUpForm = reduxForm({
 })(({error, valid, submitting, submitSucceeded, handleSubmit, onSubmit, auth: {messages: {signUpSucceeded: signUpSucceededMessage}, viewPlugin: {renderInput, SubmitButton, Form, FormError}}}) => {
   if (submitSucceeded) {
     return <Redirect to={{
-      pathname: '/',
+      pathname: '/artists',
       state: {
         notice: signUpSucceededMessage
       }}}

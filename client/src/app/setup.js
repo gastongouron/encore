@@ -3,9 +3,7 @@ import {routerMiddleware} from 'react-router-redux';
 import createBrowserHistory from 'history/createBrowserHistory';
 import {persistStore, autoRehydrate} from 'redux-persist';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-// import ApolloClient, {createNetworkInterface} from 'apollo-client';
 import ReactDeviseMaterialUI from 'react-devise-material-ui';
-// import {initReactDevise, addAuthorizationHeaderToRequest} from 'react-devise';
 import {initReactDevise} from 'react-devise';
 import {Alert, UnstyledList, ViewHeading} from '../shared';
 import styled, {injectGlobal} from 'styled-components';
@@ -19,7 +17,6 @@ import reducers from './reducers';
 import SignUpContainer from './components/devise/SignUp'
 import LoginContainer from './components/devise/LogIn'
 
-// eslint-disable-next-line no-unused-expressions
 injectGlobal`
   body {
     fontFamily: Roboto, sans-serif;
@@ -29,30 +26,8 @@ injectGlobal`
 
 injectTapEventPlugin();
 
-// const networkInterface = createNetworkInterface({
-//   uri: '/graphql'
-// });
-
-// networkInterface.use([{
-//   applyMiddleware: addAuthorizationHeaderToRequest
-// }]);
-
-// const defaultOptions = {
-//   watchQuery: {
-//     fetchPolicy: 'network-only',
-//     errorPolicy: 'all',
-//   },
-//   query: {
-//     fetchPolicy: 'network-only',
-//     errorPolicy: 'all',
-//   },
-// }
-
 const apolloClient = new ApolloClient({
-  // networkInterface: networkInterface,
   ssrMode: false,
-  // shouldBatch: true,
-  // defaultOptions: defaultOptions,
   link: new HttpLink({ uri: '/graphql', fetch }),
   cache: new InMemoryCache()
 }); 
@@ -102,12 +77,8 @@ initReactDevise({
     loginFailed: 'Whoa there. Bad login!'
   },
   routes: {
-    signup: {
-      component: SignUpContainer
-    },
-    login: {
-      component: LoginContainer
-    }
+    signup: { component: SignUpContainer },
+    login: { component: LoginContainer }
   }
 });
 
