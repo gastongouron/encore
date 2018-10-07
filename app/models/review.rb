@@ -11,5 +11,10 @@ class Review < ApplicationRecord
 	validates_with SingleReviewValidator
 	belongs_to :artist
 	belongs_to :user
+
+	def artist_name
+		return self.artist.name
+	end
+
 end
 
