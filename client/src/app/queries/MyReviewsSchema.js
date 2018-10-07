@@ -1,18 +1,19 @@
 import gql from 'graphql-tag';
 
-const artistDetailQuery = (gql`
-    query artistDetailQuery($id: ID!) {
-	    artist(id: $id) {
-	        id
-	        name
-			description
+const myReveiwsQuery = (gql`
+    query myReveiwsQuery($id: ID!) {
+	    user(id: $id) {
+	        first_name
+            last_name
+            email
 			reviews {
-				id
 				body
-				user_id
+                score
+                artist_id
+                artist_name
 			}
 	    }
     }
 `);
 
-export default artistDetailQuery
+export default myReveiwsQuery
