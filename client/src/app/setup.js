@@ -10,13 +10,14 @@ import {initReactDevise} from 'react-devise';
 import {Alert, UnstyledList, ViewHeading} from '../shared';
 import styled, {injectGlobal} from 'styled-components';
 
-
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
 import reducers from './reducers';
 
+import SignUpContainer from './components/devise/SignUp'
+import LoginContainer from './components/devise/LogIn'
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
@@ -99,6 +100,14 @@ initReactDevise({
   ],
   messages: {
     loginFailed: 'Whoa there. Bad login!'
+  },
+  routes: {
+    signup: {
+      component: SignUpContainer
+    },
+    login: {
+      component: LoginContainer
+    }
   }
 });
 
