@@ -3,10 +3,10 @@ import {ListGroup,ListGroupItem} from 'react-bootstrap';
 import {connect} from "react-redux"
 // import { Query, Mutation } from 'react-apollo';
 import { withApollo } from 'react-apollo'
-import artistDetailQuery from '../queries/ReviewsSchema'
-import newReviewMutation from '../mutations/newReview'
-import updateMutation from '../mutations/updateReview'
-import deleteMutation from '../mutations/deleteReview'
+import artistDetailQuery from '../../queries/ReviewsSchema'
+import newReviewMutation from '../../mutations/newReview'
+import updateMutation from '../../mutations/updateReview'
+import deleteMutation from '../../mutations/deleteReview'
 import {Button,Modal,FormControl,FormGroup,ControlLabel} from 'react-bootstrap';
 import './modal.css';
 import {
@@ -18,7 +18,7 @@ import {
     selectReview,
     updateReview,
     deleteReview
-} from '../actions/artistDetail'
+} from '../../actions/artistDetail'
 class ArtistDetail extends Component {
     static val1;
     constructor(props){
@@ -33,7 +33,7 @@ class ArtistDetail extends Component {
             showModalUpdate: false,
             enabledButton: true,
             selected:null
-          };
+        };
     };
     
     componentWillMount(){
@@ -85,7 +85,7 @@ class ArtistDetail extends Component {
    
     renderReviews = (reviews) => {
         console.log("renderReviews**************", reviews);
-        if (reviews.length > 0) {      
+        if (reviews.length > 0) {
             return reviews.map((review, index) => (
                 <ListGroupItem key={index} 
                 onClick={

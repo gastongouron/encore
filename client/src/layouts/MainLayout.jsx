@@ -46,6 +46,7 @@ class UserMenuItem extends Component {
       open: false
     });
   };
+
   render() {
     const {currentUser, logout, textColor} = this.props;
     if (currentUser && currentUser.isLoggedIn) {
@@ -65,6 +66,11 @@ class UserMenuItem extends Component {
             onRequestClose={this.handleRequestClose}
           >
             <Menu>
+              <MenuItem primaryText="Profile" 
+                containerElement={<Link to="/profile"/>
+              }
+              onTouchTap={this.handleRequestClose}
+              />
               <MenuItem primaryText="Log Out" onTouchTap={logout} />
             </Menu>
           </Popover>
@@ -90,9 +96,11 @@ class MainLayout extends Component {
       drawerOpen: open
     });
   }
+
   goHome = () => {
     this.props.history.push('/');
   };
+
   render() {
     const {currentUser, doLogout, children, location: {state: {notice} = {}}, muiTheme: {palette}} = this.props;
     return (
