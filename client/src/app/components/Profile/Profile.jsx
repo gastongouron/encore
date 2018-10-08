@@ -48,7 +48,6 @@ class Profile extends Component {
     }
 
 	componentWillMount(){
-        console.log("profile componentWillMount props---------", this.props);
         if (this.props.reviews.reviews.length > 0)
             return;
         this.props.loadingMyReviews();
@@ -96,7 +95,6 @@ class Profile extends Component {
         if(val===''){
             console.log("length is 0----------------------")
         } else {
-            console.log("current seletedReview is@@@@@@@@@@@@@@@@@@@@@@@@", seletedReview)
             this.props.client.mutate(
                 {mutation: updateMutation,
                  variables: {id: seletedReview.id, body:val}})
