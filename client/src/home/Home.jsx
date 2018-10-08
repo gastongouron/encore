@@ -5,10 +5,10 @@ import { ViewHeading } from '../shared';
 import { initArtists } from '../app/actions/artists'
 import { initMyReviews } from '../app/actions/reviews'
 
-const Home = ({currentUser, auth: {AuthLinks}, initArtists, initReviews}) => {
-  // console.log("--------- Home");          
-  initArtists();
-  initMyReviews();
+const Home = ({currentUser, auth: {AuthLinks}, initArtists, initMyReviews}) => {
+  console.log("--------- Home");
+ 
+  
   return (
     <div>
       <ViewHeading>Welcome to encore</ViewHeading>
@@ -18,7 +18,9 @@ const Home = ({currentUser, auth: {AuthLinks}, initArtists, initReviews}) => {
 };
 
 const mapStateToProps = state => {
-  console.log(state.currentUser)
+  console.log("current user info------------Home---------", state.currentUser)
+  initArtists();
+  initMyReviews();
   return {
     currentUser: state.currentUser
   };
