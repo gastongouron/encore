@@ -1,25 +1,42 @@
-export function initReviews() {
+export function initMyReviews() {
     return {
-      type: 'REVIEWS_INIT'
+      type: 'MYREVIEWS_INIT'
     }
   }
   
-  export function loadingReviews() {
+  export function loadingMyReviews() {
       return {
-        type: 'REVIEWS_LOADING'
+        type: 'MYREVIEWS_LOADING'
       }
   }
   
-  export function failedReviews(message) {
+  export function failedMyReviews(message) {
     return {
-      type: 'REVIEWS_ERROR',
+      type: 'MYREVIEWS_ERROR',
       message
     }
   }
-  
-  export function setReviews(reviews) {
+  export function selectMyReview(review){
+    return {
+      type: 'SELECT_MYREVIEW',
+      review
+    }
+  }
+  export function setMyReviews(reviews) {
     return {
       type: 'REVIEWS_LOADED',
       reviews
+    }
+  }
+  export function updateMyReview(review) {
+    return {
+      type: 'UPDATE_MYREVIEW',
+      review
+    }
+  }
+  export function deleteMyReview(review){
+    return {
+      type: 'DELETE_MYREVIEW',
+      review
     }
   }

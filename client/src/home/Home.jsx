@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import { withAuth } from 'react-devise';
 import { ViewHeading } from '../shared';
 import { initArtists } from '../app/actions/artists'
-import { initReviews } from '../app/actions/reviews'
+import { initMyReviews } from '../app/actions/reviews'
 
 const Home = ({currentUser, auth: {AuthLinks}, initArtists, initReviews}) => {
   // console.log("--------- Home");          
   initArtists();
-  initReviews();
+  initMyReviews();
   return (
     <div>
       <ViewHeading>Welcome to encore</ViewHeading>
@@ -27,7 +27,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
       initArtists : () => dispatch(initArtists()),
-      initReviews : () => dispatch(initReviews())
+      initMyReviews : () => dispatch(initMyReviews())
   };
 };
 

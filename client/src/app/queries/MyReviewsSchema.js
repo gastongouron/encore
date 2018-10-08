@@ -11,6 +11,8 @@ const myReveiwsQuery = (gql`
                 artist_name
 				body
                 score
+                user_id
+                id
 			}
 	    }
     }

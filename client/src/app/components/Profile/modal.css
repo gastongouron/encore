@@ -1,0 +1,19 @@
+/* .modal-container {
+    position: relative;
+  }
+  .modal-container .modal, .modal-container .modal-backdrop {
+    position: absolute;
+  }
+  .modal{
+    position: relative!important;
+  } */
+
+  div#review_detail_modal{
+    position: absolute!important;
+  }
+  div#review_detail_modal>div.modal-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }

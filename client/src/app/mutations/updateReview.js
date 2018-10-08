@@ -8,9 +8,12 @@ const updateMutation = (gql`
         })
         {
             review{
-                id
+                artist_id
+                artist_name
+				body
+                score
                 user_id
-                body
+                id
             }
         }
     }

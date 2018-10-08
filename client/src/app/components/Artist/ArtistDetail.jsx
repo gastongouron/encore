@@ -53,6 +53,7 @@ class ArtistDetail extends Component {
             }
         );
     }
+    
     handleModalNewClose() {
         this.setState({ showModalNew: false });
     }
