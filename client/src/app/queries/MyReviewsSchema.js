@@ -7,10 +7,10 @@ const myReveiwsQuery = (gql`
             last_name
             email
 			reviews {
-				body
-                score
                 artist_id
                 artist_name
+				body
+                score
 			}
 	    }
     }

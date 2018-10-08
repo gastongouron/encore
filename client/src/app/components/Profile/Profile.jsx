@@ -3,6 +3,8 @@ import {connect} from "react-redux"
 import { withApollo } from 'react-apollo'
 import Avatar from 'react-avatar';
 import SmartDataTable from 'react-smart-data-table'
+import myReveiwsQuery from '../../queries/MyReviewsSchema'
+import {initReviews, loadingReviews, failedReviews, setReviews} from '../../actions/reviews'
 
 const sematicUI = {
     segment: 'ui basic segment',
@@ -22,7 +24,6 @@ const sematicUI = {
 
 class Profile extends Component {
     constructor(props){
-        console.log("profile page------------------", props)
         super(props);
 
         this.state = {
@@ -32,12 +33,39 @@ class Profile extends Component {
     }
 
 	componentWillMount(){
-        console.log(" profile componentWillMount ---------------", this.props);
+        console.log("profile componentWillMount props---------", this.props);
+        if (this.props.reviews.reviews.length > 0)
+            return;
+        this.props.loadingReviews();
+        this.props.client.networkInterface.query({query: myReveiwsQuery, variables: {id: this.props.userInfo.user_id}, fetchPolicy: 'network-only'})
+        .then(
+            (res) => {
+                console.log("profile my reviews componentWillMount query result-----------------", res.data.user.reviews);
+                this.props.setReviews(res.data.user.reviews);
+            },
+            (err) => {
+                console.log("profile my reviews componentWillMount query componentWillMount errrr", err);
+                this.props.failedReviews(err.data);
+            }
+        );
         
     }
-
+    getHeaders() {
+        return {
+          'artist_id': {
+            text: 'ART_ID',
+          },
+          'artist_name': {
+            text: 'Artist Name',
+          },
+          'body': {
+            text: 'My review',
+          },
+        }
+      }
     render() {
-        
+        console.log("profile render props----^^^^^^^^^^^^^-----", this.props);
+        const headers = this.getHeaders()
         return (
             <div>
                 <div className="text-center">
@@ -47,16 +75,32 @@ class Profile extends Component {
                     <div>Email</div>
                 </div>
                 <div>
-                    {/* <SmartDataTable
-                        data={mDate}
-                        name='artists-table'
-                        dataKey=''
-                        className={sematicUI.table}
-                        sortable
-                        filterValue={filterValue}
-                        onRowClick={this.onRowClick}
-                        perPage = {10}
-                    /> */}
+                    {
+                        this.props.reviews.loading ?
+                            <h1>Loading...</h1>
+                        :
+                            this.props.reviews.error ?
+                                <h1>Error...</h1>
+                            :
+                                <div>
+                                    <h1>My reviews</h1>
+                                        <SmartDataTable
+                                            data={this.props.reviews.reviews}
+                                            name='reviews-table'
+                                            dataKey=''
+                                            className={sematicUI.table}
+                                            sortable
+                                            headers={headers}
+                                            loader={(
+                                                <div className={sematicUI.loader}>
+                                                  Loading...
+                                                </div>
+                                              )}
+                                            onRowClick={this.onRowClick}
+                                            perPage = {10}
+                                        />
+                                </div>
+                    }
                 </div>
             </div>
         )
@@ -64,13 +108,17 @@ class Profile extends Component {
 }
 
 const mapStateToProps = state => {
-    return { 
+    return { reviews: state.reviews,
+            userInfo: state.currentUser
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        
+        initReviews : () => dispatch(initReviews()),
+        loadingReviews : () => dispatch(loadingReviews()),
+        failedReviews : (message) => dispatch(failedReviews(message)),
+        setReviews : (reviews) => dispatch(setReviews(reviews)),
     };
 };
   

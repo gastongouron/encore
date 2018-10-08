@@ -4,7 +4,8 @@ import {reducer as formReducer} from 'redux-form';
 import {routerReducer} from 'react-router-redux';
 
 import artists from './artists';
-import artistDetail from './artistDetail'
+import artistDetail from './artistDetail';
+import reviews from './reviews'
 
 export default apolloClient => combineReducers({
   ...reactDeviseReducers,
@@ -12,5 +13,6 @@ export default apolloClient => combineReducers({
   router: routerReducer,
   apollo: apolloClient.reducer(),
   artists,
-  artistDetail
+  artistDetail,
+  reviews
 });

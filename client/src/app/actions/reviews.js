@@ -17,9 +17,9 @@ export function initReviews() {
     }
   }
   
-  export function setReviews(revies) {
+  export function setReviews(reviews) {
     return {
       type: 'REVIEWS_LOADED',
-      revies
+      reviews
     }
   }

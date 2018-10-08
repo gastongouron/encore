@@ -10,6 +10,7 @@ export default (state = initialState, action) => {
         case 'REVIEWS_INIT':
             return initialState
         case 'REVIEWS_LOADING':
+        console.log("reviews loading```````````````````````");
             return {
                 ...state,
                 error: false,
