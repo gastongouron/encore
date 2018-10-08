@@ -14,7 +14,7 @@ rid = 0
 end
 
 artists = []
-50.times do 
+30.times do 
 	artists << Artist.create(
 		name: Faker::Artist.unique.name,
 		description: Faker::GreekPhilosophers.quote
