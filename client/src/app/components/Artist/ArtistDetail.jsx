@@ -86,9 +86,9 @@ class ArtistDetail extends Component {
    
     renderReviews = (reviews) => {
         console.log("renderReviews**************", reviews);
-        if (reviews.length > 0) {
+        if (reviews !== undefined) {
             return reviews.map((review, index) => (
-                <ListGroupItem key={index} 
+                <ListGroupItem key={index}
                 onClick={
                     review.user_id==this.props.userInfo.user_id
                     ?()=>this.handleModalUpdateShow(review)
