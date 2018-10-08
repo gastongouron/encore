@@ -51,7 +51,7 @@ class Profile extends Component {
         console.log("profile componentWillMount props---------", this.props);
         if (this.props.reviews.reviews.length > 0)
             return;
-        this.props.loadingReviews();
+        this.props.loadingMyReviews();
         this.props.client.networkInterface.query({query: myReveiwsQuery, variables: {id: this.props.userInfo.user_id}, fetchPolicy: 'network-only'})
         .then(
             (res) => {
@@ -84,7 +84,7 @@ class Profile extends Component {
     }
     
     handleModalUpdateShow(review){
-        console.log('selected', review);
+        console.log('selected review', review);
         this.props.selectMyReview(review);
         this.setState({seletedReview:review});
         this.setState({ showModalUpdate: true });
@@ -165,7 +165,6 @@ class Profile extends Component {
         }
       }
     render() {
-        console.log("profile render props----^^^^^^^^^^^^^-----", this.props);
         const headers = this.getHeaders()
         return (
             <div>
