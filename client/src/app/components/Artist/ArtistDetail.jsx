@@ -68,7 +68,6 @@ class ArtistDetail extends Component {
     }
     
     handleModalUpdateShow(review){
-        console.log('selected/////////////////////////', review);
         this.props.selectReview(review);
         this.setState({selected:review});
         this.setState({ showModalUpdate: true });
