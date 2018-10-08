@@ -48,7 +48,6 @@ class Profile extends Component {
     }
 
 	componentWillMount(){
-        console.log("profile componentWillMount props---------", this.props);
         if (this.props.reviews.reviews.length > 0)
             return;
         this.props.loadingMyReviews();
@@ -84,7 +83,7 @@ class Profile extends Component {
     }
     
     handleModalUpdateShow(review){
-        console.log('selected', review);
+        console.log('selected review', review);
         this.props.selectMyReview(review);
         this.setState({seletedReview:review});
         this.setState({ showModalUpdate: true });
@@ -96,7 +95,6 @@ class Profile extends Component {
         if(val===''){
             console.log("length is 0----------------------")
         } else {
-            console.log("current seletedReview is@@@@@@@@@@@@@@@@@@@@@@@@", seletedReview)
             this.props.client.mutate(
                 {mutation: updateMutation,
                  variables: {id: seletedReview.id, body:val}})
@@ -165,7 +163,6 @@ class Profile extends Component {
         }
       }
     render() {
-        console.log("profile render props----^^^^^^^^^^^^^-----", this.props);
         const headers = this.getHeaders()
         return (
             <div>

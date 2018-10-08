@@ -53,7 +53,7 @@ class ArtistDetail extends Component {
             }
         );
     }
-    
+
     handleModalNewClose() {
         this.setState({ showModalNew: false });
     }
@@ -68,7 +68,7 @@ class ArtistDetail extends Component {
     }
     
     handleModalUpdateShow(review){
-        console.log('selected', review);
+        console.log('selected/////////////////////////', review);
         this.props.selectReview(review);
         this.setState({selected:review});
         this.setState({ showModalUpdate: true });
@@ -141,7 +141,7 @@ class ArtistDetail extends Component {
         if(val===''){
             console.log("length is 0----------------------")
         } else {
-            console.log("current selectedis@@@@@@@@@@@@@@@@@@@@@@@@", selected)
+            console.log("current selected id is@@@@@@@@@@@@@@@@@@@@@@@@", selected.id)
             this.props.client.mutate(
                 {mutation: updateMutation,
                  variables: {id: selected.id, body:val}})
