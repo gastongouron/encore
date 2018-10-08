@@ -24,7 +24,7 @@ export function initMyReviews() {
   }
   export function setMyReviews(reviews) {
     return {
-      type: 'REVIEWS_LOADED',
+      type: 'MYREVIEWS_LOADED',
       reviews
     }
   }

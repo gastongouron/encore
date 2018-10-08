@@ -36,10 +36,10 @@ const sematicUI = {
 class Profile extends Component {
     constructor(props){
         super(props);
+        console.log("profile page props ```````````````````````````````", this.props)
         this.handleModalUpdateShow = this.handleModalUpdateShow.bind(this);
         this.handleModalUpdateClose = this.handleModalUpdateClose.bind(this);
         this.state = {
-           mData: this.props.reviews.reviews,
            showModalUpdate: false,
            showOnRowClick: true,
            seletedReview: null
@@ -55,7 +55,7 @@ class Profile extends Component {
         .then(
             (res) => {
                 console.log("profile my reviews componentWillMount query result-----------------", res.data.user.reviews);
-                this.props.setReviews(res.data.user.reviews);
+                this.props.setMyReviews(res.data.user.reviews);
             },
             (err) => {
                 console.log("profile my reviews componentWillMount query componentWillMount errrr", err);
@@ -154,7 +154,7 @@ class Profile extends Component {
             filterable: false,
             invisible: true,
           },
-          '_typename': {
+          '__typename': {
             text: 'TypeName',
             sortable: false,
             filterable: false,

@@ -45,11 +45,12 @@ class Artists extends Component {
         if (this.props.artists.artists.length > 0)
             return;
         this.props.loadingArtists();
-        this.props.client.networkInterface.query({query: artistListQuery, fetchPolicy: 'network-only'})
+        this.props.client.query({query: artistListQuery, fetchPolicy: 'network-only'})
         .then(
             (res) => {
                 console.log("componentWillMount componentWillMount", res);
                 this.props.setArtists(res.data.artists);
+                this.setState({mDate: res.data.artists})
             },
             (err) => {
                 console.log("componentWillMount errrr", err);
