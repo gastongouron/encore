@@ -51,16 +51,16 @@ class Profile extends Component {
         console.log("profile componentWillMount props---------", this.props);
         if (this.props.reviews.reviews.length > 0)
             return;
-        this.props.loadingReviews();
+        this.props.loadingMyReviews();
         this.props.client.networkInterface.query({query: myReveiwsQuery, variables: {id: this.props.userInfo.user_id}, fetchPolicy: 'network-only'})
         .then(
             (res) => {
                 console.log("profile my reviews componentWillMount query result-----------------", res.data.user.reviews);
-                this.props.setReviews(res.data.user.reviews);
+                this.props.setMyReviews(res.data.user.reviews);
             },
             (err) => {
                 console.log("profile my reviews componentWillMount query componentWillMount errrr", err);
-                this.props.failedReviews(err.data);
+                this.props.failedMyReviews(err.data);
             }
         );
         
