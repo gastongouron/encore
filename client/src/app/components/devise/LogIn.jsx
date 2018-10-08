@@ -5,6 +5,7 @@ import {UnauthorizedError} from 'react-devise/lib/errors';
 import {Redirect} from 'react-router-dom';
 import {reduxForm, Field, SubmissionError} from 'redux-form';
 import {required, email} from 'react-devise/lib/views/validation';
+import {OauthView} from './OauthLinks'
 
 const LoginForm = reduxForm({
   form: 'login'
@@ -49,6 +50,13 @@ const Login = ({currentUser, doLogin, location: {state: {alert, from: {pathname:
   const {auth: {AuthLinks, viewPlugin: {View, Heading, Alert}}} = rest;
   return (
     <View>
+      <Heading>
+        Facebook
+      </Heading>
+      <OauthView />
+
+
+      <br />
       <Heading>
         Login
       </Heading>

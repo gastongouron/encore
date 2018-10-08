@@ -14,6 +14,9 @@ Devise.setup do |config|
   # with default "from" parameter.
   config.mailer_sender = 'contact@encore-playground.com'
 
+  # config.omniauth :facebook, "1351728908291385", "d904c24052ee6a0001867f39fb224a29", callback_path: 'https://ca67a2b5.ngrok.io/auth/facebook/callback', scope: 'email,first_name,last_name,picture', token_params: { parse: :json },provider_ignores_state: true
+
+
   # Configure the class responsible to send e-mails.
   config.mailer = 'UsersMailer'
 

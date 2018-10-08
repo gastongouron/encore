@@ -3,12 +3,14 @@ aid = 0
 rid = 0
 
 5.times do 
-	User.create(
-		first_name: Faker::Name.first_name, 
-		last_name: Faker::Name.last_name,
-		email:"test#{uid}@mail.com", 
-		password:"password"
-	)
+	user = User.new
+	user.first_name = Faker::Name.first_name
+	user.last_name  = Faker::Name.last_name
+	user.email		= "test#{uid}@mail.com"
+	user.password	= "password"
+	user.skip_confirmation!
+	user.save
+
 	puts "-> user_#{uid} has been created"
 	uid += 1
 end
