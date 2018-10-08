@@ -17,7 +17,6 @@ Rake start
 
 The api and the website will run on different ports. The port specified in the ```.foreman``` file will be used for the api, and the website will run on that port +100. To get the website to access the api on it's own domain, we have added the following to ```./client/package.json```.
 
-
 ```json
 "proxy": "http://localhost:[the same port in the .foreman file]"
 ```

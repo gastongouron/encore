@@ -4,30 +4,23 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # You should configure your model like this:
   # devise :omniauthable, omniauth_providers: [:twitter]
 
-  # You should also create an action method in this controller like this:
-  # def twitter
-  # end
+  def facebook
+      puts 'in callback controller -> facebook'
 
-   def facebook
-      # You need to implement the method below in your model (e.g. app/models/user.rb)
-      # env["omniauth.auth"] = params
-      puts 'IN FACEBOOK'
-      # puts env["omniauth.auth"]
-
-      # @user = User.from_omniauth(request.env["omniauth.auth"])
+      # @user = User.from_omniauth(request.env['omniauth.env']) <------- should be
+      # so just bullshit, auth should be coming from request.env["omniauth.auth"] not params
+      # everything happening in user.rb is a lie
       @user = User.from_omniauth(params["accessToken"])
-      puts 'hello user email:'
-      puts @user.email
+
       if @user.persisted?
-        puts 'USER PERSISTED!'
+        puts 'user persisted'
         sign_in_and_redirect @user, event: :authentication #this will throw if @user is not activated
-        # request.headers['authorization'] = params["accessToken"]["signedRequest"]
-        # response.set_header('Authorization', params["accessToken"]["signedRequest"])
-        # render json: @user, status: :ok 
-        # set_flash_message(:notice, :success, kind: "Facebook") if is_navigational_format?
+        response.set_header('Authorization', params["accessToken"]["signedRequest"]) #<------ not the good token anyway :'(
+        render json: @user, status: :ok # <--------- An other lie obviously
       else
-        session["devise.facebook_data"] = request.env["omniauth.auth"]
-        redirect_to new_user_registration_url
+        # ...it failed anyway 
+        # session["devise.facebook_data"] = request.env["omniauth.auth"]
+        # redirect_to new_user_registration_url
       end
     end
 
