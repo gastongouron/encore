@@ -23,15 +23,11 @@ class User < ApplicationRecord
     where(provider: 'facebook', uid: auth["id"]).first_or_create do |user|
       user.email = auth["email"]
       user.password = Devise.friendly_token[0,20]
-      user.first_name = auth["first_name"]   # assuming the user model has a name
-      user.last_name = auth["last_name"]   # assuming the user model has a name
-      user.profile_picture = auth["picture"]["data"]["image"] # assuming the user model has an image
+      user.first_name = auth["first_name"]
+      user.last_name = auth["last_name"]
+      user.profile_picture = auth["picture"]["data"]["url"]
       user.skip_confirmation!
-      # If you are using confirmable and the provider(s) you use validate emails, 
-      # uncomment the line below to skip the confirmation emails.
-      # user.skip_confirmation!
     end
   end
-
 
 end
