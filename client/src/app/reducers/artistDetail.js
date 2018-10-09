@@ -3,7 +3,7 @@ const initialState = {
     error: false,
     message: '',
     artistDetail: [],
-    newReview:[]
+    newReview: []
 }
 
 export default (state = initialState, action) => {

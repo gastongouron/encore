@@ -3,11 +3,12 @@ import {connect} from "react-redux"
 import { withApollo } from 'react-apollo'
 import Avatar from 'react-avatar';
 import SmartDataTable from 'react-smart-data-table'
-import myReveiwsQuery from '../../queries/MyReviewsSchema'
+import myReviewsQuery from '../../queries/MyReviewsSchema'
 import updateMutation from '../../mutations/updateReview'
 import deleteMutation from '../../mutations/deleteReview'
 import { initMyReviews, loadingMyReviews, failedMyReviews, setMyReviews, 
          selectMyReview, updateMyReview, deleteMyReview} from '../../actions/reviews'
+
 
 import {Button,Modal,FormControl,FormGroup,ControlLabel} from 'react-bootstrap';
 import './modal.css';
@@ -45,10 +46,11 @@ class Profile extends Component {
         if (this.props.reviews.reviews.length > 0)
             return;
         this.props.loadingMyReviews();
-        this.props.client.networkInterface.query({query: myReveiwsQuery, variables: {id: this.props.userInfo.user_id}, fetchPolicy: 'network-only'})
+        this.props.client.networkInterface.query({query: myReviewsQuery, variables: {id: this.props.userInfo.user_id}, fetchPolicy: 'network-only'})
         .then(
             (res) => {
-                console.log("profile my reviews componentWillMount query result-----------------", res.data.user.reviews);
+                // console.log("profile my reviews componentWillMount query result-----------------", res.data.user.reviews);
+                console.log(res.data.user)
                 this.props.setMyReviews(res.data.user.reviews);
             },
             (err) => {
@@ -56,6 +58,10 @@ class Profile extends Component {
                 this.props.failedMyReviews(err.data);
             }
         );
+    }
+
+    onCurrentUserProfile(){
+        return this.props.userInfo.user_id == this.props.match.params.id  
     }
 
     onRowClick = (event, { rowData, rowIndex, tableData }) => {
@@ -176,7 +182,7 @@ class Profile extends Component {
                                 sortable
                                 headers={headers}
                                 loader={(<div className={sematicUI.loader}> Loading...</div>)}
-                                onRowClick={this.onRowClick}
+                                onRowClick={this.onCurrentUserProfile() ? this.onRowClick : null}
                                 perPage={10}/>
 
                             <Modal id="review_detail_modal" show={this.state.showModalUpdate} onHide={this.handleModalUpdateClose}>

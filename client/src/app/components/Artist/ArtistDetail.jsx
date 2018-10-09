@@ -91,8 +91,7 @@ class ArtistDetail extends Component {
                 onClick={
                     review.user_id == this.props.userInfo.user_id
                     ?()=>this.handleModalUpdateShow(review)
-                    :null} disabled={review.user_id == this.props.userInfo.user_id?false:true}>{review.body}</ListGroupItem>
-                
+                    :null} disabled={review.user_id == this.props.userInfo.user_id?false:true}>{review.body}</ListGroupItem> 
             ));
         }
         else return null;
