@@ -108,7 +108,7 @@ class MainLayout extends Component {
       <div>
         <MainAppBar
           showMenuIconButton={false}
-          title="encore"
+          title="encore!"
           titleStyle={{fontSize: 28, fontWeight: 500}}
           // iconElementLeft={<Logo />}
           onTitleTouchTap={this.goHome}
