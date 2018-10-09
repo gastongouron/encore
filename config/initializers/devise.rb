@@ -8,13 +8,12 @@ Devise.setup do |config|
   # by default. You can change it below and use your own secret key.
   config.secret_key = ENV['DEVISE_JWT_SECRET_KEY'] if Rails.env.production?
 
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'contact@encore-playground.com'
-
-  # config.omniauth :facebook, ENV["FB_ID"], ENV["FB_SECRET"], callback_path: 'auth/facebook/callback', scope: 'email,first_name,last_name,picture', token_params: { parse: :json }, provider_ignores_state: true
 
 
   # Configure the class responsible to send e-mails.

@@ -11,12 +11,9 @@ gem 'graphql'
 gem 'devise'
 gem 'devise-jwt'
 gem 'graphiql-rails'
-
 gem 'faker'
 
 group :development, :test do
-  # graphiql group :
-
   gem 'sass-rails'
   gem 'uglifier'
   gem 'coffee-rails'
