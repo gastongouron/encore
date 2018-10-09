@@ -171,7 +171,7 @@ class Profile extends Component {
             <div>
                 <div className="text-center">
                     <Avatar size="100" round={true} src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg"/>
-                    <div>{this.props.userProfile.userProfile.displayName || this.props.userProfile.userProfile.email}</div>
+                    <div>{this.props.userProfile.userProfile.display_name || this.props.userProfile.userProfile.email}</div>
                     <div>{this.props.userProfile.userProfile.email}</div>
                 </div>
                 <div>
