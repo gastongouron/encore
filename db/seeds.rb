@@ -8,7 +8,7 @@ rid = 0
 	user.last_name  = Faker::Name.last_name
 	user.email		= "test#{uid}@mail.com"
 	user.password	= "password"
-	user.skip_confirmation!
+	# user.skip_confirmation!
 	user.save
 
 	puts "-> user_#{uid} has been created"

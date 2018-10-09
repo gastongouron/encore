@@ -27,7 +27,7 @@ class User < ApplicationRecord
       user.first_name = auth["first_name"]
       user.last_name = auth["last_name"]
       user.profile_picture = auth["picture"]["data"]["url"]
-      user.skip_confirmation!
+      # user.skip_confirmation!
     end
   end
 
