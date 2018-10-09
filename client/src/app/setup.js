@@ -14,8 +14,8 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 
 import reducers from './reducers';
 
-import SignUpContainer from './components/devise/SignUp'
-import LoginContainer from './components/devise/LogIn'
+import SignUpContainer from './components/Devise/views/SignUp'
+import LoginContainer from './components/Devise/views/LogIn'
 
 injectGlobal`
   body {
@@ -77,8 +77,19 @@ initReactDevise({
     loginFailed: 'Whoa there. Bad login!'
   },
   routes: {
-    signup: { component: SignUpContainer },
-    login: { component: LoginContainer }
+    signup: {
+      component: SignUpContainer,     
+      path: '/getstarted',
+      linkText: 'Create an account'
+    },
+    login: { 
+      component: LoginContainer, 
+      path: '/hello',
+      linkText: 'Log-in'
+    },
+    requestReconfirm: { 
+      linkText: ''
+    }    
   }
 });
 

@@ -61,7 +61,7 @@ const fetch = (route, data) => {
   // Render uri with any params, and remove those params from the data payload.
   let uri = [apiHost, apiResourceName, route.path].join('/');
   Object.keys(data).forEach(param => {
-    const regex = new RegExp(`\/:${param}(\/|$)`, 'g');
+    const regex = new RegExp(`:${param}(|$)`, 'g');
     if (uri.match(regex)) {
       uri = uri.replace(regex, `/${data[param]}`);
       delete data[param];

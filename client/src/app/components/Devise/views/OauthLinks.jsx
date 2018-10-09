@@ -131,17 +131,17 @@ const OauthFacebook = withProviderAuth('facebook', ({authenticate}) => {
 });
 
 let OauthView = ({currentUser, location: {state: {flash, from: {pathname: returnTo} = {}} = {}} = {}}) => {
-  if (currentUser) {
-    console.log(currentUser)
-    if (currentUser.isLoggedIn) {
-      return <Redirect to={returnTo || '/artists'} />;
-    }
-    if (currentUser.isLoggingIn) {
-      return (
-        <div>Logging in...</div>
-      );
-    }
-  }
+  // if (currentUser) {
+  //   console.log(currentUser)
+  //   if (currentUser.isLoggedIn) {
+  //     return <Redirect to={returnTo || '/artists'} />;
+  //   }
+  //   if (currentUser.isLoggingIn) {
+  //     return (
+  //       <div>Logging in...</div>
+  //     );
+  //   }
+  // }
   return (
     <div>
       <OauthFacebook />

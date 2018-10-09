@@ -8,7 +8,7 @@ import ArtistsList from './components/Artist/ArtistsList';
 import {authRoutes, PrivateRoute} from 'react-devise';
 import WithMainLayout from './WithMainLayout';
 import ArtistDetail from './components/Artist/ArtistDetail';
-import Policy from './components/public/Policy'
+import Policy from './components/Public/Policy'
 import Profile from './components/Profile/Profile'
 
 const AuthNotFound = () => <MainLayout><NotFound/></MainLayout>;

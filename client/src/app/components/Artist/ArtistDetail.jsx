@@ -77,7 +77,7 @@ class ArtistDetail extends Component {
         console.log("length ++++++++++++",  reviews.length)
         for (var i = 0; i < reviews.length; i++) {
             console.log("user id for this artist is ^^^^^^^^^^^^^^^", reviews[i].user_id)
-            if(reviews[i].user_id == this.props.userInfo.user_id){
+            if(reviews[i].user_id === this.props.userInfo.user_id){
                 this.setState({enabledButton: false});
             }
         }
@@ -89,9 +89,9 @@ class ArtistDetail extends Component {
             return reviews.map((review, index) => (
                 <ListGroupItem key={index}
                 onClick={
-                    review.user_id==this.props.userInfo.user_id
+                    review.user_id === this.props.userInfo.user_id
                     ?()=>this.handleModalUpdateShow(review)
-                    :null} disabled={review.user_id==this.props.userInfo.user_id?false:true}>{review.body}</ListGroupItem>
+                    :null} disabled={review.user_id === this.props.userInfo.user_id?false:true}>{review.body}</ListGroupItem>
                 
             ));
         }
@@ -180,123 +180,98 @@ class ArtistDetail extends Component {
         console.log("render id--------", this.props.match.params.id, enabledButton)
         return (
             <div className="row" style={{margin: "20px"}}>
+                {this.props.artistDetail.loading ? <hi>Loading...</hi> : this.props.artistDetail.error ? <h1>Error...</h1> :
 
-                {
-                    this.props.artistDetail.loading ?
-                        <hi>Loading...</hi>
-                        :
-                            this.props.artistDetail.error ?
-                                <h1>Error...</h1>
-                                :
+                <div className="col-md-3">                            
+                    <h2>{this.props.artistDetail.artistDetail.name}</h2>
+                    <form>
+                        <div className="formGroup"><label>{this.props.artistDetail.artistDetail.name}</label></div>
+                        <div>
+                            <div className="formGroup" style={{float:"left"}}>
+                                <label>{this.props.artistDetail.artistDetail.description}</label>
+                            </div>
+                            <div style={{float:"right", marginBottom: "10px"}}>
+                                { enabledButton ? <Button  onClick={this.handleModalNewShow} bsStyle="primary">New review</Button>
+                                                : <Button  onClick={this.handleModalNewShow} bsStyle="primary" disabled>New review</Button> }                               
+                                <Modal  show={this.state.showModalNew} onHide={this.handleModalNewClose}>
+                                    <Modal.Header closeButton>
+                                    <Modal.Title>New review</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <form>
+                                        <FormGroup controlId="formBasicText">
+                                            <ControlLabel>Enter your review for this artist</ControlLabel>
+                                            <FormControl
+                                                type="text"
+                                                placeholder="Enter review"
+                                                onChange= {(e)=>this.handleChange(e)} />                                                                
+                                            </FormGroup>
+                                        </form>
+                                    </Modal.Body>
+                                    <Modal.Footer>
+                                        <Button bsStyle="primary" onClick={(e)=>this.onSave(e)}>Save</Button>
+                                        <Button onClick={this.handleModalNewClose}>Close</Button>
+                                    </Modal.Footer>
+                                </Modal>
 
-                                <div className="col-md-3">
-                                
-                                <h2>{this.props.artistDetail.artistDetail.name}</h2>
-                                    <form>
-                                        <div className="formGroup">
-                                            <label>{this.props.artistDetail.artistDetail.name}</label>
-                                        </div>
-                                        <div>
-                                            <div className="formGroup" style={{float:"left"}}>
-                                                <label>{this.props.artistDetail.artistDetail.description}</label>
-                                            </div>
-                                            <div style={{float:"right", marginBottom: "10px"}}>
-                                                    { enabledButton ?
-                                                        <Button  onClick={this.handleModalNewShow} bsStyle="primary">New review</Button>
-                                                        :
-                                                        <Button  onClick={this.handleModalNewShow} bsStyle="primary" disabled>New review</Button>
-                                                    }                                               
-                                                    <Modal  show={this.state.showModalNew} onHide={this.handleModalNewClose}>
-                                                        <Modal.Header closeButton>
-                                                            <Modal.Title>New review</Modal.Title>
-                                                        </Modal.Header>
-                                                        <Modal.Body>
-                                                            <form>
-                                                            <FormGroup
-                                                                controlId="formBasicText"
-                                                                
-                                                                >
-                                                                <ControlLabel>Enter your review for this artist</ControlLabel>
-                                                                <FormControl
-                                                                    type="text"
-                                                                    
-                                                                    placeholder="Enter review"
-                                                                    onChange = {(e)=>this.handleChange(e)}
-                                                                />
-                                                                
-                                                                </FormGroup>
-                                                            </form>
-                                                        </Modal.Body>
-                                                        <Modal.Footer>
-                                                            <Button bsStyle="primary" onClick={(e)=>this.onSave(e)}>Save</Button>
-                                                            <Button onClick={this.handleModalNewClose}>Close</Button>
-                                                        </Modal.Footer>
-                                                    </Modal>
-
-                                                    <Modal  show={this.state.showModalUpdate} onHide={this.handleModalUpdateClose}>
-                                                        <Modal.Header closeButton>
-                                                            <Modal.Title>Edit Review</Modal.Title>
-                                                        </Modal.Header>
-
-                                                        <Modal.Body>
-                                                            <form>
-                                                            <FormGroup
-                                                                controlId="formBasicText"
-                                                                
-                                                                >
-                                                                <ControlLabel>Edit your for this artist</ControlLabel>
-                                                                <FormControl
-                                                                    type="text"
-                                                                    value = {this.state.selected!==null?this.state.selected.body:''}
-                                                                    placeholder="Enter review"
-                                                                    onChange = {(e)=>this.handleUpdateChange(e)}
-                                                                />
-                                                                
-                                                                </FormGroup>
-                                                            </form>
-                                                        </Modal.Body>
-                                                        <Modal.Footer>
-                                                            <Button bsStyle="danger" onClick={(e)=>this.onDelete(e)}>Delete</Button>
-                                                            <Button bsStyle="primary" onClick={(e)=>this.onUpdate(e)}>Update</Button>
-                                                            <Button onClick={this.handleModalUpdateClose}>Close</Button>
-                                                        </Modal.Footer>
-                                                    </Modal>
-
-                                            </div>
-                                        </div>
-                                
-                                        <br/>
-                                    </form>
-                                    <div style={{width:"100%",float:"left"}}>
-                                        <ListGroup>
-                                            {this.renderReviews(this.props.artistDetail.artistDetail.reviews)}
-                                        </ListGroup>
-                                    </div>
+                                <Modal show={this.state.showModalUpdate} onHide={this.handleModalUpdateClose}>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title>Edit Review</Modal.Title>
+                                    </Modal.Header>
+                                        <Modal.Body>
+                                            <form>
+                                                <FormGroup controlId="formBasicText">
+                                                    <ControlLabel>Edit your for this artist</ControlLabel>
+                                                    <FormControl
+                                                        type="text"
+                                                        value = {this.state.selected!==null?this.state.selected.body:''}
+                                                        placeholder="Enter review"
+                                                        onChange = {(e)=>this.handleUpdateChange(e)}/>                                                    
+                                                </FormGroup>
+                                            </form>
+                                        </Modal.Body>
+                                        <Modal.Footer>
+                                            <Button bsStyle="danger" onClick={(e)=>this.onDelete(e)}>Delete</Button>
+                                            <Button bsStyle="primary" onClick={(e)=>this.onUpdate(e)}>Update</Button>
+                                            <Button onClick={this.handleModalUpdateClose}>Close</Button>
+                                        </Modal.Footer>
+                                    </Modal>
                                 </div>
-
-                }        
-                
-            </div>
+                            </div>                    
+                            <br/>
+                            </form>
+                            <div style={{width:"100%",float:"left"}}>
+                                <ListGroup>
+                                    {this.renderReviews(this.props.artistDetail.artistDetail.reviews)}
+                                </ListGroup>
+                            </div>
+                        </div>
+                    }        
+                </div>
         );
     }
 }
+
 const mapStateToProps = state => {
     console.log("~~~~~~~~~~~~~~~~~~~~~~~~", state.currentUser)
-    return { artistDetail: state.artistDetail,
-            userInfo: state.currentUser
+    return { 
+        artistDetail: state.artistDetail,
+        userInfo: state.currentUser
     };
 };
+
 const mapDispatchToProps = dispatch => {
     return {
-        initArtistDetail : () => dispatch(initArtistDetail()),
-        loadingArtistDetail : () => dispatch(loadingArtistDetail()),
-        failedArtistDetail : (message) => dispatch(failedArtistDetail(message)),
-        setArtistDetail : (artistDetail) => dispatch(setArtistDetail(artistDetail)),
-        addNewReview : (newReview) => dispatch(addNewReview(newReview)),
-        selectReview: (review) =>  dispatch(selectReview(review)),
-        updateReview: (review) => dispatch(updateReview(review)),
-        deleteReview: (review) => dispatch(deleteReview(review))
+        initArtistDetail: ()          => dispatch(initArtistDetail()),
+        loadingArtistDetail: ()       => dispatch(loadingArtistDetail()),
+        failedArtistDetail: (message) => dispatch(failedArtistDetail(message)),
+        setArtistDetail: (artistDetail) => dispatch(setArtistDetail(artistDetail)),
+        addNewReview: (newReview)     => dispatch(addNewReview(newReview)),
+        selectReview: (review)        =>  dispatch(selectReview(review)),
+        updateReview: (review)        => dispatch(updateReview(review)),
+        deleteReview: (review)        => dispatch(deleteReview(review))
     };
 };
+
 // export default ArtistDetail;
-export default withApollo( connect(mapStateToProps, mapDispatchToProps)(ArtistDetail));
+export default withApollo(connect(mapStateToProps, mapDispatchToProps)(ArtistDetail));
