@@ -204,7 +204,7 @@ class ArtistDetail extends Component {
                                             <FormControl
                                                 type="text"
                                                 placeholder="Enter review"
-                                                onChange= {(e)=>this.handleChange(e)} />                                                                
+                                                onChange={(e)=>this.handleChange(e)} />                                                                
                                             </FormGroup>
                                         </form>
                                     </Modal.Body>
@@ -224,9 +224,9 @@ class ArtistDetail extends Component {
                                                     <ControlLabel>Edit your for this artist</ControlLabel>
                                                     <FormControl
                                                         type="text"
-                                                        value = {this.state.selected!==null?this.state.selected.body:''}
+                                                        value={this.state.selected!==null?this.state.selected.body:''}
                                                         placeholder="Enter review"
-                                                        onChange = {(e)=>this.handleUpdateChange(e)}/>                                                    
+                                                        onChange={(e)=>this.handleUpdateChange(e)}/>                                                    
                                                 </FormGroup>
                                             </form>
                                         </Modal.Body>

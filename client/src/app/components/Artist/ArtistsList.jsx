@@ -6,7 +6,6 @@ import SmartDataTable from 'react-smart-data-table'
 import artistListQuery from '../../queries/ArtistSchema'
 import {initArtists, loadingArtists, failedArtists, setArtists} from '../../actions/artists'
 
-
 const sematicUI = {
     segment: 'ui basic segment',
     message: 'ui message',
@@ -23,12 +22,10 @@ const sematicUI = {
     deleteIcon: 'trash red icon',
   }
 
-
 class Artists extends Component {
     constructor(props){
         console.log("Artists", props)
         super(props);
-
         this.state = {
             numResults: 10,
             mDate: this.props.artists.artists,
@@ -37,7 +34,6 @@ class Artists extends Component {
             showOnRowClick: true,
           }
           this.handleOnChange = this.handleOnChange.bind(this)
-
     }
 
 	componentWillMount(){
@@ -69,14 +65,13 @@ class Artists extends Component {
     onRowClick = (event, { rowData, rowIndex, tableData }) => {
         const { showOnRowClick } = this.state
         if (showOnRowClick) {
-          const { name, description, id } = rowData
-          let value = description || name || id
-          
+          const { id } = rowData
+          // const { name, description, id } = rowData
+          // let value = description || name || id          
           console.log(rowData, tableData[rowIndex])
           this.props.history.push(`/artists/${id}`);
         } else {
-          // The following results should be identical
-          console.log(rowData, tableData[rowIndex])
+          console.log(rowData, tableData[rowIndex]) // The following results should be identical
         }
     }
 
@@ -86,38 +81,30 @@ class Artists extends Component {
           } = this.state
         return (
             <div>
-                {
-                    this.props.artists.loading ?
-                        <h1>Loading...</h1>
-                    :
-                        this.props.artists.error ?
-                            <h1>Error...</h1>
-                        :
-                            <div>
-                                <h1>Artists</h1>
-                                <div className={sematicUI.segment}>
-                                    <div className={sematicUI.input}>
-                                        <input
-                                        type='text'
-                                        name='filterValue'
-                                        
-                                        placeholder='Filter results...'
-                                        onChange={this.handleOnChange}
-                                        />
-                                        <i className={sematicUI.searchIcon} />
-                                    </div>
-                                    </div>
-                                    <SmartDataTable
-                                        data={mDate}
-                                        name='artists-table'
-                                        dataKey=''
-                                        className={sematicUI.table}
-                                        sortable
-                                        filterValue={filterValue}
-                                        onRowClick={this.onRowClick}
-                                        perPage = {10}
-                                    />
+                { this.props.artists.loading ? <h1>Loading...</h1> : 
+                  this.props.artists.error ?<h1>Error...</h1> :
+                    <div>
+                        <h1>Artists</h1>
+                        <div className={sematicUI.segment}>
+                            <div className={sematicUI.input}>
+                                <input
+                                type='text'
+                                name='filterValue'                                
+                                placeholder='Filter results...'
+                                onChange={this.handleOnChange}/>
+                                <i className={sematicUI.searchIcon} />
                             </div>
+                        </div>
+                        <SmartDataTable
+                            data={mDate}
+                            name='artists-table'
+                            dataKey=''
+                            className={sematicUI.table}
+                            sortable
+                            filterValue={filterValue}
+                            onRowClick={this.onRowClick}
+                            perPage={13}/>
+                    </div>
                 }
             </div>
         )
@@ -131,10 +118,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        initArtists : () => dispatch(initArtists()),
-        loadingArtists : () => dispatch(loadingArtists()),
-        failedArtists : (message) => dispatch(failedArtists(message)),
-        setArtists : (artists) => dispatch(setArtists(artists)),
+        initArtists: () => dispatch(initArtists()),
+        loadingArtists: () => dispatch(loadingArtists()),
+        failedArtists: (message) => dispatch(failedArtists(message)),
+        setArtists: (artists) => dispatch(setArtists(artists)),
     };
 };
   

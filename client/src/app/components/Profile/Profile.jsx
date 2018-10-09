@@ -6,14 +6,9 @@ import SmartDataTable from 'react-smart-data-table'
 import myReveiwsQuery from '../../queries/MyReviewsSchema'
 import updateMutation from '../../mutations/updateReview'
 import deleteMutation from '../../mutations/deleteReview'
-import {
-    initMyReviews, 
-    loadingMyReviews, 
-    failedMyReviews, 
-    setMyReviews, 
-    selectMyReview, 
-    updateMyReview, 
-    deleteMyReview} from '../../actions/reviews'
+import { initMyReviews, loadingMyReviews, failedMyReviews, setMyReviews, 
+         selectMyReview, updateMyReview, deleteMyReview} from '../../actions/reviews'
+
 import {Button,Modal,FormControl,FormGroup,ControlLabel} from 'react-bootstrap';
 import './modal.css';
 
@@ -44,7 +39,6 @@ class Profile extends Component {
            showOnRowClick: true,
            seletedReview: null
           }
-
     }
 
 	componentWillMount(){
@@ -62,8 +56,8 @@ class Profile extends Component {
                 this.props.failedMyReviews(err.data);
             }
         );
-        
     }
+
     onRowClick = (event, { rowData, rowIndex, tableData }) => {
         const { showOnRowClick } = this.state
         if (showOnRowClick) {
@@ -131,37 +125,36 @@ class Profile extends Component {
     }
     getHeaders() {
         return {
-        
-        'id': {
-            text: 'ID',
-            invisible: true,
-            transform: value => `Row #${value + 1}`,
+            'id': {
+                text: 'ID',
+                invisible: true,
+                transform: value => `Row #${value + 1}`,
             },
-
-          'artist_id': {
-            text: 'ART_ID',
-            invisible: true
-          },
-          'artist_name': {
-            text: 'Artist Name',
-          },
-          'body': {
-            text: 'My review',
-          },
-          'user_id': {
-            text: 'User ID',
-            sortable: false,
-            filterable: false,
-            invisible: true,
-          },
-          '__typename': {
-            text: 'TypeName',
-            sortable: false,
-            filterable: false,
-            invisible: true,
-          },
+            'artist_id': {
+                text: 'ART_ID',
+                invisible: true
+            },
+            'artist_name': {
+                text: 'Artist Name',
+            },
+            'body': {
+                text: 'My review',
+            },
+            'user_id': {
+                text: 'User ID',
+                sortable: false,
+                filterable: false,
+                invisible: true,
+            },
+            '__typename': {
+                text: 'TypeName',
+                sortable: false,
+                filterable: false,
+                invisible: true,
+            },
         }
-      }
+    }
+
     render() {
         const headers = this.getHeaders()
         return (
@@ -172,61 +165,43 @@ class Profile extends Component {
                     <div>{this.props.userInfo.email}</div>
                 </div>
                 <div>
-                    {
-                        this.props.reviews.loading ?
-                            <h1>Loading...</h1>
-                        :
-                            this.props.reviews.error ?
-                                <h1>Error...</h1>
-                            :
-                                <div>
-                                    <h1>My reviews</h1>
-                                    <SmartDataTable
-                                        data={this.props.reviews.reviews}
-                                        name='reviews-table'
-                                        dataKey=''
-                                        className={sematicUI.table}
-                                        sortable
-                                        headers={headers}
-                                        loader={(
-                                            <div className={sematicUI.loader}>
-                                                Loading...
-                                            </div>
-                                            )}
-                                        onRowClick={this.onRowClick}
-                                        perPage = {10}
-                                    />
+                    {this.props.reviews.loading ? <h1>Loading...</h1> : this.props.reviews.error ? <h1>Error...</h1> :
+                        <div>
+                            <h1>My reviews</h1>
+                            <SmartDataTable
+                                data={this.props.reviews.reviews}
+                                name='reviews-table'
+                                dataKey=''
+                                className={sematicUI.table}
+                                sortable
+                                headers={headers}
+                                loader={(<div className={sematicUI.loader}> Loading...</div>)}
+                                onRowClick={this.onRowClick}
+                                perPage={10}/>
 
-                                    <Modal id="review_detail_modal" show={this.state.showModalUpdate} onHide={this.handleModalUpdateClose}>
-                                        <Modal.Header closeButton>
-                                            <Modal.Title>Edit Your Review</Modal.Title>
-                                        </Modal.Header>
-
-                                        <Modal.Body>
-                                            <form>
-                                            <FormGroup
-                                                controlId="formBasicText"
-                                                
-                                                >
-                                                <ControlLabel>{this.state.seletedReview!==null?this.state.seletedReview.artist_name:''}</ControlLabel>
-                                                <FormControl
-                                                    type="text"
-                                                    value = {this.state.seletedReview!==null?this.state.seletedReview.body:''}
-                                                    placeholder="Enter review"
-                                                    onChange = {(e)=>this.handleUpdateChange(e)}
-                                                />
-                                                
-                                                </FormGroup>
-                                            </form>
-                                        </Modal.Body>
-                                        <Modal.Footer>
-                                            <Button bsStyle="danger" onClick={(e)=>this.onDelete(e)}>Delete</Button>
-                                            <Button bsStyle="primary" onClick={(e)=>this.onUpdate(e)}>Update</Button>
-                                            <Button onClick={this.handleModalUpdateClose}>Close</Button>
-                                        </Modal.Footer>
-                                    </Modal>
-
-                                </div>
+                            <Modal id="review_detail_modal" show={this.state.showModalUpdate} onHide={this.handleModalUpdateClose}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Edit Your Review</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <form>
+                                    <FormGroup controlId="formBasicText">
+                                        <ControlLabel>{this.state.seletedReview!==null?this.state.seletedReview.artist_name:''}</ControlLabel>
+                                        <FormControl
+                                            type="text"
+                                            value={this.state.seletedReview!==null?this.state.seletedReview.body:''}
+                                            placeholder="Enter review"
+                                            onChange={(e)=>this.handleUpdateChange(e)}/>                                       
+                                        </FormGroup>
+                                    </form>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button bsStyle="danger" onClick={(e)=>this.onDelete(e)}>Delete</Button>
+                                    <Button bsStyle="primary" onClick={(e)=>this.onUpdate(e)}>Update</Button>
+                                    <Button onClick={this.handleModalUpdateClose}>Close</Button>
+                                </Modal.Footer>
+                            </Modal>
+                        </div>
                     }
                 </div>
             </div>

@@ -38,7 +38,7 @@ export default (state = initialState, action) => {
         case 'UPDATE_MYREVIEW':
             let reviewsClone = cloneObject (state.reviews);
             let reviews = {...state.reviews};
-            const index = getIndex(reviewsClone, action.review.id);
+            let index = getIndex(reviewsClone, action.review.id);
             if (index!==-1){
                 reviewsClone[index] = action.review;
             }
@@ -71,5 +71,5 @@ function cloneObject(object){
 
 function getIndex(data, id){
     let clone = JSON.parse(JSON.stringify(data));
-    return clone.findIndex((obj) => parseInt(obj.id) === parseInt(id));
+    return clone.findIndex((obj) => parseInt(obj.id, 10) === parseInt(id, 10));
 }

@@ -1,27 +1,21 @@
-// nice!
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';
-// import {providerLogin} from 'react-devise/lib/actions';
 import {providerLogin} from './Actions';
 import styled from 'styled-components';
 import FontAwesome from 'react-fontawesome';
 import {connect} from 'react-redux';
 // import {Flex, Box} from 'grid-styled';
-import {Redirect} from 'react-router-dom';
-
-
-// import React from 'react';
 // import {Redirect} from 'react-router-dom';
-// import {reduxForm, Field, SubmissionError} from 'redux-form';
+
 
 // const LoginContainer = styled(Flex)`
-const LoginContainer = styled.div`
-  margin-top: 100px;
-`;
+// const LoginContainer = styled.div`
+//   margin-top: 100px;
+// `;
 
-const LoginButtonContainer = styled.div`
-  margin-bottom: 5px;
-`;
+// const LoginButtonContainer = styled.div`
+//   margin-bottom: 5px;
+// `;
 
 const buttonStyles = `
   font-family: Helvetica, sans-serif;
@@ -56,15 +50,15 @@ const SocialIcon = styled(FontAwesome)`
 `;
 
 // const Alert = styled(Box)`
-const Alert = styled.div`
-  background-color: #f3c4c9;
-  margin-bottom: 10px;
-  color: #aa2833;
-  font-weight: bold;
-  border: 1px solid #aa2833;
-  border-radius: 3px;
-  padding: 3px 10px;
-`;
+// const Alert = styled.div`
+//   background-color: #f3c4c9;
+//   margin-bottom: 10px;
+//   color: #aa2833;
+//   font-weight: bold;
+//   border: 1px solid #aa2833;
+//   border-radius: 3px;
+//   padding: 3px 10px;
+// `;
 
 const mapStateToProps = state => {
   return {

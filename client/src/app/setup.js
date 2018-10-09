@@ -1,4 +1,4 @@
-import {compose, createStore, combineReducers, applyMiddleware} from 'redux';
+import {compose, createStore, applyMiddleware} from 'redux';
 import {routerMiddleware} from 'react-router-redux';
 import createBrowserHistory from 'history/createBrowserHistory';
 import {persistStore, autoRehydrate} from 'redux-persist';
@@ -6,7 +6,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import ReactDeviseMaterialUI from 'react-devise-material-ui';
 import {initReactDevise} from 'react-devise';
 import {Alert, UnstyledList, ViewHeading} from '../shared';
-import styled, {injectGlobal} from 'styled-components';
+// import styled, {injectGlobal} from 'styled-components';
+import styled from 'styled-components';
 
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
@@ -17,12 +18,12 @@ import reducers from './reducers';
 import SignUpContainer from './components/Devise/views/SignUp'
 import LoginContainer from './components/Devise/views/LogIn'
 
-injectGlobal`
-  body {
-    fontFamily: Roboto, sans-serif;
-    margin: 0;
-  }
-`;
+// injectGlobal`
+//   body {
+//     fontFamily: Roboto, sans-serif;
+//     margin: 0;
+//   }
+// `;
 
 injectTapEventPlugin();
 
@@ -32,9 +33,8 @@ const apolloClient = new ApolloClient({
   cache: new InMemoryCache()
 }); 
 
-const middlewares = [routerMiddleware(history), apolloClient.middleware()];
-
 const history = createBrowserHistory();
+const middlewares = [routerMiddleware(history), apolloClient.middleware()];
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 let store;
