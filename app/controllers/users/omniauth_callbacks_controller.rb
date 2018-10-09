@@ -16,7 +16,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       # ...it failed anyway 
       set_flash_message!(:notice, "failed")
       # render json: , status: 302
-
     end
   end
 
