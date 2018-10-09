@@ -77,7 +77,7 @@ class ArtistDetail extends Component {
         console.log("length ++++++++++++",  reviews.length)
         for (var i = 0; i < reviews.length; i++) {
             console.log("user id for this artist is ^^^^^^^^^^^^^^^", reviews[i].user_id)
-            if(reviews[i].user_id === this.props.userInfo.user_id){
+            if(reviews[i].user_id == this.props.userInfo.user_id){
                 this.setState({enabledButton: false});
             }
         }
@@ -89,9 +89,9 @@ class ArtistDetail extends Component {
             return reviews.map((review, index) => (
                 <ListGroupItem key={index}
                 onClick={
-                    review.user_id === this.props.userInfo.user_id
+                    review.user_id == this.props.userInfo.user_id
                     ?()=>this.handleModalUpdateShow(review)
-                    :null} disabled={review.user_id === this.props.userInfo.user_id?false:true}>{review.body}</ListGroupItem>
+                    :null} disabled={review.user_id == this.props.userInfo.user_id?false:true}>{review.body}</ListGroupItem>
                 
             ));
         }

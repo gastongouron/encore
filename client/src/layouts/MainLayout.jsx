@@ -49,6 +49,7 @@ class UserMenuItem extends Component {
 
   render() {
     const {currentUser, logout, textColor} = this.props;
+    console.log(currentUser)
     if (currentUser && currentUser.isLoggedIn) {
       return (
         <div>
@@ -67,7 +68,7 @@ class UserMenuItem extends Component {
           >
             <Menu>
               <MenuItem primaryText="Profile" 
-                containerElement={<Link to="/profile"/>
+                containerElement={<Link to={"/user/" + currentUser.user_id}/>
               }
               onTouchTap={this.handleRequestClose}
               />
