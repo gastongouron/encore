@@ -22,10 +22,11 @@ export function initMyReviews() {
       review
     }
   }
-  export function setMyReviews(reviews) {
+  export function setMyReviews(reviews, user) {
     return {
       type: 'MYREVIEWS_LOADED',
-      reviews
+      reviews,
+      user
     }
   }
   export function updateMyReview(review) {

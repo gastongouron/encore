@@ -9,6 +9,7 @@ import deleteMutation from '../../mutations/deleteReview'
 import { initMyReviews, loadingMyReviews, failedMyReviews, setMyReviews, 
          selectMyReview, updateMyReview, deleteMyReview} from '../../actions/reviews'
 
+import { initUserProfile, loadingUserProfile, failedUserProfile, setUserProfile } from '../../actions/userProfile'
 
 import {Button,Modal,FormControl,FormGroup,ControlLabel} from 'react-bootstrap';
 import './modal.css';
@@ -43,19 +44,21 @@ class Profile extends Component {
     }
 
 	componentWillMount(){
-        if (this.props.reviews.reviews.length > 0)
-            return;
+        // if (this.props.reviews.reviews.length > 0)
+        //     return;
         this.props.loadingMyReviews();
-        this.props.client.networkInterface.query({query: myReviewsQuery, variables: {id: this.props.userInfo.user_id}, fetchPolicy: 'network-only'})
+        this.props.loadingUserProfile();
+        this.props.client.networkInterface.query({query: myReviewsQuery, variables: {id: this.props.match.params.id }, fetchPolicy: 'network-only'})
         .then(
             (res) => {
                 // console.log("profile my reviews componentWillMount query result-----------------", res.data.user.reviews);
-                console.log(res.data.user)
                 this.props.setMyReviews(res.data.user.reviews);
+                this.props.setUserProfile(res.data.user.user)
             },
             (err) => {
                 console.log("profile my reviews componentWillMount query componentWillMount errrr", err);
                 this.props.failedMyReviews(err.data);
+                this.props.failedUserProfile(err.data);
             }
         );
     }
@@ -217,16 +220,21 @@ class Profile extends Component {
 
 const mapStateToProps = state => {
     return { reviews: state.reviews,
-            userInfo: state.currentUser
+             userProfile: state.userProfile,
+             userInfo: state.currentUser
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        initMyReviews : () => dispatch(initMyReviews()),
-        loadingMyReviews : () => dispatch(loadingMyReviews()),
-        failedMyReviews : (message) => dispatch(failedMyReviews(message)),
-        setMyReviews : (reviews) => dispatch(setMyReviews(reviews)),
+        initUserProfile: () => dispatch(initUserProfile()),
+        loadingUserProfile: () => dispatch(loadingUserProfile()),
+        failedUserProfile: (message) => dispatch(failedUserProfile(message)),
+        setUserProfile: (user) => dispatch(setUserProfile(user)),
+        initMyReviews: () => dispatch(initMyReviews()),
+        loadingMyReviews: () => dispatch(loadingMyReviews()),
+        failedMyReviews: (message) => dispatch(failedMyReviews(message)),
+        setMyReviews: (reviews) => dispatch(setMyReviews(reviews)),
         selectMyReview: (review) => dispatch(selectMyReview(review)),
         updateMyReview: (review) => dispatch(updateMyReview(review)),
         deleteMyReview: (review) => dispatch(deleteMyReview(review))

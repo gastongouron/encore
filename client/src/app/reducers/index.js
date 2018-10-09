@@ -6,6 +6,7 @@ import {routerReducer} from 'react-router-redux';
 import artists from './artists';
 import artistDetail from './artistDetail';
 import reviews from './reviews'
+import userProfile from './userProfile'
 
 export default apolloClient => combineReducers({
   ...reactDeviseReducers,
@@ -14,5 +15,6 @@ export default apolloClient => combineReducers({
   apollo: apolloClient.reducer(),
   artists,
   artistDetail,
+  userProfile,
   reviews
 });
