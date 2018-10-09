@@ -2,7 +2,7 @@ const initialState = {
     loading: false,
     error: false,
     message: '',
-    userProfile: []
+    userProfile: null
 }
 
 export default (state = initialState, action) => {
@@ -27,7 +27,7 @@ export default (state = initialState, action) => {
                 ...state,
                 error: false,
                 loading: false,
-                use: action.user
+                userProfile: action.user
             }
         default:
             return state;

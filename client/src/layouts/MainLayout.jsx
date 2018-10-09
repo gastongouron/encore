@@ -80,7 +80,7 @@ class UserMenuItem extends Component {
     }
     return (
       <MenuItem
-        containerElement={<Link to="/users/login"/>}
+        containerElement={<Link to="/users/hello"/>}
         primaryText="Log In"
         style={{color: textColor}}
       />

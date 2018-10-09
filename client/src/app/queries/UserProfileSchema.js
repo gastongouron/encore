@@ -1,12 +1,13 @@
 import gql from 'graphql-tag';
 
-const myReviewsQuery = (gql`
-    query myReviewsQuery($id: ID!) {
+const UserProfileQuery = (gql`
+    query UserProfileQuery($id: ID!) {
 	    user(id: $id) {
             email
 	        first_name
             last_name
             id
+            display_name
 			reviews {
                 artist_id
                 artist_name
@@ -19,4 +20,4 @@ const myReviewsQuery = (gql`
     }
 `);
 
-export default myReviewsQuery
+export default UserProfileQuery

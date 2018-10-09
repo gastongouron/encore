@@ -7,35 +7,35 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case 'MYREVIEWS_INIT':
+        case 'USER_REVIEWS_INIT':
             return initialState
-        case 'MYREVIEWS_LOADING':
+        case 'USER_REVIEWS_LOADING':
             return {
                 ...state,
                 error: false,
                 loading: true
             }
-        case 'MYREVIEWS_ERROR':
+        case 'USER_REVIEWS_ERROR':
             return {
                 ...state,
                 error: true,
                 message: action.message,
                 loading: false
             }
-        case 'MYREVIEWS_LOADED':
+        case 'USER_REVIEWS_LOADED':
             return {
                 ...state,
                 error: false,
                 loading: false,
                 reviews: action.reviews
             }
-        case 'SELECT_MYREVIEW':
+        case 'SELECT_USER_REVIEW':
         console.log("seleted review is----222222222--------", action.review)
         return {
             ...state,
             selected: action.review
         }
-        case 'UPDATE_MYREVIEW':
+        case 'UPDATE_USER_REVIEW':
             let reviewsClone = cloneObject (state.reviews);
             let reviews = {...state.reviews};
             let index = getIndex(reviewsClone, action.review.id);
@@ -48,7 +48,7 @@ export default (state = initialState, action) => {
                 selected: null,
                 reviews
             }
-        case 'DELETE_MYREVIEW':
+        case 'DELETE_USER_REVIEW':
             reviewsClone = cloneObject (state.reviews);
             reviews = {...state.reviews};
             index = getIndex(reviewsClone, action.review.id);

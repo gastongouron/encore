@@ -3,11 +3,11 @@ import {connect} from "react-redux"
 import { withApollo } from 'react-apollo'
 import Avatar from 'react-avatar';
 import SmartDataTable from 'react-smart-data-table'
-import myReviewsQuery from '../../queries/MyReviewsSchema'
+import UserProfileQuery from '../../queries/UserProfileSchema'
 import updateMutation from '../../mutations/updateReview'
 import deleteMutation from '../../mutations/deleteReview'
-import { initMyReviews, loadingMyReviews, failedMyReviews, setMyReviews, 
-         selectMyReview, updateMyReview, deleteMyReview} from '../../actions/reviews'
+import { initUserReviews, loadingUserReviews, failedUserReviews, setUserReviews, 
+         selectUserReview, updateUserReview, deleteUserReview} from '../../actions/reviews'
 
 import { initUserProfile, loadingUserProfile, failedUserProfile, setUserProfile } from '../../actions/userProfile'
 
@@ -46,18 +46,19 @@ class Profile extends Component {
 	componentWillMount(){
         // if (this.props.reviews.reviews.length > 0)
         //     return;
-        this.props.loadingMyReviews();
+        this.props.loadingUserReviews();
         this.props.loadingUserProfile();
-        this.props.client.networkInterface.query({query: myReviewsQuery, variables: {id: this.props.match.params.id }, fetchPolicy: 'network-only'})
+        this.props.client.networkInterface.query({query: UserProfileQuery, variables: {id: this.props.match.params.id }, fetchPolicy: 'network-only'})
         .then(
             (res) => {
                 // console.log("profile my reviews componentWillMount query result-----------------", res.data.user.reviews);
-                this.props.setMyReviews(res.data.user.reviews);
-                this.props.setUserProfile(res.data.user.user)
+                console.log("RES DATA USER -----------------",res.data.user)
+                this.props.setUserReviews(res.data.user.reviews);
+                this.props.setUserProfile(res.data.user)
             },
             (err) => {
                 console.log("profile my reviews componentWillMount query componentWillMount errrr", err);
-                this.props.failedMyReviews(err.data);
+                this.props.failedUserReviews(err.data);
                 this.props.failedUserProfile(err.data);
             }
         );
@@ -87,7 +88,7 @@ class Profile extends Component {
     
     handleModalUpdateShow(review){
         console.log('selected review', review);
-        this.props.selectMyReview(review);
+        this.props.selectUserReview(review);
         this.setState({seletedReview:review});
         this.setState({ showModalUpdate: true });
     }
@@ -105,7 +106,7 @@ class Profile extends Component {
                 (res) => {
                     const updatedArr = res.data.editReview.review
                     console.log("updated review !!!!!!!!!!!!!!!!!!!!!!!!", updatedArr);
-                    this.props.updateMyReview(updatedArr)
+                    this.props.updateUserReview(updatedArr)
                 },
                 (err) => {
                     console.log("newreview !!!!!!!!!!!!!!!!!!!!!!!!", err);
@@ -123,7 +124,7 @@ class Profile extends Component {
         .then(
             (res) => {
                 console.log("delete review result is !!!!!!!!!!!!!!!!!!!!!!!!", res);
-                this.props.deleteMyReview(seletedReview)
+                this.props.deleteUserReview(seletedReview)
                 this.setState({enabledButton: true})
             },
             (err) => {
@@ -170,8 +171,8 @@ class Profile extends Component {
             <div>
                 <div className="text-center">
                     <Avatar size="100" round={true} src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg"/>
-                    <div>{this.props.userInfo.displayName || this.props.userInfo.email}</div>
-                    <div>{this.props.userInfo.email}</div>
+                    <div>{this.props.userProfile.userProfile.displayName || this.props.userProfile.userProfile.email}</div>
+                    <div>{this.props.userProfile.userProfile.email}</div>
                 </div>
                 <div>
                     {this.props.reviews.loading ? <h1>Loading...</h1> : this.props.reviews.error ? <h1>Error...</h1> :
@@ -231,13 +232,13 @@ const mapDispatchToProps = dispatch => {
         loadingUserProfile: () => dispatch(loadingUserProfile()),
         failedUserProfile: (message) => dispatch(failedUserProfile(message)),
         setUserProfile: (user) => dispatch(setUserProfile(user)),
-        initMyReviews: () => dispatch(initMyReviews()),
-        loadingMyReviews: () => dispatch(loadingMyReviews()),
-        failedMyReviews: (message) => dispatch(failedMyReviews(message)),
-        setMyReviews: (reviews) => dispatch(setMyReviews(reviews)),
-        selectMyReview: (review) => dispatch(selectMyReview(review)),
-        updateMyReview: (review) => dispatch(updateMyReview(review)),
-        deleteMyReview: (review) => dispatch(deleteMyReview(review))
+        initUserReviews: () => dispatch(initUserReviews()),
+        loadingUserReviews: () => dispatch(loadingUserReviews()),
+        failedUserReviews: (message) => dispatch(failedUserReviews(message)),
+        setUserReviews: (reviews) => dispatch(setUserReviews(reviews)),
+        selectUserReview: (review) => dispatch(selectUserReview(review)),
+        updateUserReview: (review) => dispatch(updateUserReview(review)),
+        deleteUserReview: (review) => dispatch(deleteUserReview(review))
     };
 };
   
