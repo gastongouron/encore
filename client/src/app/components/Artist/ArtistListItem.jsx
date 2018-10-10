@@ -8,31 +8,43 @@ const ArtistListItem = (props) => {
 	const onArtistSelect = props.onArtistSelect
 	// const imageUrl = artist.snippet.thumbnails.default.url;
 
-	const style = {
-	  // height: 100,
-	  // flex:1,
-	  // width: 100,
+	const paperStyle = {
+	  display: 'grid',
 	  marginBottom: 20,
 	  padding: 20,
-	  textAlign: 'left',
-	  // display: 'inline-block',
+	  // position: 'relative',
 	};
 
+
+	const textStyle = {
+		gridColumn: 1,
+		textAlign: 'left',
+	    // position: absolute,
+	    // right: 0,
+	}
+
+	const noteStyle = {
+		gridColumn: 2,
+  	    textAlign: 'right',
+	    // position: absolute,
+	    // right: 0,
+	}
+
 	return (
-		<Paper
-			Paper
-			style={style} zDepth={1} 
-			rounded={false} 
-			onClick={ () => onArtistSelect(artist) } 
-			className="">
-			<div>
-				{artist.name}
-			</div>
-			<br />
-			<div>
-				{artist.description}
-			</div>
-		</Paper>
+			<Paper
+				style={paperStyle} zDepth={1} 
+				rounded={false} 
+				onClick={ () => onArtistSelect(artist) } 
+				className="">
+				<div style={textStyle}>
+					<b>{artist.name}</b>
+					<br />
+					{artist.description}
+				</div>
+				<div style={noteStyle}>
+					{artist.score}
+				</div>
+			</Paper>
 		)
 
 }

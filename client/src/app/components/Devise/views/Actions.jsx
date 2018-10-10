@@ -1,6 +1,6 @@
 import {fetchJSON} from 'react-devise/lib/actions/api';
 import {UnauthorizedError, ValidationError} from 'react-devise/lib/errors';
-import {setAuthToken, removeAuthToken} from 'react-devise/lib/actions/authTokenStore';
+import {setAuthToken, removeAuthToken, getAuthToken} from 'react-devise/lib/actions/authTokenStore';
 import {getConfig} from 'react-devise/lib/config/index';
 
 const ROUTES = {
@@ -81,10 +81,8 @@ const fetchWithUserForm = (route, data) => { // eslint-disable-line camelcase
 };
 
 const tryLogin = (response, dispatch) => {
-  console.log('response in tryLogin')
   const auth = response.headers.get('authorization');
   if (auth) {
-    console.log(auth)
     const [_, authToken] = auth.split(' '); // eslint-disable-line no-unused-vars
     if (authToken) {
       setAuthToken(authToken);

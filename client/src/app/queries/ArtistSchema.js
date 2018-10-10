@@ -5,7 +5,8 @@ const artistListQuery = (gql`
 	    artists {
 	        id
 	        name
-	        description     
+	        description
+	        score
 	    }
     }
 `);

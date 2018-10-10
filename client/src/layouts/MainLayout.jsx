@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {AppBar, Toolbar, ToolbarGroup, Menu, MenuItem, Popover} from 'material-ui';
 import {connect} from 'react-redux';
-import {logout} from 'react-devise/lib/actions';
+import {logout} from '../app/components/Devise/views/Actions';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';

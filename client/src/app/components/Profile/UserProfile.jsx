@@ -36,10 +36,11 @@ class Profile extends Component {
         console.log("profile page props ```````````````````````````````", this.props)
         this.handleModalUpdateShow = this.handleModalUpdateShow.bind(this);
         this.handleModalUpdateClose = this.handleModalUpdateClose.bind(this);
+
         this.state = {
            showModalUpdate: false,
            showOnRowClick: true,
-           seletedReview: null
+           seletedReview: null,
           }
     }
 
@@ -170,6 +171,7 @@ class Profile extends Component {
 
     render() {
         const headers = this.getHeaders()
+        console.log(this.props)
         return (
             <div>
                 <div className="text-center">
