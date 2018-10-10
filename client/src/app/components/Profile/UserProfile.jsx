@@ -45,8 +45,6 @@ class Profile extends Component {
     }
 
 	componentWillMount(){
-        // if (this.props.reviews.reviews.length > 0)
-        //     return;
         this.props.loadingUserReviews();
         this.props.loadingUserProfile();
         this.props.client.networkInterface.query({query: UserProfileQuery, variables: {id: this.props.match.params.id }, fetchPolicy: 'network-only'})
@@ -171,7 +169,8 @@ class Profile extends Component {
 
     render() {
         const headers = this.getHeaders()
-        console.log(this.props)
+        console.log('RENDERING')
+        console.log(this.props.userProfile)
         return (
             <div>
                 <div className="text-center">
