@@ -169,8 +169,7 @@ class Profile extends Component {
 
     render() {
         const headers = this.getHeaders()
-        console.log('RENDERING')
-        console.log(this.props.userProfile)
+
         return (
             <div>
                 <div className="text-center">

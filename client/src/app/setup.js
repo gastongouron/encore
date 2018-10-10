@@ -6,7 +6,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import ReactDeviseMaterialUI from 'react-devise-material-ui';
 import {initReactDevise} from 'react-devise';
 import {Alert, UnstyledList, ViewHeading} from '../shared';
-// import styled, {injectGlobal} from 'styled-components';
 import styled from 'styled-components';
 
 import { ApolloClient } from 'apollo-client';
@@ -18,12 +17,6 @@ import reducers from './reducers';
 import SignUpContainer from './components/Devise/views/SignUp'
 import LoginContainer from './components/Devise/views/LogIn'
 
-// injectGlobal`
-//   body {
-//     fontFamily: Roboto, sans-serif;
-//     margin: 0;
-//   }
-// `;
 
 injectTapEventPlugin();
 
@@ -62,6 +55,7 @@ const initStore = ({onRehydrationComplete}) => {
 
 const AuthAlert = styled(Alert)`
   margin-top: 10px;
+  padding: 20px;
 `;
 
 initReactDevise({

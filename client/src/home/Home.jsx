@@ -6,8 +6,6 @@ import { initArtists } from '../app/actions/artists'
 import { initUserReviews } from '../app/actions/reviews'
 
 const Home = ({currentUser, auth: {AuthLinks}, initArtists, initMyReviews}) => {
-  console.log("--------- Home");
- 
   
   return (
     <div>
@@ -18,7 +16,6 @@ const Home = ({currentUser, auth: {AuthLinks}, initArtists, initMyReviews}) => {
 };
 
 const mapStateToProps = state => {
-  console.log("current user info------------Home---------", state.currentUser)
   initArtists();
   initUserReviews();
   return {

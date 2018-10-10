@@ -23,14 +23,25 @@ export default {
     desktopSubheaderHeight: 48,
     desktopToolbarHeight: 56
   },
+  appBar: {
+    color: '#000000',
+    textColor: '#ffffff',
+  },
   palette: {
-    primary1Color: indigo500,
-    primary2Color: indigo700,
+    primary1Color: '#283593',
+    textColor: '#212121',
+    accent1Color: '#f44336',
+    accent2Color: '#b71c1c',
+    accent3Color: '#e57373',
+    primary2Color: '#283593',
+
+    // primary1Color: indigo500,
+    // primary2Color: indigo700,
     primary3Color: grey400,
-    accent1Color: deepOrangeA200,
-    accent2Color: grey100,
-    accent3Color: grey500,
-    textColor: darkBlack,
+    // accent1Color: deepOrangeA200,
+    // accent2Color: grey100,
+    // accent3Color: grey500,
+    // textColor: darkBlack,
     secondaryTextColor: fade(darkBlack, 0.54),
     alternateTextColor: white,
     canvasColor: white,
@@ -41,3 +52,31 @@ export default {
     shadowColor: fullBlack
   }
 };
+
+// {
+//     "palette": {
+//         "primary1Color": "#283593",
+//         "textColor": "#212121",
+//         "accent1Color": "#f44336",
+//         "accent2Color": "#b71c1c",
+//         "accent3Color": "#e57373",
+//         "primary2Color": "#283593"
+//     },
+//     "appBar": {
+//         "color": "#000000",
+//         "textColor": "#ffffff"
+//     },
+//     "raisedButton": {
+//         "primaryTextColor": "#ffffff",
+//         "secondaryTextColor": "#ffffff",
+//         "disabledColor": "rgba(255, 255, 255, 0.54)"
+//     },
+//     "tabs": {
+//         "backgroundColor": "#bdbdbd",
+//         "selectedTextColor": "#000000",
+//         "textColor": "#757575"
+//     },
+//     "tableHeaderColumn": {
+//         "textColor": "#ffffff"
+//     }
+// }
