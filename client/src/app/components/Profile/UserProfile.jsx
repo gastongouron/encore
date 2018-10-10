@@ -150,6 +150,9 @@ class Profile extends Component {
             'body': {
                 text: 'My review',
             },
+            'score': {
+                text: 'Review score'
+            },
             'user_id': {
                 text: 'User ID',
                 sortable: false,
@@ -177,6 +180,7 @@ class Profile extends Component {
                 <div>
                     {this.props.reviews.loading ? <h1>Loading...</h1> : this.props.reviews.error ? <h1>Error...</h1> :
                         <div>
+
                             <h1>My reviews</h1>
                             <SmartDataTable
                                 data={this.props.reviews.reviews}
@@ -188,6 +192,7 @@ class Profile extends Component {
                                 loader={(<div className={sematicUI.loader}> Loading...</div>)}
                                 onRowClick={this.onCurrentUserProfile() ? this.onRowClick : null}
                                 perPage={10}/>
+
 
                             <Modal id="review_detail_modal" show={this.state.showModalUpdate} onHide={this.handleModalUpdateClose}>
                                 <Modal.Header closeButton>

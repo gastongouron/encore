@@ -7,7 +7,9 @@ import {Provider as StoreProvider} from 'react-redux';
 import {ConnectedRouter} from 'react-router-redux';
 import {history, apolloClient} from './setup';
 import theme from './theme';
+// import theme from 'material-ui/styles/baseThemes/darkBaseTheme'
 import Routes from './Routes';
+
 
 const App = ({store}) => {
   return (

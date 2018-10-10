@@ -5,9 +5,9 @@ export function initArtists() {
 }
 
 export function loadingArtists() {
-    return {
-      type: 'ARTISTS_LOADING'
-    }
+  return {
+    type: 'ARTISTS_LOADING'
+  }
 }
 
 export function failedArtists(message) {

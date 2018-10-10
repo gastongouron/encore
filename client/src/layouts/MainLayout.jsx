@@ -5,9 +5,22 @@ import {logout} from 'react-devise/lib/actions';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
-// import LogoIcon from 'material-ui/svg-icons/action/lightbulb-outline';
+import LogoIcon from 'material-ui/svg-icons/action/lightbulb-outline';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {Notice} from '../shared';
+
+
+// mport React, {Component} from 'react';
+// import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
+// import IconMenu from 'material-ui/IconMenu';
+// import MenuItem from 'material-ui/MenuItem';
+// import FlatButton from 'material-ui/FlatButton';
+// import Toggle from 'material-ui/Toggle';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+// import NavigationClose from 'material-ui/svg-icons/navigation/close';
+
+
 
 const MainAppBar = styled(AppBar)`
   &:hover {
@@ -24,12 +37,12 @@ const MainContainer = styled.div`
   padding: 20px;
 `;
 
-// const Logo = styled(LogoIcon)`
-//   height: 32px !important;
-//   width: 32px !important;
-//   color: ${({theme}) => theme.palette.alternateTextColor} !important;
-//   padding: 6px !important;
-// `;
+const Logo = styled(LogoIcon)`
+  height: 32px !important;
+  width: 32px !important;
+  color: ${({theme}) => theme.palette.alternateTextColor} !important;
+  padding: 6px !important;
+`;
 
 class UserMenuItem extends Component {
   state = {
@@ -67,7 +80,7 @@ class UserMenuItem extends Component {
             onRequestClose={this.handleRequestClose}
           >
             <Menu>
-              <MenuItem primaryText="Profile" 
+              <MenuItem primaryText="Profile"
                 containerElement={<Link to={"/user/" + currentUser.user_id}/>
               }
               onTouchTap={this.handleRequestClose}
@@ -78,6 +91,7 @@ class UserMenuItem extends Component {
         </div>
       );
     }
+
     return (
       <MenuItem
         containerElement={<Link to="/users/hello"/>}
@@ -155,3 +169,6 @@ const mapDispatchToProps = dispatch => {
 const MainLayoutContainer = connect(mapStateToProps, mapDispatchToProps)(MainLayout);
 
 export default MainLayoutContainer;
+
+
+
