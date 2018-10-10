@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import _ from 'underscore';
 import { connect } from "react-redux";
 import { withApollo } from 'react-apollo'
-import {initArtists, loadingArtists, failedArtists, setArtists} from '../../actions/artists'
+import { initArtists, loadingArtists, failedArtists, setArtists } from '../../actions/artists'
+import _ from 'underscore';
 import artistListQuery from '../../queries/ArtistSchema'
 import ArtistList from './ArtistList'
 import SearchBar from './ArtistSearchBar'
@@ -14,7 +14,7 @@ class Artists extends Component {
         super(props);
         this.state = {
             artists: this.props.artists.artists,
-            selectedArtists: null
+            selectedArtist: null
           }
         this.artistSearch = this.artistSearch.bind(this)
     }
@@ -24,27 +24,16 @@ class Artists extends Component {
         this.props.client.query({query: artistListQuery, fetchPolicy: 'network-only'}).then(
             (res) => {
                 this.props.setArtists(res.data.artists);
-                this.setState({artists: res.data.artists})},
-            (err) => {
+                this.setState({artists: res.data.artists})}
+           ,(err) => {
                 this.props.failedArtists(err.data);
             }
         );
     }
 
-    handleOnChange({ target: { name, value } }) {
-        console.log(this.state)
-        this.setState({ [name]: value })
-    }
-
-    onRowClick = (event, { rowData, rowIndex, tableData }) => {
-        const { showOnRowClick } = this.state
-        if (showOnRowClick) {
-          const { id } = rowData
-          // console.log(rowData, tableData[rowIndex])
-          this.props.history.push(`/artists/${id}`);
-        } else {
-          // console.log(rowData, tableData[rowIndex]) // The following results should be identical
-        }
+    navigateTo(artist){
+        let id = artist.selectedArtist.id
+        this.props.history.push(`/artists/${id}`)
     }
     
     artistSearch(term) {
@@ -52,11 +41,7 @@ class Artists extends Component {
         let newlist = _.map(list, function(artist){ 
             let a = artist.name.toLowerCase()
             let t = term.toLowerCase()
-            if (a.includes(t) || a == t ) {
-                return artist
-            } else {
-                return
-            }
+            if (a.includes(t) || a == t ) { return artist } else { return }
         });
         Object.keys(newlist).forEach(artist => newlist[artist] === undefined ? delete newlist[artist] : '');
         this.setState({
@@ -70,7 +55,7 @@ class Artists extends Component {
                 <div>
                     <SearchBar onSearchTermChange={this.artistSearch}/>
                     <ArtistList 
-                        onArtistSelect={selectedArtist => this.setState({selectedArtist}) }
+                        onArtistSelect={selectedArtist => this.navigateTo({selectedArtist}) }
                         artists={this.state.artists} 
                     />
                 </div> 
