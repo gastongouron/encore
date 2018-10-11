@@ -1,5 +1,24 @@
 Rails.application.routes.draw do
 
+  # namespace :admin do
+  #   resources :users
+  #   resources :artists
+  #   resources :reviews
+  #   root to: "users#index"
+  # end
+
+  namespace :admin do
+    %i(
+      users
+      artists
+      reviews
+    ).each do |name|
+      resources name, only: %i(index show new create edit update destroy)
+    end
+    root to: "users#index"
+
+  end
+
   devise_for :users, path: :auth, controllers: {
     registrations:  'users/registrations'
   }

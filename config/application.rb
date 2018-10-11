@@ -44,5 +44,7 @@ module ReactDeviseSample
     config.api_only = true
     config.middleware.use ActionDispatch::Flash
     config.middleware.delete ActionDispatch::Session::CookieStore
+    config.middleware.use Rack::MethodOverride
+
   end
 end

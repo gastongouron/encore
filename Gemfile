@@ -12,6 +12,7 @@ gem 'devise'
 gem 'devise-jwt'
 gem 'graphiql-rails'
 gem 'faker'
+gem 'administrate'
 
 group :development, :test do
   gem 'sass-rails'
