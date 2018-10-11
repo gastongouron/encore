@@ -19,6 +19,18 @@ const SignUpForm = reduxForm({
   return (
     <Form onSubmit={handleSubmit(formAction(onSubmit))}>
       <Field
+        name="first_name"
+        component={renderInput}
+        label="First name"
+        validate={[required]}
+      />
+      <Field
+        name="last_name"
+        component={renderInput}
+        label="Last Name"
+        validate={[required]}
+      />
+      <Field
         name="email"
         component={renderInput}
         label="Email"

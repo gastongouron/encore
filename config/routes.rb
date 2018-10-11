@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  devise_for :users, path: :auth, except: :facebook
+  devise_for :users, path: :auth, controllers: {
+    registrations:  'users/registrations'
+  }
 
   if Rails.env.development?
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"

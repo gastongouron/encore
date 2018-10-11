@@ -29,7 +29,7 @@ const buttonStyles = `
   text-transform: uppercase;
   transition: background-color .3s, border-color .3s;
   padding: calc(.34435vw + 3.38843px) calc(.34435vw + 8.38843px);
-  width: 250px;
+  width: 255px;
 `;
 
 const MyFacebookLogin = ({className, ...props}) => {
