@@ -35,6 +35,11 @@ If you want to change the ports locally, change both ```.foreman``` and ```./cli
   * [apollo](http://dev.apollodata.com/)
   * [styled-components](https://github.com/styled-components/styled-components)
 
+### A Note on Administrate
+
+In development mode, the api will serve a special route `localhost:3001/admin` to allow you CRUD all resources of the app.
+In production, this route will be served by default to domain.com/admin
+
 ### A Note on GraphQL
 
 In development mode, the api will serve a special route `localhost:3001/graphiql` to allow you interract with graphiql visual playground.
