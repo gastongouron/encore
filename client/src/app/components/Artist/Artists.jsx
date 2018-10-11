@@ -10,7 +10,6 @@ import SearchBar from './ArtistSearchBar'
 class Artists extends Component {
 
     constructor(props){
-        console.log("Artists", props)
         super(props);
         this.state = {
             artists: this.props.artists.artists,

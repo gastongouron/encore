@@ -6,28 +6,21 @@ const ArtistListItem = (props) => {
 
 	const artist = props.artist
 	const onArtistSelect = props.onArtistSelect
-	// const imageUrl = artist.snippet.thumbnails.default.url;
 
 	const paperStyle = {
 	  display: 'grid',
 	  marginBottom: 20,
 	  padding: 20,
-	  // position: 'relative',
 	};
-
 
 	const textStyle = {
 		gridColumn: 1,
 		textAlign: 'left',
-	    // position: absolute,
-	    // right: 0,
 	}
 
 	const noteStyle = {
 		gridColumn: 2,
   	    textAlign: 'right',
-	    // position: absolute,
-	    // right: 0,
 	}
 
 	return (
