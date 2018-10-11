@@ -13,9 +13,6 @@ const LoginForm = reduxForm({
   form: 'login'
 })(({handleSubmit, valid, submitting, error, onSubmit, auth: {messages, viewPlugin: {renderInput, SubmitButton, Form, FormError}}}) => {
 
-  console.log('-----------------------------------------')
-  console.log(plugin)
-
   const submit = data => {
     return onSubmit(data).catch(UnauthorizedError, () => {
       throw new SubmissionError({
