@@ -90,7 +90,7 @@
     csstype "^2.0.0"
     indefinite-observable "^1.0.1"
 
-"@types/prop-types@*", "@types/prop-types@^15.5.2":
+"@types/prop-types@*":
   version "15.5.6"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.6.tgz#9c03d3fed70a8d517c191b7734da2879b50ca26c"
   integrity sha512-ZBFR7TROLVzCkswA3Fmqq+IIJt62/T7aY/Dmz+QkU7CaW2QFqAitCE8Ups7IzmGhcN1YWMBT4Qcoc07jU9hOJQ==
@@ -4972,13 +4972,6 @@ marked@^0.5.0:
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.5.1.tgz#062f43b88b02ee80901e8e8d8e6a620ddb3aa752"
   integrity sha512-iUkBZegCZou4AdwbKTwSW/lNDcz5OuRSl3qdcl31Ia0B2QPG0Jn+tKblh/9/eP9/6+4h27vpoh8wel/vQOV0vw==
 
-material-ui-search-bar@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/material-ui-search-bar/-/material-ui-search-bar-0.4.2.tgz#2f4413465a9a6f2a3b495e62ec3cbc24ac523b75"
-  integrity sha1-L0QTRlqabyo7SV5i7Dy8JKxSO3U=
-  dependencies:
-    prop-types "^15.5.8"
-
 material-ui@^0.17.4:
   version "0.17.4"
   resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.17.4.tgz#193999ecb49c3ec15ae0abb4e90fdf9a7bd343e0"
@@ -6161,7 +6154,7 @@ prop-types-extra@^1.0.1:
     react-is "^16.3.2"
     warning "^3.0.0"
 
-prop-types@>=15.0.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
+prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.9, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   integrity sha512-3pboPvLiWD7dkI3qf3KbUe6hKFKa52w+AE0VCqECtf+QHAKgOL37tTaNCnuX1nAAQ4ZhyP+kYVKf8rLmJ/feDQ==
@@ -6249,11 +6242,6 @@ railroad-diagrams@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/railroad-diagrams/-/railroad-diagrams-1.0.0.tgz#eb7e6267548ddedfb899c1b90e57374559cddb7e"
   integrity sha1-635iZ1SN3t+4mcG5Dlc3RVnN234=
-
-ramda@^0.23.0:
-  version "0.23.0"
-  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.23.0.tgz#ccd13fff73497a93974e3e86327bfd87bd6e8e2b"
-  integrity sha1-zNE//3NJepOXTj6GMnv9h71ujis=
 
 randexp@0.4.6:
   version "0.4.6"
@@ -6350,14 +6338,6 @@ react-bootstrap@^0.32.4:
     react-transition-group "^2.0.0"
     uncontrollable "^5.0.0"
     warning "^3.0.0"
-
-react-css-themr@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/react-css-themr/-/react-css-themr-2.1.2.tgz#e017514e471c232f43a754a55b49d81faf5dafb8"
-  integrity sha1-4BdRTkccIy9Dp1SlW0nYH69dr7g=
-  dependencies:
-    hoist-non-react-statics "^1.2.0"
-    invariant "^2.2.1"
 
 react-dev-utils@^0.5.2:
   version "0.5.2"
@@ -6581,20 +6561,6 @@ react-smart-data-table@^0.6.4:
     memoize-one "^4.0.2"
     segmentize "^0.4.1"
 
-react-sortablejs@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/react-sortablejs/-/react-sortablejs-1.4.0.tgz#4d9527c5b0186250767adaec597b0bdf937b36f9"
-  integrity sha512-wro0jY9h0BSDg4tC5pAFT6quwBL7lPn9D+CnAvqy2ftiA6+3WPFSDGM76buG8RnOPtssD2uDVrr4K8U7E70BPw==
-  dependencies:
-    prop-types ">=15.0.0"
-
-react-style-proptype@^3.0.0:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/react-style-proptype/-/react-style-proptype-3.2.2.tgz#d8e998e62ce79ec35b087252b90f19f1c33968a0"
-  integrity sha512-ywYLSjNkxKHiZOqNlso9PZByNEY+FTyh3C+7uuziK0xFXu9xzdyfHwg4S9iyiRRoPCR4k2LqaBBsWVmSBwCWYQ==
-  dependencies:
-    prop-types "^15.5.4"
-
 react-tap-event-plugin@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-tap-event-plugin/-/react-tap-event-plugin-2.0.1.tgz#316beb3bc6556e29ec869a7293e89c826a9074d2"
@@ -6609,19 +6575,6 @@ react-to-print@^1.0.10:
   dependencies:
     prop-types "^15.6.0"
     react "^16.2.0"
-
-react-toolbox@^2.0.0-beta.13:
-  version "2.0.0-beta.13"
-  resolved "https://registry.yarnpkg.com/react-toolbox/-/react-toolbox-2.0.0-beta.13.tgz#43f80c2e672ebb8bd56baff24167f65e88858950"
-  integrity sha512-i2/Gd+75FMS1DE4NYL5xGMxzvR8Du5Qvr8vBgkk074vS1xlurel6VqwKe5ar4JhUqMqyQr12biGj5beRQjSDig==
-  dependencies:
-    "@types/prop-types" "^15.5.2"
-    classnames "^2.2.5"
-    core-js "^2.4.0"
-    ramda "^0.23.0"
-    react-css-themr "^2.1.2"
-    react-style-proptype "^3.0.0"
-    react-transition-group "^2.2.1"
 
 react-transition-group@^1.2.0:
   version "1.2.1"
@@ -7388,11 +7341,6 @@ sort-keys@^1.0.0:
   integrity sha1-RBttTTRnmPG05J6JIK37oOVD+a0=
   dependencies:
     is-plain-obj "^1.0.0"
-
-sortablejs@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.7.0.tgz#80a2b2370abd568e1cec8c271131ef30a904fa28"
-  integrity sha1-gKKyNwq9Vo4c7IwnETHvMKkE+ig=
 
 source-list-map@^0.1.4, source-list-map@~0.1.7:
   version "0.1.8"

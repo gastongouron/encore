@@ -33,7 +33,7 @@ const sematicUI = {
 class Profile extends Component {
     constructor(props){
         super(props);
-        console.log("profile page props ```````````````````````````````", this.props)
+        console.log("profile page props :", this.props)
         this.handleModalUpdateShow = this.handleModalUpdateShow.bind(this);
         this.handleModalUpdateClose = this.handleModalUpdateClose.bind(this);
 
@@ -41,6 +41,7 @@ class Profile extends Component {
            showModalUpdate: false,
            showOnRowClick: true,
            seletedReview: null,
+           loading: true,
           }
     }
 
@@ -50,10 +51,10 @@ class Profile extends Component {
         this.props.client.networkInterface.query({query: UserProfileQuery, variables: {id: this.props.match.params.id }, fetchPolicy: 'network-only'})
         .then(
             (res) => {
-                // console.log("profile my reviews componentWillMount query result-----------------", res.data.user.reviews);
                 console.log("RES DATA USER -----------------",res.data.user)
                 this.props.setUserReviews(res.data.user.reviews);
                 this.props.setUserProfile(res.data.user)
+                this.setState({ loading: false });
             },
             (err) => {
                 console.log("profile my reviews componentWillMount query componentWillMount errrr", err);
@@ -169,19 +170,22 @@ class Profile extends Component {
 
     render() {
         const headers = this.getHeaders()
-
+        console.log(this.state)
         return (
             <div>
+            {this.state.loading ? <h1>Loading...</h1> : this.props.reviews.error ? <h1>Error...</h1> :
+            <div>                
                 <div className="text-center">
                     <Avatar size="100" round={true} src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg"/>
                     <div>{this.props.userProfile.userProfile.display_name || this.props.userProfile.userProfile.email}</div>
                     <div>{this.props.userProfile.userProfile.email}</div>
                 </div>
+
                 <div>
-                    {this.props.reviews.loading ? <h1>Loading...</h1> : this.props.reviews.error ? <h1>Error...</h1> :
+
                         <div>
 
-                            <h1>My reviews</h1>
+                            <h1>Reviews</h1>
                             <SmartDataTable
                                 data={this.props.reviews.reviews}
                                 name='reviews-table'
@@ -217,8 +221,9 @@ class Profile extends Component {
                                 </Modal.Footer>
                             </Modal>
                         </div>
-                    }
                 </div>
+                </div>
+                }
             </div>
         )
     }
