@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { withApollo } from 'react-apollo'
-import { initArtists, loadingArtists, failedArtists, setArtists } from '../../actions/artists'
+import { 
+    initArtists, 
+    loadingArtists, 
+    failedArtists, 
+    setArtists } from '../../actions/artists'
 import _ from 'underscore';
 import artistListQuery from '../../queries/ArtistSchema'
 import ArtistList from './ArtistList'

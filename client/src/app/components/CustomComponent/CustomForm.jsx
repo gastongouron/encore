@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {FormControl,FormGroup,ControlLabel, Alert} from 'react-bootstrap';
 import RaisedButton from 'material-ui/RaisedButton';
-import './modal.css';
 const CustomForm = (props) => {
 
 		return (
@@ -11,6 +10,7 @@ const CustomForm = (props) => {
                     <FormGroup controlId="formBasicText">
                         <ControlLabel>Enter your review for this artist</ControlLabel>
                         <FormControl
+                            readOnly={props.editable?false:true}
                             type="text"
                             placeholder="Enter review"
                             value={props.formValue ? props.formValue : ''}

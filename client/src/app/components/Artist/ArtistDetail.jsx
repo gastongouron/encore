@@ -26,7 +26,6 @@ const actionsStyle = {
     textAlign: 'right',
 }
 
-
 class ArtistDetail extends Component {
     static val1;
     constructor(props){
@@ -139,8 +138,6 @@ class ArtistDetail extends Component {
                         : <RaisedButton secondary={true} onClick={this.handleModalNewShow} disabled>New review</RaisedButton> }                               
                     </div>    
                     <br />
-
-                    
                 </div>
             } 
                 <div>

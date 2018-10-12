@@ -4,8 +4,10 @@ import React, { Component } from 'react';
 import CustomForm from '../CustomComponent/CustomForm'
 import updateMutation from '../../mutations/updateReview'
 import deleteMutation from '../../mutations/deleteReview'
-import { initUserReviews, loadingUserReviews, failedUserReviews, setUserReviews, 
-	selectUserReview, updateUserReview, deleteUserReview} from '../../actions/reviews'
+import { 
+    selectUserReview, 
+    updateUserReview, 
+    deleteUserReview} from '../../actions/reviews'
 
 class ReviewEdit extends Component {
 	
@@ -60,6 +62,7 @@ class ReviewEdit extends Component {
                 <form>
                     <CustomForm
                         onShow={true}
+                        editable={this.props.userInfo.user_id == this.state.selectedReview.user_id?true:false}
                         formValue={this.state.selectedReview!==null?this.state.selectedReview.body:''}
                         onChange={(e)=>this.handleUpdateChange(e)}
                         onClickDelete={(e)=>this.onDelete(e)}
