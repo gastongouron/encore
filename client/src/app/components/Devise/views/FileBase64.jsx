@@ -1,65 +1,60 @@
 import React from 'react';
 import ImageTools from './Imagetools'
-
+import $ from 'jquery'
 export default class FileBase64 extends React.Component {
 
   constructor(props) {
     super(props);
-    this.resize.bind(this)
     this.state = {
-      newfile: undefined,
-      files: [],
-    };
+      files: []
+    }
   }
 
-
-  resize(image){
+  resize(image, callback){
     ImageTools.resize(image, {
       width: 320, // maximum width
       height: 240 // maximum height
     }, function(blob, didItResize) {
-      console.log(blob)
       var newfile = new File([blob], 'temp', {type: blob.type, lastModified: Date.now()});
-      console.log('newfile')
-      console.log(newfile)
-      console.log(this)
-      return newfile
+      callback(newfile)
     });
   }
 
+
   handleChange(e) {
-    // get the files
     let files = e.target.files;
-    console.log('WE REACHED IT!!!')
-    console.log(files)
-    // Process each file
     var allFiles = [];
     for (var i = 0; i < files.length; i++) {
-      let file = files[i];
-      console.log('original file =>', file)
-      this.resize(file)
 
-      let reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        // Make a fileInfo Object
-        let fileInfo = {
-          name: file.name,
-          type: file.type,
-          size: Math.round(file.size / 1000) + ' kB',
-          base64: reader.result,
-          file: file,
-        };
-        // Push it to the state
-        allFiles.push(fileInfo);
-        // If all files have been proceed
-        if(allFiles.length == files.length){
-          // Apply Callback function
-          if(this.props.multiple) this.props.onDone(allFiles);
-          else this.props.onDone(allFiles[0]);
+      let file = files[i];
+      let callback = (file) => {
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+
+          let fileInfo = {
+            name: file.name,
+            type: file.type,
+            size: Math.round(file.size / 1000) + ' kB',
+            base64: reader.result,
+            file: file,
+          };
+
+          allFiles.push(fileInfo);
+
+          // if(allFiles.length == files.length){
+
+            console.log('in allfiles callback')
+            console.log(allFiles[0])
+
+            // if(this.props.multiple) this.props.onDone(allFiles); else
+          this.props.onDone(allFiles[0]);
+          // }
+
         }
-      } // reader.onload
-    } // for
+      }
+      this.resize(file,callback)
+    }
   }
 
   render() {

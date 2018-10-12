@@ -176,7 +176,7 @@ class Profile extends Component {
             {this.state.loading ? <h1>Loading...</h1> : this.props.reviews.error ? <h1>Error...</h1> :
             <div>                
                 <div className="text-center">
-                    <Avatar size="100" round={true} src={this.props.userProfile.userProfile.profile_picture}/>
+                    <img src={this.props.userProfile.userProfile.profile_picture}/>
                     <div>{this.props.userProfile.userProfile.display_name || this.props.userProfile.userProfile.email}</div>
                     <div>{this.props.userProfile.userProfile.email}</div>
                 </div>
