@@ -19,6 +19,13 @@ import {
 
 import ReviewList from '../Reviews/ReviewList'
 
+const style = {
+    objectFit: 'cover',
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+}
+
 class Profile extends Component {
     constructor(props){
         super(props);
@@ -30,9 +37,7 @@ class Profile extends Component {
           }
     }
 
-	componentWillMount(){
-        if (this.props.reviews.reviews.length > 0)
-            return;
+    componentWillMount(){
         this.props.loadingUserReviews();
         this.props.loadingUserProfile();
         this.props.client.networkInterface.query({query: UserProfileQuery, variables: {id: this.props.match.params.id }, fetchPolicy: 'network-only'})
@@ -52,8 +57,8 @@ class Profile extends Component {
     onCurrentUserProfile(){
         return this.props.userInfo.user_id == this.props.match.params.id  
     }
-    gotoReviewDetail(review){
 
+    gotoReviewDetail(review){
         if (review.user_id == this.props.userInfo.user_id){
             this.props.selectUserReview(review);
 
@@ -61,17 +66,17 @@ class Profile extends Component {
             this.props.history.push(`/reviews/${id}`)
         }
     }
+
     render() {
         return (
             <div>
             {this.state.loading ? <h1>Loading...</h1> : this.props.reviews.error ? <h1>Error...</h1> :
                 <div>                
                     <div>
-                        <Avatar size="100" round={true} src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg"/>
+                        <img style={style} src={this.props.userProfile.userProfile.profile_picture}/>
                         <div>{this.props.userProfile.userProfile?this.props.userProfile.userProfile.display_name:''}</div>
                         <div>{this.props.userProfile.userProfile?this.props.userProfile.userProfile.email:''}</div>
                     </div>
-
                     <div>
                             <div>
                                 <h1>Reviews</h1>
