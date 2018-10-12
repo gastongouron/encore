@@ -15,6 +15,25 @@ const styles = {
   }
 };
 
+const paperStyle = {
+  padding: 20,
+  maxWidth: 280,
+  display: 'flex', 
+  justifyContent: 'center'
+ };
+
+const coolParent = {
+  display: 'flex', 
+  justifyContent: 'center'
+}
+
+const style = {
+  marginTop: 10,
+  display: 'flex', 
+  justifyContent: 'center', 
+  alignSelf: 'stretch',
+}
+
 const adaptFileEventToValue = delegate => files => {
   delegate(files.base64);
 }
@@ -35,36 +54,15 @@ const FileInput = ({
 };
 
 
-  const paperStyle = {
-    padding: 20,
-    maxWidth: 280,
-    display: 'flex', 
-    justifyContent: 'center'
-   };
-
-  const coolParent = {
-    display: 'flex', 
-    justifyContent: 'center'
-  }
-
-
-  const style = {
-    marginTop: 10,
-    display: 'flex', 
-    justifyContent: 'center', 
-    alignSelf: 'stretch',
-  }
-
-  const SubmitButtonCustom = ({label, disabled}) => (
-    <RaisedButton
-      type="submit"
-      primary={true} 
-      label={label}
-      style={style}
-      disabled={disabled}
-    />
-  );
-
+const SubmitButtonCustom = ({label, disabled}) => (
+  <RaisedButton
+    type="submit"
+    primary={true} 
+    label={label}
+    style={style}
+    disabled={disabled}
+  />
+);
 
 const SignUpForm = reduxForm({
   form: 'signUp'

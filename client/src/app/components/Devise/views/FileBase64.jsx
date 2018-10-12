@@ -46,9 +46,6 @@ export default class FileBase64 extends React.Component {
     var allFiles = [];
     for (var i = 0; i < files.length; i++) {
       let file = files[i];
-      console.log($('#uploader'))
-
-      // show file name
       let callback = (file) => {
         let reader = new FileReader();
         reader.readAsDataURL(file);
@@ -72,7 +69,6 @@ export default class FileBase64 extends React.Component {
     }
   }
 
-
   render() {
     return (
     <RaisedButton
@@ -89,10 +85,9 @@ export default class FileBase64 extends React.Component {
         disabled={this.state.disabled}
         type="file"
         onChange={ this.handleChange.bind(this) }
-        multiple={ this.props.multiple } />
+        multiple={ this.props.multiple } 
+        />
     </RaisedButton>
-
-
     );
   }
 
