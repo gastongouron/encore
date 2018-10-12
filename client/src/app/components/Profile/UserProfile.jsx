@@ -30,6 +30,14 @@ const sematicUI = {
     deleteIcon: 'trash red icon',
   }
 
+const style = {
+    objectFit: 'cover',
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+}
+
+
 class Profile extends Component {
     constructor(props){
         super(props);
@@ -177,7 +185,7 @@ class Profile extends Component {
             {this.state.loading ? <h1>Loading...</h1> : this.props.reviews.error ? <h1>Error...</h1> :
             <div>                
                 <div className="text-center">
-                    <img src={this.props.userProfile.userProfile.profile_picture}/>
+                    <img style={style} src={this.props.userProfile.userProfile.profile_picture}/>
                     <div>{this.props.userProfile.userProfile.display_name || this.props.userProfile.userProfile.email}</div>
                     <div>{this.props.userProfile.userProfile.email}</div>
                 </div>
