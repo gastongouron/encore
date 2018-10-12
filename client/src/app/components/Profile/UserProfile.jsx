@@ -27,7 +27,6 @@ class Profile extends Component {
         this.state = {
            seletedReview: null,
            enabledButton: true,
-           userProfile: this.props.userProfile
           }
     }
 
@@ -41,7 +40,6 @@ class Profile extends Component {
             (res) => {
                 this.props.setUserReviews(res.data.user.reviews);
                 this.props.setUserProfile(res.data.user)
-                this.setState({userProfile: res.data.user})
                 this.setState({ loading: false });
             },
             (err) => {
@@ -70,8 +68,8 @@ class Profile extends Component {
                 <div>                
                     <div>
                         <Avatar size="100" round={true} src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg"/>
-                        <div>{this.state.userProfile !== null?this.state.userProfile.display_name:''}</div>
-                        <div>{this.state.userProfile !== null?this.state.userProfile.email:''}</div>
+                        <div>{this.props.userProfile.userProfile?this.props.userProfile.userProfile.display_name:''}</div>
+                        <div>{this.props.userProfile.userProfile?this.props.userProfile.userProfile.email:''}</div>
                     </div>
 
                     <div>
