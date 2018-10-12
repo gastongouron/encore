@@ -17,10 +17,10 @@ class User < ApplicationRecord
     {
       user_id: id,
       email: email,
-      firstName: first_name,
-      lastName: last_name,
-      displayName: display_name,
-      profilePicture: profile_picture
+      first_name: first_name,
+      last_name: last_name,
+      display_name: display_name,
+      profile_picture: profile_picture
     }
   end
 
