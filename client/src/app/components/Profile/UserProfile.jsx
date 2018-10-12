@@ -73,7 +73,7 @@ class Profile extends Component {
             {this.state.loading ? <h1>Loading...</h1> : this.props.reviews.error ? <h1>Error...</h1> :
                 <div>                
                     <div>
-                        <img style={style} src={this.props.userProfile.userProfile.profile_picture}/>
+                        <img style={style} src={this.props.userProfile.userProfile.profile_picture?this.props.userProfile.userProfile.profile_picture:null}/>
                         <div>{this.props.userProfile.userProfile?this.props.userProfile.userProfile.display_name:''}</div>
                         <div>{this.props.userProfile.userProfile?this.props.userProfile.userProfile.email:''}</div>
                     </div>
