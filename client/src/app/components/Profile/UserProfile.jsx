@@ -69,18 +69,14 @@ class Profile extends Component {
 
     render() {
         const user = this.onCurrentUserProfile() ? this.props.userInfo : this.props.userProfile.userProfile
-        console.log(user)
+        console.log('in RENDER LOOP')
+        console.log(user.profile_picture)
         return (
             <div>
             {this.state.loading ? <h1>Loading...</h1> : this.props.reviews.error ? <h1>Error...</h1> :
                 <div>                
                     <div>
-                    {this.onCurrentUserProfile() ? 
-                        <div>Current user</div>
-                    : 
-                         <div>Other user</div>
-
-                    }
+                    {/* {this.onCurrentUserProfile() ? <div>Current user</div>: <div>Other user</div>} */}
                     </div>
                     <div>
                         <img alt='meaningful text' style={style} src={user.profile_picture?user.profile_picture:''}/>

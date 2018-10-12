@@ -60,7 +60,7 @@ class UserMenuItem extends Component {
       return (
         <div>
           <MenuItem
-            primaryText={currentUser.displayName || currentUser.email}
+            primaryText={currentUser.display_name || currentUser.email}
             onTouchTap={this.handleTouchTap}
             leftIcon={<DropDownArrow color={textColor}/>}
             style={{color: textColor}}
