@@ -2,7 +2,7 @@ const initialState = {
     loading: false,
     error: false,
     message: '',
-    reviews: []
+    reviews: [],
 }
 
 export default (state = initialState, action) => {
@@ -30,11 +30,10 @@ export default (state = initialState, action) => {
                 reviews: action.reviews
             }
         case 'SELECT_USER_REVIEW':
-        console.log("seleted review is----222222222--------", action.review)
-        return {
-            ...state,
-            selected: action.review
-        }
+            return {
+                ...state,
+                selected: action.review
+            }
         case 'UPDATE_USER_REVIEW':
             let reviewsClone = cloneObject (state.reviews);
             let reviews = {...state.reviews};

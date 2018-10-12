@@ -9,6 +9,7 @@ import WithMainLayout from './WithMainLayout';
 import ArtistDetail from './components/Artist/ArtistDetail';
 import Policy       from '../app/PrivatePolicy';
 import Profile      from './components/Profile/UserProfile';
+import ReviewEdit from './components/Reviews/ReviewEdit';
 
 const AuthNotFound = () => <MainLayout><NotFound/></MainLayout>;
 
@@ -23,7 +24,7 @@ const Routes = () => {
       <PrivateRoute   exact path="/artists"     layout={MainLayout} component={Artists} />
       <PrivateRoute   exact path="/artists/:id" layout={MainLayout} component={ArtistDetail} />
       <PrivateRoute   exact path="/user/:id"    layout={MainLayout} component={Profile} />
-
+      <PrivateRoute   exact path="/reviews/:id"    layout={MainLayout} component={ReviewEdit} />
       <WithMainLayout component={NotFound} />
 
     </Switch>

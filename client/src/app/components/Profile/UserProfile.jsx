@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {connect} from "react-redux"
 import { withApollo } from 'react-apollo'
 import Avatar from 'react-avatar';
-import SmartDataTable from 'react-smart-data-table'
 import UserProfileQuery from '../../queries/UserProfileSchema'
 import updateMutation from '../../mutations/updateReview'
 import deleteMutation from '../../mutations/deleteReview'
@@ -11,29 +10,13 @@ import { initUserReviews, loadingUserReviews, failedUserReviews, setUserReviews,
 
 import { initUserProfile, loadingUserProfile, failedUserProfile, setUserProfile } from '../../actions/userProfile'
 
-import {Button,Modal,FormControl,FormGroup,ControlLabel} from 'react-bootstrap';
-import './modal.css';
-
-const sematicUI = {
-    segment: 'ui basic segment',
-    message: 'ui message',
-    input: 'ui icon input',
-    searchIcon: 'search icon',
-    table: 'ui compact selectable table',
-    select: 'ui dropdown',
-    refresh: 'ui labeled primary icon button',
-    refreshIcon: 'sync alternate icon',
-    change: 'ui labeled secondary icon button',
-    changeIcon: 'exchange icon',
-    checkbox: 'ui toggle checkbox',
-    loader: 'ui active text loader',
-    deleteIcon: 'trash red icon',
-  }
+import ReviewList from '../Reviews/ReviewList'
+import CustomForm from '../CustomComponent/CustomForm'
+import '../CustomComponent/modal.css';
 
 class Profile extends Component {
     constructor(props){
         super(props);
-        console.log("profile page props :", this.props)
         this.handleModalUpdateShow = this.handleModalUpdateShow.bind(this);
         this.handleModalUpdateClose = this.handleModalUpdateClose.bind(this);
 
@@ -42,6 +25,7 @@ class Profile extends Component {
            showOnRowClick: true,
            seletedReview: null,
            loading: true,
+           enabledButton: true,
           }
     }
 
@@ -51,13 +35,11 @@ class Profile extends Component {
         this.props.client.networkInterface.query({query: UserProfileQuery, variables: {id: this.props.match.params.id }, fetchPolicy: 'network-only'})
         .then(
             (res) => {
-                console.log("RES DATA USER -----------------",res.data.user)
                 this.props.setUserReviews(res.data.user.reviews);
                 this.props.setUserProfile(res.data.user)
                 this.setState({ loading: false });
             },
             (err) => {
-                console.log("profile my reviews componentWillMount query componentWillMount errrr", err);
                 this.props.failedUserReviews(err.data);
                 this.props.failedUserProfile(err.data);
             }
@@ -71,12 +53,7 @@ class Profile extends Component {
     onRowClick = (event, { rowData, rowIndex, tableData }) => {
         const { showOnRowClick } = this.state
         if (showOnRowClick) {
-          console.log("rowdata-------------", rowData)
-          console.log("table index is", tableData[rowIndex])
           this.handleModalUpdateShow(rowData);
-        } else {
-          // The following results should be identical
-          console.log(rowData, tableData[rowIndex])
         }
     }
     handleUpdateChange(e){
@@ -87,29 +64,31 @@ class Profile extends Component {
     }
     
     handleModalUpdateShow(review){
-        console.log('selected review', review);
-        this.props.selectUserReview(review);
-        this.setState({seletedReview:review});
-        this.setState({ showModalUpdate: true });
+
+        if (review.user_id == this.props.userInfo.user_id){
+            this.props.selectUserReview(review);
+            this.setState({seletedReview:review});
+            this.setState({ showModalUpdate: true });
+
+            // let id = review.id
+            // this.props.history.push(`/reviews/${id}`)
+        }
     }
     onUpdate(e) {
         this.setState({ showModalUpdate: false });
         let {seletedReview} = this.state;
         const val = seletedReview.body;
-        if(val===''){
-            console.log("length is 0----------------------")
-        } else {
+        if(val!==''){
             this.props.client.mutate(
                 {mutation: updateMutation,
                  variables: {id: seletedReview.id, body:val}})
             .then(
                 (res) => {
                     const updatedArr = res.data.editReview.review
-                    console.log("updated review !!!!!!!!!!!!!!!!!!!!!!!!", updatedArr);
                     this.props.updateUserReview(updatedArr)
                 },
                 (err) => {
-                    console.log("newreview !!!!!!!!!!!!!!!!!!!!!!!!", err);
+
                 }
             );
         }
@@ -117,111 +96,61 @@ class Profile extends Component {
     onDelete(e) {
         this.setState({ showModalUpdate: false });
         let {seletedReview} = this.state;
-        console.log("current seletedReview is@@@@@@@@@@@@@@@@@@@@@@@@", seletedReview)
         this.props.client.mutate(
             {mutation: deleteMutation,
              variables: {id: seletedReview.id}})
         .then(
             (res) => {
-                console.log("delete review result is !!!!!!!!!!!!!!!!!!!!!!!!", res);
                 this.props.deleteUserReview(seletedReview)
                 this.setState({enabledButton: true})
             },
             (err) => {
-                console.log("delete review error msg is !!!!!!!!!!!!!!!!!!!!!!!!", err);
+
             }
         );
 
     }
-    getHeaders() {
-        return {
-            'id': {
-                text: 'ID',
-                invisible: true,
-                transform: value => `Row #${value + 1}`,
-            },
-            'artist_id': {
-                text: 'ART_ID',
-                invisible: true
-            },
-            'artist_name': {
-                text: 'Artist Name',
-            },
-            'body': {
-                text: 'My review',
-            },
-            'score': {
-                text: 'Review score'
-            },
-            'user_id': {
-                text: 'User ID',
-                sortable: false,
-                filterable: false,
-                invisible: true,
-            },
-            '__typename': {
-                text: 'TypeName',
-                sortable: false,
-                filterable: false,
-                invisible: true,
-            },
-        }
-    }
-
     render() {
-        const headers = this.getHeaders()
-        console.log(this.state)
         return (
             <div>
             {this.state.loading ? <h1>Loading...</h1> : this.props.reviews.error ? <h1>Error...</h1> :
-            <div>                
-                <div className="text-center">
-                    <Avatar size="100" round={true} src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg"/>
-                    <div>{this.props.userProfile.userProfile.display_name || this.props.userProfile.userProfile.email}</div>
-                    <div>{this.props.userProfile.userProfile.email}</div>
-                </div>
+                <div>                
+                    <div className="text-center">
+                        <Avatar size="100" round={true} src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg"/>
+                        <div>{this.props.userProfile.userProfile.display_name || this.props.userProfile.userProfile.email}</div>
+                        <div>{this.props.userProfile.userProfile.email}</div>
+                    </div>
 
-                <div>
+                    <div>
+                            <div>
+                                <h1>Reviews</h1>
+                                <div>
+                                    <ReviewList
+                                        onReviewSelect={selectedReview =>this.handleModalUpdateShow(selectedReview)}
+                                        reviews={this.props.reviews.reviews}/>
+                                </div>
+                                
+                                <form>
+                                    <div>
+                                        <CustomForm 
+                                            onShow={this.state.showModalNew}
+                                            onHide={this.handleModalNewClose}
+                                            onChange={this.handleChange}
+                                            onClickSave={this.onSave}
+                                            onClickClose={this.handleModalNewClose}/>
 
-                        <div>
-
-                            <h1>Reviews</h1>
-                            <SmartDataTable
-                                data={this.props.reviews.reviews}
-                                name='reviews-table'
-                                dataKey=''
-                                className={sematicUI.table}
-                                sortable
-                                headers={headers}
-                                loader={(<div className={sematicUI.loader}> Loading...</div>)}
-                                onRowClick={this.onCurrentUserProfile() ? this.onRowClick : null}
-                                perPage={10}/>
-
-
-                            <Modal id="review_detail_modal" show={this.state.showModalUpdate} onHide={this.handleModalUpdateClose}>
-                                <Modal.Header closeButton>
-                                    <Modal.Title>Edit Your Review</Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body>
-                                    <form>
-                                    <FormGroup controlId="formBasicText">
-                                        <ControlLabel>{this.state.seletedReview!==null?this.state.seletedReview.artist_name:''}</ControlLabel>
-                                        <FormControl
-                                            type="text"
-                                            value={this.state.seletedReview!==null?this.state.seletedReview.body:''}
-                                            placeholder="Enter review"
-                                            onChange={(e)=>this.handleUpdateChange(e)}/>                                       
-                                        </FormGroup>
-                                    </form>
-                                </Modal.Body>
-                                <Modal.Footer>
-                                    <Button bsStyle="danger" onClick={(e)=>this.onDelete(e)}>Delete</Button>
-                                    <Button bsStyle="primary" onClick={(e)=>this.onUpdate(e)}>Update</Button>
-                                    <Button onClick={this.handleModalUpdateClose}>Close</Button>
-                                </Modal.Footer>
-                            </Modal>
-                        </div>
-                </div>
+                                        <CustomForm
+                                            onShow={this.state.showModalUpdate}
+                                            onHide={this.handleModalUpdateClose}
+                                            formValue={this.state.seletedReview!==null?this.state.seletedReview.body:''}
+                                            onChange={this.handleUpdateChange}
+                                            onClickDelete={this.onDelete}
+                                            onClickUpdate={this.onUpdate}
+                                            onClickClose={this.handleModalUpdateClose}/>
+                                    </div>
+                                </form>
+                            </div>
+                    </div>
                 </div>
                 }
             </div>

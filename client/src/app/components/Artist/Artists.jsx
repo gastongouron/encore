@@ -53,14 +53,15 @@ class Artists extends Component {
     render() {
         return (
             <div> { this.props.artists.loading ? <h1>Loading...</h1> : this.props.artists.error ? <h1>Error...</h1> : 
-                <div>
-                    <SearchBar onSearchTermChange={this.artistSearch}/>
-                    <ArtistList 
-                        onArtistSelect={selectedArtist => this.navigateTo({selectedArtist}) }
-                        artists={this.state.artists} 
-                    />
-                </div> 
-            }</div>
+                    <div>
+                        <SearchBar onSearchTermChange={this.artistSearch}/>
+                        <ArtistList
+                            onArtistSelect={selectedArtist => this.navigateTo({selectedArtist}) }
+                            artists={this.state.artists}
+                        />
+                    </div> 
+                }
+            </div>
         )
     }
 

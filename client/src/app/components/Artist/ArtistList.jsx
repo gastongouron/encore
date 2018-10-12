@@ -9,7 +9,7 @@ const Artist = (props) => {
 		return (
 			<ArtistItem 
 				onArtistSelect={props.onArtistSelect}
-				key={artist.name} 
+				key={artist.name}
 				artist={artist} 
 			/>
 		) 

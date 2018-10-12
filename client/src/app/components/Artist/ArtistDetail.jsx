@@ -9,14 +9,8 @@ import deleteMutation from '../../mutations/deleteReview'
 import { initArtistDetail, loadingArtistDetail, failedArtistDetail, setArtistDetail, addNewReview,selectReview, updateReview, deleteReview } from '../../actions/artistDetail'
 
 import RaisedButton from 'material-ui/RaisedButton';
-import Paper from 'material-ui/Paper';
-import CustomForm from '../CustomForm'
-
-const paperStyle = {
-  display: 'block',
-  marginBottom: 20,
-  padding: 20,
-};
+import CustomForm from '../CustomComponent/CustomForm'
+import ReviewList from '../Reviews/ReviewList'
 
 const gridStyle = {
    display: 'grid',
@@ -36,7 +30,6 @@ const actionsStyle = {
 class ArtistDetail extends Component {
     static val1;
     constructor(props){
-        console.log(props)
         super(props);
         this.handleModalNewShow = this.handleModalNewShow.bind(this);
         this.handleModalNewClose = this.handleModalNewClose.bind(this);
@@ -73,9 +66,13 @@ class ArtistDetail extends Component {
     handleModalUpdateClose() { this.setState({ showModalUpdate: false });}
     
     handleModalUpdateShow(review){
-        this.props.selectReview(review);
-        this.setState({selected:review});
-        this.setState({ showModalUpdate: true });
+        if (review.user_id == this.props.userInfo.user_id){
+            this.props.selectReview(review);
+            this.setState({selected:review});
+            this.setState({ showModalUpdate: true });
+        }
+        
+        
     }
     
     checkEnableNewReview = (reviews) => {
@@ -85,42 +82,17 @@ class ArtistDetail extends Component {
             }
         }
     }
-   
-    renderReviews = (reviews) => {
-        if (reviews !== undefined) {
-            return reviews.map((review, index) => (
-            <Paper
-                key={index}
-                onClick={review.user_id == this.props.userInfo.user_id?()=>this.handleModalUpdateShow(review):null} 
-                disabled={review.user_id == this.props.userInfo.user_id?false:true}
-                rounded={false} 
-                style={paperStyle} zDepth={1}>
-                <div>
-                    {review.body}
-                </div>
-                <br />
-                <div>
-                    {review.score}
-                </div>
-            </Paper>
-            ));
-        }
-        else return null;
-    }
 
     onSave(e){        
         this.setState({ showModalNew: false });
         if(ArtistDetail.val1===undefined||ArtistDetail.val1.trim()===''){
-            console.log("Handle empty/similar comment")
         } else {
             this.props.client.mutate({mutation: newReviewMutation, variables: {user_id: this.props.userInfo.user_id, artist_id: this.props.match.params.id, body: ArtistDetail.val1}}).then(
                 (res) => {
                     const newArr = res.data.newReview.review
                     this.props.addNewReview(newArr)
                     this.setState({enabledButton: false});},
-                (err) => {
-                    console.log("newreview !!!!!!!!!!!!!!!!!!!!!!!!", err);
-                }
+                (err) => { }
             );
         }
     }
@@ -129,15 +101,13 @@ class ArtistDetail extends Component {
         this.setState({ showModalUpdate: false });
         let {selected} = this.state;
         const val = selected.body;
-        if(val===''){
-            console.log("Handle nothing to update here")
-        } else {
+        if(val!==''){
             this.props.client.mutate({mutation: updateMutation, variables: {id: selected.id, body:val}}).then(
                 (res) => {
                     const updatedArr = res.data.editReview.review
                     this.props.updateReview(updatedArr)},
                 (err) => {
-                    console.log("newreview !!!!!!!!!!!!!!!!!!!!!!!!", err);
+
                 }
             );
         }
@@ -150,10 +120,9 @@ class ArtistDetail extends Component {
             (res) => {
                 this.props.deleteReview(selected)
                 this.setState({enabledButton: true})},
-            (err) => { console.log("delete review error msg is:", err); }
+            (err) => { }
         );
     }
-
     render() {
         const {enabledButton} = this.state
         return (
@@ -171,7 +140,17 @@ class ArtistDetail extends Component {
                     </div>    
                     <br />
 
-                    <form>
+                    
+                </div>
+            } 
+                <div>
+                    <ReviewList
+                            onReviewSelect={selectedReview =>this.handleModalUpdateShow(selectedReview)}
+                            reviews={this.props.artistDetail.artistDetail.reviews}
+                    />
+                </div>
+
+                <form>
                         <div>
                             <CustomForm 
                                 onShow={this.state.showModalNew}
@@ -190,13 +169,6 @@ class ArtistDetail extends Component {
                                 onClickClose={this.handleModalUpdateClose}/>
                         </div>
                     </form>
-                </div>
-            } 
-                <div>
-                    <div>
-                        {this.renderReviews(this.props.artistDetail.artistDetail.reviews)}
-                    </div>
-                </div>
                        
             </div>
         );
