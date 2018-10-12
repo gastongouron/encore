@@ -24,12 +24,13 @@ class Profile extends Component {
            showModalUpdate: false,
            showOnRowClick: true,
            seletedReview: null,
-           loading: true,
            enabledButton: true,
           }
     }
 
 	componentWillMount(){
+        if (this.props.reviews.reviews.length > 0)
+            return;
         this.props.loadingUserReviews();
         this.props.loadingUserProfile();
         this.props.client.networkInterface.query({query: UserProfileQuery, variables: {id: this.props.match.params.id }, fetchPolicy: 'network-only'})
@@ -67,11 +68,11 @@ class Profile extends Component {
 
         if (review.user_id == this.props.userInfo.user_id){
             this.props.selectUserReview(review);
-            this.setState({seletedReview:review});
-            this.setState({ showModalUpdate: true });
+            // this.setState({seletedReview:review});
+            // this.setState({ showModalUpdate: true });
 
-            // let id = review.id
-            // this.props.history.push(`/reviews/${id}`)
+            let id = review.id
+            this.props.history.push(`/reviews/${id}`)
         }
     }
     onUpdate(e) {
@@ -115,7 +116,7 @@ class Profile extends Component {
             <div>
             {this.state.loading ? <h1>Loading...</h1> : this.props.reviews.error ? <h1>Error...</h1> :
                 <div>                
-                    <div className="text-center">
+                    <div>
                         <Avatar size="100" round={true} src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg"/>
                         <div>{this.props.userProfile.userProfile.display_name || this.props.userProfile.userProfile.email}</div>
                         <div>{this.props.userProfile.userProfile.email}</div>
