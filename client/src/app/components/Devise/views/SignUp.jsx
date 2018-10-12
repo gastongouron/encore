@@ -5,13 +5,14 @@ import {Redirect} from 'react-router-dom';
 import {signUp, formAction} from 'react-devise/lib/actions';
 import {required, email} from 'react-devise/lib/views/validation';
 import FileBase64 from './FileBase64';
+import RaisedButton from 'material-ui/RaisedButton';
+import Paper from 'material-ui/Paper';
 
-
-const style = {
-  padding: 20,
-  maxWidth: 280,
-  display: 'flex', 
-  justifyContent: 'center'
+const styles = {
+  uploadButton: {
+    verticalAlign: 'middle',
+    backgroundColor: 'black'
+  }
 };
 
 const adaptFileEventToValue = delegate => files => {
@@ -25,12 +26,45 @@ const FileInput = ({
 }) => {
   return (
       <FileBase64
+        style={styles.uploadButton}
         onChange={adaptFileEventToValue(onChange)}
         onBlur={adaptFileEventToValue(onBlur)}
         multiple={ false }
         onDone={adaptFileEventToValue(onChange)} />
     )
 };
+
+
+  const paperStyle = {
+    padding: 20,
+    maxWidth: 280,
+    display: 'flex', 
+    justifyContent: 'center'
+   };
+
+  const coolParent = {
+    display: 'flex', 
+    justifyContent: 'center'
+  }
+
+
+  const style = {
+    marginTop: 10,
+    display: 'flex', 
+    justifyContent: 'center', 
+    alignSelf: 'stretch',
+  }
+
+  const SubmitButtonCustom = ({label, disabled}) => (
+    <RaisedButton
+      type="submit"
+      primary={true} 
+      label={label}
+      style={style}
+      disabled={disabled}
+    />
+  );
+
 
 const SignUpForm = reduxForm({
   form: 'signUp'
@@ -43,6 +77,8 @@ const SignUpForm = reduxForm({
       }}}
     />;
   }
+
+
 
   return (
     <Form onSubmit={handleSubmit(formAction(onSubmit))}>
@@ -78,16 +114,18 @@ const SignUpForm = reduxForm({
         label="Password Again"
         validate={required}
       />
-      
+
+      <br />
       <Field 
-        style={style}
         name="profile_picture" 
         component={FileInput} 
         type="file"
         label="Avatar"
         validate={required}/>
-  
-      <SubmitButton
+
+      <br />
+      <br />
+      <SubmitButtonCustom
         label={submitting ? 'Signing Up...' : 'Sign Up'}
         disabled={!valid || submitting}
       />
@@ -99,6 +137,10 @@ const SignUpForm = reduxForm({
 const SignUp = ({doSignUp, ...rest}) => {
   const {auth: {AuthLinks, viewPlugin: {View, Heading}}} = rest;
   return (
+<div style={coolParent}>
+    <Paper
+        style={paperStyle} zDepth={1} 
+        rounded={false}>
     <View>
       <Heading>
         Sign Up
@@ -106,6 +148,8 @@ const SignUp = ({doSignUp, ...rest}) => {
       <SignUpForm onSubmit={doSignUp} {...rest} />
       <AuthLinks />
     </View>
+    </Paper>
+    </div>
   );
 };
 

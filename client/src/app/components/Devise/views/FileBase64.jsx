@@ -1,12 +1,33 @@
 import React from 'react';
 import ImageTools from './Imagetools'
+import RaisedButton from 'material-ui/RaisedButton';
+import $ from 'jquery'
+
+const styles = {
+  uploadButton: {
+    verticalAlign: 'middle',
+    width: 250,
+  },
+  uploadInput: {
+    cursor: 'pointer',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    width: '100%',
+    opacity: 0,
+  },
+};
 
 export default class FileBase64 extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      files: []
+      files: [],
+      message: 'Avatar',
+      disabled: false
     }
   }
 
@@ -25,6 +46,9 @@ export default class FileBase64 extends React.Component {
     var allFiles = [];
     for (var i = 0; i < files.length; i++) {
       let file = files[i];
+      console.log($('#uploader'))
+
+      // show file name
       let callback = (file) => {
         let reader = new FileReader();
         reader.readAsDataURL(file);
@@ -39,6 +63,8 @@ export default class FileBase64 extends React.Component {
           };
 
           allFiles.push(fileInfo);
+          this.setState({message: 'Thank you'})
+          this.setState({disabled: true})
           this.props.onDone(allFiles[0]);
         }
       }
@@ -46,12 +72,27 @@ export default class FileBase64 extends React.Component {
     }
   }
 
+
   render() {
     return (
+    <RaisedButton
+      default={true}
+      disabled={this.state.disabled}
+      id="uploader"
+      label={this.state.message}
+      labelPosition="before"
+      style={styles.uploadButton}
+      containerElement="label"
+    >
       <input
+        style={styles.uploadInput}
+        disabled={this.state.disabled}
         type="file"
         onChange={ this.handleChange.bind(this) }
         multiple={ this.props.multiple } />
+    </RaisedButton>
+
+
     );
   }
 
