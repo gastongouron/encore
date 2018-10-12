@@ -4,6 +4,36 @@ import {reduxForm, Field} from 'redux-form';
 import {Redirect} from 'react-router-dom';
 import {signUp, formAction} from 'react-devise/lib/actions';
 import {required, email} from 'react-devise/lib/views/validation';
+import FileBase64 from 'react-file-base64';
+
+
+const adaptFileEventToValue = delegate => files => {
+  console.log(files)
+  delegate(files.base64);
+}
+
+ // <input
+ //     onChange={adaptFileEventToValue(onChange)}
+ //     onBlur={adaptFileEventToValue(onBlur)}
+ //     type="file"
+ //     {...props.input}
+ //     {...props}
+ //   /> 
+
+
+const FileInput = ({ 
+  input: { value: omitValue, onChange, onBlur, ...inputProps }, 
+  meta: omitMeta, 
+  ...props 
+}) => {
+  return (
+      <FileBase64
+        onChange={adaptFileEventToValue(onChange)}
+        onBlur={adaptFileEventToValue(onBlur)}
+        multiple={ false }
+        onDone={adaptFileEventToValue(onChange)} />
+    )
+};
 
 const SignUpForm = reduxForm({
   form: 'signUp'
@@ -16,6 +46,21 @@ const SignUpForm = reduxForm({
       }}}
     />;
   }
+  
+  // const customFileInput = (field) => {
+  //   console.log('in customfileinput')
+  //   console.log(field)
+  //   delete field.input.value; // <-- just delete the value property
+  //   console.log(field)
+  //   return <input type="file" id="profile_picture" {...field.input} />;
+
+  // };
+  //   <Field 
+  //   name="profile_picture"
+  //   type="file"
+  //   validate={required}
+  //   component={customFileInput}/>
+
   return (
     <Form onSubmit={handleSubmit(formAction(onSubmit))}>
       <Field
@@ -50,6 +95,14 @@ const SignUpForm = reduxForm({
         label="Password Again"
         validate={required}
       />
+      
+      <Field 
+        name="profile_picture" 
+        component={FileInput} 
+        type="file"
+        label="Avatar"
+        validate={required}/>
+  
       <SubmitButton
         label={submitting ? 'Signing Up...' : 'Sign Up'}
         disabled={!valid || submitting}
