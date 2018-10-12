@@ -9,13 +9,18 @@ class User < ApplicationRecord
     [first_name, last_name].compact.join(' ')
   end
 
+  def avatar
+    profile_picture || 'Helloworld'
+  end
+
   def jwt_payload
     {
       user_id: id,
       email: email,
       firstName: first_name,
       lastName: last_name,
-      displayName: display_name
+      displayName: display_name,
+      profilePicture: profile_picture
     }
   end
 

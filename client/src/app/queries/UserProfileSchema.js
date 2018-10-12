@@ -8,6 +8,7 @@ const UserProfileQuery = (gql`
             last_name
             id
             display_name
+            profile_picture
 			reviews {
                 artist_id
                 artist_name
