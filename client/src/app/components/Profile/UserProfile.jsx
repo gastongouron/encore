@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux"
 import { withApollo } from 'react-apollo'
-import Avatar from 'react-avatar';
+// import Avatar from 'react-avatar';
 import UserProfileQuery from '../../queries/UserProfileSchema'
 import { 
     initUserReviews, 
@@ -68,14 +68,24 @@ class Profile extends Component {
     }
 
     render() {
+        const user = this.onCurrentUserProfile() ? this.props.userInfo : this.props.userProfile.userProfile
+        console.log(user)
         return (
             <div>
             {this.state.loading ? <h1>Loading...</h1> : this.props.reviews.error ? <h1>Error...</h1> :
                 <div>                
                     <div>
-                        <img style={style} src={this.props.userProfile.userProfile.profile_picture?this.props.userProfile.userProfile.profile_picture:null}/>
-                        <div>{this.props.userProfile.userProfile?this.props.userProfile.userProfile.display_name:''}</div>
-                        <div>{this.props.userProfile.userProfile?this.props.userProfile.userProfile.email:''}</div>
+                    {this.onCurrentUserProfile() ? 
+                        <div>Current user</div>
+                    : 
+                         <div>Other user</div>
+
+                    }
+                    </div>
+                    <div>
+                        <img alt='meaningful text' style={style} src={user.profile_picture?user.profile_picture:''}/>
+                        <div>{user.display_name?user.display_name:''}</div>
+                        <div>{user.email?user.email:''}</div>
                     </div>
                     <div>
                             <div>
