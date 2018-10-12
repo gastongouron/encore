@@ -7,8 +7,14 @@ import {required, email} from 'react-devise/lib/views/validation';
 import FileBase64 from './FileBase64';
 
 
+const style = {
+  padding: 20,
+  maxWidth: 280,
+  display: 'flex', 
+  justifyContent: 'center'
+};
+
 const adaptFileEventToValue = delegate => files => {
-  console.log(files)
   delegate(files.base64);
 }
 
@@ -37,20 +43,6 @@ const SignUpForm = reduxForm({
       }}}
     />;
   }
-  
-  // const customFileInput = (field) => {
-  //   console.log('in customfileinput')
-  //   console.log(field)
-  //   delete field.input.value; // <-- just delete the value property
-  //   console.log(field)
-  //   return <input type="file" id="profile_picture" {...field.input} />;
-
-  // };
-  //   <Field 
-  //   name="profile_picture"
-  //   type="file"
-  //   validate={required}
-  //   component={customFileInput}/>
 
   return (
     <Form onSubmit={handleSubmit(formAction(onSubmit))}>
@@ -88,6 +80,7 @@ const SignUpForm = reduxForm({
       />
       
       <Field 
+        style={style}
         name="profile_picture" 
         component={FileInput} 
         type="file"

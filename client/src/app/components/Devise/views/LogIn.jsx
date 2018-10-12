@@ -39,7 +39,6 @@ const LoginForm = reduxForm({
   );
 
   return (
-
       <Form onSubmit={handleSubmit(submit)}>
         <Field
           name="email"
@@ -53,13 +52,11 @@ const LoginForm = reduxForm({
           component={renderInput}
           label="Password"
         />
-
-          <SubmitButtonCustom
-            label={submitting ? 'Logging In...' : 'Log In'}
-            disabled={!valid || submitting}
-            display='block'
-          />
-
+        <SubmitButtonCustom
+          label={submitting ? 'Logging In...' : 'Log In'}
+          disabled={!valid || submitting}
+          display='block'
+        />
         {error && <FormError>{error}</FormError>}
       </Form>
   );
@@ -75,7 +72,6 @@ const Login = ({currentUser, doLogin, location: {state: {alert, from: {pathname:
     maxWidth: 280,
     display: 'flex', 
     justifyContent: 'center'
-
    };
 
   const coolParent = {
@@ -93,17 +89,16 @@ const Login = ({currentUser, doLogin, location: {state: {alert, from: {pathname:
     <Paper
         style={paperStyle} zDepth={1} 
         rounded={false}>
-
-    <View>
-      <Heading>
-        Login
-      </Heading>
-      {alert && <Alert>{alert}</Alert>}
-      <LoginForm onSubmit={submit} {...rest} />
-      <br />
-      <OauthView />
-      <AuthLinks />
-    </View>
+      <View>
+        <Heading>
+          Login
+        </Heading>
+        {alert && <Alert>{alert}</Alert>}
+        <LoginForm onSubmit={submit} {...rest} />
+        <br />
+        <OauthView />
+        <AuthLinks />
+      </View>
     </Paper>
     </div>
   );

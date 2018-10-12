@@ -48,6 +48,7 @@ class Profile extends Component {
 	componentWillMount(){
         this.props.loadingUserReviews();
         this.props.loadingUserProfile();
+        console.log(this.props.match.params.id)
         this.props.client.networkInterface.query({query: UserProfileQuery, variables: {id: this.props.match.params.id }, fetchPolicy: 'network-only'})
         .then(
             (res) => {
