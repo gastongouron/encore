@@ -33,8 +33,8 @@ export default class FileBase64 extends React.Component {
 
   resize(image, callback){
     ImageTools.resize(image, {
-      width: 320, // maximum width
-      height: 240 // maximum height
+      width: 100, // maximum width
+      height: 100 // maximum height
     }, function(blob, didItResize) {
       var newfile = new File([blob], 'temp', {type: blob.type, lastModified: Date.now()});
       callback(newfile)

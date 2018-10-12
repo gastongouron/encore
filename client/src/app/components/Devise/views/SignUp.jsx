@@ -71,7 +71,8 @@ const SignUpForm = reduxForm({
     return <Redirect to={{
       pathname: '/artists',
       state: {
-        notice: signUpSucceededMessage
+        // notice: signUpSucceededMessage
+        notice: 'Welcome!'
       }}}
     />;
   }
