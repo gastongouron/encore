@@ -38,7 +38,8 @@ class ArtistDetail extends Component {
             showModalNew: false,
             showModalUpdate: false,
             enabledButton: true,
-            selected:null
+            selected:null,
+            newReviewBody:''
         };
     };
     
@@ -54,7 +55,10 @@ class ArtistDetail extends Component {
         );
     }
 
-    handleChange(e){ ArtistDetail.val1 = e.target.value; }
+    handleChange(e){ 
+        ArtistDetail.val1 = e.target.value; 
+        this.setState({newReviewBody: e.target.value})
+    }
 
     handleUpdateChange(e){ this.setState({selected:{...this.state.selected, body:e.target.value}}) }
 
@@ -152,6 +156,8 @@ class ArtistDetail extends Component {
                             <CustomForm 
                                 onShow={this.state.showModalNew}
                                 onHide={this.handleModalNewClose}
+                                editable={true}
+                                formValue={this.state.newReviewBody}
                                 onChange={(e)=>this.handleChange(e)}
                                 onClickSave={(e)=>this.onSave(e)}
                                 onClickClose={this.handleModalNewClose}/>
@@ -159,6 +165,7 @@ class ArtistDetail extends Component {
                             <CustomForm
                                 onShow={this.state.showModalUpdate}
                                 onHide={this.handleModalUpdateClose}
+                                editable={true}
                                 formValue={this.state.selected!==null?this.state.selected.body:''}
                                 onChange={(e)=>this.handleUpdateChange(e)}
                                 onClickDelete={(e)=>this.onDelete(e)}

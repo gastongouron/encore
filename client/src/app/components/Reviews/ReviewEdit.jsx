@@ -36,7 +36,7 @@ class ReviewEdit extends Component {
                 (res) => {
                     const updatedArr = res.data.editReview.review
                     this.props.updateUserReview(updatedArr)
-                    
+                    this.props.history.goBack()
                 },
                 (err) => {
 
