@@ -16,5 +16,13 @@ class Review < ApplicationRecord
 		return self.artist.name
 	end
 
+	def author_display_name
+		return self.user.display_name
+	end
+
+	def author_profile_picture
+		return self.user.profile_picture
+	end
+
 end
 
