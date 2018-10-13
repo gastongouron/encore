@@ -27,7 +27,7 @@ class Profile extends Component {
 
         this.state = {
             showModalUpdate: false,
-            selected:null,
+            selected: null,
             newReviewBody:'',
             newReviewScore:''
           }
