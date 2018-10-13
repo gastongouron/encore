@@ -27,21 +27,20 @@ const CustomForm = (props) => {
                     </FormGroup>
 
                     <div>
-                    {props.onClickSave ? 
-                    <div>
-                        <RaisedButton label='Save' primary={true} onClick={props.onClickSave}/>
-                        <RaisedButton label='Close' onClick={props.onClickClose}/>
-                    </div>
-					: 
-					props.onClickDelete ? 
-					<div>
-                        <RaisedButton label='Delete' secondary={true} onClick={props.onClickDelete}/>
-                        <RaisedButton label='Update' primary={true} onClick={props.onClickUpdate}/>
-                        <RaisedButton label='Close' onClick={props.onClickClose}/>
-                    </div>
-
-                    : undefined }
-
+                        { props.onClickSave ? 
+                            <div>
+                                <RaisedButton label='Save' primary={true} onClick={props.onClickSave}/>
+                                <RaisedButton label='Close' onClick={props.onClickClose}/>
+                            </div>
+    					: props.onClickDelete ? 
+    					   <div>
+                                <RaisedButton label='Delete' secondary={true} onClick={props.onClickDelete}/>
+                                <RaisedButton label='Update' primary={true} onClick={props.onClickUpdate}/>
+                                <RaisedButton label='Close' onClick={props.onClickClose}/>
+                            </div>
+                        : 
+                            undefined 
+                        }
                     </div>
                 </Alert>
             </div>

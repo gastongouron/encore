@@ -8,17 +8,11 @@ import updateMutation from '../../mutations/updateReview'
 import deleteMutation from '../../mutations/deleteReview'
 
 import { initArtistDetail, loadingArtistDetail, failedArtistDetail, setArtistDetail, addUserReview, selectUserReview, updateUserReview, deleteUserReview } from '../../actions/artistDetail'
+import { onUpdate, onDelete, onSave, handleUpdateChange, handleNewChange, handleModalNewShow, handleModalNewClose, handleModalUpdateShow, handleModalUpdateClose} from '../Reviews/Utils'
 
 import RaisedButton from 'material-ui/RaisedButton';
-import CustomForm from '../CustomComponent/CustomForm'
+import ReviewForm from '../Reviews/ReviewForm'
 import ReviewList from '../Reviews/ReviewList'
-
-import {handleUpdateChange, 
-    handleModalUpdateClose, 
-    onUpdate,
-    onDelete,
-    onSave,
-    commonValues} from '../Reviews/Utils'
 
 const gridStyle = {
    display: 'grid',
@@ -37,14 +31,16 @@ const actionsStyle = {
 class ArtistDetail extends Component {
     constructor(props){
         super(props);
+
         this.save = onSave.bind(this)
         this.update = onUpdate.bind(this)
         this.delete = onDelete.bind(this)
-
-        this.handleModalNewShow = this.handleModalNewShow.bind(this);
-        this.handleModalNewClose = this.handleModalNewClose.bind(this);
-        this.handleModalUpdateShow = this.handleModalUpdateShow.bind(this);
-        this.handleModalUpdateClose = this.handleModalUpdateClose.bind(this);
+        this.changeNew = handleNewChange.bind(this)
+        this.closeNew = handleModalNewClose.bind(this)
+        this.showNew = handleModalNewShow.bind(this)
+        this.changeUpdate = handleUpdateChange.bind(this)
+        this.showUpdate = handleModalUpdateShow.bind(this)
+        this.closeUpdate = handleModalUpdateClose.bind(this)
 
         this.state = {
             showModalNew: false,
@@ -68,45 +64,7 @@ class ArtistDetail extends Component {
         );
     }
 
-    handleChange(e){ 
-        switch(e.target.id) {
-            case 'body':
-                this.setState({ newReviewBody:e.target.value })
-                break;
-            case 'score':
-                this.setState({ newReviewScore:e.target.value })
-                break;
-        }
-    }
-
-
-    handleUpdateChange(e){
-        switch(e.target.id) {
-            case 'body':
-                this.setState({selected:{...this.state.selected, body:e.target.value}})
-                break;
-            case 'score':
-                this.setState({selected:{...this.state.selected, score:e.target.value}})
-                break;
-        }
-    }
-
-
-    handleModalNewClose() { this.setState({ showModalNew: false });}
-    
-    handleModalNewShow() { this.setState({ showModalNew: true });}
-
-    handleModalUpdateClose() { this.setState({ showModalUpdate: false });}
-    
-    handleModalUpdateShow(review){
-        if (review.user_id == this.props.userInfo.user_id){
-            this.props.selectUserReview(review);
-            this.setState({selected:review});
-            this.setState({ showModalUpdate: true });
-        } 
-    }
-    
-    checkEnableNewReview = (reviews) => {
+    checkEnableNewReview(reviews){
         for (var i = 0; i < reviews.length; i++) {
             if(reviews[i].user_id == this.props.userInfo.user_id){
                 this.setState({enabledButton: false});
@@ -126,8 +84,8 @@ class ArtistDetail extends Component {
                         <p>{this.props.artistDetail.artistDetail.description}</p>
                     </div>
                     <div style={actionsStyle}>{ enabledButton 
-                        ?  <RaisedButton label='New review' secondary={true} onClick={this.handleModalNewShow} />
-                        : <RaisedButton label='New review' secondary={true} onClick={this.handleModalNewShow} disabled/> }                               
+                        ?  <RaisedButton label='New review' secondary={true} onClick={(e) => this.showNew(this)} />
+                        : <RaisedButton label='New review' secondary={true} onClick={(e) => this.showNew(this)} disabled/> }                               
                     </div>    
                     <br />
                 </div>
@@ -136,38 +94,38 @@ class ArtistDetail extends Component {
                 
                 <div>
                     <ReviewList
-                            onReviewSelect={selectedReview =>this.handleModalUpdateShow(selectedReview)}
+                            onReviewSelect={selectedReview => this.showUpdate(selectedReview, this)}
                             reviews={this.props.artistDetail.artistDetail.reviews}
                             user={this.props.userInfo}
+                            match={this.props.match.url}
                     />
                 </div>
 
                 <form>
                     <div>
-                        <CustomForm 
+                        <ReviewForm 
                             onShow={this.state.showModalNew}
-                            onHide={this.handleModalNewClose}
+                            onHide={(e) => this.setState({ showModalNew: false })}
                             editable={true}
                             formValue={this.state.newReviewBody}
                             formScore={this.state.newReviewScore}
-                            onChange={(e)=>this.handleChange(e)}
+                            onChange={(e)=>this.changeNew(e, this)}
                             onClickSave={(e)=>this.save(e, this)}
-                            onClickClose={this.handleModalNewClose}/>
-
-                        <CustomForm
+                            onClickClose={(e) => this.closeNew(this)}
+                        />
+                        <ReviewForm
                             onShow={this.state.showModalUpdate}
-                            onHide={this.handleModalUpdateClose}
+                            onHide={(e) => this.closeUpdate(this)}
                             editable={true}
                             formValue={this.state.selected!==null?this.state.selected.body:''}
                             formScore={this.state.selected!==null?this.state.selected.score:''}
-                            onChange={(e)=>this.handleUpdateChange(e)}
+                            onChange={(e)=>this.changeUpdate(e, this)}
                             onClickDelete={(e)=>this.delete(e, this)}
-                            onClickUpdate={(e)=>this.update(e, this, this.props.updateReview)}
-                            onClickClose={this.handleModalUpdateClose}/>
-
+                            onClickUpdate={(e)=>this.update(e, this)}
+                            onClickClose={(e) => this.closeUpdate(this)}
+                        />
                     </div>
                 </form>
-                       
             </div>
         );
     }

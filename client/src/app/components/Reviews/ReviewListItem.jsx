@@ -9,6 +9,7 @@ const ReviewListItem = (props) => {
 	const review = props.review
 	const onReviewSelect = props.onReviewSelect
 	const belongsToUser = (userId == review.user_id)
+	const onUserProfile = props.match.includes('user')
 
 	const style = {
 	    objectFit: 'cover',
@@ -40,33 +41,6 @@ const ReviewListItem = (props) => {
 	    float:'left'
 	}
 
-	// const EditButton = () => {
-		// if (userId == review.user_id){
-		// 	return (
-		// 	<div>
-		// 		<button onClick={ () => onReviewSelect(review) }>
-		// 			edit
-		// 		</button>
-		// 	</div>
-		// 	)
-		// } else {
-
-		// }
-	// }
-
-// check path.. if contains user and user is current user id display user component for reviews
-// 
-
-//					<br />
-//                    { userId == review.user_id ? 
-//						<RaisedButton 
-//						onClick={ () => {if (userId == review.user_id) {onReviewSelect(review)}}}
-//						primary={true}
-//						label={'edit'}/> 
-//                    : 
-//                    	<p></p> 
-//                   	}
-
 	return (
 			<Paper
 				style={paperStyle} zDepth={1} 
@@ -75,7 +49,8 @@ const ReviewListItem = (props) => {
 				<div>
 				</div>
 				<div style={textStyle}>
-					{ review.author_display_name ? 
+				
+					{ !onUserProfile ? 
 						<div> 
 							<Link to={'/user/'+ review.user_id}>{review.author_display_name}</Link>
 	                        <img alt='meaningful text' style={style} src={review.author_profile_picture}/>
@@ -90,8 +65,8 @@ const ReviewListItem = (props) => {
 							<br />
 						</div>
 					}
-					{review.body}
 
+					{review.body}
 					<br />
 				</div>
 
@@ -100,7 +75,6 @@ const ReviewListItem = (props) => {
 				</div>
 
 				<div style={noteStyle}>
-
                     { belongsToUser ? 
 						<RaisedButton 
 							onClick={ () => onReviewSelect(review) }
@@ -110,8 +84,6 @@ const ReviewListItem = (props) => {
                     	<p></p> 
                    	}
 				</div>
-
-
 			</Paper>
 		)
 
