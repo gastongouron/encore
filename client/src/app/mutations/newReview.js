@@ -13,6 +13,8 @@ const newReviewMutation = (gql`
                 id
                 user_id
                 body
+                author_display_name
+                author_profile_picture
                 score
             }
             

@@ -34,7 +34,7 @@ const ArtistListItem = (props) => {
 					<p>{artist.description}</p>
 				</div>
 				<div style={noteStyle}>
-					{artist.score}
+					<h1>{Math.round( artist.score * 10 ) / 10}</h1>
 				</div>
 			</Paper>
 		)

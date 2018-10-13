@@ -59,6 +59,8 @@ class Artists extends Component {
             <div> { this.props.artists.loading ? <h1>Loading...</h1> : this.props.artists.error ? <h1>Error...</h1> : 
                     <div>
                         <SearchBar onSearchTermChange={this.artistSearch}/>
+                        <br />
+                        <br />
                         <ArtistList
                             onArtistSelect={selectedArtist => this.navigateTo({selectedArtist}) }
                             artists={this.state.artists}

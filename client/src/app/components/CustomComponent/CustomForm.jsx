@@ -16,7 +16,6 @@ const CustomForm = (props) => {
                             value={props.formValue ? props.formValue : ''}
                             onChange={props.onChange} />  
                     </FormGroup>
-
                     <FormGroup controlId="score">
                         <ControlLabel>Enter your score for this artist</ControlLabel>
                         <FormControl
@@ -30,15 +29,15 @@ const CustomForm = (props) => {
                     <div>
                     {props.onClickSave ? 
                     <div>
-                        <RaisedButton primary={true} onClick={props.onClickSave}>Save</RaisedButton>
-                        <RaisedButton onClick={props.onClickClose}>Close</RaisedButton>
+                        <RaisedButton label='Save' primary={true} onClick={props.onClickSave}/>
+                        <RaisedButton label='Close' onClick={props.onClickClose}/>
                     </div>
 					: 
 					props.onClickDelete ? 
 					<div>
-                        <RaisedButton primary={true} onClick={props.onClickDelete}>Delete</RaisedButton>
-                        <RaisedButton primary={true} onClick={props.onClickUpdate}>Update</RaisedButton>
-                        <RaisedButton onClick={props.onClickClose}>Close</RaisedButton>
+                        <RaisedButton label='Delete' secondary={true} onClick={props.onClickDelete}/>
+                        <RaisedButton label='Update' primary={true} onClick={props.onClickUpdate}/>
+                        <RaisedButton label='Close' onClick={props.onClickClose}/>
                     </div>
 
                     : undefined }

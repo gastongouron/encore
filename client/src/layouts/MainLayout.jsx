@@ -30,6 +30,12 @@ const MainContainer = styled.div`
   padding: 20px;
 `;
 
+const Main = styled.div`
+  background-color: #F1F1F1;
+  min-height: 100vh;
+  height: 100%;
+`;
+
 const Logo = styled(LogoIcon)`
   height: 32px !important;
   width: 32px !important;
@@ -112,7 +118,7 @@ class MainLayout extends Component {
   render() {
     const {currentUser, doLogout, children, location: {state: {notice} = {}}, muiTheme: {palette}} = this.props;
     return (
-      <div>
+      <Main>
         <MainAppBar
           style={{ background: 'grey', boxShadow: 'none', position: 'sticky', top: 0}}
           showMenuIconButton={false}
@@ -139,7 +145,7 @@ class MainLayout extends Component {
           {notice && <Notice>{notice}</Notice>}
           {children}
         </MainContainer>
-      </div>
+      </Main>
     );
   }
 }

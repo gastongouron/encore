@@ -160,8 +160,8 @@ class ArtistDetail extends Component {
                         <p>{this.props.artistDetail.artistDetail.description}</p>
                     </div>
                     <div style={actionsStyle}>{ enabledButton 
-                        ?  <RaisedButton secondary={true} onClick={this.handleModalNewShow} >New review</RaisedButton>
-                        : <RaisedButton secondary={true} onClick={this.handleModalNewShow} disabled>New review</RaisedButton> }                               
+                        ?  <RaisedButton label='New review' secondary={true} onClick={this.handleModalNewShow} />
+                        : <RaisedButton label='New review' secondary={true} onClick={this.handleModalNewShow} disabled/> }                               
                     </div>    
                     <br />
                 </div>

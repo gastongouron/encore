@@ -87,7 +87,9 @@ const ReviewListItem = (props) => {
 
 					: 	
 						<div>
-							<Link to={'/artists/'+ review.artist_id}>{review.artist_name}</Link>
+							<h1>
+								<Link to={'/artists/'+ review.artist_id}>{review.artist_name}</Link>
+							</h1>
 							<br />
 						</div>
 					}
@@ -97,15 +99,15 @@ const ReviewListItem = (props) => {
 				</div>
 
 				<div style={noteStyle}>
-					{review.score}
+					<h1>{review.score}</h1>
 				</div>
 
-				<div>
+				<div style={noteStyle}>
 
                     { belongsToUser ? 
 						<RaisedButton 
 							onClick={ () => onReviewSelect(review) }
-							primary={true}
+							default={true}
 							label={'edit'}/> 
                     : 
                     	<p></p> 
