@@ -6,11 +6,19 @@ import artistDetailQuery from '../../queries/ReviewsSchema'
 import newReviewMutation from '../../mutations/newReview'
 import updateMutation from '../../mutations/updateReview'
 import deleteMutation from '../../mutations/deleteReview'
-import { initArtistDetail, loadingArtistDetail, failedArtistDetail, setArtistDetail, addNewReview, selectReview, updateReview, deleteReview } from '../../actions/artistDetail'
+
+import { initArtistDetail, loadingArtistDetail, failedArtistDetail, setArtistDetail, addUserReview, selectUserReview, updateUserReview, deleteUserReview } from '../../actions/artistDetail'
 
 import RaisedButton from 'material-ui/RaisedButton';
 import CustomForm from '../CustomComponent/CustomForm'
 import ReviewList from '../Reviews/ReviewList'
+
+import {handleUpdateChange, 
+    handleModalUpdateClose, 
+    onUpdate,
+    onDelete,
+    onSave,
+    commonValues} from '../Reviews/Utils'
 
 const gridStyle = {
    display: 'grid',
@@ -27,13 +35,17 @@ const actionsStyle = {
 }
 
 class ArtistDetail extends Component {
-    static val1;
     constructor(props){
         super(props);
+        this.save = onSave.bind(this)
+        this.update = onUpdate.bind(this)
+        this.delete = onDelete.bind(this)
+
         this.handleModalNewShow = this.handleModalNewShow.bind(this);
         this.handleModalNewClose = this.handleModalNewClose.bind(this);
         this.handleModalUpdateShow = this.handleModalUpdateShow.bind(this);
         this.handleModalUpdateClose = this.handleModalUpdateClose.bind(this);
+
         this.state = {
             showModalNew: false,
             showModalUpdate: false,
@@ -88,7 +100,7 @@ class ArtistDetail extends Component {
     
     handleModalUpdateShow(review){
         if (review.user_id == this.props.userInfo.user_id){
-            this.props.selectReview(review);
+            this.props.selectUserReview(review);
             this.setState({selected:review});
             this.setState({ showModalUpdate: true });
         } 
@@ -100,52 +112,6 @@ class ArtistDetail extends Component {
                 this.setState({enabledButton: false});
             }
         }
-    }
-
-    onSave(e){        
-        this.setState({ showModalNew: false });
-        // if(ArtistDetail.val1===undefined||ArtistDetail.val1.trim()===''){
-        // } else {
-        this.props.client.mutate({mutation: newReviewMutation, variables: {user_id: this.props.userInfo.user_id, artist_id: this.props.match.params.id, body: this.state.newReviewBody, score: this.state.newReviewScore }}).then(
-            (res) => {
-                const newArr = res.data.newReview.review
-                this.props.addNewReview(newArr)
-                this.setState({enabledButton: false});},
-            (err) => { }
-        );
-        // }
-    }
-
-    onUpdate(e) {
-        this.setState({ showModalUpdate: false });
-        let {selected} = this.state;
-        const val = selected.body;
-        const score = selected.score;
-        if(val!=='' && score!==''){
-            this.props.client.mutate({mutation: updateMutation, variables: {id: selected.id, body:val, score:score }}).then(
-                (res) => {
-                    const updatedArr = res.data.editReview.review
-                    this.props.updateReview(updatedArr)
-                },
-                (err) => {
-
-                }
-            );
-
-        }else{
-            console.log('todo: handle validation')
-        }
-    }
-
-    onDelete(e) {
-        this.setState({ showModalUpdate: false });
-        let {selected} = this.state;
-        this.props.client.mutate({mutation: deleteMutation, variables: {id: selected.id}}).then(
-            (res) => {
-                this.props.deleteReview(selected)
-                this.setState({enabledButton: true})},
-            (err) => { }
-        );
     }
 
     render() {
@@ -185,7 +151,7 @@ class ArtistDetail extends Component {
                             formValue={this.state.newReviewBody}
                             formScore={this.state.newReviewScore}
                             onChange={(e)=>this.handleChange(e)}
-                            onClickSave={(e)=>this.onSave(e)}
+                            onClickSave={(e)=>this.save(e, this)}
                             onClickClose={this.handleModalNewClose}/>
 
                         <CustomForm
@@ -195,9 +161,10 @@ class ArtistDetail extends Component {
                             formValue={this.state.selected!==null?this.state.selected.body:''}
                             formScore={this.state.selected!==null?this.state.selected.score:''}
                             onChange={(e)=>this.handleUpdateChange(e)}
-                            onClickDelete={(e)=>this.onDelete(e)}
-                            onClickUpdate={(e)=>this.onUpdate(e)}
+                            onClickDelete={(e)=>this.delete(e, this)}
+                            onClickUpdate={(e)=>this.update(e, this, this.props.updateReview)}
                             onClickClose={this.handleModalUpdateClose}/>
+
                     </div>
                 </form>
                        
@@ -219,10 +186,10 @@ const mapDispatchToProps = dispatch => {
         loadingArtistDetail: () => dispatch(loadingArtistDetail()),
         failedArtistDetail: (message) => dispatch(failedArtistDetail(message)),
         setArtistDetail: (artistDetail) => dispatch(setArtistDetail(artistDetail)),
-        addNewReview: (newReview) => dispatch(addNewReview(newReview)),
-        selectReview: (review) =>  dispatch(selectReview(review)),
-        updateReview: (review) => dispatch(updateReview(review)),
-        deleteReview: (review) => dispatch(deleteReview(review))
+        addUserReview: (newReview) => dispatch(addUserReview(newReview)),
+        selectUserReview: (review) => dispatch(selectUserReview(review)),
+        updateUserReview: (review) => dispatch(updateUserReview(review)),
+        deleteUserReview: (review) => dispatch(deleteUserReview(review))
     };
 };
 

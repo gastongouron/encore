@@ -11,6 +11,8 @@ import Policy       from '../app/PrivatePolicy';
 import Profile      from './components/Profile/UserProfile';
 import ReviewEdit from './components/Reviews/ReviewEdit';
 
+
+// <PrivateRoute   exact path="/reviews/:id" layout={MainLayout} component={ReviewEdit} />
 const AuthNotFound = () => <MainLayout><NotFound/></MainLayout>;
 
 const Routes = () => {
@@ -25,6 +27,7 @@ const Routes = () => {
       <PrivateRoute   exact path="/artists/:id" layout={MainLayout} component={ArtistDetail} />
       <PrivateRoute   exact path="/user/:id"    layout={MainLayout} component={Profile} />
       <PrivateRoute   exact path="/reviews/:id" layout={MainLayout} component={ReviewEdit} />
+
 
       <WithMainLayout component={NotFound} />
 

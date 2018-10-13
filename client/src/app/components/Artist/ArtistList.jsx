@@ -3,12 +3,12 @@ import ArtistItem from './ArtistListItem'
 
 const Artist = (props) => {
 
-	const artistItems = props.artists.map((artist) => {
+	const artistItems = props.artists.map((artist, index) => {
 
 		return (
 			<ArtistItem 
 				onArtistSelect={props.onArtistSelect}
-				key={artist.name}
+				key={index}
 				artist={artist} 
 			/>
 		) 

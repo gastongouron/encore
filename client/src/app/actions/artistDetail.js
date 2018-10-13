@@ -23,27 +23,27 @@ export function initArtistDetail() {
       artistDetail
     }
   }
-  export function addNewReview(newReview){
+  export function addUserReview(newReview){
     return {
       type: 'ADD_NEW_REVIEW',
       newReview
     }
   }
 
-  export function selectReview(review){
+  export function selectUserReview(review){
     return {
       type: 'SELECT_REVIEW',
       review
     }
   }
 
-  export function updateReview(review) {
+  export function updateUserReview(review) {
     return {
       type: 'UPDATE_REVIEW',
       review
     }
   }
-  export function deleteReview(review){
+  export function deleteUserReview(review){
     return {
       type: 'DELETE_REVIEW',
       review

@@ -29,10 +29,11 @@ const style = {
 class Profile extends Component {
     constructor(props){
         super(props);
+
         this.gotoReviewDetail = this.gotoReviewDetail.bind(this);
 
         this.state = {
-           seletedReview: null,
+           selected: null,
            enabledButton: true,
           }
     }
@@ -61,7 +62,6 @@ class Profile extends Component {
     gotoReviewDetail(review){
         if (review.user_id == this.props.userInfo.user_id){
             this.props.selectUserReview(review);
-
             let id = review.id
             this.props.history.push(`/reviews/${id}`)
         }
@@ -92,7 +92,7 @@ class Profile extends Component {
 
                                 <div>
                                     <ReviewList
-                                        onReviewSelect={selectedReview =>this.gotoReviewDetail(selectedReview)}
+                                        onReviewSelect={selected =>this.gotoReviewDetail(selected)}
                                         reviews={this.props.reviews.reviews}
                                         user={this.props.userInfo}/>
                                 </div>

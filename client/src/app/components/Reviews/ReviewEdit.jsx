@@ -2,68 +2,32 @@ import { connect } from 'react-redux'
 import { withApollo } from 'react-apollo'
 import React, { Component } from 'react';
 import CustomForm from '../CustomComponent/CustomForm'
-import updateMutation from '../../mutations/updateReview'
-import deleteMutation from '../../mutations/deleteReview'
+
 import { 
     selectUserReview, 
     updateUserReview, 
     deleteUserReview} from '../../actions/reviews'
 
+import {handleUpdateChange, 
+    handleModalUpdateClose, 
+    onUpdate,
+    onDelete,
+    commonValues} from './Utils'
+
 class ReviewEdit extends Component {
 	
 	constructor(props){
 		super(props);
-        this.handleModalUpdateClose = this.handleModalUpdateClose.bind(this);
-        this.onUpdate = this.onUpdate.bind(this);
+        this.close = handleModalUpdateClose.bind(this)
+        this.change = handleUpdateChange.bind(this)
+        this.update = onUpdate.bind(this);
+        this.delete = onDelete.bind(this)
+
 		this.state = {
             showModalUpdate: false,
-            selectedReview: this.props.selectedUserReview
+            selected: this.props.selectedUserReview
         };
 	}
-
-	handleUpdateChange(e){
-        switch(e.target.id) {
-            case 'body':
-                this.setState({selectedReview:{...this.state.selectedReview, body:e.target.value }})
-                break;
-            case 'score':
-                this.setState({selectedReview:{...this.state.selectedReview, score:e.target.value }})
-                break;
-        }
-	}
-
-	handleModalUpdateClose(e) {
-        this.props.history.goBack()
-	}
-
-	onUpdate(e) {
-        let {selectedReview} = this.state;
-        const val = selectedReview.body;
-        const score = selectedReview.score;
-        if(val!==''){
-            this.props.client.mutate({mutation: updateMutation, variables: {id: selectedReview.id, body:val, score:score }}).then(
-                (res) => {
-                    const updatedArr = res.data.editReview.review
-                    this.props.updateUserReview(updatedArr)
-                    this.props.history.goBack()
-                },
-                (err) => {
-
-                }
-            );
-        }
-    }
-
-    onDelete(e) {
-        let {selectedReview} = this.state;
-        this.props.client.mutate({mutation: deleteMutation, variables: {id: selectedReview.id}}).then(
-            (res) => {
-                this.props.deleteUserReview(selectedReview)
-                this.props.history.goBack()
-            },
-            (err) => { }
-        );
-    }
 
 	render(){
 		return(
@@ -71,13 +35,13 @@ class ReviewEdit extends Component {
                 <form>
                     <CustomForm
                         onShow={true}
-                        editable={this.props.userInfo.user_id == this.state.selectedReview.user_id?true:false}
-                        formValue={this.state.selectedReview!==null?this.state.selectedReview.body:''}
-                        formScore={this.state.selectedReview!==null?this.state.selectedReview.score:''}
-                        onChange={(e)=>this.handleUpdateChange(e)}
-                        onClickDelete={(e)=>this.onDelete(e)}
-                        onClickUpdate={(e)=>this.onUpdate(e)}
-                        onClickClose={this.handleModalUpdateClose}/>
+                        editable={this.props.userInfo.user_id == this.state.selected.user_id?true:false}
+                        formValue={this.state.selected!==null?this.state.selected.body:''}
+                        formScore={this.state.selected!==null?this.state.selected.score:''}
+                        onChange={(e)=>this.change(e, this)}
+                        onClickDelete={(e)=>this.delete(e, this)}
+                        onClickUpdate={(e)=>this.update(e, this)}
+                        onClickClose={(e)=>this.close(e, this)}/>
                 </form>
 			</div>
 		);

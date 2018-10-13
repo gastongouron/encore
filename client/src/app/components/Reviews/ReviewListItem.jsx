@@ -10,9 +10,6 @@ const ReviewListItem = (props) => {
 	const onReviewSelect = props.onReviewSelect
 	const belongsToUser = (userId == review.user_id)
 
-	console.log('user ID', userId)
-	console.log('review', review.user_id)
-
 	const style = {
 	    objectFit: 'cover',
 	    width: 20,

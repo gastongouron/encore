@@ -6,6 +6,7 @@ import {
     loadingArtists, 
     failedArtists, 
     setArtists } from '../../actions/artists'
+
 import _ from 'underscore';
 import artistListQuery from '../../queries/ArtistSchema'
 import ArtistList from './ArtistList'
@@ -23,8 +24,8 @@ class Artists extends Component {
     }
 
 	componentWillMount(){
-        if (this.props.artists.artists.length > 0)
-            return;
+        // if (this.props.artists.artists.length > 0)
+        //     return;
         this.props.loadingArtists();
         this.props.client.query({query: artistListQuery, fetchPolicy: 'network-only'}).then(
             (res) => {
