@@ -20,8 +20,8 @@ end
 artists = []
 30.times do 
 	artists << Artist.create(
-		name: Faker::Artist.unique.name,
-		description: Faker::GreekPhilosophers.quote
+		name: Faker::Music.band,
+		description: Faker::Lorem.paragraph(rand(1..4))
 	)
 	puts "-> artist_#{aid} has been created"
 	aid += 1
@@ -30,7 +30,7 @@ end
 artists.each do |a| 
 	User.where(id: User.pluck(:id).sample(3)).each do |u|
 		Review.create(
-			body: Faker::Hacker.say_something_smart, 
+			body: Faker::Lorem.paragraph(rand(3..7)), 
 			artist_id: a.id, 
 			user_id: u.id,
 			score: rand(1..100)
