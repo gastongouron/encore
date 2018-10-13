@@ -91,9 +91,7 @@ class ArtistDetail extends Component {
             this.props.selectReview(review);
             this.setState({selected:review});
             this.setState({ showModalUpdate: true });
-        }
-        
-        
+        } 
     }
     
     checkEnableNewReview = (reviews) => {
@@ -106,28 +104,24 @@ class ArtistDetail extends Component {
 
     onSave(e){        
         this.setState({ showModalNew: false });
-        console.log(this.state)
         // if(ArtistDetail.val1===undefined||ArtistDetail.val1.trim()===''){
-
         // } else {
-            this.props.client.mutate({mutation: newReviewMutation, variables: {user_id: this.props.userInfo.user_id, artist_id: this.props.match.params.id, body: this.state.newReviewBody, score: this.state.newReviewScore }}).then(
-                (res) => {
-                    const newArr = res.data.newReview.review
-                    this.props.addNewReview(newArr)
-                    this.setState({enabledButton: false});},
-                (err) => { }
-            );
+        this.props.client.mutate({mutation: newReviewMutation, variables: {user_id: this.props.userInfo.user_id, artist_id: this.props.match.params.id, body: this.state.newReviewBody, score: this.state.newReviewScore }}).then(
+            (res) => {
+                const newArr = res.data.newReview.review
+                this.props.addNewReview(newArr)
+                this.setState({enabledButton: false});},
+            (err) => { }
+        );
         // }
     }
 
     onUpdate(e) {
         this.setState({ showModalUpdate: false });
         let {selected} = this.state;
-        console.log(selected)
-        console.log('UPDATINGGGGG')
         const val = selected.body;
         const score = selected.score;
-        if(val!==''){
+        if(val!=='' && score!==''){
             this.props.client.mutate({mutation: updateMutation, variables: {id: selected.id, body:val, score:score }}).then(
                 (res) => {
                     const updatedArr = res.data.editReview.review
@@ -137,6 +131,9 @@ class ArtistDetail extends Component {
 
                 }
             );
+
+        }else{
+            console.log('todo: handle validation')
         }
     }
 
@@ -159,8 +156,8 @@ class ArtistDetail extends Component {
 
                 <div style={gridStyle}>    
                     <div style={detailStyle}>
-                        <h2>{this.props.artistDetail.artistDetail.name}</h2>
-                        <label>{this.props.artistDetail.artistDetail.description}</label>
+                        <h1>{this.props.artistDetail.artistDetail.name}</h1>
+                        <p>{this.props.artistDetail.artistDetail.description}</p>
                     </div>
                     <div style={actionsStyle}>{ enabledButton 
                         ?  <RaisedButton secondary={true} onClick={this.handleModalNewShow} >New review</RaisedButton>
@@ -168,38 +165,41 @@ class ArtistDetail extends Component {
                     </div>    
                     <br />
                 </div>
-            } 
+                
+                } 
+                
                 <div>
                     <ReviewList
                             onReviewSelect={selectedReview =>this.handleModalUpdateShow(selectedReview)}
                             reviews={this.props.artistDetail.artistDetail.reviews}
+                            user={this.props.userInfo}
                     />
                 </div>
 
                 <form>
-                        <div>
-                            <CustomForm 
-                                onShow={this.state.showModalNew}
-                                onHide={this.handleModalNewClose}
-                                editable={true}
-                                formValue={this.state.newReviewBody}
-                                formScore={this.state.newReviewScore}
-                                onChange={(e)=>this.handleChange(e)}
-                                onClickSave={(e)=>this.onSave(e)}
-                                onClickClose={this.handleModalNewClose}/>
+                    <div>
+                        <CustomForm 
+                            onShow={this.state.showModalNew}
+                            onHide={this.handleModalNewClose}
+                            editable={true}
+                            formValue={this.state.newReviewBody}
+                            formScore={this.state.newReviewScore}
+                            onChange={(e)=>this.handleChange(e)}
+                            onClickSave={(e)=>this.onSave(e)}
+                            onClickClose={this.handleModalNewClose}/>
 
-                            <CustomForm
-                                onShow={this.state.showModalUpdate}
-                                onHide={this.handleModalUpdateClose}
-                                editable={true}
-                                formValue={this.state.selected!==null?this.state.selected.body:''}
-                                formScore={this.state.selected!==null?this.state.selected.score:''}
-                                onChange={(e)=>this.handleUpdateChange(e)}
-                                onClickDelete={(e)=>this.onDelete(e)}
-                                onClickUpdate={(e)=>this.onUpdate(e)}
-                                onClickClose={this.handleModalUpdateClose}/>
-                        </div>
-                    </form>
+                        <CustomForm
+                            onShow={this.state.showModalUpdate}
+                            onHide={this.handleModalUpdateClose}
+                            editable={true}
+                            formValue={this.state.selected!==null?this.state.selected.body:''}
+                            formScore={this.state.selected!==null?this.state.selected.score:''}
+                            onChange={(e)=>this.handleUpdateChange(e)}
+                            onClickDelete={(e)=>this.onDelete(e)}
+                            onClickUpdate={(e)=>this.onUpdate(e)}
+                            onClickClose={this.handleModalUpdateClose}/>
+                    </div>
+                </form>
                        
             </div>
         );

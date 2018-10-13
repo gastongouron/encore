@@ -29,9 +29,9 @@ const ArtistListItem = (props) => {
 				onClick={ () => onArtistSelect(artist) } 
 				className="">
 				<div style={textStyle}>
-					<b>{artist.name}</b>
+					<h1>{artist.name}</h1>
 					<br />
-					{artist.description}
+					<p>{artist.description}</p>
 				</div>
 				<div style={noteStyle}>
 					{artist.score}

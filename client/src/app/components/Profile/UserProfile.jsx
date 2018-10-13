@@ -69,6 +69,7 @@ class Profile extends Component {
 
     render() {
         const user = this.onCurrentUserProfile() ? this.props.userInfo : this.props.userProfile.userProfile
+        console.log('reviews in user profile', this.props.reviews.reviews)
         return (
             <div>
             {this.state.loading ? <h1>Loading...</h1> : this.props.reviews.error ? <h1>Error...</h1> :
@@ -83,11 +84,17 @@ class Profile extends Component {
                     </div>
                     <div>
                             <div>
-                                <h1>Reviews</h1>
+                                {this.onCurrentUserProfile() ? 
+                                    <h1>Your Reviews</h1>    
+                                :
+                                    <h1>{user.first_name + "'s Reviews"}</h1>                                        
+                                }
+
                                 <div>
                                     <ReviewList
                                         onReviewSelect={selectedReview =>this.gotoReviewDetail(selectedReview)}
-                                        reviews={this.props.reviews.reviews}/>
+                                        reviews={this.props.reviews.reviews}
+                                        user={this.props.userInfo}/>
                                 </div>
                             </div>
                     </div>
