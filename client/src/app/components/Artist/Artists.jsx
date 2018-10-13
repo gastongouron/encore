@@ -1,16 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from "react-redux";
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { withApollo } from 'react-apollo'
-import { 
-    initArtists, 
-    loadingArtists, 
-    failedArtists, 
-    setArtists } from '../../actions/artists'
-
-import _ from 'underscore';
+import { initArtists, loadingArtists, failedArtists, setArtists } from '../../actions/artists'
 import artistListQuery from '../../queries/ArtistSchema'
 import ArtistList from './ArtistList'
 import SearchBar from './ArtistSearchBar'
+import _ from 'underscore'
 
 class Artists extends Component {
 
@@ -30,8 +25,9 @@ class Artists extends Component {
         this.props.client.query({query: artistListQuery, fetchPolicy: 'network-only'}).then(
             (res) => {
                 this.props.setArtists(res.data.artists);
-                this.setState({artists: res.data.artists})}
-           ,(err) => {
+                this.setState({artists: res.data.artists})
+            },
+            (err) => {
                 this.props.failedArtists(err.data);
             }
         );

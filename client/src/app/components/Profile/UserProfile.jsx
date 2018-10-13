@@ -56,7 +56,6 @@ class Profile extends Component {
 
     render() {
         const user = this.onCurrentUserProfile() ? this.props.userInfo : this.props.userProfile.userProfile
-        console.log('reviews in user profile', this.props.reviews.reviews)
         return (
             <div>
             {this.state.loading ? <h1>Loading...</h1> : this.props.reviews.error ? <h1>Error...</h1> :

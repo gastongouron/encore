@@ -8,12 +8,7 @@ import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import LogoIcon from 'material-ui/svg-icons/action/lightbulb-outline';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {Notice} from '../shared';
-
-
 import IconButton from 'material-ui/IconButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-
-
 
 const MainAppBar = styled(AppBar)`
   &:hover {
@@ -61,7 +56,6 @@ class UserMenuItem extends Component {
 
   render() {
     const {currentUser, logout, textColor} = this.props;
-    console.log(currentUser)
     if (currentUser && currentUser.isLoggedIn) {
       return (
         <div>
