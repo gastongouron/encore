@@ -19,20 +19,29 @@ class ReviewEdit extends Component {
             showModalUpdate: false,
             selectedReview: this.props.selectedUserReview
         };
-
 	}
+
 	handleUpdateChange(e){
-        this.setState({selectedReview:{...this.state.selectedReview, body:e.target.value}})
-		}
+        switch(e.target.id) {
+            case 'body':
+                this.setState({selectedReview:{...this.state.selectedReview, body:e.target.value }})
+                break;
+            case 'score':
+                this.setState({selectedReview:{...this.state.selectedReview, score:e.target.value }})
+                break;
+        }
+	}
+
 	handleModalUpdateClose(e) {
         this.props.history.goBack()
+	}
 
-		}
 	onUpdate(e) {
         let {selectedReview} = this.state;
         const val = selectedReview.body;
+        const score = selectedReview.score;
         if(val!==''){
-            this.props.client.mutate({mutation: updateMutation, variables: {id: selectedReview.id, body:val}}).then(
+            this.props.client.mutate({mutation: updateMutation, variables: {id: selectedReview.id, body:val, score:score }}).then(
                 (res) => {
                     const updatedArr = res.data.editReview.review
                     this.props.updateUserReview(updatedArr)
@@ -47,7 +56,6 @@ class ReviewEdit extends Component {
 
     onDelete(e) {
         let {selectedReview} = this.state;
-        
         this.props.client.mutate({mutation: deleteMutation, variables: {id: selectedReview.id}}).then(
             (res) => {
                 this.props.deleteUserReview(selectedReview)
@@ -56,6 +64,7 @@ class ReviewEdit extends Component {
             (err) => { }
         );
     }
+
 	render(){
 		return(
 			<div>
@@ -64,13 +73,13 @@ class ReviewEdit extends Component {
                         onShow={true}
                         editable={this.props.userInfo.user_id == this.state.selectedReview.user_id?true:false}
                         formValue={this.state.selectedReview!==null?this.state.selectedReview.body:''}
+                        formScore={this.state.selectedReview!==null?this.state.selectedReview.score:''}
                         onChange={(e)=>this.handleUpdateChange(e)}
                         onClickDelete={(e)=>this.onDelete(e)}
                         onClickUpdate={(e)=>this.onUpdate(e)}
                         onClickClose={this.handleModalUpdateClose}/>
                 </form>
 			</div>
-			
 		);
 	}
 }

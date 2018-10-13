@@ -4,6 +4,7 @@ Mutations::EditReviewMutation = GraphQL::Relay::Mutation.define do
 
   input_field :id, !types.ID
   input_field :body, !types.String
+  input_field :score, !types.String
 
   return_field :review, Types::ReviewType
 

@@ -6,7 +6,7 @@ import artistDetailQuery from '../../queries/ReviewsSchema'
 import newReviewMutation from '../../mutations/newReview'
 import updateMutation from '../../mutations/updateReview'
 import deleteMutation from '../../mutations/deleteReview'
-import { initArtistDetail, loadingArtistDetail, failedArtistDetail, setArtistDetail, addNewReview,selectReview, updateReview, deleteReview } from '../../actions/artistDetail'
+import { initArtistDetail, loadingArtistDetail, failedArtistDetail, setArtistDetail, addNewReview, selectReview, updateReview, deleteReview } from '../../actions/artistDetail'
 
 import RaisedButton from 'material-ui/RaisedButton';
 import CustomForm from '../CustomComponent/CustomForm'
@@ -39,7 +39,8 @@ class ArtistDetail extends Component {
             showModalUpdate: false,
             enabledButton: true,
             selected:null,
-            newReviewBody:''
+            newReviewBody:'',
+            newReviewScore:''
         };
     };
     
@@ -56,11 +57,28 @@ class ArtistDetail extends Component {
     }
 
     handleChange(e){ 
-        ArtistDetail.val1 = e.target.value; 
-        this.setState({newReviewBody: e.target.value})
+        switch(e.target.id) {
+            case 'body':
+                this.setState({ newReviewBody:e.target.value })
+                break;
+            case 'score':
+                this.setState({ newReviewScore:e.target.value })
+                break;
+        }
     }
 
-    handleUpdateChange(e){ this.setState({selected:{...this.state.selected, body:e.target.value}}) }
+
+    handleUpdateChange(e){
+        switch(e.target.id) {
+            case 'body':
+                this.setState({selected:{...this.state.selected, body:e.target.value}})
+                break;
+            case 'score':
+                this.setState({selected:{...this.state.selected, score:e.target.value}})
+                break;
+        }
+    }
+
 
     handleModalNewClose() { this.setState({ showModalNew: false });}
     
@@ -88,27 +106,33 @@ class ArtistDetail extends Component {
 
     onSave(e){        
         this.setState({ showModalNew: false });
-        if(ArtistDetail.val1===undefined||ArtistDetail.val1.trim()===''){
-        } else {
-            this.props.client.mutate({mutation: newReviewMutation, variables: {user_id: this.props.userInfo.user_id, artist_id: this.props.match.params.id, body: ArtistDetail.val1}}).then(
+        console.log(this.state)
+        // if(ArtistDetail.val1===undefined||ArtistDetail.val1.trim()===''){
+
+        // } else {
+            this.props.client.mutate({mutation: newReviewMutation, variables: {user_id: this.props.userInfo.user_id, artist_id: this.props.match.params.id, body: this.state.newReviewBody, score: this.state.newReviewScore }}).then(
                 (res) => {
                     const newArr = res.data.newReview.review
                     this.props.addNewReview(newArr)
                     this.setState({enabledButton: false});},
                 (err) => { }
             );
-        }
+        // }
     }
 
     onUpdate(e) {
         this.setState({ showModalUpdate: false });
         let {selected} = this.state;
+        console.log(selected)
+        console.log('UPDATINGGGGG')
         const val = selected.body;
+        const score = selected.score;
         if(val!==''){
-            this.props.client.mutate({mutation: updateMutation, variables: {id: selected.id, body:val}}).then(
+            this.props.client.mutate({mutation: updateMutation, variables: {id: selected.id, body:val, score:score }}).then(
                 (res) => {
                     const updatedArr = res.data.editReview.review
-                    this.props.updateReview(updatedArr)},
+                    this.props.updateReview(updatedArr)
+                },
                 (err) => {
 
                 }
@@ -126,6 +150,7 @@ class ArtistDetail extends Component {
             (err) => { }
         );
     }
+
     render() {
         const {enabledButton} = this.state
         return (
@@ -158,6 +183,7 @@ class ArtistDetail extends Component {
                                 onHide={this.handleModalNewClose}
                                 editable={true}
                                 formValue={this.state.newReviewBody}
+                                formScore={this.state.newReviewScore}
                                 onChange={(e)=>this.handleChange(e)}
                                 onClickSave={(e)=>this.onSave(e)}
                                 onClickClose={this.handleModalNewClose}/>
@@ -167,6 +193,7 @@ class ArtistDetail extends Component {
                                 onHide={this.handleModalUpdateClose}
                                 editable={true}
                                 formValue={this.state.selected!==null?this.state.selected.body:''}
+                                formScore={this.state.selected!==null?this.state.selected.score:''}
                                 onChange={(e)=>this.handleUpdateChange(e)}
                                 onClickDelete={(e)=>this.onDelete(e)}
                                 onClickUpdate={(e)=>this.onUpdate(e)}

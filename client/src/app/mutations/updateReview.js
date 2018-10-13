@@ -1,10 +1,11 @@
 import gql from 'graphql-tag';
 
 const updateMutation = (gql`
-    mutation updateMutation($id: ID!, $body: String!) {
+    mutation updateMutation($id: ID!, $body: String!, $score: String!) {
         editReview(input: {
             id: $id,
-            body: $body
+            body: $body,
+            score: $score
         })
         {
             review{

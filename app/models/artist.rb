@@ -4,8 +4,8 @@ class Artist < ApplicationRecord
 
 	def score
 		scores = []
-		Review.where(id: self.id).each{ |r| scores << r.score }
-		scores.empty? ? 0 : scores.inject{ |sum, el| sum + el }.to_f / scores.size
+		Review.where(artist_id: self.id).each{ |r| scores << r.score }
+		score = scores.empty? ? 0 : scores.inject{ |sum, el| sum + el }.to_f / scores.size
 	end
 
 end
