@@ -6,24 +6,7 @@ import artistListQuery from '../../queries/ArtistSchema'
 import artistSearchQuery from '../../queries/ArtistSearch'
 import ArtistList from './ArtistList'
 import SearchBar from './ArtistSearchBar'
-import Loader from 'react-loader-spinner'
-// import _ from 'underscore'
-
-const loaderContainer = {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    display: 'flex',
-    alignItems: 'center',
-    overflow: 'auto'
-}
-
-const loader = {
-    margin: 'auto', 
-    maxHeight: '100%'
-}
+import EncoreLoader from '../EncoreLoader'
 
 class Artists extends Component {
 
@@ -79,10 +62,7 @@ class Artists extends Component {
 
 
     scrollFetch(first=null, skip=null) {
-        console.log('term?')
-        console.log(this.state.searchTerm)
         const variables = this.state.searchTerm ? {input: this.state.searchTerm.toLowerCase(), first:first, skip:skip } : {first:first, skip:skip } 
-
         this.props.client.query({query: artistSearchQuery, fetchPolicy: 'network-only', variables: variables}).then(
             (res) => {
                 this.setState({artists: this.state.artists.concat(res.data.allArtists)});
@@ -98,16 +78,7 @@ class Artists extends Component {
         return (
             <div> { this.props.artists.loading 
                 ? 
-                    <div style={loaderContainer}>
-                        <div style={loader}>
-                            <Loader 
-                               type="RevolvingDot"
-                               color="#283593"
-                               height="50"   
-                               width="50"
-                            />
-                        </div>
-                  </div>
+                    <EncoreLoader />
 
                 : this.props.artists.error ? <h1>Error...</h1> : 
                     <div>

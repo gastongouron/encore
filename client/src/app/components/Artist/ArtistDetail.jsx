@@ -14,6 +14,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import ReviewForm from '../Reviews/ReviewForm'
 import ReviewList from '../Reviews/ReviewList'
 
+import EncoreLoader from '../EncoreLoader'
+
 const gridStyle = {
    display: 'grid',
 }
@@ -26,6 +28,22 @@ const detailStyle = {
 const actionsStyle = {
     gridColumn: 2,
     textAlign: 'right',
+}
+
+const loaderContainer = {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    display: 'flex',
+    alignItems: 'center',
+    overflow: 'auto'
+}
+
+const loader = {
+    margin: 'auto', 
+    maxHeight: '100%'
 }
 
 class ArtistDetail extends Component {
@@ -84,64 +102,74 @@ class ArtistDetail extends Component {
         const {enabledButton} = this.state
         return (
             <div>
-                {this.props.artistDetail.loading ? <hi>Loading...</hi> : this.props.artistDetail.error ? <h1>Error...</h1> :
+                {this.props.artistDetail.loading 
 
-                <div style={gridStyle}>    
-                    <div style={detailStyle}>
-                        <h1>{this.props.artistDetail.artistDetail.name}</h1>
-                        <p>{this.props.artistDetail.artistDetail.description}</p>
-                    </div>
-                    <div style={actionsStyle}>
-                    { this.isConnected() ? 
-                        <div>{ enabledButton 
-                            ? <RaisedButton label='New review' secondary={true} onClick={(e) => this.showNew(this)} />
-                            : <RaisedButton label='New review' secondary={true} onClick={(e) => this.showNew(this)} disabled/> }                               
+                ? 
+                    <EncoreLoader />
+                : 
+                    this.props.artistDetail.error 
+                ? 
+                    <h1>Error...</h1> 
+                :
+                <div>
+                    <div style={gridStyle}>    
+                        <div style={detailStyle}>
+                            <h1>{this.props.artistDetail.artistDetail.name}</h1>
+                            <p>{this.props.artistDetail.artistDetail.description}</p>
                         </div>
-                    :
+                        <div style={actionsStyle}>
+                        { this.isConnected() ? 
+                            <div>{ enabledButton 
+                                ? <RaisedButton label='New review' secondary={true} onClick={(e) => this.showNew(this)} />
+                                : <RaisedButton label='New review' secondary={true} onClick={(e) => this.showNew(this)} disabled/> }                               
+                            </div>
+                        :
+                            <div>
+                                <RaisedButton label='Wanna leave a review ?' primary={true} onClick={() => this.props.history.push('/users/getstarted') } />
+                            </div>
+                        }                        
+                        </div>
+                        <br />
+                    </div>
+                    
+
+                    <div>
+                        <ReviewList
+                                onReviewSelect={selectedReview => this.showUpdate(selectedReview, this)}
+                                reviews={this.props.artistDetail.artistDetail.reviews}
+                                user={this.props.userInfo}
+                                match={this.props.match.url}
+                        />
+                    </div>
+
+                    <form>
                         <div>
-                            <RaisedButton label='Wanna leave a review ?' primary={true} onClick={() => this.props.history.push('/users/getstarted') } />
+                            <ReviewForm 
+                                onShow={this.state.showModalNew}
+                                onHide={(e) => this.closeNew(this)}
+                                editable={true}
+                                formValue={this.state.newReviewBody}
+                                formScore={this.state.newReviewScore}
+                                onChange={(e)=>this.changeNew(e, this)}
+                                onClickSave={(e)=>this.save(e, this)}
+                                onClickClose={(e) => this.closeNew(this)}
+                            />
+                            <ReviewForm
+                                onShow={this.state.showModalUpdate}
+                                onHide={(e) => this.closeUpdate(this)}
+                                editable={true}
+                                formValue={this.state.selected!==null?this.state.selected.body:''}
+                                formScore={this.state.selected!==null?this.state.selected.score:''}
+                                onChange={(e)=>this.changeUpdate(e, this)}
+                                onClickDelete={(e)=>this.delete(e, this)}
+                                onClickUpdate={(e)=>this.update(e, this)}
+                                onClickClose={(e) => this.closeUpdate(this)}
+                            />
                         </div>
-                    }                        
-                    </div>
-                    <br />
+                    </form>
                 </div>
-                
                 } 
                 
-                <div>
-                    <ReviewList
-                            onReviewSelect={selectedReview => this.showUpdate(selectedReview, this)}
-                            reviews={this.props.artistDetail.artistDetail.reviews}
-                            user={this.props.userInfo}
-                            match={this.props.match.url}
-                    />
-                </div>
-
-                <form>
-                    <div>
-                        <ReviewForm 
-                            onShow={this.state.showModalNew}
-                            onHide={(e) => this.closeNew(this)}
-                            editable={true}
-                            formValue={this.state.newReviewBody}
-                            formScore={this.state.newReviewScore}
-                            onChange={(e)=>this.changeNew(e, this)}
-                            onClickSave={(e)=>this.save(e, this)}
-                            onClickClose={(e) => this.closeNew(this)}
-                        />
-                        <ReviewForm
-                            onShow={this.state.showModalUpdate}
-                            onHide={(e) => this.closeUpdate(this)}
-                            editable={true}
-                            formValue={this.state.selected!==null?this.state.selected.body:''}
-                            formScore={this.state.selected!==null?this.state.selected.score:''}
-                            onChange={(e)=>this.changeUpdate(e, this)}
-                            onClickDelete={(e)=>this.delete(e, this)}
-                            onClickUpdate={(e)=>this.update(e, this)}
-                            onClickClose={(e) => this.closeUpdate(this)}
-                        />
-                    </div>
-                </form>
             </div>
         );
     }
