@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withApollo } from 'react-apollo'
 import { initArtists, loadingArtists, failedArtists, setArtists } from '../../actions/artists'
-import artistListQuery from '../../queries/ArtistSchema'
+// import artistListQuery from '../../queries/ArtistSchema'
 import artistSearchQuery from '../../queries/ArtistSearch'
 import ArtistList from './ArtistList'
 import SearchBar from './ArtistSearchBar'
@@ -32,8 +32,6 @@ class Artists extends Component {
             (res) => {
                 console.log('in res')
                 console.log(res)
-                // this.props.setArtists(res.data.artists);
-                // this.setState({artists: res.data.artists})
                 this.props.setArtists(res.data.allArtists);
                 this.setState({artists: res.data.allArtists})
             },
