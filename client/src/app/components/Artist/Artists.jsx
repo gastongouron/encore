@@ -5,7 +5,24 @@ import { initArtists, loadingArtists, failedArtists, setArtists } from '../../ac
 import artistListQuery from '../../queries/ArtistSchema'
 import ArtistList from './ArtistList'
 import SearchBar from './ArtistSearchBar'
+import Loader from 'react-loader-spinner'
 import _ from 'underscore'
+
+const loaderContainer = {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    display: 'flex',
+    alignItems: 'center',
+    overflow: 'auto'
+}
+
+const loader = {
+    margin: 'auto', 
+    maxHeight: '100%'
+}
 
 class Artists extends Component {
 
@@ -53,7 +70,20 @@ class Artists extends Component {
 
     render() {
         return (
-            <div> { this.props.artists.loading ? <h1>Loading...</h1> : this.props.artists.error ? <h1>Error...</h1> : 
+            <div> { this.props.artists.loading 
+                ? 
+                    <div style={loaderContainer}>
+                        <div style={loader}>
+                            <Loader 
+                               type="RevolvingDot"
+                               color="#283593"
+                               height="50"   
+                               width="50"
+                            />
+                        </div>
+                  </div>
+
+                : this.props.artists.error ? <h1>Error...</h1> : 
                     <div>
                         <SearchBar onSearchTermChange={this.artistSearch}/>
                         <br />

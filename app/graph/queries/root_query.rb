@@ -1,3 +1,6 @@
+require 'search_object'
+require 'search_object/plugin/graphql'
+
 RootQuery = GraphQL::ObjectType.define do
   name 'RootQuery'
   description 'The query root for this schema'
@@ -42,5 +45,8 @@ RootQuery = GraphQL::ObjectType.define do
       User.find(args[:id])
     })
   end
+
+  # Search fiels
+  field :allArtists, function: Resolvers::ArtistsSearch
 
 end

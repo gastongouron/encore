@@ -217,6 +217,11 @@ mutation deleteReview {
 ```
 ###mutation for search bar query
 ``` 
-TODO
+query {
+  allArtists(filter: {description_contains:"lorem" OR: {name_contains: "Kate"}}){
+		name
+    description
+  }
+}
 
 ```

@@ -9,12 +9,17 @@ ruby '2.4.1'
 
 gem 'rails', '~> 5.1.0.rc1'
 gem 'pg'
+
 gem 'graphql'
+gem 'graphiql-rails'
+gem 'search_object', '1.2.0'
+gem 'search_object_graphql', '0.1'
+
 gem 'devise'
 gem 'devise-jwt'
-gem 'graphiql-rails'
-gem 'faker'
 gem 'administrate'
+
+gem 'faker'
 
 group :development, :test do
   gem 'sass-rails'
