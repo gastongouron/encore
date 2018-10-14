@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withApollo } from 'react-apollo'
 import { initArtists, loadingArtists, failedArtists, setArtists } from '../../actions/artists'
 import artistListQuery from '../../queries/ArtistSchema'
+import artistSearchQuery from '../../queries/ArtistSearch'
 import ArtistList from './ArtistList'
 import SearchBar from './ArtistSearchBar'
 import Loader from 'react-loader-spinner'
@@ -56,16 +57,26 @@ class Artists extends Component {
     }
     
     artistSearch(term) {
-        let list = this.props.artists.artists
-        let newlist = _.map(list, function(artist){ 
-            let a = artist.name.toLowerCase()
-            let t = term.toLowerCase()
-            if (a.includes(t) || a == t ) { return artist } else { return }
-        });
-        Object.keys(newlist).forEach(artist => newlist[artist] === undefined ? delete newlist[artist] : '');
-        this.setState({
-            artists: newlist
-        })
+        this.props.client.query({query: artistSearchQuery, fetchPolicy: 'network-only', variables: {input: term.toLowerCase() }}).then(
+            (res) => {
+                this.setState({artists: res.data.allArtists})
+            },
+            (err) => {
+                this.props.failedArtists(err.data);
+            }
+        )
+
+
+        // let list = this.props.artists.artists
+        // let newlist = _.map(list, function(artist){ 
+        //     let a = artist.name.toLowerCase()
+        //     let t = term.toLowerCase()
+        //     if (a.includes(t) || a == t ) { return artist } else { return }
+        // });
+        // Object.keys(newlist).forEach(artist => newlist[artist] === undefined ? delete newlist[artist] : '');
+        // this.setState({
+        //     artists: newlist
+        // })
     }
 
     render() {

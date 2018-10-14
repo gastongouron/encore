@@ -33,8 +33,8 @@ class Resolvers::ArtistsSearch
   def normalize_filters(value, branches = [])
     # add like SQL conditions
     scope = Artist.all
-    scope = scope.where('description LIKE ?', "%#{value['description_contains']}%") if value['description_contains']
-    scope = scope.where('name LIKE ?', "%#{value['name_contains']}%") if value['name_contains']
+    scope = scope.where('lower(description) LIKE ?', "%#{value['description_contains']}%") if value['description_contains']
+    scope = scope.where('lower(name) LIKE ?', "%#{value['name_contains']}%") if value['name_contains']
 
     branches << scope
 
