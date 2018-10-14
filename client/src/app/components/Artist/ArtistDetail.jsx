@@ -64,11 +64,19 @@ class ArtistDetail extends Component {
         );
     }
 
+    isConnected() {
+        return this.props.userInfo.isLoggedIn ? true : false
+    }
+
     checkEnableNewReview(reviews){
-        for (var i = 0; i < reviews.length; i++) {
-            if(reviews[i].user_id == this.props.userInfo.user_id){
-                this.setState({enabledButton: false});
+        if (this.props.userInfo.user_id) {
+            for (var i = 0; i < reviews.length; i++) {
+                if(reviews[i].user_id == this.props.userInfo.user_id){
+                    this.setState({enabledButton: false});
+                }
             }
+        } else {
+            this.setState({enabledButton: false});            
         }
     }
 
@@ -83,10 +91,18 @@ class ArtistDetail extends Component {
                         <h1>{this.props.artistDetail.artistDetail.name}</h1>
                         <p>{this.props.artistDetail.artistDetail.description}</p>
                     </div>
-                    <div style={actionsStyle}>{ enabledButton 
-                        ?  <RaisedButton label='New review' secondary={true} onClick={(e) => this.showNew(this)} />
-                        : <RaisedButton label='New review' secondary={true} onClick={(e) => this.showNew(this)} disabled/> }                               
-                    </div>    
+                    <div style={actionsStyle}>
+                    { this.isConnected() ? 
+                        <div>{ enabledButton 
+                            ? <RaisedButton label='New review' secondary={true} onClick={(e) => this.showNew(this)} />
+                            : <RaisedButton label='New review' secondary={true} onClick={(e) => this.showNew(this)} disabled/> }                               
+                        </div>
+                    :
+                        <div>
+                            <RaisedButton label='Wanna leave a review ?' primary={true} onClick={() => this.props.history.push('/users/getstarted') } />
+                        </div>
+                    }                        
+                    </div>
                     <br />
                 </div>
                 
@@ -105,7 +121,7 @@ class ArtistDetail extends Component {
                     <div>
                         <ReviewForm 
                             onShow={this.state.showModalNew}
-                            onHide={(e) => this.setState({ showModalNew: false })}
+                            onHide={(e) => this.closeNew(this)}
                             editable={true}
                             formValue={this.state.newReviewBody}
                             formScore={this.state.newReviewScore}
