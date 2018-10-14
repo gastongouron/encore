@@ -10,7 +10,6 @@ import ArtistDetail from './components/Artist/ArtistDetail';
 import Policy       from '../app/PrivatePolicy';
 import Profile      from './components/Profile/UserProfile';
 
-// <PrivateRoute   exact path="/reviews/:id" layout={MainLayout} component={ReviewEdit} />
 const AuthNotFound = () => <MainLayout><NotFound/></MainLayout>;
 
 const Routes = () => {
@@ -23,6 +22,7 @@ const Routes = () => {
       <WithMainLayout exact path="/"            component={Home} />
       <WithMainLayout exact path="/artists/:id" component={ArtistDetail} />
       {/* <PrivateRoute   exact path="/artists/:id" layout={MainLayout} component={ArtistDetail} /> */}
+
 
       <PrivateRoute   exact path="/artists"     layout={MainLayout} component={Artists} />
       <PrivateRoute   exact path="/user/:id"    layout={MainLayout} component={Profile} />

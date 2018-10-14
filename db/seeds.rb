@@ -18,10 +18,10 @@ avatar = "data:image/gif;base64,R0lGODlhPQBEAPeoAJosM//AwO/AwHVYZ/z595kzAP/s7P+g
 end
 
 artists = []
-30.times do 
+80.times do 
 	artists << Artist.create(
 		name: Faker::Music.band,
-		description: Faker::Lorem.paragraph(rand(1..4))
+		description: Faker::Lorem.paragraph(rand(3..10))
 	)
 	puts "-> artist_#{aid} has been created"
 	aid += 1
@@ -30,7 +30,7 @@ end
 artists.each do |a| 
 	User.where(id: User.pluck(:id).sample(3)).each do |u|
 		Review.create(
-			body: Faker::Lorem.paragraph(rand(3..7)), 
+			body: Faker::Lorem.paragraph(rand(10..20)), 
 			artist_id: a.id, 
 			user_id: u.id,
 			score: rand(1..100)

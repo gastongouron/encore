@@ -73,6 +73,9 @@ class Profile extends Component {
                                 <h1>{user.first_name + "'s Reviews"}</h1>                                        
                             }
                             <div>
+                        </div>
+                        <hr />
+                        <div>
                                 <ReviewList
                                     onReviewSelect={selectedReview =>this.showUpdate(selectedReview, this)}
                                     reviews={this.props.reviews.reviews}

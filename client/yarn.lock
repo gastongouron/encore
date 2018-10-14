@@ -6423,6 +6423,11 @@ react-fontawesome@1.6.1:
   dependencies:
     prop-types "^15.5.6"
 
+react-infinite-scroll-component@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/react-infinite-scroll-component/-/react-infinite-scroll-component-4.2.0.tgz#605227dd213987c8d785157a87178acc26d465e1"
+  integrity sha512-pseyMJ8Ljk9Xr1nkWMg6VRSY7JgszCvf9lndStFovBvsVjQOYm8gFlPE1v+O/GUMUNvNk/9pbvFdPeHPz1AQ3A==
+
 react-is@^16.3.2:
   version "16.5.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.5.2.tgz#e2a7b7c3f5d48062eb769fcb123505eb928722e3"

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 const artistSearchQuery = (gql`
-    query artistSearchQuery($input: String!) {
-      allArtists(filter: {description_contains: $input OR: {name_contains: $input}}) {
+    query artistSearchQuery($input: String, $first: Int, $skip: Int) {
+      allArtists(filter: {description_contains: $input OR: {name_contains: $input}}, first: $first, skip: $skip) {
           id
           name
           description

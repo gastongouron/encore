@@ -1,24 +1,44 @@
-import React from 'react';
+import React, { Component } from "react";
 import ArtistItem from './ArtistListItem'
+import InfiniteScroll from "react-infinite-scroll-component";
 
-const Artist = (props) => {
+class Artist extends Component {
 
-	const artistItems = props.artists.map((artist, index) => {
+    constructor(props){
+        super(props);
+        console.log(props)
+    }
 
-		return (
+  	fetchMoreData = () => {
+  	    this.props.onFetch(20, this.props.artists.length)      	
+  	};
+
+  render() {
+    return (
+      <div>
+        <InfiniteScroll
+          dataLength={this.props.artists.length}
+          next={this.fetchMoreData}
+          hasMore={this.props.hasMore}
+          loader={<h4>Loading...</h4>}
+		  endMessage={
+		      <p style={{textAlign: 'center'}}>
+		        <b></b>
+		      </p>
+		   }>
+
+        {this.props.artists.map((artist, index) => (
 			<ArtistItem 
-				onArtistSelect={props.onArtistSelect}
+				onArtistSelect={this.props.onArtistSelect}
 				key={index}
 				artist={artist} 
 			/>
-		) 
-	})
+          ))}
 
-	return (
-		<div>
-			{artistItems}
-		</div>
-	)
-}
+        </InfiniteScroll>
+      </div>
+    );
+  }
 
-export default Artist;
+}  
+export default Artist
