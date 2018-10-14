@@ -32,6 +32,7 @@ class Resolvers::ArtistsSearch
 
   def normalize_filters(value, branches = [])
     # add like SQL conditions
+    # todo add genre to conditions such as RAP or ROCK
     scope = Artist.all
     scope = scope.where('lower(description) LIKE ?', "%#{value['description_contains']}%") if value['description_contains']
     scope = scope.where('lower(name) LIKE ?', "%#{value['name_contains']}%") if value['name_contains']

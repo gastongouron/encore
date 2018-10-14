@@ -7,7 +7,7 @@ import artistSearchQuery from '../../queries/ArtistSearch'
 import ArtistList from './ArtistList'
 import SearchBar from './ArtistSearchBar'
 import Loader from 'react-loader-spinner'
-import _ from 'underscore'
+// import _ from 'underscore'
 
 const loaderContainer = {
     position: 'fixed',
@@ -52,8 +52,7 @@ class Artists extends Component {
     }
 
     navigateTo(artist){
-        let id = artist.selectedArtist.id
-        this.props.history.push(`/artists/${id}`)
+        this.props.history.push(`/artists/${artist.selectedArtist.id}`)
     }
     
     artistSearch(term) {
@@ -65,18 +64,6 @@ class Artists extends Component {
                 this.props.failedArtists(err.data);
             }
         )
-
-
-        // let list = this.props.artists.artists
-        // let newlist = _.map(list, function(artist){ 
-        //     let a = artist.name.toLowerCase()
-        //     let t = term.toLowerCase()
-        //     if (a.includes(t) || a == t ) { return artist } else { return }
-        // });
-        // Object.keys(newlist).forEach(artist => newlist[artist] === undefined ? delete newlist[artist] : '');
-        // this.setState({
-        //     artists: newlist
-        // })
     }
 
     render() {
