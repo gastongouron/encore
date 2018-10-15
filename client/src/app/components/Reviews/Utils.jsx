@@ -3,10 +3,6 @@ import updateMutation from '../../mutations/updateReview'
 import deleteMutation from '../../mutations/deleteReview'
 import newReviewMutation from '../../mutations/newReview'
 
-export const doSomethingWithInput = (theInput) => {
-    return theInput;
-};
-
 export const onUpdate = (e, context) => {  
     let {review} = context.state;
     const body= review.body;
@@ -33,6 +29,7 @@ export const onDelete = (e, context) => {
     context.props.client.mutate({mutation: deleteMutation, variables: {id: review.id}}).then(
         (res) => {
             context.props.deleteUserReview(review)
+            context.setState({ selected: null })
 			context.setState({ enabledButton: true })
             context.setState({ isUpdate:false});   
         },
@@ -41,8 +38,9 @@ export const onDelete = (e, context) => {
 }
 
 export const onSave = (e, context) => {        
-    const body = context.state.review.body;
-    const score = context.state.review.score;
+    let {review} = context.state;
+    const body= review.body;
+    const score = review.score;
     if(body!=='' && score !==''){
     	context.props.client.mutate({mutation: newReviewMutation, variables: {user_id: context.props.userInfo.user_id, artist_id: context.props.match.params.id, body: body, score: score }}).then(
     	    (res) => {
@@ -60,15 +58,12 @@ export const onSave = (e, context) => {
     }
 }
 
-export const handleChange = (e, context) => {
-    switch(e.target.id) {
-        case 'body':
-            context.setState({review:{...context.state.review, body:e.target.value }})
-            break;
-        case 'score':
-            context.setState({review:{...context.state.review, score:e.target.value }})
-            break;
-    }
+export const setScore = (value, context) => {
+    context.setState({review:{...context.state.review, score: value.toString() }})    
+}
+
+export const setBody = (e, context) => {
+    context.setState({review:{...context.state.review, body:e.target.value }})
 }
 
 export const handleModalClose = (context) => { 

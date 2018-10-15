@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
+import StarRatingComponent from 'react-star-rating-component'
+import StarIcon from 'react-material-icons/icons/toggle/star';
+import StarBorder from 'react-material-icons/icons/toggle/star-border';
+import StarHalf from 'react-material-icons/icons/toggle/star-half';
 
 // // import DatePicker from 'material-ui/DatePicker'
 // import Slider from 'material-ui/Slider'
@@ -19,18 +23,29 @@ import TextField from 'material-ui/TextField'
     //        <DatePicker hintText="When was it?" /> */}
 
 
-const style = {
-  marginLeft: 10,
-}
+
 
 class CustomForm extends Component {
 
   constructor(props) {
     super(props)
 
+    this.state = {
+      rating: parseInt(this.props.formScore)
+    };
+
+  }
+
+  onStarClick(nextValue, prevValue, name) {
+    this.setState({rating: nextValue});
+    this.props.setScore(nextValue)
   }
 
   render(){
+
+    const style = {
+      marginLeft: 10
+    }
 
     const create = [ <RaisedButton style={style} label="Cancel" default={true} onClick={this.props.onClickClose}/>,
                      <RaisedButton style={style} label="Save" primary={true} keyboardFocused={true} onClick={this.props.onClickSave}/>]
@@ -38,7 +53,16 @@ class CustomForm extends Component {
                      <RaisedButton style={style} label="Delete" secondary={true} onClick={this.props.onClickDelete}/>,
                      <RaisedButton style={style} label="Cancel" default={true} onClick={this.props.onClickClose}/>]
 
+
+
     const actions = this.props.isUpdate ? update : create
+
+    const starStyle = {
+      padding: 30,
+      display: 'flex', 
+      fontSize: 44,
+      justifyContent: 'center'
+    }
 
     return (
            <Dialog
@@ -48,6 +72,25 @@ class CustomForm extends Component {
             actions={actions}
             autoScrollBodyContent={true}
           >
+            <div style={starStyle}>
+              <StarRatingComponent 
+                name="score" 
+                id="score"
+                starCount={5}
+                value={this.props.formScore}
+                onStarClick={this.onStarClick.bind(this)}
+                // onStarClick={Function(nextValue, prevValue, name)} /* on icon click handler */
+                // onStarHover={Function(nextValue, prevValue, name)} /* on icon hover handler */
+                // onStarHoverOut={Function(nextValue, prevValue, name)} /* on icon hover out handler */
+                // renderStarIcon={Function(nextValue, prevValue, name)} /* it should return string or react component */
+                // renderStarIconHalf={Function(nextValue, prevValue, name)} /* it should return string or react component */
+                renderStarIcon={(index, value) => {return (<span><StarIcon color={ index <= value ? "#f44336" : "#F1F1F1"}/></span>);}}
+                starColor={'#f44336'} /* color of selected icons, default `#ffb400` */
+                emptyStarColor={'#f1f1f1'} /* color of non-selected icons, default `#333` */
+                editing={true} /* is component available for editing, default `true` */
+              />
+            </div>
+
               <TextField
                 floatingLabelText="Review body"
                 hintText="Something meaningful you'd like to share with the world"
@@ -57,22 +100,23 @@ class CustomForm extends Component {
                 multiLine={true}
                 rows={3}
                 value={this.props.formValue}
-                onChange={this.props.onChange}      
+                onChange={this.props.setBody}      
                 fullWidth={true}       
               />
               <br />
-              <TextField
+
+              {/*<TextField
                   floatingLabelText="Review score"
                   hintText="on a scale from 0 to 100"
                   id="score"
                   min={0}
-                  max={100}
+                  max={5}
                   type="number"
                   label="Score"
                   value={this.props.formScore}
                   onChange={this.props.onChange}      
                   fullWidth={true}  
-              />
+              /> */}
 
           </Dialog>
      )

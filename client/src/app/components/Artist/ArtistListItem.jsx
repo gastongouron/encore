@@ -1,5 +1,6 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
+import StarIcon from 'react-material-icons/icons/toggle/star';
 
 const ArtistListItem = (props) => {
 
@@ -34,7 +35,10 @@ const ArtistListItem = (props) => {
 					<p>{artist.description}</p>
 				</div>
 				<div style={noteStyle}>
-					<h1>{Math.round( artist.score * 10 ) / 10}</h1>
+					<h1>
+						<StarIcon color="#f44336"/>
+						{Math.round( artist.score * 10 ) / 10}
+					</h1>
 				</div>
 			</Paper>
 		)

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withApollo } from 'react-apollo'
 import { initUserReviews, loadingUserReviews, failedUserReviews, setUserReviews, updateUserReview, deleteUserReview, selectUserReview} from '../../actions/reviews'
 import { initUserProfile, loadingUserProfile, failedUserProfile, setUserProfile } from '../../actions/userProfile'
-import { onUpdate, onDelete, handleChange, handleModalShow, handleModalClose} from '../Reviews/Utils'
+import { onUpdate, onDelete, setScore, setBody, handleModalShow, handleModalClose} from '../Reviews/Utils'
 
 import UserProfileQuery from '../../queries/UserProfileSchema'
 import ReviewList from '../Reviews/ReviewList'
@@ -22,7 +22,8 @@ class Profile extends Component {
 
         this.update = onUpdate.bind(this)
         this.delete = onDelete.bind(this)
-        this.change = handleChange.bind(this)
+        this.body = setBody.bind(this)
+        this.score = setScore.bind(this)
         this.show = handleModalShow.bind(this)
         this.close = handleModalClose.bind(this)
 
@@ -94,7 +95,8 @@ class Profile extends Component {
                                 editable={true}
                                 formValue={this.state.review!==null?this.state.review.body:''}
                                 formScore={this.state.review!==null?this.state.review.score:''}
-                                onChange={(e)=>this.change(e, this)}
+                                setBody={(e)=>this.body(e, this)}
+                                setScore={(value)=>this.score(value, this)}
                                 onClickDelete={(e)=>this.delete(e, this)}
                                 onClickUpdate={(e)=>this.update(e, this)}
                                 onClickClose={(e) => this.close(this)}

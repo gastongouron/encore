@@ -5,7 +5,7 @@ import { withApollo } from 'react-apollo'
 import artistDetailQuery from '../../queries/ReviewsSchema'
 
 import { initArtistDetail, loadingArtistDetail, failedArtistDetail, setArtistDetail, addUserReview, selectUserReview, updateUserReview, deleteUserReview } from '../../actions/artistDetail'
-import { onUpdate, onDelete, onSave, handleChange, handleModalShow, handleModalClose} from '../Reviews/Utils'
+import { onUpdate, onDelete, onSave, setBody, setScore, handleModalShow, handleModalClose} from '../Reviews/Utils'
 
 import RaisedButton from 'material-ui/RaisedButton';
 import ReviewForm from '../Reviews/ReviewForm'
@@ -34,7 +34,8 @@ class ArtistDetail extends Component {
         this.save = onSave.bind(this)
         this.update = onUpdate.bind(this)
         this.delete = onDelete.bind(this)
-        this.change = handleChange.bind(this)
+        this.body = setBody.bind(this)
+        this.score = setScore.bind(this)
         this.show = handleModalShow.bind(this)
         this.close = handleModalClose.bind(this)
 
@@ -127,7 +128,8 @@ class ArtistDetail extends Component {
                                 editable={true}
                                 formValue={this.state.review!==null?this.state.review.body:''}
                                 formScore={this.state.review!==null?this.state.review.score:''}
-                                onChange={(e)=>this.change(e, this)}
+                                setBody={(e)=>this.body(e, this)}
+                                setScore={(value)=>this.score(value, this)}
                                 onClickSave={(e)=>this.save(e, this)}
                                 onClickDelete={(e)=>this.delete(e, this)}
                                 onClickUpdate={(e)=>this.update(e, this)}
