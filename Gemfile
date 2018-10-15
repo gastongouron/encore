@@ -24,6 +24,7 @@ gem 'httparty'
 gem 'faker'
 
 group :development, :test do
+  gem 'awesome_print'
   gem 'sass-rails'
   gem 'uglifier'
   gem 'coffee-rails'

@@ -1,38 +1,49 @@
-# # http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=Cher&api_key=af337457ddc3613785f48c7e34bc4d8c&format=json
+class LastFm
+	def initialize(key)
+		@key = key	
+	end
 
-# namespace :get_data do
-#   desc 'Getdata from last fm'
-#   task :last_fm do
-#     puts 'Hello world'
-#   end
+	def query(artist)
+		response = HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=#{artist}&api_key=#{@key}&format=json")
+		format_and_print(response)
+	end
+
+	def correction(artist_name)
+		response = HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=artist.getcorrection&artist=#{artist_name}&api_key=#{@key}&format=json")
+		format_and_print(response)
+	end
+
+	def country(country='france', limit=50, page=1)
+		response = HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=#{country}&limit=#{limit}&page=#{page}&api_key=#{@key}&format=json")
+		format_and_print(response)
+	end
+
+	def format_and_print(response)
+		ap JSON.parse(response.to_json)
+	end
+
+end
+
+
+namespace :get_data do
+
+  desc 'Getdata from last fm'
+
+  task :last_fm do
+
+	key = ENV['LAST_FM_KEY']
+  	last_fm = LastFm.new(key)
+  	# last_fm.query('Rone')
+  	# last_fm.correction('Lmoepal')
+  	# last_fm.country('france', 100, 3)
+
+  	# todo:
+  	# get each page of france top
+  	# for each page, make a single query on artist
+  	# for each artist found, create a new artist such as:
+  	# name / description / tags / picture
+
+  end
   
-# end
+end
 
-
-# # Use the class methods to get down to business quickly
-# key = ENV['']
-# response = HTTParty.get('http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=Cher&api_key=af337457ddc3613785f48c7e34bc4d8c&format=json')
-
-# puts response.body, response.code, response.message, response.headers.inspect
-
-# # Or wrap things up in your own class
-# class StackExchange
-#   include HTTParty
-#   base_uri 'api.stackexchange.com'
-
-#   def initialize(service, page)
-#     @options = { query: { site: service, page: page } }
-#   end
-
-#   def questions
-#     self.class.get("/2.2/questions", @options)
-#   end
-
-#   def users
-#     self.class.get("/2.2/users", @options)
-#   end
-# end
-
-# stack_exchange = StackExchange.new("stackoverflow", 1)
-# puts stack_exchange.questions
-# puts stack_exchange.users
