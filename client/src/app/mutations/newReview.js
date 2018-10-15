@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 const newReviewMutation = (gql`
-    mutation newReviewMutation($user_id: ID!, $artist_id: ID!, $body: String!, $score: String!) {
+    mutation newReviewMutation($user_id: ID!, $artist_id: ID!, $body: String!, $score: Float!) {
         newReview(input: {
             user_id: $user_id,
             artist_id: $artist_id,

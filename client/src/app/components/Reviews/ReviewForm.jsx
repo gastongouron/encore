@@ -2,25 +2,28 @@ import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
-// import StarRatingComponent from 'react-star-rating-component'
 
 import StarIcon from 'react-material-icons/icons/toggle/star';
 import StarBorder from 'react-material-icons/icons/toggle/star-border';
 import StarHalf from 'react-material-icons/icons/toggle/star-half';
+
 import theme from '../../theme'
+import Slider from 'material-ui/Slider';
+
 
 class CustomForm extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      rating: parseInt(this.props.formScore)
+      rating: parseFloat(this.props.formScore)
     };
   }
 
-  onStarClick(nextValue, prevValue, name) {
-    this.setState({rating: nextValue});
-    this.props.setScore(nextValue)
+  onSlide(e, value) {
+    console.log(value)
+    this.setState({rating: value});
+    this.props.setScore(value)
   }
 
   render(){
@@ -49,13 +52,22 @@ class CustomForm extends Component {
     return (
            <Dialog
             open={this.props.onShow}
-            title="Review"
+            title={
+              <h1>Write something nice!</h1>
+            }
             modal={false}
             actions={actions}
             autoScrollBodyContent={true}
           >
-
-                    
+            <Slider 
+              step={1} 
+              value={parseFloat(this.props.formScore)}
+              min={0}
+              max={5}
+              onChange={this.onSlide.bind(this)}
+              required={true}
+              />
+              
             <TextField
               floatingLabelText="Review body"
               hintText="Something meaningful you'd like to share with the world"

@@ -39,8 +39,7 @@ const ReviewListItem = (props) => {
 	return (
 			<Paper
 				style={paperStyle} zDepth={1} 
-				rounded={false}  
-				className="">
+				rounded={false}>
 				<div>
 				</div>
 				<div style={textStyle}>
