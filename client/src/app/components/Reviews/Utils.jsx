@@ -59,7 +59,7 @@ export const onSave = (e, context) => {
 }
 
 export const setScore = (value, context) => {
-    context.setState({review:{...context.state.review, score: value.toString() }})    
+    context.setState({review:{...context.state.review, score: value.toString() }})
 }
 
 export const setBody = (e, context) => {

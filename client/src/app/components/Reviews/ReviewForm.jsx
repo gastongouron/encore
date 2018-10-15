@@ -3,37 +3,19 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
 import StarRatingComponent from 'react-star-rating-component'
+
 import StarIcon from 'react-material-icons/icons/toggle/star';
 import StarBorder from 'react-material-icons/icons/toggle/star-border';
 import StarHalf from 'react-material-icons/icons/toggle/star-half';
-
-// // import DatePicker from 'material-ui/DatePicker'
-// import Slider from 'material-ui/Slider'
-
-    //      {/* <Slider
-    //           label="Score"
-    //           id="score"
-    //           min={0}
-    //           max={100}
-    //           type="range"
-    //           value={this.props.formScore}
-    //           onChange={this.props.onChange}        
-    //       />
-
-    //        <DatePicker hintText="When was it?" /> */}
-
-
-
+import theme from '../../theme'
 
 class CustomForm extends Component {
 
   constructor(props) {
     super(props)
-
     this.state = {
       rating: parseInt(this.props.formScore)
     };
-
   }
 
   onStarClick(nextValue, prevValue, name) {
@@ -53,14 +35,14 @@ class CustomForm extends Component {
                      <RaisedButton style={style} label="Delete" secondary={true} onClick={this.props.onClickDelete}/>,
                      <RaisedButton style={style} label="Cancel" default={true} onClick={this.props.onClickClose}/>]
 
-
-
     const actions = this.props.isUpdate ? update : create
 
     const starStyle = {
       padding: 30,
+      letterSpacing: 16,
       display: 'flex', 
-      fontSize: 44,
+      fontSize: 28,
+      margin: 10,
       justifyContent: 'center'
     }
 
@@ -77,46 +59,33 @@ class CustomForm extends Component {
                 name="score" 
                 id="score"
                 starCount={5}
-                value={this.props.formScore}
+                value={parseInt(this.props.formScore)}
                 onStarClick={this.onStarClick.bind(this)}
                 // onStarClick={Function(nextValue, prevValue, name)} /* on icon click handler */
                 // onStarHover={Function(nextValue, prevValue, name)} /* on icon hover handler */
                 // onStarHoverOut={Function(nextValue, prevValue, name)} /* on icon hover out handler */
                 // renderStarIcon={Function(nextValue, prevValue, name)} /* it should return string or react component */
                 // renderStarIconHalf={Function(nextValue, prevValue, name)} /* it should return string or react component */
-                renderStarIcon={(index, value) => {return (<span><StarIcon color={ index <= value ? "#f44336" : "#F1F1F1"}/></span>);}}
-                starColor={'#f44336'} /* color of selected icons, default `#ffb400` */
-                emptyStarColor={'#f1f1f1'} /* color of non-selected icons, default `#333` */
+                // renderStarIcon={(index, value) => {return (<span><StarIcon color={ index <= value ? "#f44336" : "#F1F1F1"}/></span>);}}
+                starColor={theme.palette.accent1Color} /* color of selected icons, default `#ffb400` */
+                emptyStarColor={theme.palette.primary3Color} /* color of non-selected icons, default `#333` */
                 editing={true} /* is component available for editing, default `true` */
               />
             </div>
 
-              <TextField
-                floatingLabelText="Review body"
-                hintText="Something meaningful you'd like to share with the world"
-                id="body"
-                type="text"
-                label="Review"
-                multiLine={true}
-                rows={3}
-                value={this.props.formValue}
-                onChange={this.props.setBody}      
-                fullWidth={true}       
-              />
-              <br />
-
-              {/*<TextField
-                  floatingLabelText="Review score"
-                  hintText="on a scale from 0 to 100"
-                  id="score"
-                  min={0}
-                  max={5}
-                  type="number"
-                  label="Score"
-                  value={this.props.formScore}
-                  onChange={this.props.onChange}      
-                  fullWidth={true}  
-              /> */}
+            <TextField
+              floatingLabelText="Review body"
+              hintText="Something meaningful you'd like to share with the world"
+              id="body"
+              type="text"
+              label="Review"
+              multiLine={true}
+              rows={3}
+              value={this.props.formValue}
+              onChange={this.props.setBody}      
+              fullWidth={true}       
+            />
+            <br />
 
           </Dialog>
      )
@@ -126,6 +95,25 @@ class CustomForm extends Component {
 }
 
 export default CustomForm 
+
+// // import DatePicker from 'material-ui/DatePicker'
+// import Slider from 'material-ui/Slider'
+
+    //      {/* <Slider
+    //           label="Score"
+    //           id="score"
+    //           min={0}
+    //           max={100}
+    //           type="range"
+    //           value={this.props.formScore}
+    //           onChange={this.props.onChange}        
+    //       />
+
+    //        <DatePicker hintText="When was it?" /> */}
+
+
+
+
 
 
 

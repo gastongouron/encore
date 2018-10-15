@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.6",
     "@material-ui/core": "^3.2.0",
     "@material-ui/icons": "^3.0.1",
     "apollo-boost": "^0.1.16",
@@ -20,7 +21,7 @@
     "react-dom": "^15.5.4",
     "react-facebook-login": "^4.1.0",
     "react-file-base64": "^1.0.3",
-    "react-fontawesome": "1.6.1",
+    "react-fontawesome": "^1.6.1",
     "react-infinite-scroll-component": "^4.2.0",
     "react-loader-spinner": "^2.0.6",
     "react-material-icons": "^1.0.3",
