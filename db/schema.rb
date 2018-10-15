@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181015183562) do
+ActiveRecord::Schema.define(version: 20181015185207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,10 +20,13 @@ ActiveRecord::Schema.define(version: 20181015183562) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "avatar_url"
+    t.string "profile_picture_url"
+    t.string "cover_url"
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "score"
+    t.float "score"
     t.string "body"
     t.integer "user_id"
     t.integer "artist_id"
@@ -59,7 +62,7 @@ ActiveRecord::Schema.define(version: 20181015183562) do
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "profile_picture"
+    t.text "profile_picture"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
