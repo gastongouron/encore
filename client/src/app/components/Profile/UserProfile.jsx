@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withApollo } from 'react-apollo'
 import { initUserReviews, loadingUserReviews, failedUserReviews, setUserReviews, updateUserReview, deleteUserReview, selectUserReview} from '../../actions/reviews'
 import { initUserProfile, loadingUserProfile, failedUserProfile, setUserProfile } from '../../actions/userProfile'
-import { handleUpdateChange, handleModalUpdateShow, handleModalUpdateClose, onUpdate, onDelete } from '../Reviews/Utils'
+import { onUpdate, onDelete, handleChange, handleModalShow, handleModalClose} from '../Reviews/Utils'
 
 import UserProfileQuery from '../../queries/UserProfileSchema'
 import ReviewList from '../Reviews/ReviewList'
@@ -19,18 +19,19 @@ const style = {
 class Profile extends Component {
     constructor(props){
         super(props);
+
         this.update = onUpdate.bind(this)
         this.delete = onDelete.bind(this)
-        this.change = handleUpdateChange.bind(this)
-        this.closeUpdate = handleModalUpdateClose.bind(this)
-        this.showUpdate = handleModalUpdateShow.bind(this)
+        this.change = handleChange.bind(this)
+        this.show = handleModalShow.bind(this)
+        this.close = handleModalClose.bind(this)
 
         this.state = {
-            showModalUpdate: false,
-            selected: null,
-            newReviewBody:'',
-            newReviewScore:''
-          }
+            showModal: false,
+            enabledButton: true,
+            review:null,
+            isUpdate:false,
+        };
     }
 
     componentWillMount(){
@@ -77,7 +78,7 @@ class Profile extends Component {
                         <hr />
                         <div>
                                 <ReviewList
-                                    onReviewSelect={selectedReview =>this.showUpdate(selectedReview, this)}
+                                    onReviewSelect={selectedReview =>this.show(selectedReview, this)}
                                     reviews={this.props.reviews.reviews}
                                     user={this.props.userInfo}
                                     match={this.props.match.url}
@@ -86,16 +87,18 @@ class Profile extends Component {
                         </div>
                         <div>
                             <form>
-                                <ReviewForm
-                                    onShow={this.state.showModalUpdate}
-                                    onHide={(e) => this.closeUpdate(this) }
-                                    editable={true}
-                                    formValue={this.state.selected!==null?this.state.selected.body:''}
-                                    formScore={this.state.selected!==null?this.state.selected.score:''}
-                                    onChange={(e)=>this.change(e,this)}
-                                    onClickDelete={(e)=>this.delete(e, this)}
-                                    onClickUpdate={(e)=>this.update(e, this)}
-                                    onClickClose={(e) => this.closeUpdate(this) }/>
+                            <ReviewForm
+                                isUpdate={this.state.isUpdate}
+                                onShow={this.state.showModal}
+                                onHide={(e) => this.close(this)}
+                                editable={true}
+                                formValue={this.state.review!==null?this.state.review.body:''}
+                                formScore={this.state.review!==null?this.state.review.score:''}
+                                onChange={(e)=>this.change(e, this)}
+                                onClickDelete={(e)=>this.delete(e, this)}
+                                onClickUpdate={(e)=>this.update(e, this)}
+                                onClickClose={(e) => this.close(this)}
+                            />
                             </form>
                         </div>
                     </div>
@@ -110,7 +113,7 @@ const mapStateToProps = state => {
     return { reviews: state.reviews,
              userProfile: state.userProfile,
              userInfo: state.currentUser,
-             selectedUserReview: state.reviews.selected
+             selectedUserReview: state.reviews.review
     };
 };
 

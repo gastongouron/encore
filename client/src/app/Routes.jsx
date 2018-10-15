@@ -6,7 +6,7 @@ import NotFound     from '../app/NotFound';
 import Artists      from './components/Artist/Artists';
 import {authRoutes, PrivateRoute} from 'react-devise';
 import WithMainLayout from './WithMainLayout';
-import ArtistDetail from './components/Artist/ArtistDetail';
+import Artist from './components/Artist/Artist';
 import Policy       from '../app/PrivatePolicy';
 import Profile      from './components/Profile/UserProfile';
 
@@ -20,7 +20,7 @@ const Routes = () => {
 
       <WithMainLayout exact path="/policy"      component={Policy} />
       <WithMainLayout exact path="/"            component={Home} />
-      <WithMainLayout exact path="/artists/:id" component={ArtistDetail} />
+      <WithMainLayout exact path="/artists/:id" component={Artist} />
       {/* <PrivateRoute   exact path="/artists/:id" layout={MainLayout} component={ArtistDetail} /> */}
 
 

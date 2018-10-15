@@ -1,15 +1,110 @@
-
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
+// // import DatePicker from 'material-ui/DatePicker'
+// import Slider from 'material-ui/Slider'
 
-// import React from 'react'
+    //      {/* <Slider
+    //           label="Score"
+    //           id="score"
+    //           min={0}
+    //           max={100}
+    //           type="range"
+    //           value={this.props.formScore}
+    //           onChange={this.props.onChange}        
+    //       />
+
+    //        <DatePicker hintText="When was it?" /> */}
+
+
+const style = {
+  marginLeft: 10,
+}
+
+class CustomForm extends Component {
+
+  constructor(props) {
+    super(props)
+
+  }
+
+  render(){
+
+    const create = [ <RaisedButton style={style} label="Cancel" default={true} onClick={this.props.onClickClose}/>,
+                     <RaisedButton style={style} label="Save" primary={true} keyboardFocused={true} onClick={this.props.onClickSave}/>]
+    const update = [ <RaisedButton style={style} label="Update" primary={true} keyboardFocused={true} onClick={this.props.onClickUpdate}/>,
+                     <RaisedButton style={style} label="Delete" secondary={true} onClick={this.props.onClickDelete}/>,
+                     <RaisedButton style={style} label="Cancel" default={true} onClick={this.props.onClickClose}/>]
+
+    const actions = this.props.isUpdate ? update : create
+
+    return (
+           <Dialog
+            open={this.props.onShow}
+            title="Review"
+            modal={false}
+            actions={actions}
+            autoScrollBodyContent={true}
+          >
+              <TextField
+                floatingLabelText="Review body"
+                hintText="Something meaningful you'd like to share with the world"
+                id="body"
+                type="text"
+                label="Review"
+                multiLine={true}
+                rows={3}
+                value={this.props.formValue}
+                onChange={this.props.onChange}      
+                fullWidth={true}       
+              />
+              <br />
+              <TextField
+                  floatingLabelText="Review score"
+                  hintText="on a scale from 0 to 100"
+                  id="score"
+                  min={0}
+                  max={100}
+                  type="number"
+                  label="Score"
+                  value={this.props.formScore}
+                  onChange={this.props.onChange}      
+                  fullWidth={true}  
+              />
+
+          </Dialog>
+     )
+
+  }
+
+}
+
+export default CustomForm 
+
+
+
+
+// // import React from 'react'
 // import { Field, reduxForm } from 'redux-form'
 
 // const required = value => value ? undefined : 'Required'
+// const maxLength = max => value =>
+//   value && value.length > max ? `Must be ${max} characters or less` : undefined
+// const maxLength15 = maxLength(15)
+// const number = value => value && isNaN(Number(value)) ? 'Must be a number' : undefined
+// const minValue = min => value =>
+//   value && value < min ? `Must be at least ${min}` : undefined
+// const minValue18 = minValue(18)
+// const email = value =>
+//   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
+//   'Invalid email address' : undefined
+// const tooOld = value =>
+//   value && value > 65 ? 'You might be too old for this' : undefined
+// const aol = value =>
+//   value && /.+@aol\.com/.test(value) ?
+//   'Really? You still use AOL for your email?' : undefined
 
 // const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
 //   <div>
@@ -21,144 +116,139 @@ import TextField from 'material-ui/TextField'
 //   </div>
 // )
 
-// const FieldLevelValidationForm = (props) => {
-//   const { onClickUpdate, pristine, reset, submitting } = props
-//   return (
-//     <form onSubmit={onClickUpdate}>
-//       <Field name="body" type="text"
-//         component={renderField} label="Review"
-//         validate={required}
-//       />
-//       <Field name="score" type="text"
-//         component={renderField} label="Score"
-//         validate={required}
-//       />
-//       <div>
-//         <button type="submit" disabled={submitting}>Submit</button>
-//         <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
-//       </div>
-//     </form>
-//   )
+// // const CustomForm = (props) => {
+// //   const { handleSubmit, pristine, reset, submitting } = props
+// //   return (
+// //     <form onSubmit={handleSubmit}>
+// //       <Field name="username" type="text"
+// //         component={renderField} label="Username"
+// //         validate={[ required, maxLength15 ]}
+// //       />
+// //       <Field name="email" type="email"
+// //         component={renderField} label="Email"
+// //         validate={email}
+// //         warn={aol}
+// //       />
+// //       <Field name="age" type="number"
+// //         component={renderField} label="Age"
+// //         validate={[ required, number, minValue18 ]}
+// //         warn={tooOld}
+// //       />
+// //       <div>
+// //         <button type="submit" disabled={submitting}>Submit</button>
+// //         <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+// //       </div>
+// //     </form>
+// //   )
+// // }
+
+// const style = {
+//   marginLeft: 10,
 // }
+
+// class CustomForm extends Component {
+
+//   constructor(props) {
+//     super(props)
+//     console.log(props)
+//     const { handleSubmit, pristine, reset, submitting } = props
+//   }
+
+//   render(){
+
+//     const create = [ <RaisedButton style={style} label="Cancel" default={true} onClick={this.props.onClickClose}/>,
+//                      <RaisedButton style={style} label="Save" disabled={this.props.submitting} primary={true} keyboardFocused={true} onClick={this.props.onClickSave}/>,
+//                      <RaisedButton style={style} disabled={this.props.pristine || this.props.submitting} onClick={this.props.reset}>CLEAR</RaisedButton>]
+
+//     const update = [ <RaisedButton style={style} label="Update" primary={true} keyboardFocused={true} onClick={this.props.onClickUpdate}/>,
+//                      <RaisedButton style={style} label="Delete" secondary={true} onClick={this.props.onClickDelete}/>,
+//                      <RaisedButton style={style} label="Cancel" default={true} onClick={this.props.onClickClose}/>]
+
+//     const actions = this.props.isUpdate ? update : create
+
+//     return (
+//            <Dialog
+//             open={this.props.onShow}
+//             title="Review"
+//             modal={false}
+//             actions={actions}
+//             autoScrollBodyContent={true}
+//           >
+//               {/*<TextField
+//                 floatingLabelText="Review body"
+//                 hintText="Something meaningful you'd like to share with the world"
+//                 id="body"
+//                 type="text"
+//                 label="Review"
+//                 multiLine={true}
+//                 rows={3}
+//                 value={this.props.formValue}
+//                 onChange={this.props.onChange}      
+//                 fullWidth={true}       
+//               />
+//               <br />
+//               <TextField
+//                   floatingLabelText="Review score"
+//                   hintText="on a scale from 0 to 100"
+//                   id="score"
+//                   min={0}
+//                   max={100}
+//                   type="number"
+//                   label="Score"
+//                   value={this.props.formScore}
+//                   onChange={this.props.onChange}      
+//                   fullWidth={true}  
+//               /> */}
+
+//             <Field name="body" type="text"
+//               component={renderField} label="Description"
+//               validate={[ required ]}
+//             />
+//             <Field name="score" type="number"
+//               component={renderField} label="Score"
+//               validate={[ required, number, minValue18 ]}
+//             />
+
+
+
+
+//           {/* <TextField
+//                 floatingLabelText="Review body"
+//                 hintText="Something meaningful you'd like to share with the world"
+//                 id="body"
+//                 type="text"
+//                 label="Review"
+//                 multiLine={true}
+//                 rows={3}
+//                 value={this.props.formValue}
+//                 onChange={this.props.onChange}      
+//                 fullWidth={true}       
+//               />
+//               <br />
+//               <TextField
+//                   floatingLabelText="Review score"
+//                   hintText="on a scale from 0 to 100"
+//                   id="score"
+//                   min={0}
+//                   max={100}
+//                   type="number"
+//                   label="Score"
+//                   value={this.props.formScore}
+//                   onChange={this.props.onChange}      
+//                   fullWidth={true}  
+//               /> */}
+
+//           </Dialog>
+//      )
+
+//   }
+
+// }
+
+// // export default CustomForm 
+
+
 
 // export default reduxForm({
 //   form: 'fieldLevelValidation' // a unique identifier for this form
-// })(FieldLevelValidationForm)
-
-
-
-
-const CustomForm = (props) => {
-
-    const newActions = [
-        <RaisedButton
-          label="Cancel"
-          default={true}
-          onClick={props.onClickClose}
-        />,
-        <RaisedButton
-          label="Save"
-          primary={true}
-          keyboardFocused={true}
-          onClick={props.onClickSave}
-        />,
-    ];
-
-    const updateActions = [
-        <RaisedButton
-          label="Update"
-          primary={true}
-          keyboardFocused={true}
-          onClick={props.onClickUpdate}
-        />,
-        <RaisedButton
-          label="Delete"
-          secondary={true}
-          onClick={props.onClickDelete}
-        />,
-        <RaisedButton
-          label="Cancel"
-          default={true}
-          onClick={props.onClickClose}
-        />,
-    ];
-
-
-    const actions = props.onClickDelete ? updateActions : newActions
-
-	return (
-         <Dialog
-          open={props.onShow}
-          title="Review"
-          modal={false}
-          actions={actions}
-          autoScrollBodyContent={true}
-        >
-            <TextField
-                hintText="Review"
-                id="body"
-                value={props.formValue ? props.formValue : ''}
-                onChange={props.onChange}        
-            />
-            <br />
-            <TextField
-                hintText="Score"
-                id="score"
-                value={props.formScore ? props.formScore : ''}
-                onChange={props.onChange}        
-            />
-
-        </Dialog>
-		)
-
-}
-
-export default CustomForm;
-
-
-
-
-
-
-
-
-
-  // <div hidden={!props.onShow}>
-  //               <Alert bsStyle="info">
-  //                   <FormGroup controlId="body">
-  //                       <ControlLabel>Enter your review for this artist</ControlLabel>
-  //                       <FormControl
-  //                           readOnly={props.editable?false:true}
-  //                           type="text"
-  //                           placeholder="Enter review"
-  //                           value={props.formValue ? props.formValue : ''}
-  //                           onChange={props.onChange} />  
-  //                   </FormGroup>
-  //                   <FormGroup controlId="score">
-  //                       <ControlLabel>Enter your score for this artist</ControlLabel>
-  //                       <FormControl
-  //                           readOnly={props.editable?false:true}
-  //                           type="text"
-  //                           placeholder="Enter score"
-  //                           value={props.formScore ? props.formScore : ''}
-  //                           onChange={props.onChange} />  
-  //                   </FormGroup>
-
-  //                   <div>
-  //                       { props.onClickSave ? 
-  //                           <div>
-  //                               <RaisedButton label='Save' primary={true} onClick={props.onClickSave}/>
-  //                               <RaisedButton label='Close' onClick={props.onClickClose}/>
-  //                           </div>
-  //                       : props.onClickDelete ? 
-  //                          <div>
-  //                               <RaisedButton label='Delete' secondary={true} onClick={props.onClickDelete}/>
-  //                               <RaisedButton label='Update' primary={true} onClick={props.onClickUpdate}/>
-  //                               <RaisedButton label='Close' onClick={props.onClickClose}/>
-  //                           </div>
-  //                       : 
-  //                           undefined 
-  //                       }
-  //                   </div>
-  //               </Alert>
-  //           </div> 
+// })(CustomForm)

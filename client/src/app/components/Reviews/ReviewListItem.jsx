@@ -36,11 +36,6 @@ const ReviewListItem = (props) => {
   	    textAlign: 'right',
 	}
 
-	const leftSide = {
-		marginRight: 20,
-	    float:'left'
-	}
-
 	return (
 			<Paper
 				style={paperStyle} zDepth={1} 
