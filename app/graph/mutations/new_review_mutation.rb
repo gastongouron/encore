@@ -3,7 +3,7 @@ Mutations::NewReviewMutation = GraphQL::Relay::Mutation.define do
   description 'Mutation for creating a new review'
 
   input_field :body, !types.String
-  input_field :score, !types.String
+  input_field :score, !types.Float
   input_field :user_id, !types.ID
   input_field :artist_id, !types.ID
 
