@@ -35,6 +35,10 @@ If you want to change the ports locally, change both ```.foreman``` and ```./cli
   * [apollo](http://dev.apollodata.com/)
   * [styled-components](https://github.com/styled-components/styled-components)
 
+### A note about rake
+
+bundle exec rake db:drop && rake db:create && rake db:migrate && rake get_data:last_fm_top_list && get_data:last_fm_artist_detail
+
 ### A Note on Administrate
 
 In development mode, the api will serve a special route `localhost:3001/admin` to allow you CRUD all resources of the app.

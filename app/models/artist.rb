@@ -9,4 +9,8 @@ class Artist < ApplicationRecord
 		score = scores.empty? ? 0 : scores.inject{ |sum, el| sum + el }.to_f / scores.size
 	end
 
+	def tags
+		self.tag_list
+	end
+
 end

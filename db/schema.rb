@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181015185207) do
+ActiveRecord::Schema.define(version: 20181015214417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20181015185207) do
     t.string "avatar_url"
     t.string "profile_picture_url"
     t.string "cover_url"
+    t.string "mbid"
   end
 
   create_table "reviews", force: :cascade do |t|
