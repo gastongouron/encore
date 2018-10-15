@@ -38,6 +38,8 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    acts-as-taggable-on (6.0.0)
+      activerecord (~> 5.0)
     administrate (0.11.0)
       actionpack (>= 4.2, < 6.0)
       actionview (>= 4.2, < 6.0)
@@ -250,6 +252,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on
   administrate
   awesome_print
   byebug

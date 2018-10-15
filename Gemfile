@@ -19,8 +19,8 @@ gem 'devise'
 gem 'devise-jwt'
 gem 'administrate'
 
+gem 'acts-as-taggable-on'
 gem 'httparty'
-
 gem 'faker'
 
 group :development, :test do

@@ -1,6 +1,7 @@
 class Artist < ApplicationRecord
 	has_many :reviews
 	has_many :users, through: :reviews
+	acts_as_taggable
 
 	def score
 		scores = []
