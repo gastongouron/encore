@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
-import StarRatingComponent from 'react-star-rating-component'
+// import StarRatingComponent from 'react-star-rating-component'
 
 import StarIcon from 'react-material-icons/icons/toggle/star';
 import StarBorder from 'react-material-icons/icons/toggle/star-border';
@@ -54,25 +54,8 @@ class CustomForm extends Component {
             actions={actions}
             autoScrollBodyContent={true}
           >
-            <div style={starStyle}>
-              <StarRatingComponent 
-                name="score" 
-                id="score"
-                starCount={5}
-                value={parseInt(this.props.formScore)}
-                onStarClick={this.onStarClick.bind(this)}
-                // onStarClick={Function(nextValue, prevValue, name)} /* on icon click handler */
-                // onStarHover={Function(nextValue, prevValue, name)} /* on icon hover handler */
-                // onStarHoverOut={Function(nextValue, prevValue, name)} /* on icon hover out handler */
-                // renderStarIcon={Function(nextValue, prevValue, name)} /* it should return string or react component */
-                // renderStarIconHalf={Function(nextValue, prevValue, name)} /* it should return string or react component */
-                // renderStarIcon={(index, value) => {return (<span><StarIcon color={ index <= value ? "#f44336" : "#F1F1F1"}/></span>);}}
-                starColor={theme.palette.accent1Color} /* color of selected icons, default `#ffb400` */
-                emptyStarColor={theme.palette.primary3Color} /* color of non-selected icons, default `#333` */
-                editing={true} /* is component available for editing, default `true` */
-              />
-            </div>
 
+                    
             <TextField
               floatingLabelText="Review body"
               hintText="Something meaningful you'd like to share with the world"
@@ -95,6 +78,26 @@ class CustomForm extends Component {
 }
 
 export default CustomForm 
+
+
+            // <div style={starStyle}>
+            //   <StarRatingComponent 
+            //     name="score" 
+            //     id="score"
+            //     starCount={5}
+            //     value={parseInt(this.props.formScore)}
+            //     onStarClick={this.onStarClick.bind(this)}
+            //     // onStarClick={Function(nextValue, prevValue, name)} /* on icon click handler */
+            //     // onStarHover={Function(nextValue, prevValue, name)} /* on icon hover handler */
+            //     // onStarHoverOut={Function(nextValue, prevValue, name)} /* on icon hover out handler */
+            //     // renderStarIcon={Function(nextValue, prevValue, name)} /* it should return string or react component */
+            //     // renderStarIconHalf={Function(nextValue, prevValue, name)} /* it should return string or react component */
+            //     // renderStarIcon={(index, value) => {return (<span><StarIcon color={ index <= value ? "#f44336" : "#F1F1F1"}/></span>);}}
+            //     starColor={theme.palette.accent1Color} /* color of selected icons, default `#ffb400` */
+            //     emptyStarColor={theme.palette.primary3Color} /* color of non-selected icons, default `#333` */
+            //     editing={true} /* is component available for editing, default `true` */
+            //   />
+            // </div>
 
 // // import DatePicker from 'material-ui/DatePicker'
 // import Slider from 'material-ui/Slider'
