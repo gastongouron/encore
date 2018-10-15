@@ -19,6 +19,8 @@ gem 'devise'
 gem 'devise-jwt'
 gem 'administrate'
 
+gem 'httparty'
+
 gem 'faker'
 
 group :development, :test do

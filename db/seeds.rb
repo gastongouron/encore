@@ -18,9 +18,9 @@ avatar = "data:image/gif;base64,R0lGODlhPQBEAPeoAJosM//AwO/AwHVYZ/z595kzAP/s7P+g
 end
 
 artists = []
-80.times do 
+40.times do 
 	artists << Artist.create(
-		name: Faker::Music.band,
+		name: Faker::Music.unique.band,
 		description: Faker::Lorem.paragraph(rand(3..10))
 	)
 	puts "-> artist_#{aid} has been created"
@@ -33,7 +33,7 @@ artists.each do |a|
 			body: Faker::Lorem.paragraph(rand(10..20)), 
 			artist_id: a.id, 
 			user_id: u.id,
-			score: rand(1..100)
+			score: rand(1..5)
 		)
 		puts "-> review_#{rid} has been created by user_#{u.id} for artist_#{a.id}"
 		rid += 1
