@@ -10,7 +10,6 @@ const ArtistListItem = (props) => {
 	const onArtistSelect = props.onArtistSelect
 	const tags = artist.tags
 
-
 	const rootz = {
 	  flexGrow: 1,
 	}
@@ -46,11 +45,11 @@ const ArtistListItem = (props) => {
 				<div style={rootz}>
 					<Grid container>
 
-				        <Grid item xs={12} sm={4}>
+				        <Grid item xs={12} sm={3}>
 							<img style={imageStyle} src={artist.cover_url}></img>
 				        </Grid>
 
-				        <Grid style={padded} item xs={12} sm={8}>
+				        <Grid style={padded} item xs={12} sm={9}>
 
 				        	<Grid style={floatLeft} item xs={9}>
 				        		<h1>{artist.name}</h1>

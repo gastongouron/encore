@@ -9,6 +9,7 @@ import LogoIcon from 'material-ui/svg-icons/action/lightbulb-outline';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {Notice} from '../shared';
 import IconButton from 'material-ui/IconButton';
+import IconMusic from 'material-ui/'
 
 const MainAppBar = styled(AppBar)`
   &:hover {
@@ -60,7 +61,7 @@ class UserMenuItem extends Component {
       return (
         <div>
           <MenuItem
-            primaryText={currentUser.display_name || currentUser.email}
+            primaryText={currentUser.first_name || currentUser.email}
             onTouchTap={this.handleTouchTap}
             leftIcon={<DropDownArrow color={textColor}/>}
             style={{color: textColor}}
@@ -114,10 +115,11 @@ class MainLayout extends Component {
     return (
       <Main>
         <MainAppBar
-          style={{ background: 'grey', boxShadow: 'none', position: 'sticky', top: 0}}
+          style={{ boxShadow: 'none', position: 'sticky', top: 0}}
+          // style={{ background: 'transparent', boxShadow: 'none', position: 'sticky', top: 0}}
           showMenuIconButton={false}
-          title="encore!"
-          titleStyle={{fontSize: 28, fontWeight: 500}}
+          title={<b>encore!</b>}
+          titleStyle={{fontSize: 28, fontWeight: 900}}
           onTitleTouchTap={this.goHome}
         >
           <MainToolbar>

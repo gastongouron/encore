@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { withAuth } from 'react-devise';
-import { ViewHeading } from '../shared';
+import { ViewContainer } from '../shared';
 import { initArtists } from '../app/actions/artists'
 import { initUserReviews } from '../app/actions/reviews'
 
@@ -9,8 +9,10 @@ const Home = ({currentUser, auth: {AuthLinks}, initArtists, initMyReviews}) => {
   
   return (
     <div>
-      <ViewHeading>Welcome!</ViewHeading>
-      <AuthLinks />
+      <ViewContainer>
+        <h1>Welcome!</h1>
+        <AuthLinks />
+      </ViewContainer>
     </div>
   );
 };

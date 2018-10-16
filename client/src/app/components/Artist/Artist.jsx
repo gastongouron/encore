@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withApollo } from 'react-apollo'
-
-import artistDetailQuery from '../../queries/ReviewsSchema'
-
 import { initArtistDetail, loadingArtistDetail, failedArtistDetail, setArtistDetail, addUserReview, selectUserReview, updateUserReview, deleteUserReview } from '../../actions/artistDetail'
 import { onUpdate, onDelete, onSave, setBody, setScore, handleModalShow, handleModalClose} from '../Reviews/Utils'
 
-import RaisedButton from 'material-ui/RaisedButton';
+import artistDetailQuery from '../../queries/ReviewsSchema'
+
 import ReviewForm from '../Reviews/ReviewForm'
 import ReviewList from '../Reviews/ReviewList'
-
+import ActionButtons from './ActionButtons'
 import EncoreLoader from '../EncoreLoader'
-import Paper from 'material-ui/Paper'
-
 import Taglist from './Taglist'
+
+import Paper from 'material-ui/Paper'
+import Grid from '@material-ui/core/Grid'
+import StarIcon from 'react-material-icons/icons/toggle/star'
 
 const coverStyle = {
     objectFit: 'cover',
@@ -23,13 +23,21 @@ const coverStyle = {
     height: 200,
 }
 
+const rootz = {
+    flexGrow: 1,
+}
+
+const padded = {
+    padding: 20,
+}
+
+const marginBottom = {
+    marginBottom: 20,
+}
 
 class ArtistDetail extends Component {
 
-
     constructor(props){
-
-        console.log('ArtistDetail props:', props)
 
         super(props);
         this.save = onSave.bind(this)
@@ -81,42 +89,38 @@ class ArtistDetail extends Component {
         const artist = this.props.artistDetail.artistDetail
         return (
             <div>
-                {this.props.artistDetail.loading 
-
-                ? 
-                    <EncoreLoader />
-                : 
-                    this.props.artistDetail.error 
-                ? 
-                    <h1>Error...</h1> 
-                :
-
+                {this.props.artistDetail.loading ? <EncoreLoader /> : 
+                 this.props.artistDetail.error ? <h1>Error...</h1> :
                 <div>
-                    <img style={coverStyle} src={artist.cover_url}/>
-                    <div>    
-                        <div>
-                            <h1>{artist.name}</h1>
-                            <p>{artist.description}</p>
-                            <Taglist tags={artist.tags} />
-                        </div>
 
-                        <div>
-                            { this.isConnected() ? 
-                                <div>{ enabledButton 
-                                    ? <RaisedButton label='New review' secondary={true} onClick={(e) => this.show(null, this)} />
-                                    : <RaisedButton label='New review' secondary={true} onClick={(e) => this.show(null, this)} disabled/> }                               
-                                </div>
-                            :
-                                <div>
-                                    <RaisedButton label='Wanna leave a review ?' primary={true} onClick={() => this.props.history.push('/users/getstarted') } />
-                                </div>
-                            }                        
-                        </div>
+                        <Paper style={marginBottom} zDepth={1} rounded={false} >
+                            <img style={coverStyle} src={artist.cover_url}/>
+                            <div style={rootz}>
 
-                        <br />
-                    </div>
+                                <Grid style={padded} container>
+                                    <Grid item xs={9} sm={6}>
+                                        <h1>{artist.name}, {artist.score}</h1>
+                                    </Grid>
+                                    <Grid style={marginBottom} item xs={3} sm={6}>
+                                        <ActionButtons 
+                                            connected={this.isConnected()} 
+                                            new={(e) => this.show(null, this)}
+                                            enabled={this.state.enabledButton}
+                                            redirect={() => this.props.history.push('/users/getstarted')}
+                                        />
+                                    </Grid>
+                                    <Grid style={marginBottom} item xs={12} sm={12}>
+                                        <p>{artist.description}</p>
+                                    </Grid>
+                                    <Grid item xs={12} sm={12}>
+                                        <Taglist tags={artist.tags} />
+                                    </Grid>
+                                </Grid>
+
+                            </div>
+                        </Paper>
+
                     
-
                     <div>
                         <ReviewList
                             onReviewSelect={reviewReview => this.show(reviewReview, this)}

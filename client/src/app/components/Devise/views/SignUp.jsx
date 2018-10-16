@@ -77,8 +77,6 @@ const SignUpForm = reduxForm({
     />;
   }
 
-
-
   return (
     <Form onSubmit={handleSubmit(formAction(onSubmit))}>
       <Field

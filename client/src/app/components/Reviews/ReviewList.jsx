@@ -17,7 +17,9 @@ const Review = (props) => {
 		})
 		return (
 			<div>
-				{reviewItems}
+				<div>
+					{reviewItems}
+				</div>
 			</div>
 		)
 	} else {
@@ -27,3 +29,7 @@ const Review = (props) => {
 }
 
 export default Review;
+
+	            // <div>
+	            //     { props.current ? <h1>Your Reviews</h1> : <h1>{props.user.first_name + "'s Reviews"}</h1> }
+	            // <div>

@@ -9,11 +9,30 @@ import UserProfileQuery from '../../queries/UserProfileSchema'
 import ReviewList from '../Reviews/ReviewList'
 import ReviewForm from '../Reviews/ReviewForm'
 
+import EncoreLoader from '../EncoreLoader'
+import Paper from 'material-ui/Paper'
+import Grid from '@material-ui/core/Grid'
+
+
+const paddedAndMarginBottom = {
+    padding: 20,
+    marginBottom: 20,
+}
+
 const style = {
     objectFit: 'cover',
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+}
+
+const inline = {
+    display: 'inline-block'
+}
+
+const marginRight = {
+    display: 'inline-block',
+    marginRight: 16,
 }
 
 class Profile extends Component {
@@ -60,51 +79,60 @@ class Profile extends Component {
         const user = this.onCurrentUserProfile() ? this.props.userInfo : this.props.userProfile.userProfile
         return (
             <div>
-                {this.state.loading ? <h1>Loading...</h1> : this.props.reviews.error ? <h1>Error...</h1> :
+                {this.state.loading ? <EncoreLoader /> : this.props.reviews.error ? <h1>Error...</h1> :
 
                 <div>                
-                    <div>
-                        <img alt='TODO' style={style} src={user.profile_picture?user.profile_picture:''}/>
-                        <div>{user.display_name?user.display_name:''}</div>
-                        <div>{user.email?user.email:''}</div>
-                    </div>
-                    <div>
-                        <div>
-                            {this.onCurrentUserProfile() ? <h1>Your Reviews</h1> : <h1>{user.first_name + "'s Reviews"}</h1> }
-                        <div>
-                    </div>
+                    <Paper style={paddedAndMarginBottom}>
+                        <div style={marginRight}>
+                                <img alt='You uploaded a weird image^^' style={style} src={user.profile_picture?user.profile_picture:''}/>
+                        </div>
+                        <div style={inline}>
+                            <h1>
+                                {user.display_name?user.display_name:''}
+                            </h1>
+                            {user.email?user.email:''}
+                        </div>
+
+                    </Paper>
+
+                    {/* { props.current ? <h1>Your Reviews</h1> : <h1>{props.user.first_name + "'s Reviews"}</h1> } */}
 
                     <div>
-                        <ReviewList
-                            onReviewSelect={selectedReview =>this.show(selectedReview, this)}
-                            reviews={this.props.reviews.reviews}
-                            user={this.props.userInfo}
-                            match={this.props.match.url}
-                        />
+                        <div>
+                            <div>
+                                <ReviewList
+                                    current={this.onCurrentUserProfile()}
+                                    onReviewSelect={selectedReview =>this.show(selectedReview, this)}
+                                    reviews={this.props.reviews.reviews}
+                                    user={this.props.userInfo}
+                                    match={this.props.match.url}
+                                />
+                            </div>
                     </div>
-                </div>
-
-                <div>
-                    <form>
-                        <ReviewForm
-                            isUpdate={this.state.isUpdate}
-                            onShow={this.state.showModal}
-                            onHide={(e) => this.close(this)}
-                            editable={true}
-                            formValue={this.state.review!==null?this.state.review.body:''}
-                            formScore={this.state.review!==null?this.state.review.score:''}
-                            setBody={(e)=>this.body(e, this)}
-                            setScore={(value)=>this.score(value, this)}
-                            onClickDelete={(e)=>this.delete(e, this)}
-                            onClickUpdate={(e)=>this.update(e, this)}
-                            onClickClose={(e) => this.close(this)}
-                        />
-                    </form>
+                    <div>
+                        <form>
+                            <ReviewForm
+                                isUpdate={this.state.isUpdate}
+                                onShow={this.state.showModal}
+                                onHide={(e) => this.close(this)}
+                                editable={true}
+                                formValue={this.state.review!==null?this.state.review.body:''}
+                                formScore={this.state.review!==null?this.state.review.score:''}
+                                setBody={(e)=>this.body(e, this)}
+                                setScore={(value)=>this.score(value, this)}
+                                onClickDelete={(e)=>this.delete(e, this)}
+                                onClickUpdate={(e)=>this.update(e, this)}
+                                onClickClose={(e) => this.close(this)}
+                            />
+                        </form>
+                    </div>
                 </div>
             </div>
+
+            }
+
         </div>
-        }
-    </div>
+
         )
     }
 }
