@@ -1,71 +1,11 @@
-class LastFm
-	def initialize(key)
-		@key = key	
-	end
-
-	def query(artist_name, lang='eng')
-		response = HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=#{artist_name}&lang=#{lang}&utocorrect=1&api_key=#{@key}&format=json")
-		format_json(response)
-	end
-
-	def correction(artist_name)
-		response = HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=artist.getcorrection&artist=#{artist_name}&api_key=#{@key}&format=json")
-		format_json(response)
-	end
-
-	def country(country='france', limit=10, page=1)
-		response = HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=#{country}&limit=#{limit}&page=#{page}&api_key=#{@key}&format=json")
-		format_json(response)
-	end
-
-	def is_dead(musicbrainz_id)
-		response = HTTParty.get("http://musicbrainz.org/ws/2/artist/#{musicbrainz_id}?inc=aliases&fmt=json", headers: {"User-Agent" => "HTTParty"})
-	  	sleep(1.5)
-		response["life-span"]["ended"]
-	end
-
-	def format_json(response)
-		JSON.parse(response.to_json)
-	end
-
-	def get_artists(parsed_response)
-		parsed_response["topartists"]["artist"]
-	end
-
-	def get_attr(parsed_response)
-		parsed_response["topartists"]["@attr"]
-	end
-
-	def create_artists(artists)
-	  	artists.each do |a|
-			mbid = a["mbid"]
-			puts mbid
-			name = a["name"]
-			dead = is_dead(mbid)
-			puts "is #{name} a dead artist?: " + dead.to_s
-	  		unless dead || Artist.find_by(name: name)
-    	  		artist = Artist.new
-    	  		artist.name = name
-    	  		artist.mbid = mbid
-    	  		a["image"].each do |image|
-    				case image['size'] 
-    				when 'small'
-    			  		artist.avatar_url = image["#text"] 
-    				when 'medium'
-    			  		artist.profile_picture_url = image["#text"] 
-    				when 'extralarge'
-    			  		artist.cover_url = image["#text"] 
-    				end
-    	  		end
-    	  		artist.save
-			end
-	  	end
-	end
-end
+require "#{Rails.root}/lib/last_fm"
 
 
+# every day,
+# fetch last_fm top
 
 # nest both tasks in a larger, smarter one.
+
 namespace :get_data do
 	# include LastFm
 	# use musicbrainz for death/alive
@@ -100,18 +40,14 @@ namespace :get_data do
 	  		# normalize name
 	  		name = a.name.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').downcase.to_s
 	  		api_response = last_fm.query(name, lang)
-			tags = api_response["artist"]["tags"]["tag"]
-			puts 'Tags:'
-			tags.each do |tag|
+			api_response["artist"]["tags"]["tag"].each do |tag|
 	  			a.tag_list.add(tag["name"])
 	  		end	
+
 	  		summary = api_response["artist"]["bio"]["summary"]
 	  		summary = JSON.parse(summary.to_json)
-			# remove the link
-			puts summary
 			summary = summary.slice(0..(summary.rindex('<a href')))
 
-			puts summary.length
 			unless summary.empty? || summary.length < 3
 				rindex = summary.rindex('.')
 				if rindex 
@@ -120,6 +56,7 @@ namespace :get_data do
 			else
 				summary = "..."
 			end
+
 	  		a.description = summary
 	  		a.save!
 	  		puts "#{name} has been saved, taking a quick break..."

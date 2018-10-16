@@ -25,8 +25,6 @@ class Artists extends Component {
     }
 
 	componentWillMount(){
-        // if (this.props.artists.artists.length > 0)
-        //     return;
         this.props.loadingArtists();
         // this.props.client.query({query: artistListQuery, fetchPolicy: 'network-only'}).then(
         this.props.client.query({query: artistSearchQuery, fetchPolicy: 'network-only', variables: {first:20}}).then(

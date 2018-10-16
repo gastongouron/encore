@@ -84,7 +84,7 @@ class Profile extends Component {
                 <div>                
                     <Paper style={paddedAndMarginBottom}>
                         <div style={marginRight}>
-                                <img alt='You uploaded a weird image^^' style={style} src={user.profile_picture?user.profile_picture:''}/>
+                            <img alt='You uploaded a weird image^^' style={style} src={user.profile_picture?user.profile_picture:''}/>
                         </div>
                         <div style={inline}>
                             <h1>
@@ -92,10 +92,7 @@ class Profile extends Component {
                             </h1>
                             {user.email?user.email:''}
                         </div>
-
                     </Paper>
-
-                    {/* { props.current ? <h1>Your Reviews</h1> : <h1>{props.user.first_name + "'s Reviews"}</h1> } */}
 
                     <div>
                         <div>
@@ -108,9 +105,9 @@ class Profile extends Component {
                                     match={this.props.match.url}
                                 />
                             </div>
-                    </div>
-                    <div>
-                        <form>
+                        </div>
+                        <div>
+                            <form>
                             <ReviewForm
                                 isUpdate={this.state.isUpdate}
                                 onShow={this.state.showModal}
@@ -128,9 +125,7 @@ class Profile extends Component {
                     </div>
                 </div>
             </div>
-
             }
-
         </div>
 
         )
