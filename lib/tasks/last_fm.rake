@@ -21,7 +21,6 @@ class LastFm
 	def is_dead(musicbrainz_id)
 		response = HTTParty.get("http://musicbrainz.org/ws/2/artist/#{musicbrainz_id}?inc=aliases&fmt=json", headers: {"User-Agent" => "HTTParty"})
 	  	sleep(1.5)
-	  	ap response["life-span"]
 		response["life-span"]["ended"]
 	end
 
@@ -104,7 +103,6 @@ namespace :get_data do
 			tags = api_response["artist"]["tags"]["tag"]
 			puts 'Tags:'
 			tags.each do |tag|
-	  			ap tag["name"]
 	  			a.tag_list.add(tag["name"])
 	  		end	
 	  		summary = api_response["artist"]["bio"]["summary"]
@@ -122,7 +120,6 @@ namespace :get_data do
 			else
 				summary = "..."
 			end
-			ap summary
 	  		a.description = summary
 	  		a.save!
 	  		puts "#{name} has been saved, taking a quick break..."

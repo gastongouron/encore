@@ -17,20 +17,20 @@ avatar = "data:image/gif;base64,R0lGODlhPQBEAPeoAJosM//AwO/AwHVYZ/z595kzAP/s7P+g
 	uid += 1
 end
 
-artists = []
-40.times do 
-	artists << Artist.create(
-		name: Faker::Music.unique.band,
-		description: Faker::Lorem.paragraph(rand(3..10))
-	)
-	puts "-> artist_#{aid} has been created"
-	aid += 1
-end
+# artists = []
+# 40.times do 
+# 	artists << Artist.create(
+# 		name: Faker::Music.unique.band,
+# 		description: Faker::Lorem.paragraph(rand(3..10))
+# 	)
+# 	puts "-> artist_#{aid} has been created"
+# 	aid += 1
+# end
 
-artists.each do |a| 
+Artist.all.each do |a| 
 	User.where(id: User.pluck(:id).sample(3)).each do |u|
 		Review.create(
-			body: Faker::Lorem.paragraph(rand(10..20)), 
+			body: Faker::Lorem.paragraph(rand(5..10)), 
 			artist_id: a.id, 
 			user_id: u.id,
 			score: rand(1..5)
