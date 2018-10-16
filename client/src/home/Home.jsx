@@ -9,7 +9,7 @@ const Home = ({currentUser, auth: {AuthLinks}, initArtists, initMyReviews}) => {
   
   return (
     <div>
-      <ViewHeading>Welcome to encore!</ViewHeading>
+      <ViewHeading>Welcome!</ViewHeading>
       <AuthLinks />
     </div>
   );

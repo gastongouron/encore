@@ -13,6 +13,8 @@ import ReviewList from '../Reviews/ReviewList'
 
 import EncoreLoader from '../EncoreLoader'
 
+import Taglist from './Taglist'
+
 const gridStyle = {
    display: 'grid',
 }
@@ -27,9 +29,21 @@ const actionsStyle = {
     textAlign: 'right',
 }
 
+const coverStyle = {
+    objectFit: 'cover',
+    backgroundSize: 'cover',
+    width: '100%',
+    height: 200,
+}
+
 
 class ArtistDetail extends Component {
+
+
     constructor(props){
+
+        console.log('ArtistDetail props:', props)
+
         super(props);
         this.save = onSave.bind(this)
         this.update = onUpdate.bind(this)
@@ -77,6 +91,7 @@ class ArtistDetail extends Component {
 
     render() {
         const {enabledButton} = this.state
+        const artist = this.props.artistDetail.artistDetail
         return (
             <div>
                 {this.props.artistDetail.loading 
@@ -89,33 +104,37 @@ class ArtistDetail extends Component {
                     <h1>Error...</h1> 
                 :
                 <div>
+                    <img style={coverStyle} src={artist.cover_url}/>
                     <div style={gridStyle}>    
                         <div style={detailStyle}>
-                            <h1>{this.props.artistDetail.artistDetail.name}</h1>
-                            <p>{this.props.artistDetail.artistDetail.description}</p>
+                            <h1>{artist.name}</h1>
+                            <p>{artist.description}</p>
+                            <Taglist tags={artist.tags} />
                         </div>
+
                         <div style={actionsStyle}>
-                        { this.isConnected() ? 
-                            <div>{ enabledButton 
-                                ? <RaisedButton label='New review' secondary={true} onClick={(e) => this.show(null, this)} />
-                                : <RaisedButton label='New review' secondary={true} onClick={(e) => this.show(null, this)} disabled/> }                               
-                            </div>
-                        :
-                            <div>
-                                <RaisedButton label='Wanna leave a review ?' primary={true} onClick={() => this.props.history.push('/users/getstarted') } />
-                            </div>
-                        }                        
+                            { this.isConnected() ? 
+                                <div>{ enabledButton 
+                                    ? <RaisedButton label='New review' secondary={true} onClick={(e) => this.show(null, this)} />
+                                    : <RaisedButton label='New review' secondary={true} onClick={(e) => this.show(null, this)} disabled/> }                               
+                                </div>
+                            :
+                                <div>
+                                    <RaisedButton label='Wanna leave a review ?' primary={true} onClick={() => this.props.history.push('/users/getstarted') } />
+                                </div>
+                            }                        
                         </div>
+
                         <br />
                     </div>
                     
 
                     <div>
                         <ReviewList
-                                onReviewSelect={reviewReview => this.show(reviewReview, this)}
-                                reviews={this.props.artistDetail.artistDetail.reviews}
-                                user={this.props.userInfo}
-                                match={this.props.match.url}
+                            onReviewSelect={reviewReview => this.show(reviewReview, this)}
+                            reviews={artist.reviews}
+                            user={this.props.userInfo}
+                            match={this.props.match.url}
                         />
                     </div>
 

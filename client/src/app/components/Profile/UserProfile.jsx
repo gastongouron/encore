@@ -63,7 +63,7 @@ class Profile extends Component {
             {this.state.loading ? <h1>Loading...</h1> : this.props.reviews.error ? <h1>Error...</h1> :
                 <div>                
                     <div>
-                        <img alt='meaningful text' style={style} src={user.profile_picture?user.profile_picture:''}/>
+                        <img alt='TODO' style={style} src={user.profile_picture?user.profile_picture:''}/>
                         <div>{user.display_name?user.display_name:''}</div>
                         <div>{user.email?user.email:''}</div>
                     </div>

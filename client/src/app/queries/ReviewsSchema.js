@@ -6,6 +6,8 @@ const artistDetailQuery = (gql`
 	        id
 	        name
 			description
+			tags
+			cover_url
 			reviews {
 				artist_id
                 artist_name

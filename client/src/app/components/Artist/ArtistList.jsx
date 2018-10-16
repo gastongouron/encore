@@ -20,20 +20,18 @@ class Artist extends Component {
           next={this.fetchMoreData}
           hasMore={this.props.hasMore}
           loader={<h4>Loading...</h4>}
-		  endMessage={
-		      <p style={{textAlign: 'center'}}>
-		        <b></b>
-		      </p>
-		   }>
-
-        {this.props.artists.map((artist, index) => (
-			<ArtistItem 
-				onArtistSelect={this.props.onArtistSelect}
-				key={index}
-				artist={artist} 
-			/>
-          ))}
-
+		      endMessage={
+		          <p style={{textAlign: 'center'}}>
+		            <b></b>
+		          </p>
+		       }>
+           {this.props.artists.map((artist, index) => (
+      			  <ArtistItem 
+      			  	onArtistSelect={this.props.onArtistSelect}
+      			  	key={index}
+      			  	artist={artist} 
+      			  />
+            ))}
         </InfiniteScroll>
       </div>
     );

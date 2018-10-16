@@ -7,6 +7,10 @@ const artistSearchQuery = (gql`
           name
           description
           score
+          avatar_url
+          profile_picture_url
+          cover_url
+          tags
       }
     }
 `);

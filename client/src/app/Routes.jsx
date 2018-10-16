@@ -21,8 +21,6 @@ const Routes = () => {
       <WithMainLayout exact path="/policy"      component={Policy} />
       <WithMainLayout exact path="/"            component={Home} />
       <WithMainLayout exact path="/artists/:id" component={Artist} />
-      {/* <PrivateRoute   exact path="/artists/:id" layout={MainLayout} component={ArtistDetail} /> */}
-
 
       <PrivateRoute   exact path="/artists"     layout={MainLayout} component={Artists} />
       <PrivateRoute   exact path="/user/:id"    layout={MainLayout} component={Profile} />
