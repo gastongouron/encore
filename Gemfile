@@ -20,7 +20,6 @@ gem 'devise-jwt'
 gem 'administrate'
 
 gem 'acts-as-taggable-on'
-gem 'whenever', require: false
 
 gem 'httparty'
 gem 'faker'

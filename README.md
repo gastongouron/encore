@@ -35,9 +35,10 @@ If you want to change the ports locally, change both ```.foreman``` and ```./cli
   * [apollo](http://dev.apollodata.com/)
   * [styled-components](https://github.com/styled-components/styled-components)
 
+
 ### A note about rake
 
-bundle exec rake db:drop && rake db:create && rake db:migrate && rake get_data:last_fm_top_list && get_data:last_fm_artist_detail
+bundle exec rake db:drop && rake db:create && rake db:migrate && rake get_data:last_fm_top_list && get_data:last_fm_artist_detail. This projects uses `heroku scheduler`, to access it: `heroku addons:open scheduler`.
 
 ### A Note on Administrate
 
