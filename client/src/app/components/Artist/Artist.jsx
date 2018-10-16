@@ -12,22 +12,9 @@ import ReviewForm from '../Reviews/ReviewForm'
 import ReviewList from '../Reviews/ReviewList'
 
 import EncoreLoader from '../EncoreLoader'
+import Paper from 'material-ui/Paper'
 
 import Taglist from './Taglist'
-
-const gridStyle = {
-   display: 'grid',
-}
-
-const detailStyle = {
-    gridColumn: 1,
-    textAlign: 'left',
-}
-
-const actionsStyle = {
-    gridColumn: 2,
-    textAlign: 'right',
-}
 
 const coverStyle = {
     objectFit: 'cover',
@@ -103,16 +90,17 @@ class ArtistDetail extends Component {
                 ? 
                     <h1>Error...</h1> 
                 :
+
                 <div>
                     <img style={coverStyle} src={artist.cover_url}/>
-                    <div style={gridStyle}>    
-                        <div style={detailStyle}>
+                    <div>    
+                        <div>
                             <h1>{artist.name}</h1>
                             <p>{artist.description}</p>
                             <Taglist tags={artist.tags} />
                         </div>
 
-                        <div style={actionsStyle}>
+                        <div>
                             { this.isConnected() ? 
                                 <div>{ enabledButton 
                                     ? <RaisedButton label='New review' secondary={true} onClick={(e) => this.show(null, this)} />

@@ -23,6 +23,9 @@ export default {
     desktopSubheaderHeight: 48,
     desktopToolbarHeight: 56
   },
+  typography: {
+    useNextVariants: true,
+  },
   appBar: {
     color: '#000000',
     textColor: '#ffffff',

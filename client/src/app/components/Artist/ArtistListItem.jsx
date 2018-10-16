@@ -1,7 +1,8 @@
-import React from 'react';
-import Paper from 'material-ui/Paper';
-import StarIcon from 'react-material-icons/icons/toggle/star';
+import React from 'react'
+import Paper from 'material-ui/Paper'
+import StarIcon from 'react-material-icons/icons/toggle/star'
 import Taglist from './Taglist'
+import Grid from '@material-ui/core/Grid'
 
 const ArtistListItem = (props) => {
 
@@ -10,44 +11,31 @@ const ArtistListItem = (props) => {
 	const tags = artist.tags
 
 
-	const root = {
-    flexGrow: 1,
+	const rootz = {
+	  flexGrow: 1,
+	}
+
+	const padded = {
+	  padding: 20,
+	}
+
+	const floatLeft = {
+	  float: 'left',
+	}
+
+	const floatRight = {
+	  float: 'right',
 	}
 
 	const paperStyle = {
-	  display: 'grid',
-	  zIndex: 2,
 	  marginBottom: 20,
 	};
 
-	const inline = {
-		display: 'inline'
-	}
-
 	const imageStyle = {
-		// width: '100%',
 	    objectFit: 'cover',
 	    backgroundSize: 'cover',
 	    height: '100%',
-	    maxWidth: '100%'
-	    // height: 200,
-	}
-
-	const gridColumn = {
-		gridColumn: 1,
-	}
-
-	const textStyle = {
-		gridColumn: 2,
-		textAlign: 'left',
-		float: 'left',
-		padding: 20,
-	}
-
-	const noteStyle = {
-		gridColumn: 3,
-  	    textAlign: 'right',
-		padding: 20,
+	    width: '100%'
 	}
 
 	return (
@@ -55,23 +43,36 @@ const ArtistListItem = (props) => {
 				style={paperStyle} zDepth={1} 
 				rounded={false} 
 				onClick={ () => onArtistSelect(artist) } >
+				<div style={rootz}>
+					<Grid container>
 
-				<div style={gridColumn}>
-					<img style={imageStyle} src={artist.cover_url}></img>
-				</div>
+				        <Grid item xs={12} sm={4}>
+							<img style={imageStyle} src={artist.cover_url}></img>
+				        </Grid>
 
-				<div style={textStyle}>
-					<h1 style={inline}>{artist.name}</h1>
-					<br />
-					<p>{artist.description}</p>
-					<Taglist tags={tags}/>
-				</div>
+				        <Grid style={padded} item xs={12} sm={8}>
 
-				<div style={noteStyle}>
-					<h1>
-						<StarIcon color="#f44336"/>
-						{Math.round( artist.score * 10 ) / 10}
-					</h1>
+				        	<Grid style={floatLeft} item xs={9}>
+				        		<h1>{artist.name}</h1>
+				        	</Grid>
+
+				        	<Grid style={floatRight} item xs={3}>
+				        		<h1><StarIcon color="#f44336"/>{Math.round( artist.score * 10 ) / 10}</h1>
+				        	</Grid>
+
+				        	<br />
+				        	<br />
+				        	<br />
+
+							<Grid style={floatLeft} item xs={12}>
+								<p>{artist.description}</p>
+								<Taglist tags={tags}/>
+					        </Grid>
+
+						</Grid>
+
+
+				    </Grid>
 				</div>
 
 			</Paper>

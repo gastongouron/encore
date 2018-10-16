@@ -60,7 +60,8 @@ class Profile extends Component {
         const user = this.onCurrentUserProfile() ? this.props.userInfo : this.props.userProfile.userProfile
         return (
             <div>
-            {this.state.loading ? <h1>Loading...</h1> : this.props.reviews.error ? <h1>Error...</h1> :
+                {this.state.loading ? <h1>Loading...</h1> : this.props.reviews.error ? <h1>Error...</h1> :
+
                 <div>                
                     <div>
                         <img alt='TODO' style={style} src={user.profile_picture?user.profile_picture:''}/>
@@ -69,44 +70,41 @@ class Profile extends Component {
                     </div>
                     <div>
                         <div>
-                            {this.onCurrentUserProfile() ? 
-                                <h1>Your Reviews</h1>    
-                            :
-                                <h1>{user.first_name + "'s Reviews"}</h1>                                        
-                            }
-                            <div>
-                        </div>
-                        <hr />
+                            {this.onCurrentUserProfile() ? <h1>Your Reviews</h1> : <h1>{user.first_name + "'s Reviews"}</h1> }
                         <div>
-                                <ReviewList
-                                    onReviewSelect={selectedReview =>this.show(selectedReview, this)}
-                                    reviews={this.props.reviews.reviews}
-                                    user={this.props.userInfo}
-                                    match={this.props.match.url}
-                                />
-                            </div>
-                        </div>
-                        <div>
-                            <form>
-                            <ReviewForm
-                                isUpdate={this.state.isUpdate}
-                                onShow={this.state.showModal}
-                                onHide={(e) => this.close(this)}
-                                editable={true}
-                                formValue={this.state.review!==null?this.state.review.body:''}
-                                formScore={this.state.review!==null?this.state.review.score:''}
-                                setBody={(e)=>this.body(e, this)}
-                                setScore={(value)=>this.score(value, this)}
-                                onClickDelete={(e)=>this.delete(e, this)}
-                                onClickUpdate={(e)=>this.update(e, this)}
-                                onClickClose={(e) => this.close(this)}
-                            />
-                            </form>
-                        </div>
+                    </div>
+
+                    <div>
+                        <ReviewList
+                            onReviewSelect={selectedReview =>this.show(selectedReview, this)}
+                            reviews={this.props.reviews.reviews}
+                            user={this.props.userInfo}
+                            match={this.props.match.url}
+                        />
                     </div>
                 </div>
-                }
+
+                <div>
+                    <form>
+                        <ReviewForm
+                            isUpdate={this.state.isUpdate}
+                            onShow={this.state.showModal}
+                            onHide={(e) => this.close(this)}
+                            editable={true}
+                            formValue={this.state.review!==null?this.state.review.body:''}
+                            formScore={this.state.review!==null?this.state.review.score:''}
+                            setBody={(e)=>this.body(e, this)}
+                            setScore={(value)=>this.score(value, this)}
+                            onClickDelete={(e)=>this.delete(e, this)}
+                            onClickUpdate={(e)=>this.update(e, this)}
+                            onClickClose={(e) => this.close(this)}
+                        />
+                    </form>
+                </div>
             </div>
+        </div>
+        }
+    </div>
         )
     }
 }
