@@ -71,7 +71,7 @@ class Profile extends Component {
     }
 
     onCurrentUserProfile(){
-        return this.props.userInfo.user_id === this.props.match.params.id  
+        return Number(this.props.userInfo.user_id) === Number(this.props.match.params.id)
     }
 
     render() {
