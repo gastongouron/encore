@@ -42,7 +42,7 @@ class LastFm
 			mbid = a["mbid"]
 			name = a["name"]
 			dead = is_dead(mbid)
-	  		unless dead || Artist.find_by(name: name)
+	  		unless Artist.find_by(name: name) || dead
     	  		artist = Artist.new
     	  		artist.name = name
     	  		artist.mbid = mbid

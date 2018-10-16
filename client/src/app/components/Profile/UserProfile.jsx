@@ -11,7 +11,6 @@ import ReviewForm from '../Reviews/ReviewForm'
 
 import EncoreLoader from '../EncoreLoader'
 import Paper from 'material-ui/Paper'
-import Grid from '@material-ui/core/Grid'
 
 
 const paddedAndMarginBottom = {
@@ -72,7 +71,7 @@ class Profile extends Component {
     }
 
     onCurrentUserProfile(){
-        return this.props.userInfo.user_id == this.props.match.params.id  
+        return this.props.userInfo.user_id === this.props.match.params.id  
     }
 
     render() {
@@ -84,7 +83,7 @@ class Profile extends Component {
                 <div>                
                     <Paper style={paddedAndMarginBottom}>
                         <div style={marginRight}>
-                            <img alt='You uploaded a weird image^^' style={style} src={user.profile_picture?user.profile_picture:''}/>
+                            <img alt='...' style={style} src={user.profile_picture?user.profile_picture:''}/>
                         </div>
                         <div style={inline}>
                             <h1>

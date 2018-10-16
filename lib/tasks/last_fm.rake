@@ -15,6 +15,11 @@ namespace :get_data do
 	last_fm = LastFm.new(key)
 	sleeptime = 0.4
 	
+	task :test_task => [ :environment ] do
+		puts key
+		puts lang
+	end
+
 	task :last_fm_top_list => [ :environment ] do
 
 	  	# params for task?

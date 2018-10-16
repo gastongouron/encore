@@ -8,7 +8,7 @@ const ReviewListItem = (props) => {
 	const userId = props.userId
 	const review = props.review
 	const onReviewSelect = props.onReviewSelect
-	const belongsToUser = (userId == review.user_id)
+	const belongsToUser = (userId === review.user_id)
 	const onUserProfile = props.match.includes('user')
 
 	const style = {

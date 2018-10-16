@@ -1,7 +1,6 @@
 import React from 'react';
 import ImageTools from './Imagetools'
 import RaisedButton from 'material-ui/RaisedButton';
-import $ from 'jquery'
 
 const styles = {
   uploadButton: {

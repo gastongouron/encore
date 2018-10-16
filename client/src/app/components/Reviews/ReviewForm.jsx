@@ -2,12 +2,6 @@ import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
-
-import StarIcon from 'react-material-icons/icons/toggle/star';
-import StarBorder from 'react-material-icons/icons/toggle/star-border';
-import StarHalf from 'react-material-icons/icons/toggle/star-half';
-
-import theme from '../../theme'
 import Slider from 'material-ui/Slider';
 
 
@@ -38,15 +32,6 @@ class CustomForm extends Component {
                      <RaisedButton style={style} label="Cancel" default={true} onClick={this.props.onClickClose}/>]
 
     const actions = this.props.isUpdate ? update : create
-
-    const starStyle = {
-      padding: 30,
-      letterSpacing: 16,
-      display: 'flex', 
-      fontSize: 28,
-      margin: 10,
-      justifyContent: 'center'
-    }
 
     return (
            <Dialog

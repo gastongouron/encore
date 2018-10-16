@@ -5,11 +5,9 @@ import {logout} from '../app/components/Devise/views/Actions';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
-import LogoIcon from 'material-ui/svg-icons/action/lightbulb-outline';
+// import LogoIcon from 'material-ui/svg-icons/action/lightbulb-outline';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {Notice} from '../shared';
-import IconButton from 'material-ui/IconButton';
-import IconMusic from 'material-ui/'
 
 const MainAppBar = styled(AppBar)`
   &:hover {
@@ -32,12 +30,12 @@ const Main = styled.div`
   height: 100%;
 `;
 
-const Logo = styled(LogoIcon)`
-  height: 32px !important;
-  width: 32px !important;
-  color: ${({theme}) => theme.palette.alternateTextColor} !important;
-  padding: 6px !important;
-`;
+// const Logo = styled(LogoIcon)`
+//   height: 32px !important;
+//   width: 32px !important;
+//   color: ${({theme}) => theme.palette.alternateTextColor} !important;
+//   padding: 6px !important;
+// `;
 
 class UserMenuItem extends Component {
   state = {

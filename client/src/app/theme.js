@@ -1,7 +1,6 @@
 import {
-  deepOrangeA200,
-  grey100, grey300, grey400, grey500,
-  white, darkBlack, fullBlack, indigo500, indigo700
+  grey300, grey400, indigo500,
+  white, darkBlack, fullBlack
 } from 'material-ui/styles/colors';
 import {fade} from 'material-ui/utils/colorManipulator';
 
@@ -38,12 +37,7 @@ export default {
     accent3Color: '#e57373',
     primary2Color: '#283593',
 
-    // primary1Color: indigo500,
-    // primary2Color: indigo700,
     primary3Color: grey400,
-    // accent1Color: deepOrangeA200,
-    // accent2Color: grey100,
-    // accent3Color: grey500,
     // textColor: darkBlack,
     secondaryTextColor: fade(darkBlack, 0.54),
     alternateTextColor: white,

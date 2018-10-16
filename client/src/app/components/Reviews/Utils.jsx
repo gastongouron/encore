@@ -1,4 +1,3 @@
-import React, {Component} from 'react';
 import updateMutation from '../../mutations/updateReview'
 import deleteMutation from '../../mutations/deleteReview'
 import newReviewMutation from '../../mutations/newReview'

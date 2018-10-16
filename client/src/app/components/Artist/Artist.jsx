@@ -14,7 +14,6 @@ import Taglist from './Taglist'
 
 import Paper from 'material-ui/Paper'
 import Grid from '@material-ui/core/Grid'
-import StarIcon from 'react-material-icons/icons/toggle/star'
 
 const coverStyle = {
     objectFit: 'cover',
@@ -75,7 +74,7 @@ class ArtistDetail extends Component {
     checkEnableNewReview(reviews){
         if (this.props.userInfo.user_id) {
             for (var i = 0; i < reviews.length; i++) {
-                if(reviews[i].user_id == this.props.userInfo.user_id){
+                if(reviews[i].user_id === this.props.userInfo.user_id){
                     this.setState({enabledButton: false});
                 }
             }
@@ -85,7 +84,6 @@ class ArtistDetail extends Component {
     }
 
     render() {
-        const {enabledButton} = this.state
         const artist = this.props.artistDetail.artistDetail
         return (
             <div>
@@ -94,7 +92,7 @@ class ArtistDetail extends Component {
                 <div>
 
                         <Paper style={marginBottom} zDepth={1} rounded={false} >
-                            <img style={coverStyle} src={artist.cover_url}/>
+                            <img alt="" style={coverStyle} src={artist.cover_url}/>
                             <div style={rootz}>
 
                                 <Grid style={padded} container>

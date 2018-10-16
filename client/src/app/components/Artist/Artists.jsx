@@ -20,7 +20,7 @@ class Artists extends Component {
             searchTerm: ''
 
           }
-        this.artistSearch = this.method = __.debounce(this.artistSearch.bind(this),500);
+        this.artistSearch = this.method = __.debounce(this.artistSearch.bind(this), 200);
         this.scrollFetch = this.scrollFetch.bind(this)
     }
 
@@ -49,7 +49,7 @@ class Artists extends Component {
         this.props.client.query({query: artistSearchQuery, fetchPolicy: 'network-only', variables: {input: term.toLowerCase() }}).then(
             (res) => {
                 this.setState({artists: res.data.allArtists})
-                if (res.data.allArtists.length == 0) { this.setState({hasMore: false}) }
+                if (res.data.allArtists.length === 0) { this.setState({hasMore: false}) }
             },
             (err) => {
                 this.props.failedArtists(err.data);
@@ -63,7 +63,7 @@ class Artists extends Component {
         this.props.client.query({query: artistSearchQuery, fetchPolicy: 'network-only', variables: variables}).then(
             (res) => {
                 this.setState({artists: this.state.artists.concat(res.data.allArtists)});
-                if (res.data.allArtists.length == 0) { this.setState({hasMore: false}) }
+                if (res.data.allArtists.length === 0) { this.setState({hasMore: false}) }
             },
             (err) => {
                 this.props.failedArtists(err.data);
