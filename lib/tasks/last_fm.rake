@@ -16,8 +16,7 @@ namespace :get_data do
 	sleeptime = 0.4
 	
 	task :test_task => [ :environment ] do
-		puts key
-		puts lang
+		puts 'HELLO WORLD'
 	end
 
 	task :last_fm_top_list => [ :environment ] do

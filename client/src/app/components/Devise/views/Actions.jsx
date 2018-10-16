@@ -1,6 +1,7 @@
 import {fetchJSON} from 'react-devise/lib/actions/api';
 import {UnauthorizedError, ValidationError} from 'react-devise/lib/errors';
-import {setAuthToken, removeAuthToken, getAuthToken} from 'react-devise/lib/actions/authTokenStore';
+// import {setAuthToken, removeAuthToken, getAuthToken} from 'react-devise/lib/actions/authTokenStore';
+import {setAuthToken, removeAuthToken} from 'react-devise/lib/actions/authTokenStore';
 import {getConfig} from 'react-devise/lib/config/index';
 
 const ROUTES = {
