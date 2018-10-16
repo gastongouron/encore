@@ -7,6 +7,7 @@ import artistSearchQuery from '../../queries/ArtistSearch'
 import ArtistList from './ArtistList'
 import SearchBar from './ArtistSearchBar'
 import EncoreLoader from '../EncoreLoader'
+import __ from 'lodash';
 
 class Artists extends Component {
 
@@ -19,7 +20,7 @@ class Artists extends Component {
             searchTerm: ''
 
           }
-        this.artistSearch = this.artistSearch.bind(this)
+        this.artistSearch = this.method = __.debounce(this.artistSearch.bind(this),500);
         this.scrollFetch = this.scrollFetch.bind(this)
     }
 

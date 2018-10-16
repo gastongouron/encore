@@ -88,7 +88,7 @@ class Profile extends Component {
                         </div>
                         <div style={inline}>
                             <h1>
-                                {user.display_name?user.display_name:''}
+                                {user.display_name?user.display_name:''} reviews
                             </h1>
                             {user.email?user.email:''}
                         </div>

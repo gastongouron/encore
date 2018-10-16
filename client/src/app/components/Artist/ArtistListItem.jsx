@@ -45,11 +45,11 @@ const ArtistListItem = (props) => {
 				<div style={rootz}>
 					<Grid container>
 
-				        <Grid item xs={12} sm={3}>
+				        <Grid item xs={12} sm={4} md={3}>
 							<img style={imageStyle} src={artist.cover_url}></img>
 				        </Grid>
 
-				        <Grid style={padded} item xs={12} sm={9}>
+				        <Grid style={padded} item xs={12} sm={8} md={9}>
 
 				        	<Grid style={floatLeft} item xs={9}>
 				        		<h1>{artist.name}</h1>
