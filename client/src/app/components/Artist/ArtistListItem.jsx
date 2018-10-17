@@ -8,6 +8,7 @@ const ArtistListItem = (props) => {
 
 	const artist = props.artist
 	const onArtistSelect = props.onArtistSelect
+	const onClickTag = props.onClickTag
 	const tags = artist.tags
 
 	const rootz = {
@@ -40,12 +41,11 @@ const ArtistListItem = (props) => {
 	return (
 			<Paper
 				style={paperStyle} zDepth={1} 
-				rounded={false} 
-				onClick={ () => onArtistSelect(artist) } >
+				rounded={false} >
 				<div style={rootz}>
 					<Grid container>
 
-				        <Grid item xs={12} sm={4} md={3}>
+				        <Grid item xs={12} sm={4} md={3} onClick={ () => onArtistSelect(artist) }>
 							<img alt="todo" style={imageStyle} src={artist.cover_url}></img>
 				        </Grid>
 
@@ -65,7 +65,12 @@ const ArtistListItem = (props) => {
 
 							<Grid style={floatLeft} item xs={12}>
 								<p>{artist.description}</p>
-								<Taglist tags={tags}/>
+							</Grid>
+							<Grid style={floatLeft} item xs={12}>
+								<Taglist 
+									onClickTag={onClickTag}
+									tags={tags} />
+								
 					        </Grid>
 
 						</Grid>

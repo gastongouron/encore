@@ -4,9 +4,9 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 class Artist extends Component {
 
-    // constructor(props){
-    //     super(props);
-    // }
+    constructor(props){
+        super(props);
+    }
 
   	fetchMoreData = () => {
   	    this.props.onFetch(20, this.props.artists.length)      	
@@ -27,6 +27,7 @@ class Artist extends Component {
 		       }>
            {this.props.artists.map((artist, index) => (
       			  <ArtistItem 
+                onClickTag={this.props.onClickTag}
       			  	onArtistSelect={this.props.onArtistSelect}
       			  	key={index}
       			  	artist={artist} 

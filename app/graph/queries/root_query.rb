@@ -28,6 +28,13 @@ RootQuery = GraphQL::ObjectType.define do
     })
   end
 
+  field :tagged, types[Types::ArtistType] do
+    argument :tag, !types.String
+    resolve (->(_, args, _) {
+      Artist.tagged_with(args[:tag])
+    })
+  end
+
   # get a review by id
   field :review do
     type Types::ReviewType

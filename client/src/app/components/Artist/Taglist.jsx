@@ -1,42 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Chip from 'material-ui/Chip';
 
 const styles = {
   chip: {
-  	zIndex: 4,
     margin: 4,
   },
   wrapper: {
     display: 'flex',
-    zIndex: 3,
     flexWrap: 'wrap',
   }
 }
 
-const handleClick = (e, tag) => {
-	console.log(tag)
-}
+class Taglist extends Component {
 
-const Taglist = (props) => {
+	constructor(props){
+		super(props)
+	}
 
-	if(props.tags !== undefined){
-		const tagItems = props.tags.split(',').map((tag, index) => {
+	render(){
+
+		if(this.props.tags !== undefined){
+			const tagItems = this.props.tags.split(',').map((tag, index) => {
+				return (
+			        <Chip 
+			        	key={index} 
+			        	style={styles.chip}
+			        	onClick={ () => this.props.onClickTag(tag)}>
+			        	{tag} 
+			        </Chip>			
+				) 
+			})
 			return (
-		        <Chip 
-		        	key={index} 
-		        	style={styles.chip}
-		        	onClick={(e) => handleClick(e, tag)}>
-		        	{tag} 
-		        </Chip>			
-			) 
-		})
-		return (
-			<div style={styles.wrapper}>
-				{tagItems}
-			</div>
-		)
-	} else {
-		return null
+				<div style={styles.wrapper}>
+					{tagItems}
+				</div>
+			)
+		} else {
+			return null
+		}
 	}
 }
 

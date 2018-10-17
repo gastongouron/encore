@@ -4,6 +4,7 @@ import { withApollo } from 'react-apollo'
 import { initArtists, loadingArtists, failedArtists, setArtists } from '../../actions/artists'
 // import artistListQuery from '../../queries/ArtistSchema'
 import artistSearchQuery from '../../queries/ArtistSearch'
+import artistByTagNameQuery from '../../queries/ArtistByTagName'
 import ArtistList from './ArtistList'
 import SearchBar from './ArtistSearchBar'
 import EncoreLoader from '../EncoreLoader'
@@ -17,11 +18,12 @@ class Artists extends Component {
             artists: this.props.artists.artists,
             selectedArtist: null,
             hasMore: true,
-            searchTerm: ''
-
+            searchTerm: '',
+            tag: ''
           }
-        this.artistSearch = this.method = __.debounce(this.artistSearch.bind(this), 200);
+        this.artistSearch = this.method = __.debounce(this.artistSearch.bind(this), 500);
         this.scrollFetch = this.scrollFetch.bind(this)
+        this.onClickTag = this.onClickTag.bind(this)
     }
 
 	componentWillMount(){
@@ -29,8 +31,6 @@ class Artists extends Component {
         // this.props.client.query({query: artistListQuery, fetchPolicy: 'network-only'}).then(
         this.props.client.query({query: artistSearchQuery, fetchPolicy: 'network-only', variables: {first:20}}).then(
             (res) => {
-                console.log('in res')
-                console.log(res)
                 this.props.setArtists(res.data.allArtists);
                 this.setState({artists: res.data.allArtists})
             },
@@ -45,7 +45,7 @@ class Artists extends Component {
     }
     
     artistSearch(term) {
-        this.setState({searchTerm: term})
+        this.setState({searchTerm: term.toLowerCase()})
         this.props.client.query({query: artistSearchQuery, fetchPolicy: 'network-only', variables: {input: term.toLowerCase() }}).then(
             (res) => {
                 this.setState({artists: res.data.allArtists})
@@ -57,6 +57,21 @@ class Artists extends Component {
         )
     }
 
+    onClickTag(tagname) {
+        this.setState(tagname)
+
+        this.child.method(tagname)
+
+        this.props.client.query({query: artistByTagNameQuery, fetchPolicy: 'network-only', variables: {input: tagname.tag.toLowerCase() }}).then(
+            (res) => {
+                this.setState({artists: res.data.tagged})
+                if (res.data.tagged.length === 0) { this.setState({hasMore: false}) }
+            },
+            (err) => {
+                this.props.failedArtists(err.data);
+            }
+        )
+    }
 
     scrollFetch(first=null, skip=null) {
         const variables = this.state.searchTerm ? {input: this.state.searchTerm.toLowerCase(), first:first, skip:skip } : {first:first, skip:skip } 
@@ -79,10 +94,14 @@ class Artists extends Component {
 
                 : this.props.artists.error ? <h1>Error...</h1> : 
                     <div>
-                        <SearchBar onSearchTermChange={this.artistSearch}/>
+                        <SearchBar 
+                            onRef={ref => (this.child = ref)} 
+                            onSearchTermChange={this.artistSearch}
+                        />
                         <br />
                         <br />
                         <ArtistList
+                            onClickTag={tag => this.onClickTag({tag})}
                             hasMore={this.state.hasMore}
                             onFetch={this.scrollFetch}
                             dataLength={this.state.artists.length}

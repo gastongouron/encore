@@ -44,6 +44,10 @@ class Resolvers::ArtistsSearch
     # add like SQL conditions
     # todo add genre to conditions such as RAP or ROCK
     scope = Artist.all
+
+    # check manually is a value is a tag. 
+    # puts ActsAsTaggableOn::Tag.where(name: value['name_contains'] ).exists?
+
     scope = scope.where('lower(description) LIKE ?', "%#{value['description_contains']}%") if value['description_contains']
     scope = scope.where('lower(name) LIKE ?', "%#{value['name_contains']}%") if value['name_contains']
 
