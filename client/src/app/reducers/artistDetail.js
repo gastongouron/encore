@@ -31,7 +31,6 @@ export default (state = initialState, action) => {
                 artistDetail: action.artistDetail
             }
         case 'ADD_NEW_REVIEW':
-            console.log('new', action.newReview);
             let {reviews=[]} = state.artistDetail;
             let artistDetail = {...state.artistDetail};
             artistDetail.reviews = [...reviews, action.newReview];

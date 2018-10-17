@@ -66,6 +66,7 @@ const ArtistListItem = (props) => {
 							<Grid style={floatLeft} item xs={12}>
 								<p>{artist.description}</p>
 							</Grid>
+
 							<Grid style={floatLeft} item xs={12}>
 								<Taglist 
 									onClickTag={onClickTag}

@@ -14,6 +14,9 @@ class Artists extends Component {
 
     constructor(props){
         super(props);
+
+        console.log('PROPS in Artists: ', props)
+
         this.state = {
             artists: this.props.artists.artists,
             selectedArtist: null,

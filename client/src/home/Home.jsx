@@ -4,13 +4,14 @@ import { withAuth } from 'react-devise';
 import { ViewContainer } from '../shared';
 import { initArtists } from '../app/actions/artists'
 import { initUserReviews } from '../app/actions/reviews'
+import strings from '../app/locales/strings'
 
 const Home = ({currentUser, auth: {AuthLinks}, initArtists, initMyReviews}) => {
-  
+
   return (
     <div>
       <ViewContainer>
-        <h1>Welcome!</h1>
+        <h1>{strings.how}</h1>
         <AuthLinks />
       </ViewContainer>
     </div>

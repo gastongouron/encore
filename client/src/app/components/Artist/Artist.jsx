@@ -3,9 +3,7 @@ import { connect } from 'react-redux'
 import { withApollo } from 'react-apollo'
 import { initArtistDetail, loadingArtistDetail, failedArtistDetail, setArtistDetail, addUserReview, selectUserReview, updateUserReview, deleteUserReview } from '../../actions/artistDetail'
 import { onUpdate, onDelete, onSave, setBody, setScore, handleModalShow, handleModalClose} from '../Reviews/Utils'
-
 import artistDetailQuery from '../../queries/ReviewsSchema'
-
 import ReviewForm from '../Reviews/ReviewForm'
 import ReviewList from '../Reviews/ReviewList'
 import ActionButtons from './ActionButtons'
@@ -39,6 +37,8 @@ class ArtistDetail extends Component {
     constructor(props){
 
         super(props);
+        console.log('props in ARTIST! ->>>>', props)
+
         this.save = onSave.bind(this)
         this.update = onUpdate.bind(this)
         this.delete = onDelete.bind(this)
@@ -111,7 +111,7 @@ class ArtistDetail extends Component {
                                         <p>{artist.description}</p>
                                     </Grid>
                                     <Grid item xs={12} sm={12}>
-                                        <Taglist tags={artist.tags} />
+                                        <Taglist onClickTag={() => console.log('cool')} tags={artist.tags} />
                                     </Grid>
                                 </Grid>
 

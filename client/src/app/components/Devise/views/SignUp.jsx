@@ -7,6 +7,7 @@ import {required, email} from 'react-devise/lib/views/validation';
 import FileBase64 from './FileBase64';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
+import strings from '../../../locales/strings'
 
 const styles = {
   uploadButton: {
@@ -65,7 +66,10 @@ const SubmitButtonCustom = ({label, disabled}) => (
 );
 
 const SignUpForm = reduxForm({
-  form: 'signUp'
+  form: 'signUp',
+  initialValues: {
+    "locale": strings.getLanguage()
+  }
 })(({error, valid, submitting, submitSucceeded, handleSubmit, onSubmit, auth: {messages: {signUpSucceeded: signUpSucceededMessage}, viewPlugin: {renderInput, SubmitButton, Form, FormError}}}) => {
   if (submitSucceeded) {
     return <Redirect to={{

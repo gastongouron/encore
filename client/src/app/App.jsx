@@ -10,7 +10,6 @@ import theme from './theme';
 // import theme from 'material-ui/styles/baseThemes/darkBaseTheme'
 import Routes from './Routes';
 
-
 const App = ({store}) => {
   return (
     <StyledComponentsThemeProvider theme={theme}>

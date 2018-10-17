@@ -17,7 +17,6 @@ import reducers from './reducers';
 import SignUpContainer from './components/Devise/views/SignUp'
 import LoginContainer from './components/Devise/views/LogIn'
 
-
 injectTapEventPlugin();
 
 const apolloClient = new ApolloClient({
@@ -67,6 +66,7 @@ initReactDevise({
       Heading: ViewHeading
     }
   ],
+  // Internationalize
   messages: {
     loginFailed: 'Whoa there. Bad login!'
   },

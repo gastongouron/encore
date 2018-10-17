@@ -18,7 +18,7 @@ class SearchBar extends Component {
 	}
 	
 	method(tagname) {
-	  this.setState({tag: tagname.tag})
+	  this.setState({tag: tagname.tag.trim()})
 	}
 
 	render() {

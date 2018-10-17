@@ -4765,6 +4765,11 @@ loader-utils@0.2.x, loader-utils@^0.2.11, loader-utils@^0.2.16, loader-utils@^0.
     json5 "^0.5.0"
     object-assign "^4.0.1"
 
+localized-strings@^0.2.00:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/localized-strings/-/localized-strings-0.2.0.tgz#7a62e6d901a9feb3e0340db8ea3eaec0000a0f40"
+  integrity sha512-f65RKRAt97oznq2gRVhuQim6bWAlz+yPr0C002dxttnkcxMEamDQLJmGMctqclfeQyrBm2cc4bFmIzk44+sLAQ==
+
 lodash-es@^4.17.3, lodash-es@^4.17.4, lodash-es@^4.17.5, lodash-es@^4.2.1:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.11.tgz#145ab4a7ac5c5e52a3531fb4f310255a152b4be0"
@@ -6467,6 +6472,14 @@ react-loader-spinner@^2.0.6:
     babel-runtime "^6.6.1"
     prop-types "^15.6.2"
 
+react-localization@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/react-localization/-/react-localization-1.0.12.tgz#df87d5f9b956175e92aa2e548d6d3def4efcaa84"
+  integrity sha512-/DHst00OTF9hHbj+HIdozvvm8P9KT/WzTOhtYEJ27xHRdXTI81Q22FNyYaNrQj9nwupidM/fDaWgGNMDKFxJPQ==
+  dependencies:
+    localized-strings "^0.2.00"
+    react "^16.0.0"
+
 react-material-icons@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/react-material-icons/-/react-material-icons-1.0.3.tgz#8974b06e00e20f60f21abe94b5d6db07f8a391d9"
@@ -6643,7 +6656,7 @@ react@^15.5.4, react@^15.6.1:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
-react@^16.2.0, react@^16.4.2:
+react@^16.0.0, react@^16.2.0, react@^16.4.2:
   version "16.5.2"
   resolved "https://registry.yarnpkg.com/react/-/react-16.5.2.tgz#19f6b444ed139baa45609eee6dc3d318b3895d42"
   integrity sha512-FDCSVd3DjVTmbEAjUNX6FgfAmQ+ypJfHUsqUJOYNCBUp1h8lqmtC+0mXJ+JjsWx4KAVTkk1vKd1hLQPvEviSuw==

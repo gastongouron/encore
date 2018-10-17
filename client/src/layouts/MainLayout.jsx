@@ -9,6 +9,9 @@ import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {Notice} from '../shared';
 
+// import strings from '../app/locales/strings'
+
+
 const MainAppBar = styled(AppBar)`
   &:hover {
     cursor: pointer;
@@ -37,16 +40,19 @@ const Main = styled.div`
 //   padding: 6px !important;
 // `;
 
+
 class UserMenuItem extends Component {
   state = {
     open: false
   }
+
   handleTouchTap = event => {
     this.setState({
       open: true,
       anchorEl: event.currentTarget
     });
   }
+
   handleRequestClose = () => {
     this.setState({
       open: false
@@ -85,18 +91,21 @@ class UserMenuItem extends Component {
     }
 
     return (
+      <div>
       <MenuItem
         containerElement={<Link to="/users/hello"/>}
-        primaryText="Log In"
+        primaryText="Login"
         style={{color: textColor}}
       />
+      </div>
     );
   }
 }
 
 class MainLayout extends Component {
   state = {
-    drawerOpen: false
+    drawerOpen: false,
+   // strings: strings
   }
   setDrawer = open => {
     this.setState({
@@ -106,7 +115,15 @@ class MainLayout extends Component {
 
   goHome = () => {
     this.props.history.push('/');
-  };
+  }
+
+  // onSwitchLanguage = (event) => {
+  //   let lang = (strings.getLanguage() == 'en') ? 'fr' : 'en'
+  //   strings.setLanguage(lang);
+  //   this.setState({
+  //     strings: strings
+  //   });
+  // }
 
   render() {
     const {currentUser, doLogout, children, location: {state: {notice} = {}}, muiTheme: {palette}} = this.props;
@@ -136,6 +153,9 @@ class MainLayout extends Component {
           </MainToolbar>
         </MainAppBar>
         <MainContainer>
+        {/* <button onClick={this.onSwitchLanguage}>{strings.login}</button> */}
+
+
           {notice && <Notice>{notice}</Notice>}
           {children}
         </MainContainer>
