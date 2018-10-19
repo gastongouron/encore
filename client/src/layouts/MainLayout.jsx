@@ -68,7 +68,7 @@ class UserMenuItem extends Component {
           <MenuItem
             primaryText={currentUser.first_name || currentUser.email}
             onTouchTap={this.handleTouchTap}
-            leftIcon={<DropDownArrow color={textColor}/>}
+            // leftIcon={<DropDownArrow color={textColor}/>}
             style={{color: textColor}}
           />
           <Popover
@@ -113,8 +113,7 @@ class MainLayout extends Component {
   }
 
   componentWillMount(){
-      // strings.setLanguage(this.props.currentUser.locale || "en")   
-      strings.setLanguage(strings.getLanguage())   
+      strings.setLanguage(this.props.currentUser.locale || strings.getLanguage())   
   }
   
   setDrawer = open => {
@@ -158,15 +157,15 @@ class MainLayout extends Component {
                 primaryText={strings.artists}
                 style={{color: palette.alternateTextColor}}
               />
-              <MenuItem
-                onClick={this.onSwitchLanguage}
-                primaryText={strings.switch}
-                style={{color: palette.alternateTextColor}}
-              />
               <UserMenuItem
                 logout={doLogout}
                 currentUser={currentUser}
                 textColor={palette.alternateTextColor}
+              />
+              <MenuItem
+                onClick={this.onSwitchLanguage}
+                primaryText={strings.getLanguage()}
+                style={{color: palette.alternateTextColor}}
               />
             </ToolbarGroup>
           </MainToolbar>
