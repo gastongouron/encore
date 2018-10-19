@@ -39,6 +39,7 @@ const translations = {
    delete:"Supprimer",
 
    policy: {
+      link:"Politique de confidentialité",
       title:"Encore: Politique de confidentialité",
       p1:"Votre vie privée est importante pour nous. Encore a pour politique de respecter votre vie privée à l’égard des informations que nous pouvons collecter sur votre site internet. ",
       p2:"Nous ne vous demandons pas vos informations personnelles sauf si nous en avons vraiment besoin. Lorsque nous le faisons, nous ne collectons ce dont nous avons besoin que par des moyens équitables et licites et, le cas échéant, à votre connaissance ou avec votre consentement. Nous allons également vous faire savoir pourquoi nous le recueillons et comment il sera utilisé",
@@ -85,6 +86,7 @@ const translations = {
    delete:"Delete",
 
    policy: {
+      link:"Privacy policy",
       title:"Encore: Privacy Policy",
       p1:"Your privacy is important to us. It is Encore's policy to respect your privacy regarding any information we may collect from you across our website.",
       p2:"We don’t ask for your personal information unless we truly need it. When we do, we’ll only collect what we need by fair and lawful means and, where appropriate, with your knowledge or consent. We’ll also let you know why we’re collecting it and how it will be used",

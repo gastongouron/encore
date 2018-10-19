@@ -220,7 +220,7 @@ class MainLayout extends Component {
             null
           :
           <StyledFooter>
-            <Link to='/policy'>Private policy</Link>
+            <Link to='/policy'>{this.props.locales.locales.policy.link}</Link>
           </StyledFooter>
           }
       </Main>

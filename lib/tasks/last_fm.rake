@@ -13,7 +13,7 @@ namespace :get_data do
 	task :last_fm_top_list => [ :environment ] do
 
 	  	# params for task?
-	  	maxpages 	= 10
+	  	maxpages 	= 50
 	  	page 		= 1
 	  	country 	= 'france'
 	  	results_per_page = 10
