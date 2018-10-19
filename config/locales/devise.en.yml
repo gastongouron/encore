@@ -18,15 +18,32 @@ en:
       unconfirmed: "You have to confirm your email address before continuing."
     mailer:
       confirmation_instructions:
-        subject: "Confirmation instructions"
-      reset_password_instructions:
-        subject: "Reset password instructions"
-      unlock_instructions:
-        subject: "Unlock instructions"
+        action: Confirm my email
+        greeting: Welcome %{recipient}!
+        instruction: 'You can confirm your email with the following link:'
+        subject: Confirmation instructions
       email_changed:
-        subject: "Email Changed"
+        greeting: Welcome %{recipient}!
+        message: We notify you for the change of your email address to %{email}.
+        subject: Email Changed
       password_change:
-        subject: "Password Changed"
+        greeting: Welcome %{recipient}!
+        message: Your password has been changed.
+        subject: Password Changed
+      reset_password_instructions:
+        action: Change my password
+        greeting: Welcome %{recipient}!
+        instruction: 'Follow this a link to change your password:'
+        instruction_2: If you are not aware of this query please ignore this email.
+        instruction_3: Your password will never be chanegd without you clicking on this link and setting a new password.
+        subject: Reset password instructions
+      unlock_instructions:
+        action: Unlock my account
+        greeting: Welcome %{recipient}!
+        instruction: 'Follow this link to unlock your account:'
+        message: Your account has been locked due to an high amount of unsuccessfull login tries
+        subject: Unlock instructions
+
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."

@@ -12,8 +12,8 @@ const coolParent = {
 }
 
 const paperStyle = {
-  padding: 20,
-  maxWidth: 280,
+  padding: 30,
+  maxWidth: 300,
   display: 'flex', 
   justifyContent: 'center'
  };
@@ -66,20 +66,21 @@ const RequestResetPasswordForm = reduxForm({
 const RequestResetPassword = ({doRequestResetPassword, locales, ...rest}) => {
   const {auth: {AuthLinks, viewPlugin: {View, Heading}}} = rest;
   return (
+  <div>
   <div style={coolParent}>
     <Paper
-        style={paperStyle} zDepth={1} 
-        rounded={false}>
+        style={paperStyle} zDepth={3} 
+        rounded={true}>
       <View>
         <Heading>
           {locales.locales.request}
         </Heading>
         <RequestResetPasswordForm locales={locales} onSubmit={doRequestResetPassword} {...rest} />
-        <AuthLinks locales={locales} />
       </View>
     </Paper>
   </div>
-
+  <AuthLinks locales={locales} />
+  </div>
   );
 };
 

@@ -17,8 +17,8 @@ const styles = {
 };
 
 const paperStyle = {
-  padding: 20,
-  maxWidth: 280,
+  padding: 30,
+  maxWidth: 300,
   display: 'flex', 
   justifyContent: 'center'
  };
@@ -146,18 +146,20 @@ const SignUp = ({doSignUp, locales, ...rest}) => {
 
   const {auth: {AuthLinks, viewPlugin: {View, Heading}}} = rest;
   return (
+  <div>
   <div style={coolParent}>
     <Paper
-        style={paperStyle} zDepth={1} 
-        rounded={false}>
+        style={paperStyle} zDepth={3} 
+        rounded={true}>
     <View>
       <Heading>
         {locales.locales.signup}
       </Heading>
       <SignUpForm initialValues={{locale: strings.getLanguage()}} locales={locales} onSubmit={doSignUp} {...rest} />
-      <AuthLinks locales={locales} />
     </View>
     </Paper>
+    </div>
+    <AuthLinks locales={locales} />
     </div>
   );
 };

@@ -91,7 +91,7 @@ class ArtistDetail extends Component {
                  this.props.artistDetail.error ? <h1>Error...</h1> :
                 <div>
 
-                        <Paper style={marginBottom} zDepth={1} rounded={false} >
+                        <Paper style={marginBottom} zDepth={3} rounded={true} >
                             <img alt="" style={coverStyle} src={artist.cover_url}/>
                             <div style={rootz}>
 

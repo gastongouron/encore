@@ -40,8 +40,8 @@ const ArtistListItem = (props) => {
 
 	return (
 			<Paper
-				style={paperStyle} zDepth={1} 
-				rounded={false} >
+				style={paperStyle} zDepth={3} 
+				rounded={true} >
 				<div style={rootz}>
 					<Grid container>
 

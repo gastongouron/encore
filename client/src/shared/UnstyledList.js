@@ -3,18 +3,29 @@ import theme from '../app/theme'
 
 const UnstyledList = styled.ul`
   list-style: none;
-  margin-top:24px;
   text-align: center;
+
   li {
+    display: inline
+  }
+  li::after {
+    color: white;
+    content: "  —  ";
+  }
+
+  li:last-child {
+    &::after {
+      content: "";
+    }
   }
   padding: 0;
   a {
-  	color: #283593;
+  	color: #F1F1F1;
   	font-weight: 300;
     text-decoration: none;
   }
   a:hover {
-  	color: #283593;
+  	color: white;
     text-decoration: none;
   }
 `;

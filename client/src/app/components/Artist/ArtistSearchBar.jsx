@@ -1,6 +1,23 @@
 import React, { Component } from 'react'
 import TextField from 'material-ui/TextField';
 
+const style = {
+	color: "white",
+}
+
+const underlineStyle = {
+    borderColor: '#F1F1F1',
+}
+
+const underlineFocusStyle = {
+    borderColor: 'white',
+}
+
+const hintStyle = {
+    color: 'white',
+}
+
+
 class SearchBar extends Component {
 
 	constructor(props) {
@@ -24,6 +41,10 @@ class SearchBar extends Component {
 	render() {
 		return (
 	        <TextField
+				hintStyle={hintStyle}
+				inputStyle={hintStyle}
+	        	underlineStyle={underlineStyle}
+				underlineFocusStyle={underlineFocusStyle}
 				onChange={event => this.onInputChange(event.target.value)}
 	            hintText={"Search..."} // artist sample
 	            fullWidth={true}

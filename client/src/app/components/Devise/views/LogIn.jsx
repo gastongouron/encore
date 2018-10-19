@@ -11,7 +11,6 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import AuthLinks from './AuthLinks'
 
-
 const LoginForm = reduxForm({
   form: 'login'
 })(({handleSubmit, locales, valid, submitting, error, onSubmit, auth: {messages, viewPlugin: {renderInput, SubmitButton, Form, FormError}}}) => {
@@ -72,7 +71,7 @@ const Login = ({currentUser, locales, doLogin, location: {state: {alert, from: {
 
   const paperStyle = {
     padding: 20,
-    maxWidth: 280,
+    maxWidth: 300,
     display: 'flex', 
     justifyContent: 'center'
    };
@@ -87,11 +86,11 @@ const Login = ({currentUser, locales, doLogin, location: {state: {alert, from: {
   }
   const {auth: {AuthLinks, viewPlugin: {View, Heading, Alert}}} = rest;
   return (
-
+    <div>
     <div style={coolParent}>
     <Paper
-        style={paperStyle} zDepth={1} 
-        rounded={false}>
+        style={paperStyle} zDepth={3} 
+        rounded={true}>
       <View>
         <Heading>
           {locales.locales.login}
@@ -100,9 +99,10 @@ const Login = ({currentUser, locales, doLogin, location: {state: {alert, from: {
         <LoginForm locales={locales} onSubmit={submit} {...rest} />
         <br />
         <OauthView locales={locales}/>
-        <AuthLinks locales={locales}/>
       </View>
     </Paper>
+    </div>
+    <AuthLinks locales={locales}/>
     </div>
   );
 };

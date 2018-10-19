@@ -4,7 +4,7 @@ const translations = {
  en:{
    login:"Login",
    mustLogin:"Please log in or sign up",
-   facebook:"Login with Facebook",
+   facebook:"with Facebook",
    signup:"Sign up",
    sign:"Sign up",
    firstName:"First name",

@@ -9,8 +9,8 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const paperStyle = {
-  padding: 20,
-  maxWidth: 280,
+  padding: 30,
+  maxWidth: 300,
   display: 'flex', 
   justifyContent: 'center'
  };
@@ -78,20 +78,21 @@ const ResetPassword = ({doResetPassword, locales, location, ...rest}) => {
   const {query} = url.parse(location.search, true);
   const {auth: {AuthLinks, viewPlugin: {View, Heading}}} = rest;
   return (
+  <div>
   <div style={coolParent}>
     <Paper
-      style={paperStyle} zDepth={1} 
-      rounded={false}>
+      style={paperStyle} zDepth={3} 
+      rounded={true}>
       <View>
         <Heading>
           {locales.locales.reset} 
         </Heading>
         <ResetPasswordForm locales={locales} onSubmit={doResetPassword} query={query} {...rest} />
-        <AuthLinks locales={locales} />
       </View>
     </Paper>
   </div>
-
+  <AuthLinks locales={locales} />
+  </div>
   );
 };
 

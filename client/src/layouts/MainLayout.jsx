@@ -8,7 +8,7 @@ import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
 // import LogoIcon from 'material-ui/svg-icons/action/lightbulb-outline';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {Notice} from '../shared';
-
+import Drawer from 'material-ui/Drawer';
 import strings from '../app/locales/strings'
 import { setLocales } from '../app/actions/locales'
 import { initDevise } from '../app/devistsetup'
@@ -25,11 +25,12 @@ const MainToolbar = styled(Toolbar)`
 `;
 
 const MainContainer = styled.div`
-  padding: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
 const Main = styled.div`
-  background-color: #F1F1F1;
+  background-color: #283593;
   min-height: 100vh;
   height: 100%;
 `;
@@ -108,34 +109,38 @@ class MainLayout extends Component {
   constructor(props){
     super(props)
     this.state = {
-       drawerOpen: false
+       drawerOpen: false,
+       open: false
     }
+    
+    this.onSwitchLanguage() // Set default lang :)
   }
 
   componentWillMount(){
-      strings.setLanguage(this.props.currentUser.locale || strings.getLanguage())   
-  }
-  
-  setDrawer = open => {
-    this.setState({
-      drawerOpen: open
-    });
+      strings.setLanguage(this.props.currentUser.locale || strings.getLanguage() || 'fr')   
   }
 
+  toggleHome = () => {
+    this.handleToggle()
+    this.props.history.push('/');
+  }
+  
   goHome = () => {
     this.props.history.push('/');
   }
 
+  handleToggle = () => {
+    console.log('hrerere')
+    this.setState({open: !this.state.open});
+  }
+
   onSwitchLanguage = (event) => {
-    console.log(event)
-    if(event){
-      let lang = (strings.getLanguage() == 'en') ? 'fr' : 'en'
-      // if current user, do mutation then...
-      strings.setLanguage(lang);
-      initDevise(strings)
-      this.props.setLocales(strings)
-      this.setState({});
-    }
+    let lang = (strings.getLanguage() == 'en') ? 'fr' : 'en'
+    // if current user, do mutation then...
+    strings.setLanguage(lang);
+    initDevise()
+    this.props.setLocales(strings)
+    this.setState({});
   }
 
   render() {
@@ -143,13 +148,36 @@ class MainLayout extends Component {
     return (
       <Main>
         <MainAppBar
-          style={{ boxShadow: 'none', position: 'sticky', top: 0}}
-          // style={{ background: 'transparent', boxShadow: 'none', position: 'sticky', top: 0}}
-          showMenuIconButton={false}
+          // style={{ boxShadow: 'none', position: 'sticky', top: 0}}
+          style={{ background: '#283593', boxShadow: 'none', position: 'sticky', top: 0}}
+          showMenuIconButton={true}
           title={<b>encore!</b>}
           titleStyle={{fontSize: 28, fontWeight: 900}}
           onTitleTouchTap={this.goHome}
+          onLeftIconButtonTouchTap={this.handleToggle}
         >
+
+
+         <Drawer open={this.state.open}>
+          <MenuItem onClick={this.toggleHome}>Home</MenuItem>
+              <MenuItem
+                containerElement={<Link to="/artists"/>}
+                primaryText={strings.artists}
+                style={{color: palette.alternateTextColor}}
+              />
+              <UserMenuItem
+                logout={doLogout}
+                currentUser={currentUser}
+                textColor={palette.alternateTextColor}
+              />
+              <MenuItem
+                onClick={this.onSwitchLanguage}
+                primaryText={strings.getLanguage()}
+                style={{color: palette.alternateTextColor}}
+              />
+          <MenuItem>Menu Item 2</MenuItem>
+        </Drawer>
+        
           <MainToolbar>
             <ToolbarGroup>
               <MenuItem

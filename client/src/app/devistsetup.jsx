@@ -12,7 +12,7 @@ import strings from '../app/locales/strings'
 const AuthAlert = styled(Alert)`
   padding: 10px;
   text-align: center;
-  border:none;
+  border: none;
 `;
 
 export const initDevise = () => {

@@ -38,4 +38,9 @@ class User < ApplicationRecord
     end
   end
 
+
+  def send_devise_notification(notification, *args)
+    I18n.with_locale(self.locale) { super }
+  end
+
 end
