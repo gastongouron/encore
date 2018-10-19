@@ -1,7 +1,7 @@
 class Artist < ApplicationRecord
 	has_many :reviews
 	has_many :users, through: :reviews
-	acts_as_taggable
+	acts_as_taggable # comment if u need to generate admin views
 
 	def score
 		scores = []

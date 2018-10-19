@@ -74,7 +74,7 @@ const ReviewListItem = (props) => {
 						<RaisedButton 
 							onClick={ () => onReviewSelect(review) }
 							default={true}
-							label={'edit'}/> 
+							label={props.locales.locales.edit}/> 
                     : 
                     	<p></p> 
                    	}

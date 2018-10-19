@@ -1,3 +1,4 @@
+import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
@@ -25,11 +26,11 @@ class CustomForm extends Component {
       marginLeft: 10
     }
 
-    const create = [ <RaisedButton style={style} label="Cancel" default={true} onClick={this.props.onClickClose}/>,
-                     <RaisedButton style={style} label="Save" primary={true} keyboardFocused={true} onClick={this.props.onClickSave}/>]
-    const update = [ <RaisedButton style={style} label="Update" primary={true} keyboardFocused={true} onClick={this.props.onClickUpdate}/>,
-                     <RaisedButton style={style} label="Delete" secondary={true} onClick={this.props.onClickDelete}/>,
-                     <RaisedButton style={style} label="Cancel" default={true} onClick={this.props.onClickClose}/>]
+    const create = [ <RaisedButton style={style} label={this.props.locales.locales.cancel} default={true} onClick={this.props.onClickClose}/>,
+                     <RaisedButton style={style} label={this.props.locales.locales.save} primary={true} keyboardFocused={true} onClick={this.props.onClickSave}/>]
+    const update = [ <RaisedButton style={style} label={this.props.locales.locales.update} primary={true} keyboardFocused={true} onClick={this.props.onClickUpdate}/>,
+                     <RaisedButton style={style} label={this.props.locales.locales.delete} secondary={true} onClick={this.props.onClickDelete}/>,
+                     <RaisedButton style={style} label={this.props.locales.locales.cancel} default={true} onClick={this.props.onClickClose}/>]
 
     const actions = this.props.isUpdate ? update : create
 
@@ -73,4 +74,11 @@ class CustomForm extends Component {
 
 }
 
-export default CustomForm 
+
+const mapStateToProps = state => {
+    return { 
+        locales: state.locales
+    };
+};
+
+export default connect(mapStateToProps, null)(CustomForm);

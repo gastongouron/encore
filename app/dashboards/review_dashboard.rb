@@ -11,7 +11,7 @@ class ReviewDashboard < Administrate::BaseDashboard
     artist: Field::BelongsTo,
     user: Field::BelongsTo,
     id: Field::Number,
-    score: Field::Number,
+    score: Field::Number.with_options(decimals: 2),
     body: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,

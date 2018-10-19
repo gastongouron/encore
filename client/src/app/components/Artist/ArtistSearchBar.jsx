@@ -47,7 +47,7 @@ class SearchBar extends Component {
 	        	underlineStyle={underlineStyle}
 				underlineFocusStyle={underlineFocusStyle}
 				onChange={event => this.onInputChange(event.target.value)}
-	            hintText={"Search..."} // artist sample
+	            hintText={this.props.locales.locales.search} // artist sample
 	            fullWidth={true}
 				value={this.state.tag ? this.state.tag : this.state.term}
 	            name='filterValue'

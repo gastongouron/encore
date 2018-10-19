@@ -12,9 +12,14 @@ class ArtistDashboard < Administrate::BaseDashboard
     users: Field::HasMany,
     id: Field::Number,
     name: Field::String,
-    description: Field::Text,
+    description_en: Field::Text,
+    description_fr: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    avatar_url: Field::String,
+    profile_picture_url: Field::String,
+    cover_url: Field::String,
+    mbid: Field::String,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -36,9 +41,14 @@ class ArtistDashboard < Administrate::BaseDashboard
     :users,
     :id,
     :name,
-    :description,
+    :description_en,
+    :description_fr,
     :created_at,
     :updated_at,
+    :avatar_url,
+    :profile_picture_url,
+    :cover_url,
+    :mbid,
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -48,7 +58,12 @@ class ArtistDashboard < Administrate::BaseDashboard
     :reviews,
     :users,
     :name,
-    :description,
+    :description_en,
+    :description_fr,
+    :avatar_url,
+    :profile_picture_url,
+    :cover_url,
+    :mbid,
   ].freeze
 
   # Overwrite this method to customize how artists are displayed

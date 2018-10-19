@@ -1,3 +1,4 @@
+import { withApollo } from 'react-apollo'
 import React, {Component} from 'react';
 import {AppBar, Toolbar, ToolbarGroup, Menu, MenuItem, Popover} from 'material-ui';
 import {connect} from 'react-redux';
@@ -12,6 +13,7 @@ import Drawer from 'material-ui/Drawer';
 import strings from '../app/locales/strings'
 import { setLocales } from '../app/actions/locales'
 import { initDevise } from '../app/devistsetup'
+import updateUserMutation from '../app/mutations/updateUser'
 
 const MainAppBar = styled(AppBar)`
   &:hover {
@@ -116,8 +118,7 @@ class MainLayout extends Component {
   }
 
   componentWillMount(){
-      console.log(this.props.currentUser.locale)
-      strings.setLanguage(this.props.currentUser.locale || strings.getLanguage() || 'fr')   
+      strings.setLanguage(this.props.currentUser.locale || strings.getLanguage())   
   }
 
   toggleHome = () => {
@@ -135,9 +136,16 @@ class MainLayout extends Component {
   }
 
   onSwitchLanguage = (event) => {
-
     let lang = (strings.getLanguage() == 'en') ? 'fr' : 'en'
-    // if current user, do mutation then...
+    if (this.props.currentUser) {
+      this.props.client.mutate({mutation: updateUserMutation, variables: {user_id: this.props.currentUser.user_id, locale: lang}}).then(
+        (res) => {
+          console.log(res.data.editUser.user.locale)
+        },
+        (err) => {
+          console.log('HANDLE ERROR!!!')
+        })
+      }
     strings.setLanguage(lang);
     initDevise()
     this.props.setLocales(strings)
@@ -229,7 +237,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const MainLayoutContainer = connect(mapStateToProps, mapDispatchToProps)(MainLayout);
+const MainLayoutContainer = withApollo(connect(mapStateToProps, mapDispatchToProps)(MainLayout));
 
 export default MainLayoutContainer;
 

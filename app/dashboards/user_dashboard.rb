@@ -13,7 +13,7 @@ class UserDashboard < Administrate::BaseDashboard
     id: Field::Number,
     first_name: Field::String,
     last_name: Field::String,
-    profile_picture: Field::String,
+    profile_picture: Field::Text,
     email: Field::String,
     encrypted_password: Field::String,
     reset_password_token: Field::String,
@@ -31,6 +31,7 @@ class UserDashboard < Administrate::BaseDashboard
     updated_at: Field::DateTime,
     provider: Field::String,
     uid: Field::String,
+    locale: Field::String,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -71,6 +72,7 @@ class UserDashboard < Administrate::BaseDashboard
     :updated_at,
     :provider,
     :uid,
+    :locale,
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -97,6 +99,7 @@ class UserDashboard < Administrate::BaseDashboard
     :unconfirmed_email,
     :provider,
     :uid,
+    :locale,
   ].freeze
 
   # Overwrite this method to customize how users are displayed
