@@ -13,6 +13,7 @@ import Drawer from 'material-ui/Drawer';
 import strings from '../app/locales/strings'
 import { setLocales } from '../app/actions/locales'
 import { initDevise } from '../app/devistsetup'
+import { StyledFooter } from '../shared'
 import updateUserMutation from '../app/mutations/updateUser'
 
 const MainAppBar = styled(AppBar)`
@@ -118,8 +119,7 @@ class MainLayout extends Component {
   }
 
   componentWillMount(){
-      console.log('meeee')
-      
+      // console.log('meeee')      
       // strings.setLanguage(this.props.currentUser.locale || strings.getLanguage())   
   }
 
@@ -142,10 +142,10 @@ class MainLayout extends Component {
     if (this.props.currentUser) {
       this.props.client.mutate({mutation: updateUserMutation, variables: {user_id: this.props.currentUser.user_id, locale: lang}}).then(
         (res) => {
-          console.log(res.data.editUser.user.locale)
+          // console.log(res.data.editUser.user.locale)
         },
         (err) => {
-          console.log('HANDLE ERROR!!!')
+          // console.log('HANDLE ERROR!!!')
         })
       }
     strings.setLanguage(lang);
@@ -215,6 +215,14 @@ class MainLayout extends Component {
           {notice && <Notice>{notice}</Notice>}
           {children}
         </MainContainer>
+
+          {currentUser.isLoggedIn ? 
+            null
+          :
+          <StyledFooter>
+            <Link to='/policy'>Private policy</Link>
+          </StyledFooter>
+          }
       </Main>
     );
   }
@@ -231,9 +239,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // initLocales: () => dispatch(initLocales()),
-    // loadingLocales: () => dispatch(loadingLocales()),
-    // failedLocales: (message) => dispatch(failedLocales(message)),
     setLocales: (locales) => dispatch(setLocales(locales)),
     doLogout: () => logout(dispatch)
   };

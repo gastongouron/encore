@@ -78,7 +78,12 @@ const Login = ({currentUser, locales, doLogin, location: {state: {alert, from: {
 
   const coolParent = {
     display: 'flex', 
-    justifyContent: 'center'
+    justifyContent: 'center',
+    position: 'absolute',
+    display: 'block',
+    top: '48%',
+    left: '50%',
+    transform: 'translateX(-50%) translateY(-50%)',
   }
 
   if (currentUser.isLoggedIn) {
@@ -101,8 +106,9 @@ const Login = ({currentUser, locales, doLogin, location: {state: {alert, from: {
         <OauthView locales={locales}/>
       </View>
     </Paper>
-    </div>
     <AuthLinks locales={locales}/>
+
+    </div>
     </div>
   );
 };

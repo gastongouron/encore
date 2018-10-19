@@ -37,6 +37,15 @@ const translations = {
    edit:"Éditer",
    update:"Mettre à jour",
    delete:"Supprimer",
+
+   policy: {
+      title:"Encore: Politique de confidentialité",
+      p1:"Votre vie privée est importante pour nous. Encore a pour politique de respecter votre vie privée à l’égard des informations que nous pouvons collecter sur votre site internet. ",
+      p2:"Nous ne vous demandons pas vos informations personnelles sauf si nous en avons vraiment besoin. Lorsque nous le faisons, nous ne collectons ce dont nous avons besoin que par des moyens équitables et licites et, le cas échéant, à votre connaissance ou avec votre consentement. Nous allons également vous faire savoir pourquoi nous le recueillons et comment il sera utilisé",
+      p3:"Nous ne partageons pas vos informations personnelles avec des tiers, sauf si requis par la loi. Nous ne conserverons ces informations que le temps nécessaire pour vous fournir un service",
+      p4:"Nous ne stockons pas vos informations personnelles sur nos serveurs, sauf si cela est nécessaire pour vous fournir un service. Ce que nous stockons, nous le protégerons par des moyens commercialement acceptables afin de protéger vos informations personnelles contre la perte ou le vol, ainsi que contre les attaques non autorisées. accès, divulgation, copie, utilisation ou modification.!)",
+   },
+
  },
  en:{
    login:"Login",
@@ -75,6 +84,13 @@ const translations = {
    update:"Update",
    delete:"Delete",
 
+   policy: {
+      title:"Encore: Privacy Policy",
+      p1:"Your privacy is important to us. It is Encore's policy to respect your privacy regarding any information we may collect from you across our website.",
+      p2:"We don’t ask for your personal information unless we truly need it. When we do, we’ll only collect what we need by fair and lawful means and, where appropriate, with your knowledge or consent. We’ll also let you know why we’re collecting it and how it will be used",
+      p3:"We don’t share your personal information with third-parties, except where required by law. We will only retain personal information for as long as necessary to provide you with a service",
+      p4:"We don’t store your personal information on our servers unless it’s required for providing a service to you. What we store, we’ll protect within commercially acceptable means to protect your personal information from loss or theft, as well as unauthorized access, disclosure, copying, use or modification.!)",
+   },
 
  }
 }

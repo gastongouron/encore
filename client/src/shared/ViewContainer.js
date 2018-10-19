@@ -4,7 +4,7 @@ const ViewContainer = styled.div`
    text-align: center;
    position: absolute;
    color:white;
-   top: 40%;
+   top: 48%;
    left: 50%;
    transform: translateX(-50%) translateY(-50%);
 `;
