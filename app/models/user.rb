@@ -20,12 +20,14 @@ class User < ApplicationRecord
       first_name: first_name,
       last_name: last_name,
       display_name: display_name,
-      profile_picture: profile_picture
+      profile_picture: profile_picture,
+      locale: locale || I18n.locale
     }
   end
 
   def self.from_omniauth(auth)
     puts auth
+
     where(provider: 'facebook', uid: auth["id"]).first_or_create do |user|
       user.email = auth["email"]
       user.password = Devise.friendly_token[0,20]

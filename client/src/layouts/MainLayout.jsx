@@ -9,8 +9,9 @@ import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {Notice} from '../shared';
 
-// import strings from '../app/locales/strings'
-
+import strings from '../app/locales/strings'
+import { setLocales } from '../app/actions/locales'
+import { initDevise } from '../app/devistsetup'
 
 const MainAppBar = styled(AppBar)`
   &:hover {
@@ -78,12 +79,12 @@ class UserMenuItem extends Component {
             onRequestClose={this.handleRequestClose}
           >
             <Menu>
-              <MenuItem primaryText="Profile"
+              <MenuItem primaryText={strings.profile}
                 containerElement={<Link to={"/user/" + currentUser.user_id}/>
               }
               onTouchTap={this.handleRequestClose}
               />
-              <MenuItem primaryText="Log Out" onTouchTap={logout} />
+              <MenuItem primaryText={strings.logout} onTouchTap={logout} />
             </Menu>
           </Popover>
         </div>
@@ -94,7 +95,7 @@ class UserMenuItem extends Component {
       <div>
       <MenuItem
         containerElement={<Link to="/users/hello"/>}
-        primaryText="Login"
+        primaryText={strings.login}
         style={{color: textColor}}
       />
       </div>
@@ -103,10 +104,19 @@ class UserMenuItem extends Component {
 }
 
 class MainLayout extends Component {
-  state = {
-    drawerOpen: false,
-   // strings: strings
+
+  constructor(props){
+    super(props)
+    this.state = {
+       drawerOpen: false
+    }
   }
+
+  componentWillMount(){
+      // strings.setLanguage(this.props.currentUser.locale || "en")   
+      strings.setLanguage(strings.getLanguage())   
+  }
+  
   setDrawer = open => {
     this.setState({
       drawerOpen: open
@@ -117,13 +127,17 @@ class MainLayout extends Component {
     this.props.history.push('/');
   }
 
-  // onSwitchLanguage = (event) => {
-  //   let lang = (strings.getLanguage() == 'en') ? 'fr' : 'en'
-  //   strings.setLanguage(lang);
-  //   this.setState({
-  //     strings: strings
-  //   });
-  // }
+  onSwitchLanguage = (event) => {
+    console.log(event)
+    if(event){
+      let lang = (strings.getLanguage() == 'en') ? 'fr' : 'en'
+      // if current user, do mutation then...
+      strings.setLanguage(lang);
+      initDevise(strings)
+      this.props.setLocales(strings)
+      this.setState({});
+    }
+  }
 
   render() {
     const {currentUser, doLogout, children, location: {state: {notice} = {}}, muiTheme: {palette}} = this.props;
@@ -141,7 +155,12 @@ class MainLayout extends Component {
             <ToolbarGroup>
               <MenuItem
                 containerElement={<Link to="/artists"/>}
-                primaryText="Artists"
+                primaryText={strings.artists}
+                style={{color: palette.alternateTextColor}}
+              />
+              <MenuItem
+                onClick={this.onSwitchLanguage}
+                primaryText={strings.switch}
                 style={{color: palette.alternateTextColor}}
               />
               <UserMenuItem
@@ -153,7 +172,6 @@ class MainLayout extends Component {
           </MainToolbar>
         </MainAppBar>
         <MainContainer>
-        {/* <button onClick={this.onSwitchLanguage}>{strings.login}</button> */}
 
 
           {notice && <Notice>{notice}</Notice>}
@@ -168,12 +186,17 @@ MainLayout = muiThemeable()(MainLayout);
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    locales: state.locales
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    // initLocales: () => dispatch(initLocales()),
+    // loadingLocales: () => dispatch(loadingLocales()),
+    // failedLocales: (message) => dispatch(failedLocales(message)),
+    setLocales: (locales) => dispatch(setLocales(locales)),
     doLogout: () => logout(dispatch)
   };
 };

@@ -4,19 +4,22 @@ import {login} from 'react-devise/lib/actions';
 import {UnauthorizedError} from 'react-devise/lib/errors';
 import {Redirect} from 'react-router-dom';
 import {reduxForm, Field, SubmissionError} from 'redux-form';
-import {required, email} from 'react-devise/lib/views/validation';
+// import {required, email} from 'react-devise/lib/views/validation';
+import {required, email} from './Validation';
 import {OauthView} from './OauthLinks'
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
+import AuthLinks from './AuthLinks'
+
 
 const LoginForm = reduxForm({
   form: 'login'
-})(({handleSubmit, valid, submitting, error, onSubmit, auth: {messages, viewPlugin: {renderInput, SubmitButton, Form, FormError}}}) => {
+})(({handleSubmit, locales, valid, submitting, error, onSubmit, auth: {messages, viewPlugin: {renderInput, SubmitButton, Form, FormError}}}) => {
 
   const submit = data => {
     return onSubmit(data).catch(UnauthorizedError, () => {
       throw new SubmissionError({
-        _error: messages.loginFailed
+        _error: locales.locales.failed
       });
     });
   };
@@ -43,17 +46,17 @@ const LoginForm = reduxForm({
         <Field
           name="email"
           component={renderInput}
-          label="Email"
+          label={locales.locales.email}
           validate={[required, email]}
         />
         <Field
           name="password"
           type="password"
           component={renderInput}
-          label="Password"
+          label={locales.locales.password}
         />
         <SubmitButtonCustom
-          label={submitting ? 'Logging In...' : 'Log In'}
+          label={submitting ? locales.locales.logging : locales.locales.login}
           disabled={!valid || submitting}
           display='block'
         />
@@ -62,7 +65,7 @@ const LoginForm = reduxForm({
   );
 });
 
-const Login = ({currentUser, doLogin, location: {state: {alert, from: {pathname: returnTo} = {}} = {}} = {}, ...rest} = {}) => {
+const Login = ({currentUser, locales, doLogin, location: {state: {alert, from: {pathname: returnTo} = {}} = {}} = {}, ...rest} = {}) => {
   const submit = data => {
     return doLogin(data);
   };
@@ -91,13 +94,13 @@ const Login = ({currentUser, doLogin, location: {state: {alert, from: {pathname:
         rounded={false}>
       <View>
         <Heading>
-          Login
+          {locales.locales.login}
         </Heading>
         {alert && <Alert>{alert}</Alert>}
-        <LoginForm onSubmit={submit} {...rest} />
+        <LoginForm locales={locales} onSubmit={submit} {...rest} />
         <br />
-        <OauthView />
-        <AuthLinks />
+        <OauthView locales={locales}/>
+        <AuthLinks locales={locales}/>
       </View>
     </Paper>
     </div>
@@ -106,7 +109,8 @@ const Login = ({currentUser, doLogin, location: {state: {alert, from: {pathname:
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    locales: state.locales
   };
 };
 

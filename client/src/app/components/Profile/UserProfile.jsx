@@ -11,7 +11,7 @@ import ReviewForm from '../Reviews/ReviewForm'
 
 import EncoreLoader from '../EncoreLoader'
 import Paper from 'material-ui/Paper'
-
+import strings from '../../locales/strings'
 
 const paddedAndMarginBottom = {
     padding: 20,
@@ -87,8 +87,8 @@ class Profile extends Component {
                         </div>
                         <div style={inline}>
                             <h1>
-                                {user.display_name?user.display_name:''} reviews
-                            </h1>
+                                {strings.formatString(this.props.locales.locales.reviews, {username: user.display_name})}
+                             </h1>
                             {user.email?user.email:''}
                         </div>
                     </Paper>
@@ -135,7 +135,8 @@ const mapStateToProps = state => {
     return { reviews: state.reviews,
              userProfile: state.userProfile,
              userInfo: state.currentUser,
-             selectedUserReview: state.reviews.review
+             selectedUserReview: state.reviews.review,
+             locales: state.locales
     };
 };
 

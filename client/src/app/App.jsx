@@ -11,6 +11,7 @@ import theme from './theme';
 import Routes from './Routes';
 
 const App = ({store}) => {
+
   return (
     <StyledComponentsThemeProvider theme={theme}>
       <MuiThemeProvider muiTheme={getMuiTheme(theme)} store={store}>

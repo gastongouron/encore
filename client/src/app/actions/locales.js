@@ -10,7 +10,7 @@ export function loadingLocales() {
   }
 }
 
-export function failedLocales(locale) {
+export function failedLocales(message) {
   return {
     type: 'LOCALES_ERROR',
     message
@@ -20,6 +20,6 @@ export function failedLocales(locale) {
 export function setLocales(locales) {
   return {
     type: 'LOCALES_LOADED',
-    Locales
+    locales
   }
 }

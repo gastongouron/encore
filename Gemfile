@@ -14,6 +14,7 @@ gem 'graphql'
 gem 'graphiql-rails'
 gem 'search_object', '1.2.0'
 gem 'search_object_graphql', '0.1'
+gem 'rails-i18n'
 
 gem 'devise'
 gem 'devise-jwt'
