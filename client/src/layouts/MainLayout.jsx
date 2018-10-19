@@ -118,7 +118,9 @@ class MainLayout extends Component {
   }
 
   componentWillMount(){
-      strings.setLanguage(this.props.currentUser.locale || strings.getLanguage())   
+      console.log('meeee')
+      
+      // strings.setLanguage(this.props.currentUser.locale || strings.getLanguage())   
   }
 
   toggleHome = () => {

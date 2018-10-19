@@ -1,4 +1,4 @@
 Schema = GraphQL::Schema.define do
   query RootQuery
-  mutation Mutations::ReviewMutation
+  mutation Mutations::AllMutation
 end
