@@ -21,7 +21,12 @@ end
 # 40.times do 
 # 	artists << Artist.create(
 # 		name: Faker::Music.unique.band,
-# 		description: Faker::Lorem.paragraph(rand(3..10))
+# 		description_en: Faker::Lorem.paragraph(rand(3..10)),
+# 		description_fr: Faker::Lorem.paragraph(rand(3..10)),
+# 		profile_picture_url: "https://www.petplace.com/wp-content/uploads/2018/03/AdobeStock_81993293-300x300.jpeg",
+# 		avatar_url: "https://www.petplace.com/wp-content/uploads/2018/03/AdobeStock_81993293-300x300.jpeg",
+# 		cover_url: "https://www.petplace.com/wp-content/uploads/2018/03/AdobeStock_81993293-300x300.jpeg",
+# 		tag_list: ["cool", "whao", "super", "awesome", "great"]
 # 	)
 # 	puts "-> artist_#{aid} has been created"
 # 	aid += 1

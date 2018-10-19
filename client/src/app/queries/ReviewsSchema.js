@@ -5,7 +5,8 @@ const artistDetailQuery = (gql`
 	    artist(id: $id) {
 	        id
 	        name
-			description
+			description_en
+			description_fr
 			tags
 			cover_url
 			score

@@ -5,7 +5,8 @@ const artistSearchQuery = (gql`
       allArtists(filter: {description_contains: $input OR: {name_contains: $input}}, first: $first, skip: $skip) {
           id
           name
-          description
+          description_en
+          description_fr
           score
           avatar_url
           profile_picture_url

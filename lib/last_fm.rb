@@ -21,8 +21,9 @@ class LastFm
 
 	def is_dead(musicbrainz_id)
 		response = HTTParty.get("http://musicbrainz.org/ws/2/artist/#{musicbrainz_id}?inc=aliases&fmt=json", headers: {"User-Agent" => "HTTParty"})
-	  	sleep(1.5)
-		response["life-span"]["ended"]
+	  	sleep(2)
+	  	puts 'got one'
+	  	response &&	response["life-span"]["ended"] ? response["life-span"]["ended"] : false
 	end
 
 	def format_json(response)

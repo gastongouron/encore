@@ -1,3 +1,4 @@
+import { connect } from 'react-redux'
 import React from 'react'
 import Paper from 'material-ui/Paper'
 import StarIcon from 'react-material-icons/icons/toggle/star'
@@ -64,9 +65,12 @@ const ArtistListItem = (props) => {
 				        	<br />
 
 							<Grid style={floatLeft} item xs={12}>
-								<p>{artist.description}</p>
-							</Grid>
-
+									{props.locales.locales._language == 'en' ? 
+										<p>{artist.description_en}</p>
+									:
+										<p>{artist.description_fr}</p>
+									}
+								</Grid>
 							<Grid style={floatLeft} item xs={12}>
 								<Taglist 
 									onClickTag={onClickTag}
@@ -85,4 +89,13 @@ const ArtistListItem = (props) => {
 
 }
 
-export default ArtistListItem;
+
+
+
+const mapStateToProps = state => {
+    return {
+        locales: state.locales
+     };
+};
+  
+export default connect(mapStateToProps, null)(ArtistListItem)

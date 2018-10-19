@@ -72,9 +72,12 @@ class ArtistDetail extends Component {
     }
 
     checkEnableNewReview(reviews){
+        console.log('here')
+        console.log(reviews)
+        console.log(this.props.userInfo.user_id)
         if (this.props.userInfo.user_id) {
             for (var i = 0; i < reviews.length; i++) {
-                if(reviews[i].user_id === this.props.userInfo.user_id){
+                if(Number(reviews[i].user_id) === Number(this.props.userInfo.user_id)){
                     this.setState({enabledButton: false});
                 }
             }
@@ -108,7 +111,12 @@ class ArtistDetail extends Component {
                                         />
                                     </Grid>
                                     <Grid style={marginBottom} item xs={12} sm={12}>
-                                        <p>{artist.description}</p>
+                                        {this.props.locales.locales._language == 'en' ? 
+                                            <p>{artist.description_en}</p>
+                                        :
+                                            <p>{artist.description_fr}</p>
+                                        }
+
                                     </Grid>
                                     <Grid item xs={12} sm={12}>
                                         <Taglist onClickTag={() => console.log('cool')} tags={artist.tags} />
@@ -157,7 +165,8 @@ class ArtistDetail extends Component {
 const mapStateToProps = state => {
     return { 
         artistDetail: state.artistDetail,
-        userInfo: state.currentUser
+        userInfo: state.currentUser,
+        locales: state.locales
     };
 };
 

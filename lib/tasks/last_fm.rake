@@ -1,24 +1,15 @@
 require "#{Rails.root}/lib/last_fm"
 
 
-# every day,
-# fetch last_fm top
-
-# nest both tasks in a larger, smarter one.
+# every day ?
 
 namespace :get_data do
-	# include LastFm
-	# use musicbrainz for death/alive
 	desc 'Getdata from last fm'
 	key = ENV['LAST_FM_KEY']
-	lang = 'en'
+	lang = 'fr'
 	last_fm = LastFm.new(key)
-	sleeptime = 0.4
+	sleeptime = 1
 	
-	task :test_task => [ :environment ] do
-		puts 'HELLO WORLD'
-	end
-
 	task :last_fm_top_list => [ :environment ] do
 
 	  	# params for task?
@@ -40,30 +31,51 @@ namespace :get_data do
 
 	task :last_fm_artist_detail => [ :environment ] do
 
-	  	Artist.where(description: nil).each do |a|
-	  		# normalize name
-	  		name = a.name.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').downcase.to_s
-	  		api_response = last_fm.query(name, lang)
+
+	  	Artist.where(description_en: nil).each do |a|
+	  		name = a.name.parameterize.underscore.humanize.downcase
+	  		# name = a.name.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').downcase.to_s
+	  		api_response = last_fm.query(name, 'en')
+
 			api_response["artist"]["tags"]["tag"].each do |tag|
 	  			a.tag_list.add(tag["name"])
-	  		end	
-
+	  		end
 	  		summary = api_response["artist"]["bio"]["summary"]
 	  		summary = JSON.parse(summary.to_json)
 			summary = summary.slice(0..(summary.rindex('<a href')))
-
 			unless summary.empty? || summary.length < 3
 				rindex = summary.rindex('.')
 				if rindex 
 					summary = summary.slice(0..(rindex))
 				end
 			else
-				summary = "..."
+				summary = "Nothing yet.."
 			end
-
-	  		a.description = summary
+	  		a.description_en = summary
 	  		a.save!
-	  		puts "#{name} has been saved, taking a quick break..."
+	  		puts "#{name} english description has been saved, taking a quick break..."
+		  	sleep(sleeptime)
+	  	end
+
+	  	Artist.where(description_fr: nil).each do |a|
+	  		name = a.name.parameterize.underscore.humanize.downcase
+	  		# name = a.name.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').downcase.to_s
+	  		api_response = last_fm.query(name, 'fr')
+
+	  		summary = api_response["artist"]["bio"]["summary"]
+	  		summary = JSON.parse(summary.to_json)
+			summary = summary.slice(0..(summary.rindex('<a href')))
+			unless summary.empty? || summary.length < 3
+				rindex = summary.rindex('.')
+				if rindex 
+					summary = summary.slice(0..(rindex))
+				end
+			else
+				summary = "Rien pour le moment"
+			end
+	  		a.description_fr = summary
+	  		a.save!
+	  		puts "#{name} French description has been saved, taking a quick break..."
 		  	sleep(sleeptime)
 	  	end
 

@@ -5,7 +5,7 @@ import {withRouter} from 'react-router-dom';
 
 const AuthLinksComponent = ({currentUser, locales, location, resourceName, AuthLinksList, AuthLinksListItem}) => {
   if (currentUser.isLoggingIn) {
-    return <div>Logging in...</div>;
+    return <div></div>;
   }
   if (currentUser.isLoggedIn) {
     return null;

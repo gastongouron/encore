@@ -48,7 +48,8 @@ class Resolvers::ArtistsSearch
     # check manually is a value is a tag. 
     # puts ActsAsTaggableOn::Tag.where(name: value['name_contains'] ).exists?
 
-    scope = scope.where('lower(description) LIKE ?', "%#{value['description_contains']}%") if value['description_contains']
+    scope = scope.where('lower(description_fr) LIKE ?', "%#{value['description_contains']}%") if value['description_contains']
+    scope = scope.where('lower(description_en) LIKE ?', "%#{value['description_contains']}%") if value['description_contains']
     scope = scope.where('lower(name) LIKE ?', "%#{value['name_contains']}%") if value['name_contains']
 
     branches << scope

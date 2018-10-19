@@ -1,3 +1,4 @@
+import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import TextField from 'material-ui/TextField';
 
@@ -62,4 +63,11 @@ class SearchBar extends Component {
 
 }
 
-export default SearchBar;
+
+const mapStateToProps = state => {
+    return { 
+        locales: state.locales
+    };
+};
+
+export default connect(mapStateToProps, null)(SearchBar);

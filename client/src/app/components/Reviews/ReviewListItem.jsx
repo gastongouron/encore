@@ -1,3 +1,4 @@
+import { connect } from 'react-redux' 
 import React from 'react';
 import Paper from 'material-ui/Paper';
 import { Link } from 'react-router-dom'
@@ -83,4 +84,10 @@ const ReviewListItem = (props) => {
 
 }
 
-export default ReviewListItem;
+const mapStateToProps = state => {
+    return { 
+        locales: state.locales
+    };
+};
+
+export default connect(mapStateToProps, null)(ReviewListItem);

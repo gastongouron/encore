@@ -2,11 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withApollo } from 'react-apollo'
 import { initArtists, loadingArtists, failedArtists, setArtists } from '../../actions/artists'
-
-// import { initLocales, loadingLocales, failedLocales, setLocales } from '../../actions/locales'
-// import strings from '../../locales/strings'
-
-// import artistListQuery from '../../queries/ArtistSchema'
 import artistSearchQuery from '../../queries/ArtistSearch'
 import artistByTagNameQuery from '../../queries/ArtistByTagName'
 import ArtistList from './ArtistList'
@@ -14,17 +9,10 @@ import SearchBar from './ArtistSearchBar'
 import EncoreLoader from '../EncoreLoader'
 import __ from 'lodash';
 
-
-
-
 class Artists extends Component {
 
     constructor(props){
         super(props);
-
-        console.log('PROPS in Artists: ', props)
-        // console.log(strings)
-
         this.state = {
             artists: this.props.artists.artists,
             locales: this.props.locales.locales,
@@ -128,7 +116,6 @@ class Artists extends Component {
 }
 
 const mapStateToProps = state => {
-    // console.log(state)
     return {
         artists: state.artists,
         locales: state.locales
@@ -140,11 +127,7 @@ const mapDispatchToProps = dispatch => {
         initArtists: () => dispatch(initArtists()),
         loadingArtists: () => dispatch(loadingArtists()),
         failedArtists: (message) => dispatch(failedArtists(message)),
-        setArtists: (artists) => dispatch(setArtists(artists)),
-        // initLocales: () => dispatch(initLocales()),
-        // loadingLocales: () => dispatch(loadingLocales()),
-        // failedLocales: (message) => dispatch(failedLocales(message)),
-        // setLocales: (locales) => dispatch(setLocales(locales)),
+        setArtists: (artists) => dispatch(setArtists(artists))
     };
 };
   

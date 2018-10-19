@@ -5,7 +5,8 @@ const artistByTagNameQuery = (gql`
       tagged(tag: $input) {
           id
           name
-          description
+          description_en
+          description_fr
           score
           avatar_url
           profile_picture_url

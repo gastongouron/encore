@@ -112,11 +112,11 @@ class MainLayout extends Component {
        drawerOpen: false,
        open: false
     }
-    
-    this.onSwitchLanguage() // Set default lang :)
+    this.props.setLocales(strings)
   }
 
   componentWillMount(){
+      console.log(this.props.currentUser.locale)
       strings.setLanguage(this.props.currentUser.locale || strings.getLanguage() || 'fr')   
   }
 
@@ -135,6 +135,7 @@ class MainLayout extends Component {
   }
 
   onSwitchLanguage = (event) => {
+
     let lang = (strings.getLanguage() == 'en') ? 'fr' : 'en'
     // if current user, do mutation then...
     strings.setLanguage(lang);
@@ -150,15 +151,15 @@ class MainLayout extends Component {
         <MainAppBar
           // style={{ boxShadow: 'none', position: 'sticky', top: 0}}
           style={{ background: '#283593', boxShadow: 'none', position: 'sticky', top: 0}}
-          showMenuIconButton={true}
+          showMenuIconButton={false}
           title={<b>encore!</b>}
           titleStyle={{fontSize: 28, fontWeight: 900}}
           onTitleTouchTap={this.goHome}
-          onLeftIconButtonTouchTap={this.handleToggle}
+          // onLeftIconButtonTouchTap={this.handleToggle}
         >
 
 
-         <Drawer open={this.state.open}>
+        {/* <Drawer open={this.state.open}>
           <MenuItem onClick={this.toggleHome}>Home</MenuItem>
               <MenuItem
                 containerElement={<Link to="/artists"/>}
@@ -176,7 +177,7 @@ class MainLayout extends Component {
                 style={{color: palette.alternateTextColor}}
               />
           <MenuItem>Menu Item 2</MenuItem>
-        </Drawer>
+        </Drawer> */}
         
           <MainToolbar>
             <ToolbarGroup>
