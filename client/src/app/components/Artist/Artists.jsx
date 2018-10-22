@@ -58,7 +58,7 @@ class Artists extends Component {
 
     onClickTag(tagname) {
         this.setState(tagname)
-
+        window.scrollTo(0, 0)
         this.child.method(tagname)
 
         this.props.client.query({query: artistByTagNameQuery, fetchPolicy: 'network-only', variables: {input: tagname.tag.toLowerCase() }}).then(

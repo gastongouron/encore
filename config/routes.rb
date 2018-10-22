@@ -9,8 +9,8 @@ Rails.application.routes.draw do
     end
     resources :users
     root to: "users#index"
-
   end
+
 
   devise_for :users, path: :auth, controllers: {
     registrations:  'users/registrations'
@@ -22,10 +22,14 @@ Rails.application.routes.draw do
 
   match :graphql, to: 'graphql#index', via: [:get, :post, :options]
 
+
+  get '/s3/presigned_url', to: 's3/s3#create'
+
   devise_scope :user do
   	post '/auth/facebook/callback' => 'users/omniauth_callbacks#facebook'
   end
 
   # to allow the client router to handle routing
   get '/*path' => 'home#index'
+
 end

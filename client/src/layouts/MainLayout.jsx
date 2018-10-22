@@ -120,7 +120,8 @@ class MainLayout extends Component {
 
   componentWillMount(){
       // console.log('meeee')      
-      // strings.setLanguage(this.props.currentUser.locale || strings.getLanguage())   
+      console.log(strings.getLanguage())
+      strings.setLanguage(strings.getLanguage()) 
   }
 
   toggleHome = () => {
@@ -220,7 +221,8 @@ class MainLayout extends Component {
             null
           :
           <StyledFooter>
-            <Link to='/policy'>{this.props.locales.locales.policy.link}</Link>
+            {/* <Link to='/policy'>{this.props.locales.locales.policy.link}</Link> */}
+            <Link to='/policy'>policy</Link> 
           </StyledFooter>
           }
       </Main>

@@ -20,6 +20,8 @@ gem 'devise'
 gem 'devise-jwt'
 gem 'administrate'
 
+gem 'aws-sdk', '~> 3'
+
 gem 'acts-as-taggable-on'
 
 gem 'httparty'
@@ -30,6 +32,7 @@ group :development, :test do
   gem 'sass-rails'
   gem 'uglifier'
   gem 'coffee-rails'
+  # gem 'rack-cors'
 
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails'

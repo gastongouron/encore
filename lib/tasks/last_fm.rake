@@ -3,6 +3,31 @@ require "#{Rails.root}/lib/last_fm"
 
 # every day ?
 
+
+
+
+namespace :s3 do
+
+	task :test => [ :environment ] do
+		
+		data="test"
+		start_date = 2.months.ago.strftime("%Y%m%d")
+		end_date = 3.months.ago.strftime("%Y%m%d")
+		filename = "#{start_date}-#{end_date}.json"
+		file = File.open(File.join(Dir.pwd, '/tmp', filename), "w")
+		file.puts(data.to_json)
+		file.close
+		puts file.path
+		puts filename
+		file
+		s3 = Aws::S3::Resource.new
+		obj = s3.bucket('encorencore').object(filename)
+		obj.upload_file(file.path)
+
+	end
+
+end
+
 namespace :get_data do
 	desc 'Getdata from last fm'
 	key = ENV['LAST_FM_KEY']
