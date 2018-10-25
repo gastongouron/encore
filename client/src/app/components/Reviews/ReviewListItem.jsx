@@ -3,6 +3,8 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import { Link } from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton';
+import isImage from 'is-image'
+import ReactPlayer from 'react-player'
 
 const ReviewListItem = (props) => {
 
@@ -63,9 +65,14 @@ const ReviewListItem = (props) => {
 
 					{review.body}
 					<br />
-					<video>
-						<source src={review.media} />
-					</video>
+					{
+						review.media ? 
+							isImage(review.media) ? <img src={review.media} /> : <ReactPlayer url={review.media} controls={true} />
+					:
+						'no'
+					}
+
+
 				</div>
 
 				<div style={noteStyle}>
