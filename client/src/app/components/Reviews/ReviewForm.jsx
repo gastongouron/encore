@@ -15,8 +15,8 @@ class CustomForm extends Component {
       rating: parseFloat(this.props.formScore),
       userId: this.props.currentUser.user_id,
       artistId: this.props.artistDetail.artistDetail.artist_id, 
-      filename: '',
-      path: ''
+      filename: null,
+      path: null
     };
     // this.getSignedUrl.bind(this)
   }
@@ -57,6 +57,10 @@ class CustomForm extends Component {
     console.log('in onSignedUrl empty func')
   }  
 
+  onClickRemove(){
+    this.setState({path: null})
+    this.setState({filename: null})
+  }
 
   render(){
 
@@ -73,6 +77,8 @@ class CustomForm extends Component {
     const actions = this.props.isUpdate ? update : create
     const user_id = this.props.currentUser.user_id
     const artist_id = this.props.artistDetail.artistDetail.id
+    const imgAction = this.state 
+
 
     return (
            <Dialog
@@ -85,25 +91,39 @@ class CustomForm extends Component {
             autoScrollBodyContent={true}
           >
 
-            <img alt="cool" src={this.state.path}/>
-            <ReactS3Uploader
-              signingUrl={`/s3/sign`}
-              signingUrlMethod="GET"
-              accept="*"
-              s3path={"/user_uploads/" + user_id + "/reviews/" + artist_id}
-              getSignedUrl={this.getSignedUrl}
-              onSignedUrl={this.onSignedUrl}
-              onProgress={this.onUploadProgress}
-              onError={this.onUploadError}
-              onFinish={(obj) => this.onUploadFinish(this, obj)}
-              signingUrlHeaders={ this.headers }
-              signingUrlQueryParams={{ user_id: user_id, artist_id: artist_id }}
-              signingUrlWithCredentials={ true }      // in case when need to pass authentication credentials via CORS
-              contentDisposition="auto"
-              scrubFilename={(filename) => filename.replace(/[^\w\d_\-.]+/ig, '')}
-              inputRef={cmp => this.uploadInput = cmp}
-              autoUpload={true}
-              /> 
+            <br />
+            <span>Photo / Video</span>
+            <br />
+            <img src={this.state.path}/>
+
+            {
+              this.state.path != null
+            ? 
+              <RaisedButton onClick={this.onClickRemove}>
+                Haha
+              </RaisedButton>
+            : 
+             
+              <ReactS3Uploader
+                signingUrl={`/s3/sign`}
+                signingUrlMethod="GET"
+                accept="*"
+                s3path={"/user_uploads/" + user_id + "/reviews/" + artist_id}
+                getSignedUrl={this.getSignedUrl}
+                onSignedUrl={this.onSignedUrl}
+                onProgress={this.onUploadProgress}
+                onError={this.onUploadError}
+                onFinish={(obj) => this.onUploadFinish(this, obj)}
+                signingUrlHeaders={ this.headers }
+                signingUrlQueryParams={{ user_id: user_id, artist_id: artist_id }}
+                signingUrlWithCredentials={ true }      // in case when need to pass authentication credentials via CORS
+                contentDisposition="auto"
+                scrubFilename={(filename) => filename.replace(/[^\w\d_\-.]+/ig, '')}
+                inputRef={cmp => this.uploadInput = cmp}
+                autoUpload={true}
+                /> 
+
+            } 
 
             <Slider 
               step={1} 

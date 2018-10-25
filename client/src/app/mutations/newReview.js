@@ -1,12 +1,13 @@
 import gql from 'graphql-tag';
 
 const newReviewMutation = (gql`
-    mutation newReviewMutation($user_id: ID!, $artist_id: ID!, $body: String!, $score: Float!) {
+    mutation newReviewMutation($user_id: ID!, $artist_id: ID!, $body: String!, $score: Float!, $media: String) {
         newReview(input: {
             user_id: $user_id,
             artist_id: $artist_id,
             body: $body,
-            score: $score
+            score: $score,
+            media: $media
         })
         {
             review{
@@ -16,6 +17,7 @@ const newReviewMutation = (gql`
                 author_display_name
                 author_profile_picture
                 score
+                media
             }
             
         }

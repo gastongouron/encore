@@ -6,8 +6,10 @@ export const onUpdate = (e, context) => {
     let {review} = context.state;
     const body= review.body;
     const score = review.score;
+    const media = review.media;
+    console.log(review)
     if(body!=='' && score !==''){
-        context.props.client.mutate({mutation: updateMutation, variables: {id: review.id, body:body, score:score }}).then(
+        context.props.client.mutate({mutation: updateMutation, variables: {id: review.id, body:body, score:score, media: media }}).then(
             (res) => {
                 const updatedArr = res.data.editReview.review
                 context.props.updateUserReview(updatedArr)
