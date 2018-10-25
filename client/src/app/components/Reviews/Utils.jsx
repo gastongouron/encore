@@ -3,11 +3,13 @@ import deleteMutation from '../../mutations/deleteReview'
 import newReviewMutation from '../../mutations/newReview'
 
 export const onUpdate = (e, context) => {  
+
     let {review} = context.state;
     const body= review.body;
     const score = review.score;
     const media = review.media;
-    console.log(review)
+    console.log('--------------------')
+    console.log(review.media)
     if(body!=='' && score !==''){
         context.props.client.mutate({mutation: updateMutation, variables: {id: review.id, body:body, score:score, media: media }}).then(
             (res) => {
@@ -42,8 +44,10 @@ export const onSave = (e, context) => {
     let {review} = context.state;
     const body= review.body;
     const score = review.score;
+    const media = review.media;
+    console.log('ON SAVE-)))))))))', media)
     if(body!=='' && score !==''){
-    	context.props.client.mutate({mutation: newReviewMutation, variables: {user_id: context.props.userInfo.user_id, artist_id: context.props.match.params.id, body: body, score: score }}).then(
+    	context.props.client.mutate({mutation: newReviewMutation, variables: {user_id: context.props.userInfo.user_id, artist_id: context.props.match.params.id, body: body, score: score, media: media }}).then(
     	    (res) => {
     	        const newArr = res.data.newReview.review
     	        context.props.addUserReview(newArr)
@@ -69,6 +73,10 @@ export const setBody = (e, context) => {
 
 export const setMedia = (value, context) => {
     context.setState({review:{...context.state.review, media: value }})
+}
+
+export const unsetMedia = (context) => {
+    context.setState({review:{...context.state.review, media: null }})
 }
 
 export const handleModalClose = (context) => { 

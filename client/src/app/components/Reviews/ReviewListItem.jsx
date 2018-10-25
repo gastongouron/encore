@@ -63,6 +63,9 @@ const ReviewListItem = (props) => {
 
 					{review.body}
 					<br />
+					<video>
+						<source src={review.media} />
+					</video>
 				</div>
 
 				<div style={noteStyle}>

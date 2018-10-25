@@ -6,6 +6,7 @@ Mutations::NewReviewMutation = GraphQL::Relay::Mutation.define do
   input_field :score, !types.Float
   input_field :user_id, !types.ID
   input_field :artist_id, !types.ID
+  input_field :media, types.String
 
   return_field :review, Types::ReviewType
 
@@ -16,6 +17,9 @@ Mutations::NewReviewMutation = GraphQL::Relay::Mutation.define do
     # uid = inputs["user_id"]
     # aid = inputs["artist_id"]
     # review = Review.new(body: body, score: score, artist_id: aid, user_id: uid)
+    puts '------------------------------'
+    puts input.to_h
+    puts '------------------------------'
     review = Review.create(input.to_h)
     review.save!
 

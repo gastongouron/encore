@@ -10,7 +10,10 @@ Types::ReviewType = GraphQL::ObjectType.define do
   field :artist_id, !types.ID
   field :artist_name, !types.String
   field :score, !types.Float
+  field :media, types.String
+
   field :artist, types[Types::ArtistType]
   field :user, types[Types::UserType]
+
 
 end

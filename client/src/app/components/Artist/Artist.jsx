@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withApollo } from 'react-apollo'
 import { initArtistDetail, loadingArtistDetail, failedArtistDetail, setArtistDetail, addUserReview, selectUserReview, updateUserReview, deleteUserReview } from '../../actions/artistDetail'
-import { onUpdate, onDelete, onSave, setBody, setScore, setMedia, handleModalShow, handleModalClose} from '../Reviews/Utils'
+import { onUpdate, onDelete, onSave, setBody, setScore, setMedia, unsetMedia, handleModalShow, handleModalClose} from '../Reviews/Utils'
 import artistDetailQuery from '../../queries/ReviewsSchema'
 import ReviewForm from '../Reviews/ReviewForm'
 import ReviewList from '../Reviews/ReviewList'
@@ -45,6 +45,7 @@ class ArtistDetail extends Component {
         this.body = setBody.bind(this)
         this.score = setScore.bind(this)
         this.media = setMedia.bind(this)
+        this.removeMedia = unsetMedia.bind(this)
         this.show = handleModalShow.bind(this)
         this.close = handleModalClose.bind(this)
 
@@ -146,9 +147,11 @@ class ArtistDetail extends Component {
                                 editable={true}
                                 formValue={this.state.review!==null?this.state.review.body:''}
                                 formScore={this.state.review!==null?this.state.review.score:''}
+                                formMedia={this.state.review!==null?this.state.review.media:null}
                                 setBody={(e)=>this.body(e, this)}
                                 setScore={(value)=>this.score(value, this)}
                                 setMedia={(value)=>this.media(value, this)}
+                                unsetMedia={(value) => this.removeMedia(this)}
                                 onClickSave={(e)=>this.save(e, this)}
                                 onClickDelete={(e)=>this.delete(e, this)}
                                 onClickUpdate={(e)=>this.update(e, this)}

@@ -11,14 +11,21 @@ class CustomForm extends Component {
 
   constructor(props) {
     super(props)
+
+    console.log('form props', props)
+
     this.state = {
       rating: parseFloat(this.props.formScore),
       userId: this.props.currentUser.user_id,
       artistId: this.props.artistDetail.artistDetail.artist_id, 
       filename: null,
-      path: null
+      path: this.props.formMedia
     };
     // this.getSignedUrl.bind(this)
+  }
+
+  componentDidMount(){
+    console.log(this.state)
   }
 
   onSlide(e, value) {
@@ -40,32 +47,38 @@ class CustomForm extends Component {
   // }
 
   onUploadProgress(){
-    console.log('in onUploadProgress')
   }  
 
   onUploadError(error){
-    console.log(error)
-    console.log('in onUploadError')
   }  
 
   onUploadFinish(context, obj){
-    console.log(obj.public)
     this.setState({path: obj.public})
     this.props.setMedia(obj.public)
-    console.log('---------------')
-    console.log(context.props)
-    console.log('in onSignedUrl empty func')
   }  
 
   onClickRemove(){
-    this.setState({path: null})
-    this.setState({filename: null})
+    console.log('--------------')
+    console.log(this.props)
+    this.setState({path: null});    
+    this.props.unsetMedia()
+    console.log('--------------')
+    console.log(this.props)
+
   }
 
   render(){
 
     const style = {
       marginLeft: 10
+    }
+
+    const coverStyle = {
+        objectFit: 'cover',
+        backgroundSize: 'cover',
+        width: '100%',
+        height: '100%',
+        maxHeight: '300px',
     }
 
     const create = [ <RaisedButton style={style} label={this.props.locales.locales.cancel} default={true} onClick={this.props.onClickClose}/>,
@@ -94,34 +107,38 @@ class CustomForm extends Component {
             <br />
             <span>Photo / Video</span>
             <br />
-            <img src={this.state.path}/>
 
             {
               this.state.path != null
             ? 
-              <RaisedButton onClick={this.onClickRemove}>
-                Haha
-              </RaisedButton>
+              <div>
+                <img style={coverStyle} src={this.state.path}/>             
+                <RaisedButton onClick={(e) => this.onClickRemove(e, this)}>
+                  Haha
+                </RaisedButton>
+              </div>
             : 
-             
-              <ReactS3Uploader
-                signingUrl={`/s3/sign`}
-                signingUrlMethod="GET"
-                accept="*"
-                s3path={"/user_uploads/" + user_id + "/reviews/" + artist_id}
-                getSignedUrl={this.getSignedUrl}
-                onSignedUrl={this.onSignedUrl}
-                onProgress={this.onUploadProgress}
-                onError={this.onUploadError}
-                onFinish={(obj) => this.onUploadFinish(this, obj)}
-                signingUrlHeaders={ this.headers }
-                signingUrlQueryParams={{ user_id: user_id, artist_id: artist_id }}
-                signingUrlWithCredentials={ true }      // in case when need to pass authentication credentials via CORS
-                contentDisposition="auto"
-                scrubFilename={(filename) => filename.replace(/[^\w\d_\-.]+/ig, '')}
-                inputRef={cmp => this.uploadInput = cmp}
-                autoUpload={true}
-                /> 
+  
+              <div>
+                <ReactS3Uploader
+                  signingUrl={`/s3/sign`}
+                  signingUrlMethod="GET"
+                  accept="*"
+                  s3path={"/user_uploads/" + user_id + "/reviews/" + artist_id}
+                  getSignedUrl={this.getSignedUrl}
+                  onSignedUrl={this.onSignedUrl}
+                  onProgress={this.onUploadProgress}
+                  onError={this.onUploadError}
+                  onFinish={(obj) => this.onUploadFinish(this, obj)}
+                  signingUrlHeaders={ this.headers }
+                  signingUrlQueryParams={{ user_id: user_id, artist_id: artist_id }}
+                  signingUrlWithCredentials={ true }      // in case when need to pass authentication credentials via CORS
+                  contentDisposition="auto"
+                  scrubFilename={(filename) => filename.replace(/[^\w\d_\-.]+/ig, '')}
+                  inputRef={cmp => this.uploadInput = cmp}
+                  autoUpload={true}
+                  /> 
+              </div>
 
             } 
 

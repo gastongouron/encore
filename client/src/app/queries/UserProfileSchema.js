@@ -14,6 +14,7 @@ const UserProfileQuery = (gql`
                 artist_name
 				body
                 score
+                media
                 user_id
                 id
 			}

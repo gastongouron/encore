@@ -17,6 +17,7 @@ const artistDetailQuery = (gql`
                 author_profile_picture
 				body
                 score
+                media
                 user_id
                 id
 			}
