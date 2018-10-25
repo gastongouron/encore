@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton';
 import isImage from 'is-image-filename'
 import ReactPlayer from 'react-player'
+import TimeAgo from 'react-timeago'
+import frenchStrings from 'react-timeago/lib/language-strings/fr'
+import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
+ 
 
 const ReviewListItem = (props) => {
 
@@ -13,6 +17,8 @@ const ReviewListItem = (props) => {
 	const onReviewSelect = props.onReviewSelect
 	const belongsToUser = (Number(userId) === Number(review.user_id))
 	const onUserProfile = props.match.includes('user')
+	const formatter = buildFormatter(frenchStrings)
+
 
 	const style = {
 	    objectFit: 'cover',
@@ -83,7 +89,6 @@ const ReviewListItem = (props) => {
 						</div>
 					}
 
-
 					<div style={right}>
 						<h3><span>{review.score}</span></h3>
 					</div>
@@ -104,6 +109,16 @@ const ReviewListItem = (props) => {
 				<div style={clear}>
 					<p>{review.body}</p>
 
+					<i style={{color: 'grey'}}>
+						{
+							review.created_at === review.updated_at 
+						? 
+							props.locales.locales.created_at
+						: 
+							props.locales.locales.updated_at
+						}
+						<TimeAgo date={review.created_at} formatter={props.locales.locales._language == 'en' ? undefined : formatter}/>
+					</i>
 				</div>
 
 				<div style={padded}>

@@ -10,6 +10,9 @@ Mutations::EditUserMutation = GraphQL::Relay::Mutation.define do
   resolve -> (_, input, _) {
     user = User.find(input[:id])
     user.update!(input.to_h)
+    if input[:locale]
+      I18n.locale = input[:locale]
+    end
     user.save!
     { user: user }
   }

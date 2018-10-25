@@ -19,6 +19,8 @@ const artistDetailQuery = (gql`
                 score
                 media
                 user_id
+                created_at
+                updated_at
                 id
 			}
 	    }

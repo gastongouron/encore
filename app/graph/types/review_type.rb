@@ -11,6 +11,8 @@ Types::ReviewType = GraphQL::ObjectType.define do
   field :artist_name, !types.String
   field :score, !types.Float
   field :media, types.String
+  field :created_at, !types.String
+  field :updated_at, !types.String
 
   field :artist, types[Types::ArtistType]
   field :user, types[Types::UserType]

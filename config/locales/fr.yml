@@ -1,4 +1,7 @@
 fr:
+  file:
+    type: "Type de fichier non pris en charge"
+    size: "Fichier trop volumineux"    
   activerecord:
     errors:
       messages:

@@ -40,6 +40,8 @@ const translations = {
    deleteMedia:"Supprimer ce média",
    addMedia:"Ajouter un média",
    changeMedia:"Changer ce média",
+   created_at:"Créé ",
+   updated_at:"Mis à jour ",
    policy: {
       link:"Politique de confidentialité",
       title:"Encore: Politique de confidentialité",
@@ -89,6 +91,8 @@ const translations = {
    deleteMedia:"Delete media file",
    addMedia:"Add a media",
    changeMedia:"Change media",
+   created_at:"Created ",
+   updated_at:"Updated ",
    policy: {
       link:"Privacy policy",
       title:"Encore: Privacy Policy",

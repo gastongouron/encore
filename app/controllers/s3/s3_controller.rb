@@ -5,6 +5,7 @@ class S3::S3Controller < ApiController
     artist_id = params[:artist_id]
     filename = params[:objectName]
     content_type = params[:contentType]
+    allowed_extentions = ['jpg', 'jpeg', 'png', 'gif', 'mp4', 'ogv']
 
     bucket = Rails.env.development? ? ENV['S3_BUCKET_DEVELOPMENT'] : ENV['S3_BUCKET_PRODUCTION']
 
@@ -16,22 +17,28 @@ class S3::S3Controller < ApiController
     headers = {"Content-Type" => params[:contentType], 
                "x-amz-acl" => "public-read"}
 
+    # check filetype
+    if is_allowed(content_type, allowed_extentions)
 
+      storage = Fog::Storage.new(
+        provider: 'AWS',
+        aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+        aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+        region: ENV['AWS_REGION']
+      )
 
+      # get_files(storage, folder, bucket)      
+      bucket_url = storage.put_object_url(bucket, target_path, 15.minutes.from_now.to_time.to_i, headers, options)
+      public_url = "https://#{bucket}.s3.amazonaws.com/user_uploads/#{user_id}/reviews/#{artist_id}/#{filename}"
 
-    storage = Fog::Storage.new(
-      provider: 'AWS',
-      aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-      aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-      region: ENV['AWS_REGION']
-    )
+      render json: { signedUrl: bucket_url, public: public_url } 
 
-    get_files(storage, folder, bucket)
-    
-    bucket_url = storage.put_object_url(bucket, target_path, 15.minutes.from_now.to_time.to_i, headers, options)
-    public_url = "https://#{bucket}.s3.amazonaws.com/user_uploads/#{user_id}/reviews/#{artist_id}/#{filename}"
+    else
 
-    render json: { signedUrl: bucket_url, public: public_url } 
+      I18n.locale
+      render json: { status: "error", code: 401, message: I18n.t('file.type') }
+
+    end
 
   end
 
@@ -42,6 +49,12 @@ class S3::S3Controller < ApiController
     end
   end
 
+  def is_allowed(filetype, extentions)
+    extentions.each do |extention|
+      return true if filetype.include?(extention)
+    end
+    return false
+  end
 
 
 end

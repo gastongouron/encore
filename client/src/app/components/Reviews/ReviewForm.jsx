@@ -8,6 +8,7 @@ import ReactS3Uploader from 'react-s3-uploader'
 import isImage from 'is-image-filename'
 import ReactPlayer from 'react-player'
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Alert from '../../../shared/Alert'
 
 class CustomForm extends Component {
 
@@ -19,6 +20,8 @@ class CustomForm extends Component {
       artistId: this.props.artistDetail.artistDetail.artist_id, 
       progress: 0,
       hiddenProgress: true,
+      error: '',
+      hiddenError: true,
     };
   }
 
@@ -39,20 +42,36 @@ class CustomForm extends Component {
     }
   }  
 
-  onUploadError(error){
+  onUploadError(context, error){
+    this.setState({hiddenProgress: true})
   }  
 
   onUploadFinish(context, obj){
-    console.log(obj)
     this.setState({path: obj.public})
     this.props.setMedia(obj.public)
+    this.setState({hiddenProgress: true})
+    this.setState({hiddenError:true})
   }  
 
   onClickRemove(){
     this.props.unsetMedia()
     this.setState({progress: 0})
     this.setState({hiddenProgress: true})
+    this.setState({hiddenError:true})
+  }
 
+  onSignedUrl(context, resp){
+    if(resp.status == "error" ){
+      console.log(resp.message)
+      this.setState({error:resp.message})
+      this.setState({hiddenError:false})
+      return    
+    }else{
+      this.setState({error:''})      
+      this.setState({hiddenError:true})
+    }
+    // console.log(val.error)
+    // console.log('here')
   }
 
   render(){
@@ -61,19 +80,11 @@ class CustomForm extends Component {
       marginLeft: 10
     }
 
-    const coverStyle = {
-        objectFit: 'cover',
-        backgroundSize: 'cover',
-        width: '100%',
-        height: '100%',
-        maxHeight: '300px',
-    }
-
     const imageStyle = {
         objectFit: 'cover',
         backgroundSize: 'cover',
         width: '100%',
-        height: '100%',
+        height: '30%',
     }
 
     const videoStyle = {
@@ -106,8 +117,10 @@ class CustomForm extends Component {
   
             <br />
 
-          
               <div>
+                <Alert hidden={this.state.hiddenError}>
+                  {this.state.error}
+                </Alert>
                <LinearProgress hidden={this.state.hiddenProgress} variant="determinate" value={this.state.progress} />
                {isImage(this.props.formMedia) ? <img style={imageStyle} src={this.props.formMedia} /> : <ReactPlayer width='100%' height='auto' url={this.props.formMedia} controls={true} />}
                {
@@ -133,9 +146,9 @@ class CustomForm extends Component {
                   accept="*"
                   s3path={"/user_uploads/" + user_id + "/reviews/" + artist_id}
                   getSignedUrl={this.getSignedUrl}
-                  onSignedUrl={this.onSignedUrl}
+                  onSignedUrl={(resp) => this.onSignedUrl(this, resp)}
                   onProgress={(val) => this.onUploadProgress(this, val)}
-                  onError={this.onUploadError}
+                  onError={(msg) => this.onUploadError(this, msg)}
                   onFinish={(obj) => this.onUploadFinish(this, obj)}
                   signingUrlHeaders={ this.headers }
                   signingUrlQueryParams={{ user_id: user_id, artist_id: artist_id }}
