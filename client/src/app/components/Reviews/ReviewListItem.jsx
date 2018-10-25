@@ -3,7 +3,7 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import { Link } from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton';
-import isImage from 'is-image'
+import isImage from 'is-image-filename'
 import ReactPlayer from 'react-player'
 
 const ReviewListItem = (props) => {
