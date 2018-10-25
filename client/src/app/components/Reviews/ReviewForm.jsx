@@ -5,7 +5,8 @@ import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
 import Slider from 'material-ui/Slider';
 import ReactS3Uploader from 'react-s3-uploader'
-
+import isImage from 'is-image-filename'
+import ReactPlayer from 'react-player'
 
 class CustomForm extends Component {
 
@@ -30,6 +31,7 @@ class CustomForm extends Component {
   }  
 
   onUploadFinish(context, obj){
+    console.log(obj)
     this.setState({path: obj.public})
     this.props.setMedia(obj.public)
   }  
@@ -51,6 +53,18 @@ class CustomForm extends Component {
         width: '100%',
         height: '100%',
         maxHeight: '300px',
+    }
+
+    const imageStyle = {
+        objectFit: 'cover',
+        backgroundSize: 'cover',
+        width: '100%',
+        height: '100%',
+    }
+
+    const videoStyle = {
+        width: '100%',
+        height: 'auto',
     }
 
     const create = [ <RaisedButton style={style} label={this.props.locales.locales.cancel} default={true} onClick={this.props.onClickClose}/>,
@@ -75,23 +89,32 @@ class CustomForm extends Component {
             autoScrollBodyContent={true}
           >
 
-            <br />
-            <span>Photo / Video</span>
-            <br />
-
-            {
-              this.props.formMedia != null
-            ? 
-              <div>
-                <img style={coverStyle} src={this.props.formMedia}/>             
-                <RaisedButton onClick={(e) => this.onClickRemove(e, this)}>
-                  Remove media
-                </RaisedButton>
-              </div>
-            : 
   
+            <br />
+              <span>Photo / Video</span>
+            <br />
+          
               <div>
+               {isImage(this.props.formMedia) ? <img style={imageStyle} src={this.props.formMedia} /> : <ReactPlayer width='100%' height='auto' url={this.props.formMedia} controls={true} />}
+
+               {
+                this.props.formMedia ? 
+                  <RaisedButton label={this.props.locales.locales.deleteMedia} secondary={true} onClick={(e) => this.onClickRemove(e, this)} />
+                :
+                  null
+               }
+
+              </div>
+        
+              <div>
+                <RaisedButton
+                   containerElement='label'
+                   label={this.props.formMedia ? this.props.locales.locales.changeMedia : this.props.locales.locales.addMedia}>
+
                 <ReactS3Uploader
+                  style={{display:"none"}}
+                  className="btn"
+                  htmlFor="flat-button-file"
                   signingUrl={`/s3/sign`}
                   signingUrlMethod="GET"
                   accept="*"
@@ -109,9 +132,9 @@ class CustomForm extends Component {
                   inputRef={cmp => this.uploadInput = cmp}
                   autoUpload={true}
                   /> 
-              </div>
+                </RaisedButton>
 
-            } 
+              </div>
 
             <Slider 
               step={1} 
@@ -129,7 +152,7 @@ class CustomForm extends Component {
               type="text"
               label="Review"
               multiLine={true}
-              rows={3}
+              rows={1}
               value={this.props.formValue}
               onChange={this.props.setBody}      
               fullWidth={true}       

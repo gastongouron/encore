@@ -24,19 +24,37 @@ const ReviewListItem = (props) => {
 	}
 
 	const paperStyle = {
-	  display: 'grid',
 	  marginBottom: 20,
-	  padding: 20,
+	  // padding: 20,
 	};
 
-	const textStyle = {
-		gridColumn: 1,
-		textAlign: 'left',
+	const padded = {
+	  padding: 20,
 	}
 
-	const noteStyle = {
-		gridColumn: 2,
-  	    textAlign: 'right',
+	const imageStyle = {
+	    objectFit: 'cover',
+	    backgroundSize: 'cover',
+	    width: '100%',
+	    height: '100%',
+	}
+
+	const videoStyle = {
+	    width: '100%',
+	    height: 'auto',
+	}
+
+	const clear = {
+		padding: 20,
+		clear: 'both',
+	}
+
+	const left = {
+		float: 'left',
+	}
+
+	const right = {
+  	    float: 'right',
 	}
 
 	return (
@@ -45,41 +63,50 @@ const ReviewListItem = (props) => {
 				rounded={true}>
 				<div>
 				</div>
-				<div style={textStyle}>
+
+
+				<div style={clear}>
 				
 					{ !onUserProfile ? 
-						<div> 
-							<Link to={'/user/'+ review.user_id}>{review.author_display_name}</Link>
-	                        <img alt='meaningful text' style={style} src={review.author_profile_picture}/>
-
+						<div style={left}> 
+							<h3>
+								<Link to={'/user/'+ review.user_id}>{review.author_display_name}</Link>
+	                        	<img alt='meaningful text' style={style} src={review.author_profile_picture}/>
+	                        </h3>
 						</div> 
 
 					: 	
-						<div>
-							<h1>
+						<div style={left}>
+							<h3>
 								<Link to={'/artists/'+ review.artist_id}>{review.artist_name}</Link>
-							</h1>
-							<br />
+							</h3>
 						</div>
 					}
 
-					{review.body}
-					<br />
+
+					<div style={right}>
+						<h3><span>{review.score}</span></h3>
+					</div>
+
+				<br />
+
+				</div>
+
+				<div>
 					{
 						review.media ? 
-							isImage(review.media) ? <img src={review.media} /> : <ReactPlayer url={review.media} controls={true} />
+							isImage(review.media) ? <img style={imageStyle} src={review.media} /> : <ReactPlayer width='100%' height='auto' url={review.media} controls={true} />
 					:
-						'no'
+						<hr />
 					}
+				</div>
 
+				<div style={clear}>
+					<p>{review.body}</p>
 
 				</div>
 
-				<div style={noteStyle}>
-					<h1>{review.score}</h1>
-				</div>
-
-				<div style={noteStyle}>
+				<div style={padded}>
                     { belongsToUser ? 
 						<RaisedButton 
 							onClick={ () => onReviewSelect(review) }
@@ -89,6 +116,8 @@ const ReviewListItem = (props) => {
                     	<p></p> 
                    	}
 				</div>
+
+
 			</Paper>
 		)
 

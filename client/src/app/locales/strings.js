@@ -37,7 +37,9 @@ const translations = {
    edit:"Éditer",
    update:"Mettre à jour",
    delete:"Supprimer",
-
+   deleteMedia:"Supprimer ce média",
+   addMedia:"Ajouter un média",
+   changeMedia:"Changer ce média",
    policy: {
       link:"Politique de confidentialité",
       title:"Encore: Politique de confidentialité",
@@ -84,7 +86,9 @@ const translations = {
    edit:"Edit",
    update:"Update",
    delete:"Delete",
-
+   deleteMedia:"Delete media file",
+   addMedia:"Add a media",
+   changeMedia:"Change media",
    policy: {
       link:"Privacy policy",
       title:"Encore: Privacy Policy",
