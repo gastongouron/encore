@@ -6,7 +6,6 @@ Mutations::EditReviewMutation = GraphQL::Relay::Mutation.define do
   input_field :body, !types.String
   input_field :score, !types.Float
   input_field :media, types.String
-
   return_field :review, Types::ReviewType
 
   resolve -> (_, input, _) {
@@ -15,3 +14,4 @@ Mutations::EditReviewMutation = GraphQL::Relay::Mutation.define do
     { review: review }
   }
 end
+

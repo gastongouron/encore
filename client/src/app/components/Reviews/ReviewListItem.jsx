@@ -109,16 +109,17 @@ const ReviewListItem = (props) => {
 				<div style={clear}>
 					<p>{review.body}</p>
 
-					<i style={{color: 'grey'}}>
-						{
-							review.created_at === review.updated_at 
-						? 
-							props.locales.locales.created_at
-						: 
-							props.locales.locales.updated_at
-						}
-						<TimeAgo date={review.created_at} formatter={props.locales.locales._language == 'en' ? undefined : formatter}/>
-					</i>
+					{ 
+						review.created_at != undefined 
+					?
+						<i style={{color: 'grey'}}>
+							{ review.created_at === review.updated_at ? props.locales.locales.created_at : props.locales.locales.updated_at}
+							<TimeAgo date={review.created_at === review.updated_at ? review.created_at : review.updated_at} formatter={props.locales.locales._language == 'en' ? undefined : formatter}/>
+						</i>
+					: 
+						null
+					}
+
 				</div>
 
 				<div style={padded}>
