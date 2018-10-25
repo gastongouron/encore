@@ -45,11 +45,6 @@ const ReviewListItem = (props) => {
 	    height: '100%',
 	}
 
-	const videoStyle = {
-	    width: '100%',
-	    height: 'auto',
-	}
-
 	const clear = {
 		padding: 20,
 		clear: 'both',
@@ -100,7 +95,7 @@ const ReviewListItem = (props) => {
 				<div>
 					{
 						review.media ? 
-							isImage(review.media) ? <img style={imageStyle} src={review.media} /> : <ReactPlayer width='100%' height='auto' url={review.media} controls={true} />
+							isImage(review.media) ? <img alt="" style={imageStyle} src={review.media} /> : <ReactPlayer width='100%' height='auto' url={review.media} controls={true} />
 					:
 						<hr />
 					}
@@ -110,11 +105,11 @@ const ReviewListItem = (props) => {
 					<p>{review.body}</p>
 
 					{ 
-						review.created_at != undefined 
+						review.created_at !== undefined 
 					?
 						<i style={{color: 'grey'}}>
 							{ review.created_at === review.updated_at ? props.locales.locales.created_at : props.locales.locales.updated_at}
-							<TimeAgo date={review.created_at === review.updated_at ? review.created_at : review.updated_at} formatter={props.locales.locales._language == 'en' ? undefined : formatter}/>
+							<TimeAgo date={review.created_at === review.updated_at ? review.created_at : review.updated_at} formatter={props.locales.locales._language === 'en' ? undefined : formatter}/>
 						</i>
 					: 
 						null

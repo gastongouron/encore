@@ -9,6 +9,7 @@ import isImage from 'is-image-filename'
 import ReactPlayer from 'react-player'
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Alert from '../../../shared/Alert'
+import strings from '../../../app/locales/strings'
 
 class CustomForm extends Component {
 
@@ -61,7 +62,7 @@ class CustomForm extends Component {
   }
 
   onSignedUrl(context, resp){
-    if(resp.status == "error" ){
+    if(resp.status === "error" ){
       console.log(resp.message)
       this.setState({error:resp.message})
       this.setState({hiddenError:false})
@@ -85,11 +86,6 @@ class CustomForm extends Component {
         height: '30%',
     }
 
-    const videoStyle = {
-        width: '100%',
-        height: 'auto',
-    }
-
     const create = [ <RaisedButton style={style} label={this.props.locales.locales.cancel} default={true} onClick={this.props.onClickClose}/>,
                      <RaisedButton style={style} label={this.props.locales.locales.save} primary={true} keyboardFocused={true} onClick={this.props.onClickSave}/>]
     const update = [ <RaisedButton style={style} label={this.props.locales.locales.update} primary={true} keyboardFocused={true} onClick={this.props.onClickUpdate}/>,
@@ -105,7 +101,7 @@ class CustomForm extends Component {
            <Dialog
             open={this.props.onShow}
             title={
-              <h1>Write something nice!</h1>
+              <h1>{strings.formatString(this.props.locales.locales.review, {name: this.props.artistDetail.artistDetail.name})}</h1>
             }
             modal={false}
             actions={actions}
@@ -120,7 +116,7 @@ class CustomForm extends Component {
                   {this.state.error}
                 </Alert>
                <LinearProgress hidden={this.state.hiddenProgress} variant="determinate" value={this.state.progress} />
-               {isImage(this.props.formMedia) ? <img style={imageStyle} src={this.props.formMedia} /> : <ReactPlayer width='100%' height='auto' url={this.props.formMedia} controls={true} />}
+               {isImage(this.props.formMedia) ? <img alt="" style={imageStyle} src={this.props.formMedia} /> : <ReactPlayer width='100%' height='auto' url={this.props.formMedia} controls={true} />}
                {
                 this.props.formMedia ? 
                   <RaisedButton label={this.props.locales.locales.deleteMedia} secondary={true} onClick={(e) => this.onClickRemove(e, this)} />
@@ -170,8 +166,8 @@ class CustomForm extends Component {
               />
               
             <TextField
-              floatingLabelText="Review body"
-              hintText="Something meaningful you'd like to share with the world"
+              floatingLabelText={this.props.locales.locales.reviewBodyLabel}
+              hintText={this.props.locales.locales.reviewHint}
               id="body"
               type="text"
               label="Review"

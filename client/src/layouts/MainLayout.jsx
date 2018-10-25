@@ -140,7 +140,6 @@ class MainLayout extends Component {
 
   onSwitchLanguage = (event) => {
     let lang = (strings.getLanguage() === 'en') ? 'fr' : 'en'
-    // console.log(this.props.currentUser != null)
     if (!Object.keys(this.props.currentUser).length === 0) {
       this.props.client.mutate({mutation: updateUserMutation, variables: {user_id: this.props.currentUser.user_id, locale: lang}}).then(
         (res) => {
