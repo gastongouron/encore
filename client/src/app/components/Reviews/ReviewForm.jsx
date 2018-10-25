@@ -70,8 +70,6 @@ class CustomForm extends Component {
       this.setState({error:''})      
       this.setState({hiddenError:true})
     }
-    // console.log(val.error)
-    // console.log('here')
   }
 
   render(){

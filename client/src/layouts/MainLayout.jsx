@@ -140,7 +140,8 @@ class MainLayout extends Component {
 
   onSwitchLanguage = (event) => {
     let lang = (strings.getLanguage() === 'en') ? 'fr' : 'en'
-    if (this.props.currentUser) {
+    // console.log(this.props.currentUser != null)
+    if (!Object.keys(this.props.currentUser).length === 0) {
       this.props.client.mutate({mutation: updateUserMutation, variables: {user_id: this.props.currentUser.user_id, locale: lang}}).then(
         (res) => {
           // console.log(res.data.editUser.user.locale)
@@ -221,8 +222,8 @@ class MainLayout extends Component {
             null
           :
           <StyledFooter>
-            {/* <Link to='/policy'>{this.props.locales.locales.policy.link}</Link> */}
-            <Link to='/policy'>policy</Link> 
+            { this.props.locales.locales.policy.link ? <Link to='/policy'>{this.props.locales.locales.policy.link}</Link> : undefined}
+
           </StyledFooter>
           }
       </Main>

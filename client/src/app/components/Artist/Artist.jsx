@@ -37,7 +37,6 @@ class ArtistDetail extends Component {
     constructor(props){
 
         super(props);
-        console.log('props in ARTIST! ->>>>', props)
 
         this.save = onSave.bind(this)
         this.update = onUpdate.bind(this)
