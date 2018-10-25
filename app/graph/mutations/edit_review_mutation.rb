@@ -11,20 +11,7 @@ Mutations::EditReviewMutation = GraphQL::Relay::Mutation.define do
 
   resolve -> (_, input, _) {
     review = Review.find(input[:id])
-    puts '------------------------------'
-    puts input.to_h
-    puts '------------------------------'
     review.update!(input.to_h)
-
-    # unless input[:media] 
-    #   a = review.media  
-    #   a = nil
-    #   review.save!
-    # end
-
-    puts '------------------------------'
-    puts review.media
-
     { review: review }
   }
 end

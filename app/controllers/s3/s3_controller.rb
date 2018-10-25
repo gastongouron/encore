@@ -6,9 +6,12 @@ class S3::S3Controller < ApiController
     filename = params[:objectName]
     content_type = params[:contentType]
 
+    bucket = Rails.env.development? ? ENV['S3_BUCKET_DEVELOPMENT'] : ENV['S3_BUCKET_PRODUCTION']
+
     target_path = "user_uploads/#{user_id}/reviews/#{artist_id}/#{filename}"
 
     options = {path_style: true}
+
     headers = {"Content-Type" => params[:contentType], 
                "x-amz-acl" => "public-read"}
 
@@ -19,13 +22,10 @@ class S3::S3Controller < ApiController
       region: ENV['AWS_REGION']
     )
     
-    bucket_url = storage.put_object_url(ENV['S3_BUCKET'], target_path, 15.minutes.from_now.to_time.to_i, headers, options)
-    public_url = "https://#{ENV['S3_BUCKET']}.s3.amazonaws.com/user_uploads/#{user_id}/reviews/#{artist_id}/#{filename}"
+    bucket_url = storage.put_object_url(bucket, target_path, 15.minutes.from_now.to_time.to_i, headers, options)
+    public_url = "https://#{bucket}.s3.amazonaws.com/user_uploads/#{user_id}/reviews/#{artist_id}/#{filename}"
 
     render json: { signedUrl: bucket_url, public: public_url } 
-
-    # associate to an unexisting review oO?
-    # store the link to the resource somewhere and associate it to review?
 
   end
 
