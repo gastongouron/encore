@@ -20,7 +20,8 @@ gem 'devise'
 gem 'devise-jwt'
 gem 'administrate'
 
-gem 'aws-sdk', '~> 3'
+# gem 'aws-sdk', '~> 3'
+gem 'fog'
 
 gem 'acts-as-taggable-on'
 

@@ -3,13 +3,12 @@ import {routerMiddleware} from 'react-router-redux';
 import createBrowserHistory from 'history/createBrowserHistory';
 import {persistStore, autoRehydrate} from 'redux-persist';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import reducers from './reducers';
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { initDevise } from './devistsetup'
-import strings from './locales/strings'
 
 injectTapEventPlugin();
 

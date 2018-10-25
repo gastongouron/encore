@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   match :graphql, to: 'graphql#index', via: [:get, :post, :options]
 
 
-  get '/s3/presigned_url', to: 's3/s3#create'
+  get '/s3/sign', to: 's3/s3#create'
 
   devise_scope :user do
   	post '/auth/facebook/callback' => 'users/omniauth_callbacks#facebook'

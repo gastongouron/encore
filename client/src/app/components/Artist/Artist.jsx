@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withApollo } from 'react-apollo'
 import { initArtistDetail, loadingArtistDetail, failedArtistDetail, setArtistDetail, addUserReview, selectUserReview, updateUserReview, deleteUserReview } from '../../actions/artistDetail'
-import { onUpdate, onDelete, onSave, setBody, setScore, handleModalShow, handleModalClose} from '../Reviews/Utils'
+import { onUpdate, onDelete, onSave, setBody, setScore, setMedia, handleModalShow, handleModalClose} from '../Reviews/Utils'
 import artistDetailQuery from '../../queries/ReviewsSchema'
 import ReviewForm from '../Reviews/ReviewForm'
 import ReviewList from '../Reviews/ReviewList'
@@ -44,6 +44,7 @@ class ArtistDetail extends Component {
         this.delete = onDelete.bind(this)
         this.body = setBody.bind(this)
         this.score = setScore.bind(this)
+        this.media = setMedia.bind(this)
         this.show = handleModalShow.bind(this)
         this.close = handleModalClose.bind(this)
 
@@ -111,7 +112,7 @@ class ArtistDetail extends Component {
                                         />
                                     </Grid>
                                     <Grid style={marginBottom} item xs={12} sm={12}>
-                                        {this.props.locales.locales._language == 'en' ? 
+                                        {this.props.locales.locales._language === 'en' ? 
                                             <p>{artist.description_en}</p>
                                         :
                                             <p>{artist.description_fr}</p>
@@ -147,6 +148,7 @@ class ArtistDetail extends Component {
                                 formScore={this.state.review!==null?this.state.review.score:''}
                                 setBody={(e)=>this.body(e, this)}
                                 setScore={(value)=>this.score(value, this)}
+                                setMedia={(value)=>this.media(value, this)}
                                 onClickSave={(e)=>this.save(e, this)}
                                 onClickDelete={(e)=>this.delete(e, this)}
                                 onClickUpdate={(e)=>this.update(e, this)}

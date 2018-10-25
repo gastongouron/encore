@@ -2,13 +2,6 @@ import updateMutation from '../../mutations/updateReview'
 import deleteMutation from '../../mutations/deleteReview'
 import newReviewMutation from '../../mutations/newReview'
 
-
-// export const onSignUrl = (value) => {
-//     console.log(value)    
-//     // console.log(context)    
-//     console.log('IN SIGN URL')    
-// }
-
 export const onUpdate = (e, context) => {  
     let {review} = context.state;
     const body= review.body;
@@ -69,7 +62,11 @@ export const setScore = (value, context) => {
 }
 
 export const setBody = (e, context) => {
-    context.setState({review:{...context.state.review, body:e.target.value }})
+    context.setState({review:{...context.state.review, body: e.target.value }})
+}
+
+export const setMedia = (value, context) => {
+    context.setState({review:{...context.state.review, media: value }})
 }
 
 export const handleModalClose = (context) => { 

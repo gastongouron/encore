@@ -19,20 +19,20 @@ import strings from '../../../locales/strings'
 //   margin-bottom: 5px;
 // `;
 
-const buttonStyles = `
-  font-family: Helvetica, sans-serif;
-  font-weight: 700;
-  font-smoothing: antialiased;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-size: calc(.27548vw + 12.71074px);
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: background-color .3s, border-color .3s;
-  padding: calc(.34435vw + 3.38843px) calc(.34435vw + 8.38843px);
-  width: 255px;
-`;
+// const buttonStyles = `
+//   font-family: Helvetica, sans-serif;
+//   font-weight: 700;
+//   font-smoothing: antialiased;
+//   color: #fff;
+//   cursor: pointer;
+//   display: inline-block;
+//   font-size: calc(.27548vw + 12.71074px);
+//   text-decoration: none;
+//   text-transform: uppercase;
+//   transition: background-color .3s, border-color .3s;
+//   padding: calc(.34435vw + 3.38843px) calc(.34435vw + 8.38843px);
+//   width: 255px;
+// `;
 
 const style = {
     fontFamily: 'Helvetica',
@@ -52,17 +52,17 @@ const style = {
     border: 'solid #4c69ba'
 }
 
-const MyFacebookLogin = ({className, ...props}) => {
-  return (
-    <FacebookLogin cssClass={className} {...props} />
-  );
-};
+// const MyFacebookLogin = ({className, ...props}) => {
+//   return (
+//     <FacebookLogin cssClass={className} {...props} />
+//   );
+// };
 
-const StyledFacebookLogin = styled(MyFacebookLogin)`
-  ${buttonStyles}
-  background-color: #4c69ba;
-  border: calc(.06887vw + .67769px) solid #4c69ba;
-`;
+// const StyledFacebookLogin = styled(MyFacebookLogin)`
+//   ${buttonStyles}
+//   background-color: #4c69ba;
+//   border: calc(.06887vw + .67769px) solid #4c69ba;
+// `;
 
 const SocialIcon = styled(FontAwesome)`
   margin-right: 10px;

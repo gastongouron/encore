@@ -9,7 +9,7 @@ import {required, email} from './Validation';
 import {OauthView} from './OauthLinks'
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
-import AuthLinks from './AuthLinks'
+// import AuthLinks from './AuthLinks'
 
 const LoginForm = reduxForm({
   form: 'login'
@@ -77,7 +77,7 @@ const Login = ({currentUser, locales, doLogin, location: {state: {alert, from: {
    };
 
   const coolParent = {
-    display: 'flex', 
+    // display: 'flex', 
     justifyContent: 'center',
     position: 'absolute',
     display: 'block',

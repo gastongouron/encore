@@ -7,7 +7,7 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const coolParent = {
-  display: 'flex', 
+  // display: 'flex', 
   justifyContent: 'center',
   position: 'absolute',
   display: 'block',

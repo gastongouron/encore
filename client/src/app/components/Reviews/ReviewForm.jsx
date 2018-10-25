@@ -5,7 +5,6 @@ import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
 import Slider from 'material-ui/Slider';
 import ReactS3Uploader from 'react-s3-uploader'
-// import PresignedUrl from '../../queries/s3Signature'
 
 
 class CustomForm extends Component {
@@ -14,11 +13,12 @@ class CustomForm extends Component {
     super(props)
     this.state = {
       rating: parseFloat(this.props.formScore),
-      filename: ''
+      userId: this.props.currentUser.user_id,
+      artistId: this.props.artistDetail.artistDetail.artist_id, 
+      filename: '',
+      path: ''
     };
-    console.log('-------------------')
-    console.log(props)
-
+    // this.getSignedUrl.bind(this)
   }
 
   onSlide(e, value) {
@@ -26,63 +26,37 @@ class CustomForm extends Component {
     this.props.setScore(value)
   }
 
-  // getSignedUrl(value){
-  //   console.log('in getSignedUrl')
-  //   console.log(value)
-  //   this.props.onSign(value)
-
-    // this.props.client.query({query: PresignedUrl, variables: {filename: "lol.jpg"}}).then(
-    //   (res) => {
-    //       console.log(res)
-    //       // const updatedArr = res.data.editReview.review
-    //       // context.props.updateUserReview(updatedArr)
-    //       // context.setState({showModal:false})
-    //   },
-    //   (err) => {
-    //     console.log(err)
-    //     // console.log('HANDLE ERROR!!!')
-    //   })
-
+  // getSignedUrl(response) {
+  //   let url = "https://encore88.s3.amazonaws.com" + this.s3path + "/" + response.name
+  //   console.log(this.setState({path: url}))
   // }
 
-  // onUploadStart(value) {
-  //   console.log('STARTING UPLOAD')
-  //   console.log(value.name)
-  //   // this.setState({filename: value.name})
-  //   this.getSignedUrl(value.name)
+  // onSignedUrl(context, obj){
+    // console.log(obj.public)
+    // this.setState({path: obj.public})
+    // console.log('---------------')
+    // console.log(context.props)
+    // console.log('in onSignedUrl empty func')
   // }
 
+  onUploadProgress(){
+    console.log('in onUploadProgress')
+  }  
 
-  // onSignedUrl(){
-  //   console.log('in onSignedUrl empty func')
-  // }
+  onUploadError(error){
+    console.log(error)
+    console.log('in onUploadError')
+  }  
 
-  // onUploadProgress(){
-  //   console.log('in onUploadProgress')
-  // }  
+  onUploadFinish(context, obj){
+    console.log(obj.public)
+    this.setState({path: obj.public})
+    this.props.setMedia(obj.public)
+    console.log('---------------')
+    console.log(context.props)
+    console.log('in onSignedUrl empty func')
+  }  
 
-  // onUploadError(){
-  //   console.log('in onUploadError')
-  // }  
-
-  // onUploadFinish(){
-  //   console.log('in onUploadFinish')
-  // }  
-  getSignedUrl(file, callback) {
-    console.log('WTF AM I DOING HERE?')
-    console.log(file)
-    console.log(callback)
-    // const params = {
-    //   contentType: file.type || 'application/octet-stream'
-    // };
-    // api.get('/s3/sign', { params })
-    //   .then(response => {
-    //     callback(response.data);
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //   });
-  }
 
   render(){
 
@@ -97,6 +71,8 @@ class CustomForm extends Component {
                      <RaisedButton style={style} label={this.props.locales.locales.cancel} default={true} onClick={this.props.onClickClose}/>]
 
     const actions = this.props.isUpdate ? update : create
+    const user_id = this.props.currentUser.user_id
+    const artist_id = this.props.artistDetail.artistDetail.id
 
     return (
            <Dialog
@@ -109,37 +85,25 @@ class CustomForm extends Component {
             autoScrollBodyContent={true}
           >
 
-         <ReactS3Uploader
-            signingUrl={`/s3/presigned_url`}
-            signingUrlMethod="GET"
-            accept="image/*"
-            s3path="/uploads/"
-            // getSignedUrl={this.getSignedUrl}
-            preprocess={this.onUploadStart}
-            onSignedUrl={this.onSignedUrl}
-            onProgress={this.onUploadProgress}
-            onError={this.onUploadError}
-            onFinish={this.onUploadFinish}
-            signingUrlHeaders={ this.headers }
-            // signingUrlQueryParams={{ additional: query-params }}
-            signingUrlWithCredentials={ false }      // in case when need to pass authentication credentials via CORS
-            uploadRequestHeaders={{ 'x-amz-acl': 'public-read' }}  // this is the default
-            contentDisposition="auto"
-            scrubFilename={(filename) => filename.replace(/[^\w\d_\-.]+/ig, '')}
-            // server="http://localhost:3001"
-            // inputRef={cmp => this.uploadInput = cmp}
-            autoUpload={true}
-            /> 
-
-            {/*<ReactS3Uploader
-              signingUrl={`${process.env.HOST}/things/presigned_url`}
+            <img alt="cool" src={this.state.path}/>
+            <ReactS3Uploader
+              signingUrl={`/s3/sign`}
               signingUrlMethod="GET"
-              signingUrlHeaders={this.headers}
-              signingUrlWithCredentials={true}
-              uploadRequestHeaders={{ 'acl': 'public-read' }}
+              accept="*"
+              s3path={"/user_uploads/" + user_id + "/reviews/" + artist_id}
+              getSignedUrl={this.getSignedUrl}
+              onSignedUrl={this.onSignedUrl}
+              onProgress={this.onUploadProgress}
+              onError={this.onUploadError}
+              onFinish={(obj) => this.onUploadFinish(this, obj)}
+              signingUrlHeaders={ this.headers }
+              signingUrlQueryParams={{ user_id: user_id, artist_id: artist_id }}
+              signingUrlWithCredentials={ true }      // in case when need to pass authentication credentials via CORS
               contentDisposition="auto"
-              preprocess={addFileToBookingObject}
-            />; */}
+              scrubFilename={(filename) => filename.replace(/[^\w\d_\-.]+/ig, '')}
+              inputRef={cmp => this.uploadInput = cmp}
+              autoUpload={true}
+              /> 
 
             <Slider 
               step={1} 
@@ -174,6 +138,8 @@ class CustomForm extends Component {
 
 const mapStateToProps = state => {
     return { 
+        artistDetail: state.artistDetail,
+        currentUser: state.currentUser,
         locales: state.locales
     };
 };

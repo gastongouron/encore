@@ -5,11 +5,11 @@ import {connect} from 'react-redux';
 import {logout} from '../app/components/Devise/views/Actions';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
+// import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
 // import LogoIcon from 'material-ui/svg-icons/action/lightbulb-outline';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {Notice} from '../shared';
-import Drawer from 'material-ui/Drawer';
+// import Drawer from 'material-ui/Drawer';
 import strings from '../app/locales/strings'
 import { setLocales } from '../app/actions/locales'
 import { initDevise } from '../app/devistsetup'
@@ -139,7 +139,7 @@ class MainLayout extends Component {
   }
 
   onSwitchLanguage = (event) => {
-    let lang = (strings.getLanguage() == 'en') ? 'fr' : 'en'
+    let lang = (strings.getLanguage() === 'en') ? 'fr' : 'en'
     if (this.props.currentUser) {
       this.props.client.mutate({mutation: updateUserMutation, variables: {user_id: this.props.currentUser.user_id, locale: lang}}).then(
         (res) => {

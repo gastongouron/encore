@@ -138,8 +138,6 @@ const SignUpFormz = reduxForm({
   );
 });
 
-const SignUpForm = connect(mapStateToProps, mapDispatchToProps)(SignUpFormz);
-
 
 const SignUp = ({doSignUp, locales, ...rest}) => {
   console.log(strings.getLanguage())
@@ -176,6 +174,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const SignUpForm = connect(mapStateToProps, mapDispatchToProps)(SignUpFormz);
 const SignUpContainer = connect(mapStateToProps, mapDispatchToProps)(SignUp);
 
 export {

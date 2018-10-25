@@ -65,7 +65,7 @@ const ArtistListItem = (props) => {
 				        	<br />
 
 							<Grid style={floatLeft} item xs={12}>
-									{props.locales.locales._language == 'en' ? 
+									{props.locales.locales._language === 'en' ? 
 										<p>{artist.description_en}</p>
 									:
 										<p>{artist.description_fr}</p>

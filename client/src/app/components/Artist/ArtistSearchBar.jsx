@@ -2,9 +2,9 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import TextField from 'material-ui/TextField';
 
-const style = {
-	color: "white",
-}
+// const style = {
+// 	color: "white",
+// }
 
 const underlineStyle = {
     borderColor: '#F1F1F1',
