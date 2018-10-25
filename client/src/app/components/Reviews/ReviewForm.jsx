@@ -7,6 +7,7 @@ import Slider from 'material-ui/Slider';
 import ReactS3Uploader from 'react-s3-uploader'
 import isImage from 'is-image-filename'
 import ReactPlayer from 'react-player'
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 class CustomForm extends Component {
 
@@ -16,6 +17,8 @@ class CustomForm extends Component {
       rating: parseFloat(this.props.formScore),
       userId: this.props.currentUser.user_id,
       artistId: this.props.artistDetail.artistDetail.artist_id, 
+      progress: 0,
+      hiddenProgress: true,
     };
   }
 
@@ -24,7 +27,16 @@ class CustomForm extends Component {
     this.props.setScore(value)
   }
 
-  onUploadProgress(){
+  onUploadProgress(context, val){
+    this.setState({progress: val})
+    this.setState({hiddenProgress: false})
+    const { progress } = this.state.progress;
+    if (progress === 100) {
+      this.setState({hiddenProgress: true})
+    } else {
+      const diff = Math.random() * 10;
+      this.setState({ progress: Math.min(progress + diff, 100) });
+    }
   }  
 
   onUploadError(error){
@@ -38,6 +50,8 @@ class CustomForm extends Component {
 
   onClickRemove(){
     this.props.unsetMedia()
+    this.setState({progress: 0})
+    this.setState({hiddenProgress: true})
 
   }
 
@@ -91,12 +105,11 @@ class CustomForm extends Component {
 
   
             <br />
-              <span>Photo / Video</span>
-            <br />
+
           
               <div>
+               <LinearProgress hidden={this.state.hiddenProgress} variant="determinate" value={this.state.progress} />
                {isImage(this.props.formMedia) ? <img style={imageStyle} src={this.props.formMedia} /> : <ReactPlayer width='100%' height='auto' url={this.props.formMedia} controls={true} />}
-
                {
                 this.props.formMedia ? 
                   <RaisedButton label={this.props.locales.locales.deleteMedia} secondary={true} onClick={(e) => this.onClickRemove(e, this)} />
@@ -121,7 +134,7 @@ class CustomForm extends Component {
                   s3path={"/user_uploads/" + user_id + "/reviews/" + artist_id}
                   getSignedUrl={this.getSignedUrl}
                   onSignedUrl={this.onSignedUrl}
-                  onProgress={this.onUploadProgress}
+                  onProgress={(val) => this.onUploadProgress(this, val)}
                   onError={this.onUploadError}
                   onFinish={(obj) => this.onUploadFinish(this, obj)}
                   signingUrlHeaders={ this.headers }

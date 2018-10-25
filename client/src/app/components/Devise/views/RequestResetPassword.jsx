@@ -7,13 +7,8 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const coolParent = {
-  // display: 'flex', 
-  justifyContent: 'center',
-  position: 'absolute',
-  display: 'block',
-  top: '48%',
-  left: '50%',
-  transform: 'translateX(-50%) translateY(-50%)',
+  display: 'flex', 
+  justifyContent: 'center'
 }
 
 const paperStyle = {
@@ -83,8 +78,8 @@ const RequestResetPassword = ({doRequestResetPassword, locales, ...rest}) => {
         <RequestResetPasswordForm locales={locales} onSubmit={doRequestResetPassword} {...rest} />
       </View>
     </Paper>
-    <AuthLinks locales={locales} />
   </div>
+  <AuthLinks locales={locales} />
   </div>
   );
 };
