@@ -11,40 +11,17 @@ class CustomForm extends Component {
 
   constructor(props) {
     super(props)
-
-    console.log('form props', props)
-
     this.state = {
       rating: parseFloat(this.props.formScore),
       userId: this.props.currentUser.user_id,
       artistId: this.props.artistDetail.artistDetail.artist_id, 
-      filename: null,
-      path: this.props.formMedia
     };
-    // this.getSignedUrl.bind(this)
-  }
-
-  componentDidMount(){
-    console.log(this.state)
   }
 
   onSlide(e, value) {
     this.setState({rating: value});
     this.props.setScore(value)
   }
-
-  // getSignedUrl(response) {
-  //   let url = "https://encore88.s3.amazonaws.com" + this.s3path + "/" + response.name
-  //   console.log(this.setState({path: url}))
-  // }
-
-  // onSignedUrl(context, obj){
-    // console.log(obj.public)
-    // this.setState({path: obj.public})
-    // console.log('---------------')
-    // console.log(context.props)
-    // console.log('in onSignedUrl empty func')
-  // }
 
   onUploadProgress(){
   }  
@@ -58,12 +35,7 @@ class CustomForm extends Component {
   }  
 
   onClickRemove(){
-    console.log('--------------')
-    console.log(this.props)
-    this.setState({path: null});    
     this.props.unsetMedia()
-    console.log('--------------')
-    console.log(this.props)
 
   }
 
@@ -90,7 +62,6 @@ class CustomForm extends Component {
     const actions = this.props.isUpdate ? update : create
     const user_id = this.props.currentUser.user_id
     const artist_id = this.props.artistDetail.artistDetail.id
-    const imgAction = this.state 
 
 
     return (
@@ -109,12 +80,12 @@ class CustomForm extends Component {
             <br />
 
             {
-              this.state.path != null
+              this.props.formMedia != null
             ? 
               <div>
-                <img style={coverStyle} src={this.state.path}/>             
+                <img style={coverStyle} src={this.props.formMedia}/>             
                 <RaisedButton onClick={(e) => this.onClickRemove(e, this)}>
-                  Haha
+                  Remove media
                 </RaisedButton>
               </div>
             : 
