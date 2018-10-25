@@ -210,7 +210,7 @@ class MainLayout extends Component {
             </ToolbarGroup>
           </MainToolbar>
         </MainAppBar>
-        <MainContainer>
+        <MainContainer style={{margin: '0 auto', maxWidth: 800}}>
 
 
           {notice && <Notice>{notice}</Notice>}
