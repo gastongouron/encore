@@ -39,14 +39,6 @@ const Main = styled.div`
   height: 100%;
 `;
 
-// const Logo = styled(LogoIcon)`
-//   height: 32px !important;
-//   width: 32px !important;
-//   color: ${({theme}) => theme.palette.alternateTextColor} !important;
-//   padding: 6px !important;
-// `;
-
-
 class UserMenuItem extends Component {
   state = {
     open: false
@@ -123,12 +115,14 @@ class MainLayout extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.updateWindowDimensions);
+    // window.addEventListener('resize', this.updateWindowDimensions);
+    this.updateWindowDimensions();
+
   }
 
   componentWillMount(){
       // console.log('meeee')      
-      this.updateWindowDimensions();
+      // this.updateWindowDimensions();
       window.removeEventListener('resize', this.updateWindowDimensions);
       console.log(strings.getLanguage())
       strings.setLanguage(strings.getLanguage()) 
@@ -182,14 +176,8 @@ class MainLayout extends Component {
     this.props.setLocales(strings)
     this.setState({});
   }
+
   closeDrawer() { this.setState({ open: false }) }
-// close(reason) { 
-//   if (this.props.open === null) 
-//     this.setState({open: false}); 
-//   if (this.props.onRequestChange) 
-//     this.props.onRequestChange(false, reason); 
-//   return this; 
-// }
 
   render() {
     const {currentUser, doLogout, children, location: {state: {notice} = {}}, muiTheme: {palette}} = this.props;

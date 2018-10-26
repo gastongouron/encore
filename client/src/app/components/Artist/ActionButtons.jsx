@@ -11,12 +11,12 @@ const floatRight = {
 
 const action = {
 	float: 'right',
-	marginTop: -30,
-	marginRight: 15,
+	display: 'inline-block',
+	marginTop: -32,
+	marginRight: 20,
 }
 
 const ActionButtons = (props) => {
-	console.log(props)
 	if (props.connected) {
 		if(props.enabled){
 			return (

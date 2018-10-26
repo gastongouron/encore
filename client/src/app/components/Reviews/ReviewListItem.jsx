@@ -36,6 +36,12 @@ const ReviewListItem = (props) => {
 
 	const padded = {
 	  padding: 20,
+	  paddingTop: 0,
+	  // marginTop: -20,
+	  right: 0,
+	  witht: '100%',
+	  // float: 'right',
+	  display: 'inline-block'
 	}
 
 	const imageStyle = {

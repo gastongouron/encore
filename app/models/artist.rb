@@ -10,6 +10,10 @@ class Artist < ApplicationRecord
 		score.round(1)
 	end
 
+	def review_count
+		self.reviews.count
+	end
+
 	def tags
 		self.tag_list
 	end
