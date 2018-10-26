@@ -221,8 +221,8 @@ class MainLayout extends Component {
             null
           :
           <StyledFooter>
-            { this.props.locales.locales.policy.link ? <Link to='/policy'>{this.props.locales.locales.policy.link}</Link> : undefined}
-
+           {/*  { this.props.locales.locales.policy.link ? <Link to='/policy'>{this.props.locales.locales.policy.link}</Link> : undefined} */}
+          <Link to='/policy'>policy</Link>
           </StyledFooter>
           }
       </Main>

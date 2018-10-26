@@ -15,7 +15,7 @@ const ActionButtons = (props) => {
 			return(<RaisedButton style={floatRight} label={props.locales.locales.new} primary={true} onClick={props.new} disabled/>)
 		}
 	} else {
-		return (<RaisedButton style={floatRight} label='Wanna leave a review ?' secondary={true} onClick={props.redirect}/>)
+		return (<RaisedButton style={floatRight} label={props.locales.locales.wanna} secondary={true} onClick={props.redirect}/>)
 	}
 
 }

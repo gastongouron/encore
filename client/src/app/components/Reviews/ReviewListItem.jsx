@@ -117,12 +117,14 @@ const ReviewListItem = (props) => {
 
 				</div>
 
-				<div style={padded}>
+				<div>
                     { belongsToUser ? 
-						<RaisedButton 
-							onClick={ () => onReviewSelect(review) }
-							default={true}
-							label={props.locales.locales.edit}/> 
+						<div  style={padded}>
+							<RaisedButton 
+								onClick={ () => onReviewSelect(review) }
+								default={true}
+								label={props.locales.locales.edit}/> 
+						</div>
                     : 
                     	<p></p> 
                    	}

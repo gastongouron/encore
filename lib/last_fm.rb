@@ -21,9 +21,13 @@ class LastFm
 
 	def is_dead(musicbrainz_id)
 		response = HTTParty.get("http://musicbrainz.org/ws/2/artist/#{musicbrainz_id}?inc=aliases&fmt=json", headers: {"User-Agent" => "HTTParty"})
-	  	sleep(2)
-	  	puts 'got one'
-	  	response &&	response["life-span"]["ended"] ? response["life-span"]["ended"] : false
+	  	sleep(3)
+	  	res = response["life-span"]["ended"].nil? rescue true
+		unless res
+		 	false
+		else
+			res
+		end
 	end
 
 	def format_json(response)
@@ -37,6 +41,28 @@ class LastFm
 	def get_attr(parsed_response)
 		parsed_response["topartists"]["@attr"]
 	end
+
+	def set_tags(artist, tags)
+		tags.each do |tag|
+	  		artist.tag_list.add(tag["name"])
+	  	end
+	  	artist.save
+	end
+
+	def set_summary(artist, summary, lang)
+  		summary = JSON.parse(summary.to_json)
+		summary = summary.slice(0..(summary.rindex('<a href')))
+		unless summary.empty? || summary.length < 3
+			if rindex = summary.rindex('.')
+  				summary = summary.slice(0..(rindex))
+			end
+		else
+			summary = lang == 'en' ? "No description yet" : "Pas encore de description"
+		end
+		lang == 'en' ? artist.description_en = summary : artist.description_fr = summary
+  		artist.save!	
+ 		puts "#{lang} description has been saved for #{artist.name}"
+  	end
 
 	def create_artists(artists)
 	  	artists.each do |a|
@@ -58,6 +84,7 @@ class LastFm
     				end
     	  		end
     	  		artist.save
+			  	puts "#{artist.name} has been added"
 			end
 	  	end
 	end

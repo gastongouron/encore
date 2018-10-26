@@ -1,108 +1,56 @@
 require "#{Rails.root}/lib/last_fm"
 
-
-# every day ?
-
-
-
-
-namespace :s3 do
-
-	task :test => [ :environment ] do
-		
-		data="test"
-		start_date = 2.months.ago.strftime("%Y%m%d")
-		end_date = 3.months.ago.strftime("%Y%m%d")
-		filename = "#{start_date}-#{end_date}.json"
-		file = File.open(File.join(Dir.pwd, '/tmp', filename), "w")
-		file.puts(data.to_json)
-		file.close
-		puts file.path
-		puts filename
-		file
-		s3 = Aws::S3::Resource.new
-		obj = s3.bucket('encorencore').object(filename)
-		obj.upload_file(file.path)
-
-	end
-
-end
-
 namespace :get_data do
+
 	desc 'Getdata from last fm'
 	key = ENV['LAST_FM_KEY']
-	lang = 'fr'
 	last_fm = LastFm.new(key)
 	sleeptime = 1
-	
-	task :last_fm_top_list => [ :environment ] do
 
-	  	# params for task?
-	  	maxpages 	= 50
-	  	page 		= 1
-	  	country 	= 'france'
-	  	results_per_page = 10
+	# rake get_data:last_fm_top_list'[100, 1, 'france', 10]'
+	task :last_fm_top_list, [:maxpages, :page, :country, :results_per_page] => [ :environment ] do |t, args|
+
+	  	maxpages 		 = args[:maxpages].to_i
+	  	page 			 = args[:page].to_i
+	  	country 		 = args[:country]
+	  	results_per_page = args[:results_per_page].to_i
 
 	  	while page <= maxpages do
+	  		puts '-------------------------'
+	  		puts "Working on page: #{page} / #{maxpages}"
 		  	api_response = last_fm.country(country, page, results_per_page)  		
-		  	attrs = last_fm.get_attr(api_response)
-		  	artists = last_fm.get_artists(api_response)
+		  	attrs 		 = last_fm.get_attr(api_response)
+		  	artists 	 = last_fm.get_artists(api_response)
 		  	last_fm.create_artists(artists)
-		  	puts 'taking a quick break :>'
 		  	sleep(sleeptime)
 		  	page += 1
 	  	end
 	end
 
 	task :last_fm_artist_detail => [ :environment ] do
-
-
-	  	Artist.where(description_en: nil).each do |a|
+	  	Artist.where(description_en: nil).or(Artist.where(description_fr: nil)).each do |a|
 	  		name = a.name.parameterize.underscore.humanize.downcase
-	  		# name = a.name.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').downcase.to_s
-	  		api_response = last_fm.query(name, 'en')
+	  		['en', 'fr'].each do |lang|
+		  		api_response = last_fm.query(name, lang)
+				if lang == 'en'
+				  	res = api_response["artist"]["tags"]["tag"].nil? rescue true
+					unless res
+						last_fm.set_tags(a, api_response["artist"]["tags"]["tag"])
+					end
+				end	
+		  		res = api_response["artist"]["bio"]["summary"].nil? rescue true
+				unless res
+			  		last_fm.set_summary(a, api_response["artist"]["bio"]["summary"], lang)
+			  	else
+			  		# fix artists without summary beeing non handled
+				end
 
-			api_response["artist"]["tags"]["tag"].each do |tag|
-	  			a.tag_list.add(tag["name"])
 	  		end
-	  		summary = api_response["artist"]["bio"]["summary"]
-	  		summary = JSON.parse(summary.to_json)
-			summary = summary.slice(0..(summary.rindex('<a href')))
-			unless summary.empty? || summary.length < 3
-				rindex = summary.rindex('.')
-				if rindex 
-					summary = summary.slice(0..(rindex))
-				end
-			else
-				summary = "Nothing yet.."
-			end
-	  		a.description_en = summary
-	  		a.save!
-	  		puts "#{name} english description has been saved, taking a quick break..."
 		  	sleep(sleeptime)
 	  	end
+	end
 
-	  	Artist.where(description_fr: nil).each do |a|
-	  		name = a.name.parameterize.underscore.humanize.downcase
-	  		# name = a.name.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').downcase.to_s
-	  		api_response = last_fm.query(name, 'fr')
-
-	  		summary = api_response["artist"]["bio"]["summary"]
-	  		summary = JSON.parse(summary.to_json)
-			summary = summary.slice(0..(summary.rindex('<a href')))
-			unless summary.empty? || summary.length < 3
-				rindex = summary.rindex('.')
-				if rindex 
-					summary = summary.slice(0..(rindex))
-				end
-			else
-				summary = "Rien pour le moment"
-			end
-	  		a.description_fr = summary
-	  		a.save!
-	  		puts "#{name} French description has been saved, taking a quick break..."
-		  	sleep(sleeptime)
-	  	end
+	task :ensure_non_nil => [ :environment ] do
 
 	end
 
