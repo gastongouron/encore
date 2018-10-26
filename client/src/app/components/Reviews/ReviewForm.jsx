@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
+import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
 import Slider from 'material-ui/Slider';
@@ -10,6 +11,10 @@ import ReactPlayer from 'react-player'
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Alert from '../../../shared/Alert'
 import strings from '../../../app/locales/strings'
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import Delete from 'material-ui/svg-icons/action/delete';
+import IconButton from 'material-ui/IconButton';
+
 
 class CustomForm extends Component {
 
@@ -86,11 +91,9 @@ class CustomForm extends Component {
         height: '30%',
     }
 
-    const create = [ <RaisedButton style={style} label={this.props.locales.locales.cancel} default={true} onClick={this.props.onClickClose}/>,
-                     <RaisedButton style={style} label={this.props.locales.locales.save} primary={true} keyboardFocused={true} onClick={this.props.onClickSave}/>]
+    const create = [ <RaisedButton style={style} label={this.props.locales.locales.save} primary={true} keyboardFocused={true} onClick={this.props.onClickSave}/>]
     const update = [ <RaisedButton style={style} label={this.props.locales.locales.update} primary={true} keyboardFocused={true} onClick={this.props.onClickUpdate}/>,
-                     <RaisedButton style={style} label={this.props.locales.locales.delete} secondary={true} onClick={this.props.onClickDelete}/>,
-                     <RaisedButton style={style} label={this.props.locales.locales.cancel} default={true} onClick={this.props.onClickClose}/>]
+                     <RaisedButton style={style} label={this.props.locales.locales.delete} secondary={true} onClick={this.props.onClickDelete}/>]
 
     const actions = this.props.isUpdate ? update : create
     const user_id = this.props.currentUser.user_id
@@ -101,14 +104,15 @@ class CustomForm extends Component {
            <Dialog
             open={this.props.onShow}
             title={
+              <div>
               <h1>{strings.formatString(this.props.locales.locales.review, {name: this.props.artistDetail.artistDetail.name})}</h1>
+              <IconButton style={{float: 'right', top: 0, right: 0, position: 'absolute'}} onClick={this.props.onClickClose}><NavigationClose /></IconButton>
+              </div>
             }
             modal={false}
             actions={actions}
             autoScrollBodyContent={true}
           >
-
-  
             <br />
 
               <div>
@@ -116,18 +120,19 @@ class CustomForm extends Component {
                   {this.state.error}
                 </Alert>
                <LinearProgress hidden={this.state.hiddenProgress} variant="determinate" value={this.state.progress} />
-               {isImage(this.props.formMedia) ? <img alt="" style={imageStyle} src={this.props.formMedia} /> : <ReactPlayer width='100%' height='auto' url={this.props.formMedia} controls={true} />}
-               {
-                this.props.formMedia ? 
-                  <RaisedButton label={this.props.locales.locales.deleteMedia} secondary={true} onClick={(e) => this.onClickRemove(e, this)} />
-                :
-                  null
-               }
 
               </div>
         
               <div>
-                <RaisedButton
+               {isImage(this.props.formMedia) ? <img alt="" style={imageStyle} src={this.props.formMedia} /> : <ReactPlayer width='100%' height='auto' url={this.props.formMedia} controls={true} />}
+               {
+                this.props.formMedia ? 
+                  <FlatButton style={{float: 'right'}} label={this.props.locales.locales.deleteMedia} secondary={true} onClick={(e) => this.onClickRemove(e, this)} />
+                :
+                  null
+               }
+                <FlatButton
+                   primary={true}
                    containerElement='label'
                    label={this.props.formMedia ? this.props.locales.locales.changeMedia : this.props.locales.locales.addMedia}>
 
@@ -152,7 +157,7 @@ class CustomForm extends Component {
                   inputRef={cmp => this.uploadInput = cmp}
                   autoUpload={true}
                   /> 
-                </RaisedButton>
+                </FlatButton>
 
               </div>
 

@@ -81,7 +81,7 @@ const ResetPassword = ({doResetPassword, locales, location, ...rest}) => {
   <div>
   <div style={coolParent}>
     <Paper
-      style={paperStyle} zDepth={3} 
+      style={paperStyle} zDepth={1} 
       rounded={true}>
       <View>
         <Heading>

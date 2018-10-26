@@ -23,7 +23,7 @@ const EncoreLoader = (props) => {
 	        <div style={loader}>
 	            <Loader 
 	               type="RevolvingDot"
-	               color="white"
+	               color="#283593"
 	               height="50"   
 	               width="50"/>
 	        </div>

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 const style = {
     paddingTop: 20,
-    color: 'white',
+    // color: 'white',
 }
 
 class Policy extends Component {

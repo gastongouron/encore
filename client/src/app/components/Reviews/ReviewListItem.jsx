@@ -8,7 +8,7 @@ import ReactPlayer from 'react-player'
 import TimeAgo from 'react-timeago'
 import frenchStrings from 'react-timeago/lib/language-strings/fr'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
- 
+import theme from '../../theme'
 
 const ReviewListItem = (props) => {
 
@@ -60,7 +60,7 @@ const ReviewListItem = (props) => {
 
 	return (
 			<Paper
-				style={paperStyle} zDepth={3} 
+				style={paperStyle} zDepth={1} 
 				rounded={true}>
 				<div>
 				</div>
@@ -71,7 +71,7 @@ const ReviewListItem = (props) => {
 					{ !onUserProfile ? 
 						<div style={left}> 
 							<h3>
-								<Link to={'/user/'+ review.user_id}>{review.author_display_name}</Link>
+								<Link style={{color: theme.palette.primary1Color}} to={'/user/'+ review.user_id}>{review.author_display_name}</Link>
 	                        	<img alt='meaningful text' style={style} src={review.author_profile_picture}/>
 	                        </h3>
 						</div> 
@@ -79,7 +79,7 @@ const ReviewListItem = (props) => {
 					: 	
 						<div style={left}>
 							<h3>
-								<Link to={'/artists/'+ review.artist_id}>{review.artist_name}</Link>
+								<Link style={{color: theme.palette.primary1Color}} to={'/artists/'+ review.artist_id}>{review.artist_name}</Link>
 							</h3>
 						</div>
 					}
@@ -107,7 +107,7 @@ const ReviewListItem = (props) => {
 					{ 
 						review.created_at !== undefined 
 					?
-						<i style={{color: 'grey'}}>
+						<i style={{color: 'grey', fontSize: '0.8em'}}>
 							{ review.created_at === review.updated_at ? props.locales.locales.created_at : props.locales.locales.updated_at}
 							<TimeAgo date={review.created_at === review.updated_at ? review.created_at : review.updated_at} formatter={props.locales.locales._language === 'en' ? undefined : formatter}/>
 						</i>

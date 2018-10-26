@@ -9,7 +9,6 @@ const UnstyledList = styled.ul`
     display: inline
   }
   li::after {
-    color: white;
     content: "  —  ";
   }
 
@@ -20,12 +19,10 @@ const UnstyledList = styled.ul`
   }
   padding: 0;
   a {
-  	color: #F1F1F1;
   	font-weight: 300;
     text-decoration: none;
   }
   a:hover {
-  	color: white;
     text-decoration: none;
   }
 `;

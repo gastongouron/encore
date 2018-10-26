@@ -1,21 +1,32 @@
 import { connect } from 'react-redux'
 import React from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import ContentEdit from 'material-ui/svg-icons/image/edit';
 
 const floatRight = {
   float: 'right'
+}
+
+const action = {
+	float: 'right',
+	marginTop: -30,
+	marginRight: 15,
 }
 
 const ActionButtons = (props) => {
 	console.log(props)
 	if (props.connected) {
 		if(props.enabled){
-			return(<RaisedButton style={floatRight} label={props.locales.locales.new} primary={true} onClick={props.new}/>)
+			return (
+			<FloatingActionButton style={action} onClick={props.new}><ContentAdd /></FloatingActionButton>)
+
 		}else{
-			return(<RaisedButton style={floatRight} label={props.locales.locales.new} primary={true} onClick={props.new} disabled/>)
+			return(<FloatingActionButton style={action} onClick={props.new} disabled><ContentAdd /></FloatingActionButton>)
 		}
 	} else {
-		return (<RaisedButton style={floatRight} label={props.locales.locales.wanna} secondary={true} onClick={props.redirect}/>)
+		return (<FloatingActionButton style={action} secondary={true} onClick={props.redirect}><ContentAdd /></FloatingActionButton>)
 	}
 
 }

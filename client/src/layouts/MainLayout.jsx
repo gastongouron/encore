@@ -9,7 +9,7 @@ import styled from 'styled-components';
 // import LogoIcon from 'material-ui/svg-icons/action/lightbulb-outline';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {Notice} from '../shared';
-// import Drawer from 'material-ui/Drawer';
+import Drawer from 'material-ui/Drawer';
 import strings from '../app/locales/strings'
 import { setLocales } from '../app/actions/locales'
 import { initDevise } from '../app/devistsetup'
@@ -28,12 +28,13 @@ const MainToolbar = styled(Toolbar)`
 `;
 
 const MainContainer = styled.div`
+  padding-top: 5px;
   padding-left: 20px;
   padding-right: 20px;
 `;
 
 const Main = styled.div`
-  background-color: #283593;
+  background-color: #F1F1F1;
   min-height: 100vh;
   height: 100%;
 `;
@@ -113,29 +114,56 @@ class MainLayout extends Component {
     super(props)
     this.state = {
        drawerOpen: false,
-       open: false
+       open: false,
+       width: 0,
+       height: 0
     }
     this.props.setLocales(strings)
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.updateWindowDimensions);
   }
 
   componentWillMount(){
       // console.log('meeee')      
+      this.updateWindowDimensions();
+      window.removeEventListener('resize', this.updateWindowDimensions);
       console.log(strings.getLanguage())
       strings.setLanguage(strings.getLanguage()) 
   }
 
-  toggleHome = () => {
+  updateWindowDimensions() {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+  }
+
+  drawerToggleHome = () => {
     this.handleToggle()
     this.props.history.push('/');
   }
-  
+
+  drawerToggleProfile = () => {
+    this.handleToggle()
+    this.props.history.push("/user/" + this.props.currentUser.user_id)
+  }
+
+  drawerToggleArtists = () => {
+    this.handleToggle()
+    this.props.history.push("/artists")
+  }  
+
   goHome = () => {
     this.props.history.push('/');
   }
 
   handleToggle = () => {
-    console.log('hrerere')
     this.setState({open: !this.state.open});
+  }
+
+  drawerSwitchLanguage = () => {
+    this.handleToggle()
+    this.onSwitchLanguage()
   }
 
   onSwitchLanguage = (event) => {
@@ -154,63 +182,87 @@ class MainLayout extends Component {
     this.props.setLocales(strings)
     this.setState({});
   }
+  closeDrawer() { this.setState({ open: false }) }
+// close(reason) { 
+//   if (this.props.open === null) 
+//     this.setState({open: false}); 
+//   if (this.props.onRequestChange) 
+//     this.props.onRequestChange(false, reason); 
+//   return this; 
+// }
 
   render() {
     const {currentUser, doLogout, children, location: {state: {notice} = {}}, muiTheme: {palette}} = this.props;
     return (
       <Main>
         <MainAppBar
-          // style={{ boxShadow: 'none', position: 'sticky', top: 0}}
-          style={{ background: '#283593', boxShadow: 'none', position: 'sticky', top: 0}}
-          showMenuIconButton={false}
+          style={{background: '#F1F1F1', boxShadow: 'none', position: 'sticky', top: 0}}
+          // style={{ background: 'white', boxShadow: 'none', position: 'sticky', top: 0}}
+          showMenuIconButton={this.state.width > 500 ? false : true}
           title={<b>encore!</b>}
           titleStyle={{fontSize: 28, fontWeight: 900}}
           onTitleTouchTap={this.goHome}
-          // onLeftIconButtonTouchTap={this.handleToggle}
+          onLeftIconButtonTouchTap={this.handleToggle}
         >
 
+        {
+          this.state.width > 500 
 
-        {/* <Drawer open={this.state.open}>
-          <MenuItem onClick={this.toggleHome}>Home</MenuItem>
-              <MenuItem
-                containerElement={<Link to="/artists"/>}
-                primaryText={strings.artists}
-                style={{color: palette.alternateTextColor}}
-              />
-              <UserMenuItem
-                logout={doLogout}
-                currentUser={currentUser}
-                textColor={palette.alternateTextColor}
-              />
-              <MenuItem
-                onClick={this.onSwitchLanguage}
-                primaryText={strings.getLanguage()}
-                style={{color: palette.alternateTextColor}}
-              />
-          <MenuItem>Menu Item 2</MenuItem>
-        </Drawer> */}
+        ? 
         
           <MainToolbar>
             <ToolbarGroup>
               <MenuItem
                 containerElement={<Link to="/artists"/>}
                 primaryText={strings.artists}
-                style={{color: palette.alternateTextColor}}
+                // style={{color: palette.alternateTextColor}}
               />
               <UserMenuItem
                 logout={doLogout}
                 currentUser={currentUser}
-                textColor={palette.alternateTextColor}
+                // textColor={palette.alternateTextColor}
               />
               <MenuItem
                 onClick={this.onSwitchLanguage}
                 primaryText={strings.getLanguage()}
-                style={{color: palette.alternateTextColor}}
+                // style={{color: palette.alternateTextColor}}
               />
             </ToolbarGroup>
-          </MainToolbar>
+          </MainToolbar>        
+        : 
+        
+        <Drawer open={this.state.open} docked={false} onRequestChange={(e) => this.closeDrawer(e)}>
+          <MenuItem 
+            onClick={this.drawerToggleHome}
+            primaryText="Hot"
+            />
+            {this.props.currentUser.isLoggedIn ? 
+              <MenuItem
+                onClick={this.drawerToggleProfile}
+                primaryText={currentUser.first_name || currentUser.email}
+              />
+            :
+              null
+            }
+
+          <MenuItem
+            onClick={this.drawerToggleArtists}
+            primaryText={strings.artists}
+          />
+          <MenuItem
+            onClick={this.drawerSwitchLanguage}
+            primaryText={strings.getLanguage()}
+          />
+          {this.props.currentUser.isLoggedIn ? 
+            <MenuItem primaryText={strings.logout} onClick={doLogout} />
+          :
+            null
+         }
+        </Drawer> 
+
+        }
         </MainAppBar>
-        <MainContainer style={{margin: '0 auto', maxWidth: 800}}>
+        <MainContainer style={{margin: '0 auto'}}> 
 
 
           {notice && <Notice>{notice}</Notice>}
@@ -222,7 +274,7 @@ class MainLayout extends Component {
           :
           <StyledFooter>
            {/*  { this.props.locales.locales.policy.link ? <Link to='/policy'>{this.props.locales.locales.policy.link}</Link> : undefined} */}
-          <Link to='/policy'>policy</Link>
+          <Link style={{float:'left'}} to='/policy'>policy</Link>
           </StyledFooter>
           }
       </Main>

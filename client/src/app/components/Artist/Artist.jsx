@@ -26,6 +26,7 @@ const rootz = {
 
 const padded = {
     padding: 20,
+    paddingTop: 0,
 }
 
 const marginBottom = {
@@ -95,8 +96,14 @@ class ArtistDetail extends Component {
                  this.props.artistDetail.error ? <h1>Error...</h1> :
                 <div>
 
-                        <Paper style={marginBottom} zDepth={3} rounded={true} >
+                        <Paper style={marginBottom} zDepth={1} rounded={true} >
                             <img alt="" style={coverStyle} src={artist.cover_url}/>
+                           <ActionButtons 
+                                connected={this.isConnected()} 
+                                new={(e) => this.show(null, this)}
+                                enabled={this.state.enabledButton}
+                                redirect={() => this.props.history.push('/users/getstarted')}
+                            />
                             <div style={rootz}>
 
                                 <Grid style={padded} container>
@@ -104,12 +111,7 @@ class ArtistDetail extends Component {
                                         <h1>{artist.name}, {artist.score}</h1>
                                     </Grid>
                                     <Grid style={marginBottom} item xs={3} sm={6}>
-                                        <ActionButtons 
-                                            connected={this.isConnected()} 
-                                            new={(e) => this.show(null, this)}
-                                            enabled={this.state.enabledButton}
-                                            redirect={() => this.props.history.push('/users/getstarted')}
-                                        />
+ 
                                     </Grid>
                                     <Grid style={marginBottom} item xs={12} sm={12}>
                                         {this.props.locales.locales._language === 'en' ? 

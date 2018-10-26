@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import React from 'react'
 import Paper from 'material-ui/Paper'
-import StarIcon from 'react-material-icons/icons/toggle/star'
+// import StarIcon from 'react-material-icons/icons/toggle/star'
 import Taglist from './Taglist'
 import Grid from '@material-ui/core/Grid'
 
@@ -29,6 +29,7 @@ const ArtistListItem = (props) => {
 	}
 
 	const paperStyle = {
+      margin: 2,
 	  marginBottom: 20,
 	};
 
@@ -41,7 +42,7 @@ const ArtistListItem = (props) => {
 
 	return (
 			<Paper
-				style={paperStyle} zDepth={3} 
+				style={paperStyle} zDepth={1} 
 				rounded={true} >
 				<div style={rootz}>
 					<Grid container>
@@ -57,7 +58,7 @@ const ArtistListItem = (props) => {
 				        	</Grid>
 
 				        	<Grid style={floatRight} item xs={3}>
-				        		<h1><StarIcon color="#f44336"/>{Math.round( artist.score * 10 ) / 10}</h1>
+				        		<h1>{Math.round( artist.score * 10 ) / 10}</h1>
 				        	</Grid>
 
 				        	<br />

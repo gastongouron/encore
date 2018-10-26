@@ -27,11 +27,13 @@ export default {
   },
   appBar: {
     color: '#000000',
-    textColor: '#ffffff',
+    textColor: 'black',
   },
   palette: {
     primary1Color: '#283593',
+    // primary1Color: '#0000FF',
     textColor: '#212121',
+    // textColor: darkBlack,
     accent1Color: '#f44336',
     accent2Color: '#b71c1c',
     accent3Color: '#e57373',

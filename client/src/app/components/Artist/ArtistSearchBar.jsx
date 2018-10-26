@@ -7,15 +7,15 @@ import TextField from 'material-ui/TextField';
 // }
 
 const underlineStyle = {
-    borderColor: '#F1F1F1',
+    // borderColor: '#F1F1F1',
 }
 
 const underlineFocusStyle = {
-    borderColor: 'white',
+    // borderColor: 'white',
 }
 
 const hintStyle = {
-    color: 'white',
+    // color: 'white',
 }
 
 
