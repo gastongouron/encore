@@ -24,5 +24,9 @@ class Review < ApplicationRecord
 		return self.user.profile_picture
 	end
 
+	def artist_profile_picture
+		return self.artist.profile_picture_url
+	end
+
 end
 

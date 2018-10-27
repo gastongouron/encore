@@ -22,11 +22,12 @@ const ReviewListItem = (props) => {
 
 	const style = {
 	    objectFit: 'cover',
-	    width: 20,
-	    height: 20,
-	    borderRadius: 10,
-	    marginRight: 3,
+	    width: 26,
+	    height: 26,
+	    borderRadius: 13,
+	    marginRight: 6,
 		float: 'left',
+		displat: 'block'
 	}
 
 	const paperStyle = {
@@ -75,16 +76,30 @@ const ReviewListItem = (props) => {
 				<div style={clear}>
 				
 					{ !onUserProfile ? 
-						<div style={left}> 
-							<h3>
+						<div style={{float:'left', display: 'flex', alignItems: 'center'}}> 
+	                        <img alt='meaningful text' style={style} src={review.author_profile_picture}/>
+	                        <div style={{lineHeight: 1}}>
 								<Link style={{color: theme.palette.primary1Color}} to={'/user/'+ review.user_id}>{review.author_display_name}</Link>
-	                        	<img alt='meaningful text' style={style} src={review.author_profile_picture}/>
-	                        </h3>
+								<br />
+							{ 
+								review.created_at !== undefined 
+							?
+								<span style={{color: 'grey', fontSize: '0.77em'}}>
+									{ review.created_at === review.updated_at ? props.locales.locales.created_at : props.locales.locales.updated_at}
+									<TimeAgo date={review.created_at === review.updated_at ? review.created_at : review.updated_at} formatter={props.locales.locales._language === 'en' ? undefined : formatter}/>
+								</span>
+							: 
+								<span style={{color: 'grey', fontSize: '0.77em'}}>
+									{props.locales.locales.justNow}
+								</span>
+							}
+							</div>
 						</div> 
 
 					: 	
 						<div style={left}>
 							<h3>
+		                        <img alt='meaningful text' style={style} src={review.artist_profile_picture}/>
 								<Link style={{color: theme.palette.primary1Color}} to={'/artists/'+ review.artist_id}>{review.artist_name}</Link>
 							</h3>
 						</div>
@@ -109,17 +124,6 @@ const ReviewListItem = (props) => {
 
 				<div style={clear}>
 					<p>{review.body}</p>
-
-					{ 
-						review.created_at !== undefined 
-					?
-						<i style={{color: 'grey', fontSize: '0.8em'}}>
-							{ review.created_at === review.updated_at ? props.locales.locales.created_at : props.locales.locales.updated_at}
-							<TimeAgo date={review.created_at === review.updated_at ? review.created_at : review.updated_at} formatter={props.locales.locales._language === 'en' ? undefined : formatter}/>
-						</i>
-					: 
-						null
-					}
 
 				</div>
 

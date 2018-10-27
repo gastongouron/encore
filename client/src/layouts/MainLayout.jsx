@@ -5,8 +5,6 @@ import {connect} from 'react-redux';
 import {logout} from '../app/components/Devise/views/Actions';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-// import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
-// import LogoIcon from 'material-ui/svg-icons/action/lightbulb-outline';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {Notice} from '../shared';
 import Drawer from 'material-ui/Drawer';
@@ -117,7 +115,6 @@ class MainLayout extends Component {
   componentDidMount() {
     // window.addEventListener('resize', this.updateWindowDimensions);
     this.updateWindowDimensions();
-
   }
 
   componentWillMount(){

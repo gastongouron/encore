@@ -45,6 +45,7 @@ const translations = {
    changeMedia:"Changer ce média",
    created_at:"Créé ",
    updated_at:"Mis à jour ",
+   justNow: "À l'instant",
    policy: {
       link:"Politique de confidentialité",
       title:"Encore: Politique de confidentialité",
@@ -99,6 +100,7 @@ const translations = {
    changeMedia:"Change media",
    created_at:"Created ",
    updated_at:"Updated ",
+   justNow: "Just now",
    policy: {
       link:"Privacy policy",
       title:"Encore: Privacy Policy",

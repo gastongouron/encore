@@ -155,7 +155,9 @@ const updateUser = (data, dispatch) => {
 };
 
 const logout = dispatch => {
+  setAuthToken(null)
   removeAuthToken();
+  
   dispatch({
     type: 'LOG_OUT'
   });

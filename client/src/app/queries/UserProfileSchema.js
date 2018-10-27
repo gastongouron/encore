@@ -12,6 +12,7 @@ const UserProfileQuery = (gql`
 			reviews {
                 artist_id
                 artist_name
+                artist_profile_picture
 				body
                 score
                 media

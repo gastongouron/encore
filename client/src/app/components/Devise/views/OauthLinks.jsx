@@ -114,7 +114,6 @@ const withProviderAuth = (provider, Button) => {
 
       console.log(response)
       console.log(accessToken)
-
       // return login(response.accessToken);
       return login(response);
     };

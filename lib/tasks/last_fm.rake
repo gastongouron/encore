@@ -30,6 +30,18 @@ namespace :get_data do
 	task :last_fm_artist_detail => [ :environment ] do
 	  	Artist.where(description_en: nil).or(Artist.where(description_fr: nil)).each do |a|
 	  		name = a.name.parameterize.underscore.humanize.downcase
+
+	  		# todo
+	  		#-------------------
+	  		name.include?('!') ? name.sub('!', 'i') : name
+	  		name.include?('&') ? name.sub('&', 'and') : name
+	  		name.include?('ø') ? name.sub('ø', 'o') : name
+	  		name.include?("'") ? name.gsub("'", " ") : name
+
+	  		name = last_fm.correcrion(name)
+	  		puts name
+	  		#-------------------
+
 	  		['en', 'fr'].each do |lang|
 		  		api_response = last_fm.query(name, lang)
 				if lang == 'en'
@@ -42,9 +54,8 @@ namespace :get_data do
 				unless res
 			  		last_fm.set_summary(a, api_response["artist"]["bio"]["summary"], lang)
 			  	else
-			  		# fix artists without summary beeing non handled
+			  		last_fm.set_summary(a, 'TODO', lang)
 				end
-
 	  		end
 		  	sleep(sleeptime)
 	  	end

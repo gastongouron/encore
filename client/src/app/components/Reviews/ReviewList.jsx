@@ -1,35 +1,51 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReviewListItem from './ReviewListItem'
+import _ from 'underscore'
 
-const Review = (props) => {
+class Review extends Component {
 
-	if(props.reviews !== undefined){
-		const reviewItems = props.reviews.map((review) => {
+	constructor(props){
+		super(props)
+	}
+
+	sort(objects){
+		return _.sortBy(objects,function(node){
+		  - (new Date(node.created_at).getTime());
+		});
+	}
+
+		// sort:
+	render(){
+
+		const reviews = this.sort(this.props.reviews).reverse()
+
+		if(reviews !== undefined){
+								
+			const reviewItems = reviews.map((review) => {
+				return (
+					<ReviewListItem
+						onReviewSelect={this.props.onReviewSelect}
+						key={review.id}
+						match={this.props.match}
+						userId={this.props.user.user_id}
+						review={review} 
+					/>
+				) 
+			})
 			return (
-				<ReviewListItem
-					onReviewSelect={props.onReviewSelect}
-					key={review.id}
-					match={props.match}
-					userId={props.user.user_id}
-					review={review} 
-				/>
-			) 
-		})
-		return (
-			<div>
 				<div>
-					{reviewItems}
+					<div>
+						{reviewItems}
+					</div>
 				</div>
-			</div>
-		)
-	} else {
-		return null
+			)
+		} else {
+			return null
+		}
+
+
 	}
 
 }
 
 export default Review;
-
-	            // <div>
-	            //     { props.current ? <h1>Your Reviews</h1> : <h1>{props.user.first_name + "'s Reviews"}</h1> }
-	            // <div>

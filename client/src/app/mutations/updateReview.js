@@ -14,6 +14,7 @@ const updateMutation = (gql`
                 artist_name
                 author_display_name
                 author_profile_picture
+                artist_profile_picture
 				body
                 score
                 media

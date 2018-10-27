@@ -21,12 +21,12 @@ class LastFm
 
 	def is_dead(musicbrainz_id)
 		response = HTTParty.get("http://musicbrainz.org/ws/2/artist/#{musicbrainz_id}?inc=aliases&fmt=json", headers: {"User-Agent" => "HTTParty"})
-	  	sleep(3)
-	  	res = response["life-span"]["ended"].nil? rescue true
-		unless res
-		 	false
-		else
-			res
+	  	sleep(3.3)
+	  	if response.nil? || response["life-span"].nil? || response["life-span"]["ended"].nil? 
+	  		# we assume that if musicbrainz doesnt know an artist it might mean he is too young to be dead
+	  		return false
+	  	else
+	  		return response["life-span"]["ended"]
 		end
 	end
 
@@ -51,7 +51,9 @@ class LastFm
 
 	def set_summary(artist, summary, lang)
   		summary = JSON.parse(summary.to_json)
-		summary = summary.slice(0..(summary.rindex('<a href')))
+  		unless summary.rindex('<a href').nil?
+			summary = summary.slice(0..(summary.rindex('<a href')))
+		end
 		unless summary.empty? || summary.length < 3
 			if rindex = summary.rindex('.')
   				summary = summary.slice(0..(rindex))
@@ -68,8 +70,7 @@ class LastFm
 	  	artists.each do |a|
 			mbid = a["mbid"]
 			name = a["name"]
-			dead = is_dead(mbid)
-	  		unless Artist.find_by(name: name) || dead
+	  		unless Artist.find_by(name: name) || is_dead(mbid)
     	  		artist = Artist.new
     	  		artist.name = name
     	  		artist.mbid = mbid
