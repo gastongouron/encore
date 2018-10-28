@@ -9,6 +9,7 @@ Types::ArtistType = GraphQL::ObjectType.define do
   field :avatar_url, !types.String
   field :profile_picture_url, !types.String
   field :cover_url, !types.String
+  field :reviews_count, !types.String
 
   field :tags, !types.String
   field :score, !types.Float

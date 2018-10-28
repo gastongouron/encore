@@ -54,11 +54,16 @@ class ArtistDetail extends Component {
             enabledButton: true,
             review:null,
             isUpdate:false,
+            userReview: null,
         };
     };
     
     componentWillMount(){
         this.props.loadingArtistDetail();
+
+        let observable = this.props.client.watchQuery({query: artistDetailQuery, variables: {id: this.props.match.params.id}, fetchPolicy: 'cache-and-network', pollInterval: 5000})
+        this.setState({observable: observable})
+
         this.props.client.query({query: artistDetailQuery, variables: {id: this.props.match.params.id}, fetchPolicy: 'network-only'}).then(
             (res) => {
                 this.props.setArtistDetail(res.data.artist);
@@ -69,17 +74,31 @@ class ArtistDetail extends Component {
         );
     }
 
+    componentDidMount(){
+        this.state.observable.subscribe({
+          next: ({ data }) => this.props.setArtistDetail(data.artist)
+        });
+    }
+ 
+    componentWillUnmount(){
+        this.state.observable.stopPolling()
+    }
+
+
     isConnected() {
         return this.props.userInfo.isLoggedIn ? true : false
     }
 
+    toggleEditFromArtist(context){
+        let reviewReview = this.state.userReview
+        context.show(reviewReview, context)
+    }
+
     checkEnableNewReview(reviews){
-        console.log('here')
-        console.log(reviews)
-        console.log(this.props.userInfo.user_id)
         if (this.props.userInfo.user_id) {
             for (var i = 0; i < reviews.length; i++) {
                 if(Number(reviews[i].user_id) === Number(this.props.userInfo.user_id)){
+                    this.setState({userReview: reviews[i]})
                     this.setState({enabledButton: false});
                 }
             }
@@ -98,8 +117,8 @@ class ArtistDetail extends Component {
 
                         <Paper style={marginBottom} zDepth={1} rounded={true} >
                             <img alt="" style={coverStyle} src={artist.cover_url}/>
-                           <ActionButtons 
-                                onReviewSelect={reviewReview => this.show(reviewReview, this)}
+                           <ActionButtons
+                                edit={(e) => this.toggleEditFromArtist(this)} 
                                 connected={this.isConnected()} 
                                 new={(e) => this.show(null, this)}
                                 enabled={this.state.enabledButton}

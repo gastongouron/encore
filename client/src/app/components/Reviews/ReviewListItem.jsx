@@ -9,6 +9,7 @@ import TimeAgo from 'react-timeago'
 import frenchStrings from 'react-timeago/lib/language-strings/fr'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
 import theme from '../../theme'
+import Divider from 'material-ui/Divider';
 
 const ReviewListItem = (props) => {
 
@@ -36,10 +37,9 @@ const ReviewListItem = (props) => {
 	};
 
 	const padded = {
-	  padding: 20,
 	  paddingTop: 0,
 	  // marginTop: -20,
-	  right: 0,
+
 	  witht: '100%',
 	  // float: 'right',
 	  display: 'inline-block'
@@ -54,7 +54,6 @@ const ReviewListItem = (props) => {
 
 	const clear = {
 		padding: 20,
-		clear: 'both',
 	}
 
 	const left = {
@@ -118,7 +117,7 @@ const ReviewListItem = (props) => {
 						review.media ? 
 							isImage(review.media) ? <img alt="" style={imageStyle} src={review.media} /> : <ReactPlayer width='100%' height='auto' url={review.media} controls={true} />
 					:
-						<hr />
+						<Divider />
 					}
 				</div>
 
@@ -128,7 +127,7 @@ const ReviewListItem = (props) => {
 				</div>
 
 				<div>
-                    { belongsToUser ? 
+                    { belongsToUser && onUserProfile ? 
 						<div  style={padded}>
 							<RaisedButton 
 								onClick={ () => onReviewSelect(review) }
@@ -136,7 +135,7 @@ const ReviewListItem = (props) => {
 								label={props.locales.locales.edit}/> 
 						</div>
                     : 
-                    	<p></p> 
+                    	null
                    	}
 				</div>
 

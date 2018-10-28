@@ -46,6 +46,11 @@ const translations = {
    created_at:"Créé ",
    updated_at:"Mis à jour ",
    justNow: "À l'instant",
+   reviewLabel: "Avis",
+   reviewsLabel: "Avis",
+   beTheFirst: "Soyez le premier à donner votre avis!",
+   readMore: " voir plus.",
+   readLess: " voir moins.",
    policy: {
       link:"Politique de confidentialité",
       title:"Encore: Politique de confidentialité",
@@ -101,6 +106,11 @@ const translations = {
    created_at:"Created ",
    updated_at:"Updated ",
    justNow: "Just now",
+   reviewLabel: "Review",
+   reviewsLabel: "Reviews",
+   beTheFirst: "Be the first to review this artist!",
+   readMore: " read more.",
+   readLess: " read less.",
    policy: {
       link:"Privacy policy",
       title:"Encore: Privacy Policy",

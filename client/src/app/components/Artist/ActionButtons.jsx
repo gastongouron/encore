@@ -23,7 +23,7 @@ const ActionButtons = (props) => {
 			<FloatingActionButton style={action} onClick={props.new}><ContentAdd /></FloatingActionButton>)
 
 		}else{
-			return(<FloatingActionButton style={action} onClick={props.new} disabled><ContentAdd /></FloatingActionButton>)
+			return(<FloatingActionButton style={action} onClick={props.edit}><ContentEdit /></FloatingActionButton>)
 		}
 	} else {
 		return (<FloatingActionButton style={action} secondary={true} onClick={props.redirect}><ContentAdd /></FloatingActionButton>)

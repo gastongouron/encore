@@ -37,6 +37,7 @@ namespace :get_data do
 	  		name.include?('&') ? name.sub('&', 'and') : name
 	  		name.include?('ø') ? name.sub('ø', 'o') : name
 	  		name.include?("'") ? name.gsub("'", " ") : name
+	  		name.include?("+") ? name.gsub("+", " ") : name
 
 	  		name = last_fm.correcrion(name)
 	  		puts name
