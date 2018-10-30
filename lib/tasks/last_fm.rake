@@ -41,7 +41,7 @@ namespace :get_data do
 	  		name.include?("'") ? name.gsub("'", " ") : name
 	  		name.include?("+") ? name.gsub("+", " ") : name
 
-	  		name = last_fm.correcrion(name)
+	  		# name = last_fm.correction(name)
 	  		puts name
 	  		#-------------------
 
