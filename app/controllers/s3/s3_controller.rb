@@ -5,7 +5,7 @@ class S3::S3Controller < ApiController
     artist_id = params[:artist_id]
     filename = params[:objectName]
     content_type = params[:contentType]
-    allowed_extentions = ['jpg', 'jpeg', 'png', 'gif', 'mp4', 'ogv', 'ogg', 'webm']
+    allowed_extentions = ['jpg', 'jpeg', 'png', 'gif', 'mp4', 'ogv', 'ogg', 'webm', 'mov']
 
     bucket = Rails.env.development? ? ENV['S3_BUCKET_DEVELOPMENT'] : ENV['S3_BUCKET_PRODUCTION']
 
