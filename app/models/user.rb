@@ -4,6 +4,9 @@ class User < ApplicationRecord
   # :confirmable,
   has_many :reviews
   has_many :artists, through: :reviews
+  
+  acts_as_followable
+  acts_as_follower
 
   def display_name
     [first_name, last_name].compact.join(' ')
