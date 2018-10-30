@@ -9,9 +9,13 @@ import UserProfileQuery from '../../queries/UserProfileSchema'
 import ReviewList from '../Reviews/ReviewList'
 import ReviewForm from '../Reviews/ReviewForm'
 
+import SocialList from './SocialList'
+
 import EncoreLoader from '../EncoreLoader'
 import Paper from 'material-ui/Paper'
 import strings from '../../locales/strings'
+
+
 
 const paddedAndMarginBottom = {
     padding: 20,
@@ -37,6 +41,9 @@ const marginRight = {
 class Profile extends Component {
     constructor(props){
         super(props);
+
+
+        console.log('------_>>>>>>', props)
 
         this.update = onUpdate.bind(this)
         this.delete = onDelete.bind(this)
@@ -93,6 +100,18 @@ class Profile extends Component {
                              </h1>
                             {user.email?user.email:''}
                         </div>
+                    </Paper>
+
+                    <Paper style={paddedAndMarginBottom}>
+
+                        Followers:
+                        <SocialList 
+                            users={this.props.userProfile.userProfile.followers}/>
+
+                        Follows: 
+                        <SocialList 
+                            users={this.props.userProfile.userProfile.following_users}/>
+
                     </Paper>
 
                     <div>

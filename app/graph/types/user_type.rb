@@ -12,6 +12,6 @@ Types::UserType = GraphQL::ObjectType.define do
   field :reviews, types[Types::ReviewType]
   field :artists, types[Types::ArtistType]
   field :followers, types[Types::UserType]
-  field :follows, types[Types::UserType]
+  field :following_users, types[Types::UserType]
 
 end
