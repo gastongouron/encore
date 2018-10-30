@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { withApollo } from 'react-apollo'
 import { initUserReviews, loadingUserReviews, failedUserReviews, setUserReviews, updateUserReview, deleteUserReview, selectUserReview} from '../../actions/reviews'
 import { initUserProfile, loadingUserProfile, failedUserProfile, setUserProfile } from '../../actions/userProfile'
+import followUserMutation from '../../mutations/followUser'
+
 import { onUpdate, onDelete, setScore, setBody, setMedia, unsetMedia, handleModalShow, handleModalClose} from '../Reviews/Utils'
 
 import UserProfileQuery from '../../queries/UserProfileSchema'
@@ -14,8 +16,9 @@ import SocialList from './SocialList'
 import EncoreLoader from '../EncoreLoader'
 import Paper from 'material-ui/Paper'
 import strings from '../../locales/strings'
+import RaisedButton from 'material-ui/RaisedButton';
 
-
+import _ from 'underscore'
 
 const paddedAndMarginBottom = {
     padding: 20,
@@ -53,7 +56,9 @@ class Profile extends Component {
         this.close = handleModalClose.bind(this)
         this.media = setMedia.bind(this)
         this.removeMedia = unsetMedia.bind(this)
-        
+
+        this.onClickFollow.bind(this)
+
         this.state = {
             showModal: false,
             enabledButton: true,
@@ -79,6 +84,26 @@ class Profile extends Component {
         );
     }
 
+    onClickFollow(){
+        console.log(this.props)
+        this.props.client.mutate({mutation: followUserMutation, variables: {follower_id: this.props.userInfo.user_id, followee_id: this.props.userProfile.userProfile.id}}).then(
+        (res) => {
+            console.log(res)
+              this.props.setUserProfile(res.data.followUser.user)
+              // turn button to off
+        },
+        (err) => { }
+        );
+    }
+
+    alreadyFollows(){
+        let followeeId = this.props.userInfo.user_id
+        let exists = _.find( this.props.userProfile.userProfile.followers, function( follower, followee ){
+          return Number(follower.id) === Number(followeeId);
+        } );
+        return exists ? true : false
+    }
+
     onCurrentUserProfile(){
         return Number(this.props.userInfo.user_id) === Number(this.props.match.params.id)
     }
@@ -100,16 +125,29 @@ class Profile extends Component {
                              </h1>
                             {user.email?user.email:''}
                         </div>
+
+
+                            {
+                                this.onCurrentUserProfile() ? 
+                                null
+                                :
+                                <RaisedButton 
+                                    onClick={ (e) => this.onClickFollow(e) }
+                                    // onClick={ (e) => this.alreadyFollows(e) }
+                                    default={true}
+                                    label={this.alreadyFollows() ? "unfollow" : "follow"}/> 
+                            }
+
                     </Paper>
 
                     <Paper style={paddedAndMarginBottom}>
 
-                        Followers:
                         <SocialList 
+                            title="Followers"
                             users={this.props.userProfile.userProfile.followers}/>
 
-                        Follows: 
                         <SocialList 
+                            title="Follows"
                             users={this.props.userProfile.userProfile.following_users}/>
 
                     </Paper>

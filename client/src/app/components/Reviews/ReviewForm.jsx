@@ -104,7 +104,7 @@ class CustomForm extends Component {
             open={this.props.onShow}
             title={
               <div>
-              <h1>{strings.formatString(this.props.locales.locales.review, {name: this.props.formTitle})}</h1>
+              <h1>{strings.formatString(this.props.locales.locales.review, {name: this.props.formTitle || this.props.artistDetail.artistDetail.name})}</h1>
               <IconButton style={{float: 'right', top: 0, right: 0, position: 'absolute'}} onClick={this.props.onClickClose}><NavigationClose /></IconButton>
               </div>
             }

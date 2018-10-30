@@ -28,7 +28,7 @@ class SocialList extends Component {
 			return (
 				<div>
 					<div>
-						{count}
+						{count}&nbsp;{this.props.title}:
 						{userItems}
 					</div>
 				</div>
