@@ -20,7 +20,6 @@ const ReviewListItem = (props) => {
 	const onUserProfile = props.match.includes('user')
 	const formatter = buildFormatter(frenchStrings)
 
-
 	const style = {
 	    objectFit: 'cover',
 	    width: 26,
@@ -52,8 +51,15 @@ const ReviewListItem = (props) => {
 	    height: '100%',
 	}
 
-	const clear = {
+	const header = {
+		padding:20,
+		paddingTop: 12,
+	}
+
+	const body = {
 		padding: 20,
+		paddingTop: 12,
+		paddingBottom: 12,
 	}
 
 	const left = {
@@ -72,7 +78,7 @@ const ReviewListItem = (props) => {
 				</div>
 
 
-				<div style={clear}>
+				<div style={header}>
 				
 					{ !onUserProfile ? 
 						<div style={{float:'left', display: 'flex', alignItems: 'center'}}> 
@@ -121,14 +127,14 @@ const ReviewListItem = (props) => {
 					}
 				</div>
 
-				<div style={clear}>
+				<div style={body}>
 					<p>{review.body}</p>
 
 				</div>
 
 				<div>
                     { belongsToUser && onUserProfile ? 
-						<div  style={padded}>
+						<div  style={header}>
 							<RaisedButton 
 								onClick={ () => onReviewSelect(review) }
 								default={true}

@@ -9,9 +9,9 @@ import ReviewList from '../Reviews/ReviewList'
 import ActionButtons from './ActionButtons'
 import EncoreLoader from '../EncoreLoader'
 import Taglist from './Taglist'
-
 import Paper from 'material-ui/Paper'
 import Grid from '@material-ui/core/Grid'
+import Divider from 'material-ui/Divider';
 
 const coverStyle = {
     objectFit: 'cover',
@@ -26,7 +26,6 @@ const rootz = {
 
 const padded = {
     padding: 20,
-    paddingTop: 0,
 }
 
 const marginBottom = {
@@ -54,14 +53,13 @@ class ArtistDetail extends Component {
             enabledButton: true,
             review:null,
             isUpdate:false,
-            userReview: null,
         };
     };
     
     componentWillMount(){
         this.props.loadingArtistDetail();
 
-        let observable = this.props.client.watchQuery({query: artistDetailQuery, variables: {id: this.props.match.params.id}, fetchPolicy: 'cache-and-network', pollInterval: 5000})
+        let observable = this.props.client.watchQuery({query: artistDetailQuery, variables: {id: this.props.match.params.id}, fetchPolicy: 'cache-and-network', pollInterval: 4000})
         this.setState({observable: observable})
 
         this.props.client.query({query: artistDetailQuery, variables: {id: this.props.match.params.id}, fetchPolicy: 'network-only'}).then(
@@ -76,7 +74,7 @@ class ArtistDetail extends Component {
 
     componentDidMount(){
         this.state.observable.subscribe({
-          next: ({ data }) => this.props.setArtistDetail(data.artist)
+          next: ({ data }) => data ? this.props.setArtistDetail(data.artist) : null
         });
     }
  
@@ -84,21 +82,19 @@ class ArtistDetail extends Component {
         this.state.observable.stopPolling()
     }
 
-
     isConnected() {
         return this.props.userInfo.isLoggedIn ? true : false
     }
 
-    toggleEditFromArtist(context){
-        let reviewReview = this.state.userReview
-        context.show(reviewReview, context)
+    toggleEditFromArtist(){
+        let review = this.props.artistDetail.artistDetail.reviews.find(x => Number(x.user_id) === Number(this.props.userInfo.user_id)) 
+        this.show(review, this)
     }
 
     checkEnableNewReview(reviews){
         if (this.props.userInfo.user_id) {
             for (var i = 0; i < reviews.length; i++) {
                 if(Number(reviews[i].user_id) === Number(this.props.userInfo.user_id)){
-                    this.setState({userReview: reviews[i]})
                     this.setState({enabledButton: false});
                 }
             }
@@ -118,7 +114,7 @@ class ArtistDetail extends Component {
                         <Paper style={marginBottom} zDepth={1} rounded={true} >
                             <img alt="" style={coverStyle} src={artist.cover_url}/>
                            <ActionButtons
-                                edit={(e) => this.toggleEditFromArtist(this)} 
+                                edit={(e) => this.toggleEditFromArtist()} 
                                 connected={this.isConnected()} 
                                 new={(e) => this.show(null, this)}
                                 enabled={this.state.enabledButton}
@@ -128,11 +124,22 @@ class ArtistDetail extends Component {
 
                                 <Grid style={padded} container>
                                     <Grid item xs={12}>
-                                        <h1><span style={{float:'left'}}>{artist.name}</span><span style={{float:'right'}}>{artist.score}</span></h1>
+                                        <h1><span style={{float:'left'}}>{artist.name}</span><span style={{float:'right'}}>{ Number(artist.reviews_count) != 0 ? (Math.round( artist.score * 10 ) / 10) : ""}</span></h1>
+                                        <br />
+                                        <span><b>
+                                        {
+                                            Number(artist.reviews_count) > 1 
+                                        ? 
+                                            artist.reviews_count + " " + this.props.locales.locales.reviewsLabel 
+                                        : 
+                                            Number(artist.reviews_count) === 1 ? artist.reviews_count + " " + this.props.locales.locales.reviewLabel : this.props.locales.locales.beTheFirst
+                                        }
+                                        </b></span>
+
                                     </Grid>
-                                    {/*<Grid style={marginBottom} item xs={3} sm={6}>
- 
-                                    </Grid>
+                                </Grid>
+                                <Divider />
+                                <Grid style={padded} container>
                                     <Grid style={marginBottom} item xs={12} sm={12}>
                                         {this.props.locales.locales._language === 'en' ? 
                                             <p>{artist.description_en}</p>
@@ -141,9 +148,11 @@ class ArtistDetail extends Component {
                                         }
 
                                     </Grid>
+                                {/*
                                     <Grid item xs={12} sm={12}>
                                         <Taglist onClickTag={() => console.log('cool')} tags={artist.tags} />
-                                    </Grid> */}
+                                    </Grid> 
+                                */}
                                 </Grid>
 
                             </div>
@@ -192,7 +201,7 @@ const mapStateToProps = state => {
     return { 
         artistDetail: state.artistDetail,
         userInfo: state.currentUser,
-        locales: state.locales
+        locales: state.locales,
     };
 };
 

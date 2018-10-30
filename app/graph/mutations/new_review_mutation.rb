@@ -11,9 +11,15 @@ Mutations::NewReviewMutation = GraphQL::Relay::Mutation.define do
 
   resolve(->(_, input, ctx){
     review = Review.create(input.to_h)
+    # set or remove most reviewed tag
+    # review.artist.most_reviewed
     review.save!
+    # review.artist.check_if_most_reviewed
     { review: review }
   })
+
+  # set or remove most reviewed tag
+
 
 end
   

@@ -89,7 +89,7 @@ const translations = {
    switch:"Switch language",
    welcome:"Welcome!",
    reviews:"{username}'s reviews",
-   review:"New review for {name}",   
+   review:"Your review for {name}",   
    reviewHint:"Something you wanna share with the world!", 
    reviewBodyLabel:"Review text", 
    wanna:"Wanna leave a review?",

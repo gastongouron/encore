@@ -17,7 +17,7 @@ class Review extends Component {
 		// sort:
 	render(){
 
-		const reviews = this.sort(this.props.reviews).reverse()
+		const reviews = this.sort(this.props.reviews) //.reverse()
 
 		if(reviews !== undefined){
 								

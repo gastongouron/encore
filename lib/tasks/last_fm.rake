@@ -33,9 +33,11 @@ namespace :get_data do
 
 	  		# todo
 	  		#-------------------
+	  		name.include?('! ') ? name.sub('!', '') : name
 	  		name.include?('!') ? name.sub('!', 'i') : name
 	  		name.include?('&') ? name.sub('&', 'and') : name
 	  		name.include?('ø') ? name.sub('ø', 'o') : name
+	  		name.include?('ö') ? name.sub('ö', 'o') : name
 	  		name.include?("'") ? name.gsub("'", " ") : name
 	  		name.include?("+") ? name.gsub("+", " ") : name
 

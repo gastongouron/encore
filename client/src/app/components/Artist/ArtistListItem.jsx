@@ -24,6 +24,11 @@ const ArtistListItem = (props) => {
 	  padding: 20,
 	}
 
+	const tagsContainer = {
+	  padding: 20,
+	  paddingTop: 0,
+	}
+
 	const floatLeft = {
 	  float: 'left',
 	}
@@ -91,8 +96,7 @@ const ArtistListItem = (props) => {
 
 									</Grid>
 							</Grid>
-							<Divider />
-							<Grid style={padded} container>
+							<Grid style={tagsContainer} container>
 								<Grid item xs={12}>
 									<Taglist 
 										onClickTag={onClickTag}

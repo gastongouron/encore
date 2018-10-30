@@ -11,6 +11,7 @@ Mutations::EditReviewMutation = GraphQL::Relay::Mutation.define do
   resolve -> (_, input, _) {
     review = Review.find(input[:id])
     review.update!(input.to_h)
+    # review.artist.check_if_most_reviewed
     { review: review }
   }
 end

@@ -11,6 +11,7 @@ const artistByTagNameQuery = (gql`
           avatar_url
           profile_picture_url
           cover_url
+          reviews_count
           tags
       }
     }
