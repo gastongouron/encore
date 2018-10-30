@@ -68,7 +68,6 @@ class CustomForm extends Component {
 
   onSignedUrl(context, resp){
     if(resp.status === "error" ){
-      console.log(resp.message)
       this.setState({error:resp.message})
       this.setState({hiddenError:false})
       return    
@@ -105,7 +104,7 @@ class CustomForm extends Component {
             open={this.props.onShow}
             title={
               <div>
-              <h1>{strings.formatString(this.props.locales.locales.review, {name: this.props.artistDetail.artistDetail.name})}</h1>
+              <h1>{strings.formatString(this.props.locales.locales.review, {name: this.props.formTitle})}</h1>
               <IconButton style={{float: 'right', top: 0, right: 0, position: 'absolute'}} onClick={this.props.onClickClose}><NavigationClose /></IconButton>
               </div>
             }

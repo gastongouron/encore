@@ -59,7 +59,7 @@ class ArtistDetail extends Component {
     componentWillMount(){
         this.props.loadingArtistDetail();
 
-        let observable = this.props.client.watchQuery({query: artistDetailQuery, variables: {id: this.props.match.params.id}, fetchPolicy: 'cache-and-network', pollInterval: 4000})
+        let observable = this.props.client.watchQuery({query: artistDetailQuery, variables: {id: this.props.match.params.id}, fetchPolicy: 'cache-and-network', pollInterval: 5000})
         this.setState({observable: observable})
 
         this.props.client.query({query: artistDetailQuery, variables: {id: this.props.match.params.id}, fetchPolicy: 'network-only'}).then(
@@ -175,6 +175,7 @@ class ArtistDetail extends Component {
                                 onShow={this.state.showModal}
                                 onHide={(e) => this.close(this)}
                                 editable={true}
+                                formTitle={this.state.review!=null?this.state.review.artist_name:''}
                                 formValue={this.state.review!=null?this.state.review.body:''}
                                 formScore={this.state.review!=null?this.state.review.score:''}
                                 formMedia={this.state.review!=null?this.state.review.media:null}

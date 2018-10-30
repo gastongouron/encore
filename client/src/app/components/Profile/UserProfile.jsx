@@ -114,6 +114,7 @@ class Profile extends Component {
                                 onShow={this.state.showModal}
                                 onHide={(e) => this.close(this)}
                                 editable={true}
+                                formTitle={this.state.review!=null?this.state.review.artist_name:''}
                                 formValue={this.state.review!==null?this.state.review.body:''}
                                 formScore={this.state.review!==null?this.state.review.score:''}
                                 formMedia={this.state.review!=null?this.state.review.media:null}
