@@ -10,7 +10,9 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { initDevise } from './devistsetup'
 import ActionCable from 'actioncable'
-import addGraphQLSubscriptions from 'graphql-ruby-client/subscriptions/addGraphQLSubscriptions'
+
+import addGraphQLSubscriptions from '../cable/subscriptions/addGraphQLSubscriptions'
+
 import $ from 'jquery'
 
 injectTapEventPlugin();
