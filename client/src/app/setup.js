@@ -10,6 +10,7 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { initDevise } from './devistsetup'
 import ActionCable from 'actioncable'
+import addGraphQLSubscriptions from 'graphql-ruby-client/subscriptions/addGraphQLSubscriptions'
 import $ from 'jquery'
 // import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws';
 
@@ -32,7 +33,6 @@ const RailsNetworkInterface = createNetworkInterface({
  }
 });
 
-const addGraphQLSubscriptions = require("graphql-ruby-client/subscriptions/addGraphQLSubscriptions")
 const networkInterfaceWithSubscriptions = addGraphQLSubscriptions(RailsNetworkInterface, {cable: cable})
 
 // const wsClient = new SubscriptionClient(`ws://localhost:3000/cable`, {
