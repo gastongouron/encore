@@ -33,8 +33,6 @@ class Resolvers::ArtistsSearch
   end
 
   def apply_first(scope, value)
-    puts '-------------------------'
-    puts scope.class
     scope.order('random()').limit(value)
   end
 

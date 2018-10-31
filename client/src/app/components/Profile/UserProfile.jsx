@@ -17,6 +17,7 @@ import EncoreLoader from '../EncoreLoader'
 import Paper from 'material-ui/Paper'
 import strings from '../../locales/strings'
 import RaisedButton from 'material-ui/RaisedButton';
+import Grid from '@material-ui/core/Grid'
 
 import _ from 'underscore'
 
@@ -36,10 +37,23 @@ const inline = {
     display: 'inline-block'
 }
 
+const clear = {
+    clear: 'both'
+}
+
+const right = {
+    float: 'right'
+}
+
 const marginRight = {
     display: 'inline-block',
     marginRight: 16,
 }
+
+const rootz = {
+    flexGrow: 1,
+}
+
 
 class Profile extends Component {
     constructor(props){
@@ -116,39 +130,55 @@ class Profile extends Component {
 
                 <div>                
                     <Paper style={paddedAndMarginBottom}>
-                        <div style={marginRight}>
-                            <img alt='...' style={style} src={user.profile_picture?user.profile_picture:''}/>
-                        </div>
-                        <div style={inline}>
-                            <h1>
-                                {strings.formatString(this.props.locales.locales.reviews, {username: user.display_name})}
-                             </h1>
-                            {user.email?user.email:''}
-                        </div>
+
+                            <div style={rootz}>
+
+                                <Grid container>
+                                    <Grid item xs={12} md={6}>
+
+                                        <div style={marginRight}>
+                                            <img alt='...' style={style} src={user.profile_picture?user.profile_picture:''}/>
+                                        </div>
+                                        <div style={inline}>
+                                            <h1>
+                                                {strings.formatString(this.props.locales.locales.reviews, {username: user.display_name})}
+                                             </h1>
+                                            {user.email?user.email:''}
+                                        </div>
+
+                                        <br />
+                                        <br />
+
+                                        <div>
+                                        <SocialList 
+                                            title="Followers"
+                                            users={this.props.userProfile.userProfile.followers}/>
+
+                                        <SocialList 
+                                            title="Follows"
+                                            users={this.props.userProfile.userProfile.following_users}/>
+                                        </div>
 
 
-                            {
-                                this.onCurrentUserProfile() ? 
-                                null
-                                :
-                                <RaisedButton 
-                                    onClick={ (e) => this.onClickFollow(e) }
-                                    // onClick={ (e) => this.alreadyFollows(e) }
-                                    default={true}
-                                    label={this.alreadyFollows() ? "unfollow" : "follow"}/> 
-                            }
+                                    </Grid>
+                                    <Grid style={clear} item xs={12} md={6}>
 
-                    </Paper>
+                                        {
+                                            this.onCurrentUserProfile() ? 
+                                            null
+                                            :
+                                            <RaisedButton 
+                                                style={right}
+                                                onClick={ (e) => this.onClickFollow(e) }
+                                                // onClick={ (e) => this.alreadyFollows(e) }
+                                                default={true}
+                                                label={this.alreadyFollows() ? "unfollow" : "follow"}/> 
+                                        }
 
-                    <Paper style={paddedAndMarginBottom}>
+                                    </Grid>
+                                </Grid>
 
-                        <SocialList 
-                            title="Followers"
-                            users={this.props.userProfile.userProfile.followers}/>
-
-                        <SocialList 
-                            title="Follows"
-                            users={this.props.userProfile.userProfile.following_users}/>
+                            </div>
 
                     </Paper>
 

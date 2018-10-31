@@ -7,11 +7,11 @@ const SocialListItem = (props) => {
 	const user = props.user
 
 	return (
-			<div>
+			<span>
         		<Link style={{color: theme.palette.primary1Color}} to={'/user/'+ user.id}>
-        			{user.display_name}
+        			{user.display_name}&nbsp;
     			</Link>
-			</div>
+			</span>
 		)
 
 }
