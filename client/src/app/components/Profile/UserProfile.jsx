@@ -97,7 +97,7 @@ class Profile extends Component {
             }
         );
     }
-
+ 
     onClickFollow(){
         console.log(this.props)
         this.props.client.mutate({mutation: followUserMutation, variables: {follower_id: this.props.userInfo.user_id, followee_id: this.props.userProfile.userProfile.id}}).then(
@@ -152,11 +152,11 @@ class Profile extends Component {
                                         <div>
                                         <SocialList 
                                             title="Followers"
-                                            users={this.props.userProfile.userProfile.followers}/>
+                                            users={this.props.userProfile.userProfile.followers ? this.props.userProfile.userProfile.followers : null}/>
 
                                         <SocialList 
                                             title="Follows"
-                                            users={this.props.userProfile.userProfile.following_users}/>
+                                            users={this.props.userProfile.userProfile.following_users ? this.props.userProfile.userProfile.following_users : null}/>
                                         </div>
 
 

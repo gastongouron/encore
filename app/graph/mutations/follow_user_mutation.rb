@@ -8,14 +8,16 @@ Mutations::FollowUserMutation = GraphQL::Relay::Mutation.define do
   return_field :user, Types::UserType
 
   resolve -> (_, input, _) {
-    # check if he is already following, else unfollow :)
+
     user = User.find(input[:follower_id])
     followee = User.find(input[:followee_id])
 
     unless followee.followed_by?(user)
       user.follow(followee)
+      Schema.subscriptions.trigger("userWasFollowed", {}, followee)
     else
       user.stop_following(followee)
+      Schema.subscriptions.trigger("userWasUnfollowed", {}, followee)
     end
     { user: followee }
   }

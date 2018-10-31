@@ -13,6 +13,8 @@ import Paper from 'material-ui/Paper'
 import Grid from '@material-ui/core/Grid'
 import Divider from 'material-ui/Divider';
 
+import reviewSubscription from '../../subscriptions/reviewSubscription'
+
 const coverStyle = {
     objectFit: 'cover',
     backgroundSize: 'cover',
@@ -56,10 +58,14 @@ class ArtistDetail extends Component {
         };
     };
     
+    testSubscription(data){
+        console.log(data)
+    }
+
     componentWillMount(){
         this.props.loadingArtistDetail();
 
-        let observable = this.props.client.watchQuery({query: artistDetailQuery, variables: {id: this.props.match.params.id}, fetchPolicy: 'cache-and-network', pollInterval: 5000})
+        let observable = this.props.client.subscribe({ query: reviewSubscription })
         this.setState({observable: observable})
 
         this.props.client.query({query: artistDetailQuery, variables: {id: this.props.match.params.id}, fetchPolicy: 'network-only'}).then(
@@ -73,13 +79,25 @@ class ArtistDetail extends Component {
     }
 
     componentDidMount(){
+        console.log("COMPONENTDIDMOUNT")
+        const ctx = this
+        console.log(this.props.client)
         this.state.observable.subscribe({
-          next: ({ data }) => data ? this.props.setArtistDetail(data.artist) : null
-        });
+            next(data) {
+                console.log(ctx)
+                console.log(data)
+                if(data){
+                    console.log('DATAAA')
+                    ctx.props.setArtistDetail(data.reviewWasAdded);
+                    ctx.checkEnableNewReview(data.reviewWasAdded.reviews)
+                }
+            },
+            error(err) { console.error('err', err); },
+          });
     }
  
     componentWillUnmount(){
-        this.state.observable.stopPolling()
+        this.state.observable.unsuscribe()
     }
 
     isConnected() {

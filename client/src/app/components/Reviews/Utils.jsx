@@ -9,8 +9,6 @@ export const onUpdate = (e, context) => {
     const body= review.body;
     const score = review.score;
     const media = review.media;
-    console.log('--------------------')
-    console.log(review.media)
     if(body!=='' && score !==''){
         context.props.client.mutate({mutation: updateMutation, variables: {id: review.id, body:body, score:score, media: media }}).then(
             (res) => {
