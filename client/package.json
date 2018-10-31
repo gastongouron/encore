@@ -46,6 +46,7 @@
     "semantic-ui-css": "^2.4.0",
     "styled-components": "^1.4.6",
     "subscriptions-transport-ws": "^0.9.15",
+    "uglify-es": "^3.3.9",
     "underscore": "^1.9.1"
   },
   "devDependencies": {

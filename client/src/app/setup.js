@@ -12,16 +12,12 @@ import { initDevise } from './devistsetup'
 import ActionCable from 'actioncable'
 import addGraphQLSubscriptions from 'graphql-ruby-client/subscriptions/addGraphQLSubscriptions'
 import $ from 'jquery'
-// import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws';
 
 injectTapEventPlugin();
 
 
-
 const cable = ActionCable.createConsumer()
 window.cable = cable
-
-// console.log("cable", cable)
 
 const RailsNetworkInterface = createNetworkInterface({
  uri: '/graphql',
@@ -34,19 +30,6 @@ const RailsNetworkInterface = createNetworkInterface({
 });
 
 const networkInterfaceWithSubscriptions = addGraphQLSubscriptions(RailsNetworkInterface, {cable: cable})
-
-// const wsClient = new SubscriptionClient(`ws://localhost:3000/cable`, {
-//   reconnect: true
-// });
-
-// const networkInterface = createNetworkInterface({
-//   uri: '/graphql'
-// });
-
-// const networkInterfaceWithSubscriptions = addGraphQLSubscriptions(
-//   networkInterface,
-//   wsClient
-// );
 
 const apolloClient = new ApolloClient({
   ssrMode: false,
