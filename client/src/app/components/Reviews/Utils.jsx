@@ -44,7 +44,7 @@ export const onSave = (e, context) => {
     const body= review.body;
     const score = review.score;
     const media = review.media;
-    console.log('ON SAVE-)))))))))', media)
+
     if(body!=='' && score !==''){
     	context.props.client.mutate({mutation: newReviewMutation, variables: {user_id: context.props.userInfo.user_id, artist_id: context.props.match.params.id, body: body, score: score, media: media }}).then(
     	    (res) => {

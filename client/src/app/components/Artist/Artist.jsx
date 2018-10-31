@@ -95,11 +95,7 @@ class ArtistDetail extends Component {
             error(err) { console.error('err', err); },
           });
     }
- 
-    componentWillUnmount(){
-        this.state.observable.unsuscribe()
-    }
-
+    
     isConnected() {
         return this.props.userInfo.isLoggedIn ? true : false
     }
