@@ -25,6 +25,7 @@ gem 'fog'
 
 gem 'acts-as-taggable-on'
 gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
+gem 'redis'
 
 gem 'httparty'
 gem 'faker'
