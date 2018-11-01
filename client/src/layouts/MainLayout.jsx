@@ -10,7 +10,7 @@ import {Notice} from '../shared';
 import Drawer from 'material-ui/Drawer';
 import strings from '../app/locales/strings'
 import { setLocales } from '../app/actions/locales'
-import { initDevise } from '../app/devistsetup'
+import { initDevise } from '../app/devisesetup'
 import { StyledFooter } from '../shared'
 import updateUserMutation from '../app/mutations/updateUser'
 
@@ -200,17 +200,17 @@ class MainLayout extends Component {
               <MenuItem
                 containerElement={<Link to="/artists"/>}
                 primaryText={strings.artists}
-                // style={{color: palette.alternateTextColor}}
+                style={{color: palette.textColor}}
               />
               <UserMenuItem
                 logout={doLogout}
                 currentUser={currentUser}
-                // textColor={palette.alternateTextColor}
+                textColor={palette.textColor}
               />
               <MenuItem
                 onClick={this.onSwitchLanguage}
                 primaryText={strings.getLanguage()}
-                // style={{color: palette.alternateTextColor}}
+                style={{color: palette.textColor}}
               />
             </ToolbarGroup>
           </MainToolbar>        
@@ -253,14 +253,15 @@ class MainLayout extends Component {
           {notice && <Notice>{notice}</Notice>}
           {children}
         </MainContainer>
-
+          {/* 
           {currentUser.isLoggedIn ? 
             null
           :
           <StyledFooter>
-           {/*  { this.props.locales.locales.policy.link ? <Link to='/policy'>{this.props.locales.locales.policy.link}</Link> : undefined} */}
-          <Link style={{float:'left'}} to='/policy'>policy</Link>
+          { this.props.locales ? <Link to='/policy'>{this.props.locales.locales.policy.link}</Link> : undefined}
+          <Link style={{float:'left'}} to='/policy'>policy</Link> 
           </StyledFooter>
+          */}
           }
       </Main>
     );

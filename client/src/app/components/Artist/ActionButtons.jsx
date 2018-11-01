@@ -1,13 +1,8 @@
 import { connect } from 'react-redux'
 import React from 'react'
-import RaisedButton from 'material-ui/RaisedButton'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentEdit from 'material-ui/svg-icons/image/edit';
-
-const floatRight = {
-  float: 'right'
-}
 
 const action = {
 	float: 'right',

@@ -12,7 +12,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Alert from '../../../shared/Alert'
 import strings from '../../../app/locales/strings'
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
-import Delete from 'material-ui/svg-icons/action/delete';
+// import Delete from 'material-ui/svg-icons/action/delete';
 import IconButton from 'material-ui/IconButton';
 
 

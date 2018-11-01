@@ -124,6 +124,7 @@ class Profile extends Component {
 
     render() {
         const user = this.onCurrentUserProfile() ? this.props.userInfo : this.props.userProfile.userProfile
+        console.log("->>>>>", user)
         return (
             <div>
                 {this.state.loading ? <EncoreLoader /> : this.props.reviews.error ? <h1>Error...</h1> :
@@ -152,11 +153,11 @@ class Profile extends Component {
                                         <div>
                                         <SocialList 
                                             title="Followers"
-                                            users={this.props.userProfile.userProfile.followers ? this.props.userProfile.userProfile.followers : null}/>
+                                            users={this.props.userProfile.userProfile ? this.props.userProfile.userProfile.followers : null}/>
 
                                         <SocialList 
                                             title="Follows"
-                                            users={this.props.userProfile.userProfile.following_users ? this.props.userProfile.userProfile.following_users : null}/>
+                                            users={this.props.userProfile.userProfile ? this.props.userProfile.userProfile.following_users : null}/>
                                         </div>
 
 

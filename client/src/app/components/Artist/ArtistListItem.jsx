@@ -81,7 +81,7 @@ const ArtistListItem = (props) => {
 					        	</Grid>
 
 					        	<Grid item xs={3}>
-					        		<h1 style={floatRight}>{ Number(artist.reviews_count) != 0 ? (Math.round( artist.score * 10 ) / 10) : ""}</h1>
+					        		<h1 style={floatRight}>{ Number(artist.reviews_count) !== 0 ? (Math.round( artist.score * 10 ) / 10) : ""}</h1>
 					        	</Grid>
 					        </Grid>
 					        <Divider />

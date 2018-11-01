@@ -8,7 +8,7 @@ import ReviewForm from '../Reviews/ReviewForm'
 import ReviewList from '../Reviews/ReviewList'
 import ActionButtons from './ActionButtons'
 import EncoreLoader from '../EncoreLoader'
-import Taglist from './Taglist'
+// import Taglist from './Taglist'
 import Paper from 'material-ui/Paper'
 import Grid from '@material-ui/core/Grid'
 import Divider from 'material-ui/Divider';

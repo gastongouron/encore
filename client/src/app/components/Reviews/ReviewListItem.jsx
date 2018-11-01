@@ -35,15 +35,6 @@ const ReviewListItem = (props) => {
 	  // padding: 20,
 	};
 
-	const padded = {
-	  paddingTop: 0,
-	  // marginTop: -20,
-
-	  witht: '100%',
-	  // float: 'right',
-	  display: 'inline-block'
-	}
-
 	const imageStyle = {
 	    objectFit: 'cover',
 	    backgroundSize: 'cover',

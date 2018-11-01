@@ -8,15 +8,13 @@ import reducers from './reducers';
 import { ApolloClient, createNetworkInterface } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { initDevise } from './devistsetup'
+import { initDevise } from './devisesetup'
 import ActionCable from 'actioncable'
-
-import addGraphQLSubscriptions from '../cable/subscriptions/addGraphQLSubscriptions'
+import addGraphQLSubscriptions from './cable/subscriptions/addGraphQLSubscriptions'
 
 import $ from 'jquery'
 
 injectTapEventPlugin();
-
 
 const cable = ActionCable.createConsumer()
 window.cable = cable

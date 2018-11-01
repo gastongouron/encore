@@ -1,4 +1,4 @@
-var printer = require("graphql/language/printer")
+// var printer = require("graphql/language/printer")
 var registry = require("./registry")
 
 /**
