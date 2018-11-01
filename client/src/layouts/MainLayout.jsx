@@ -262,7 +262,7 @@ class MainLayout extends Component {
           <Link style={{float:'left'}} to='/policy'>policy</Link> 
           </StyledFooter>
           */}
-          }
+          
       </Main>
     );
   }

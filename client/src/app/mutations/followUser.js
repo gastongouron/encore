@@ -18,10 +18,12 @@ const followUserMutation = (gql`
                 followers {
                     id
                     display_name
+                    profile_picture
                 }
                 following_users {
                     id
                     display_name
+                    profile_picture
                 }
             }
         }

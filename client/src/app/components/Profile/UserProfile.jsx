@@ -19,19 +19,18 @@ import Paper from 'material-ui/Paper'
 import strings from '../../locales/strings'
 import RaisedButton from 'material-ui/RaisedButton';
 import Grid from '@material-ui/core/Grid'
-
+import Divider from 'material-ui/Divider'
 import _ from 'underscore'
 
-const paddedAndMarginBottom = {
+const padded = {
     padding: 20,
-    marginBottom: 20,
 }
 
 const style = {
     objectFit: 'cover',
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
 }
 
 const inline = {
@@ -41,6 +40,12 @@ const inline = {
 const clear = {
     clear: 'both'
 }
+
+// const circle = {
+//   height: 100,
+//   width: 100,
+
+// };
 
 const right = {
     float: 'right'
@@ -129,96 +134,95 @@ class Profile extends Component {
 
         return (
             <div>
-                {this.state.loading ? <EncoreLoader /> : this.props.reviews.error ? <h1>Error...</h1> :
+                {this.state.loading ? <EncoreLoader /> : this.props.reviews.error ? <h1>Error...</h1> : 
 
                 <div>                
-                    <Paper style={paddedAndMarginBottom}>
 
-                            <div style={rootz}>
+                    <div style={rootz}>
+                      <Grid container spacing={24}>
+                        <Grid item xs={12} sm={5} md={3} style={{textAlign: 'center'}}>
 
-                                <Grid container>
-                                    <Grid item xs={12} md={6}>
+                            <Paper>
 
-                                        <div style={marginRight}>
-                                            <img alt='...' style={style} src={user.profile_picture?user.profile_picture:''}/>
-                                        </div>
-                                        <div style={inline}>
-                                            <h1>
-                                                {strings.formatString(this.props.locales.locales.reviews, {username: user.display_name})}
-                                             </h1>
-                                            {user.email?user.email:''}
-                                        </div>
+                                <div style={padded}>
+                                    <img alt='...' style={style} src={user.profile_picture?user.profile_picture:''}/>
+                                    <h2 style={{marginTop:3}}>
+                                        {user.display_name}
+                                        {/* strings.formatString(this.props.locales.locales.reviews, {username: user.display_name})*/}
+                                     </h2>
+                                    { this.props.userProfile.userProfile !== null ? Object.keys(this.props.reviews.reviews).length + " experiences" : ""}
+                                    {/* user.email?user.email:'' */}
+                                </div>
 
-                                        <br />
-                                        <br />
-                                            <div>
-                                                <SocialList 
-                                                    title="Followers"
-                                                    users={this.props.userProfile.userProfile !== null ? this.props.userProfile.userProfile.followers : undefined}/>
-
-                                                <SocialList 
-                                                    title="Follows"
-                                                    users={this.props.userProfile.userProfile !== null ? this.props.userProfile.userProfile.following_users : undefined}/>
-                                            </div>
+                                <Divider />
 
 
-                                    </Grid>
-                                    <Grid style={clear} item xs={12} md={6}>
+                                    <div style={{textAlign: 'left'}}>
+                                        <SocialList 
+                                            followingUsers={this.props.userProfile.userProfile !== null ? this.props.userProfile.userProfile.following_users : undefined}
+                                            followers={this.props.userProfile.userProfile !== null ? this.props.userProfile.userProfile.followers : undefined}/>
 
-                                        {
-                                            this.onCurrentUserProfile() ? 
-                                            null
-                                            :
-                                            <RaisedButton 
-                                                style={right}
-                                                onClick={ (e) => this.onClickFollow(e) }
-                                                // onClick={ (e) => this.alreadyFollows(e) }
-                                                default={true}
-                                                label={this.alreadyFollows() ? "unfollow" : "follow"}/> 
-                                        }
+                                    <br />
+                                {
 
-                                    </Grid>
-                                </Grid>
+                                    this.onCurrentUserProfile() ? 
+                                    null
+                                    :
+                                    <RaisedButton 
+                                        onClick={ (e) => this.onClickFollow(e) }
+                                        // onClick={ (e) => this.alreadyFollows(e) }
+                                        default={true}
+                                        label={this.alreadyFollows() ? "unfollow" : "follow"}/> 
+                                }
 
-                            </div>
+                                    </div>
 
-                    </Paper>
+                            </Paper>
 
-                    <div>
-                        <div>
+                        </Grid>
+                        <Grid item xs={12} sm={7} md={9}>
+
                             <div>
-                                <ReviewList
-                                    current={this.onCurrentUserProfile()}
-                                    onReviewSelect={selectedReview =>this.show(selectedReview, this)}
-                                    reviews={this.props.reviews.reviews}
-                                    user={this.props.userInfo}
-                                    match={this.props.match.url}
-                                />
+                                <div>
+                                    <div>
+                                        <ReviewList
+                                            current={this.onCurrentUserProfile()}
+                                            onReviewSelect={selectedReview =>this.show(selectedReview, this)}
+                                            reviews={this.props.reviews.reviews}
+                                            user={this.props.userInfo}
+                                            match={this.props.match.url}
+                                        />
+                                    </div>
+                                </div>
+                                <div>
+                                    <form>
+                                    <ReviewForm
+                                        isUpdate={this.state.isUpdate}
+                                        onShow={this.state.showModal}
+                                        onHide={(e) => this.close(this)}
+                                        editable={true}
+                                        formTitle={this.state.review!=null?this.state.review.artist_name:''}
+                                        formValue={this.state.review!==null?this.state.review.body:''}
+                                        formScore={this.state.review!==null?this.state.review.score:''}
+                                        formMedia={this.state.review!=null?this.state.review.media:null}
+                                        setBody={(e)=>this.body(e, this)}
+                                        setScore={(value)=>this.score(value, this)}
+                                        setMedia={(value)=>this.media(value, this)}
+                                        unsetMedia={(value) => this.removeMedia(this)}
+                                        onClickDelete={(e)=>this.delete(e, this)}
+                                        onClickUpdate={(e)=>this.update(e, this)}
+                                        onClickClose={(e) => this.close(this)}
+                                    />
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <form>
-                            <ReviewForm
-                                isUpdate={this.state.isUpdate}
-                                onShow={this.state.showModal}
-                                onHide={(e) => this.close(this)}
-                                editable={true}
-                                formTitle={this.state.review!=null?this.state.review.artist_name:''}
-                                formValue={this.state.review!==null?this.state.review.body:''}
-                                formScore={this.state.review!==null?this.state.review.score:''}
-                                formMedia={this.state.review!=null?this.state.review.media:null}
-                                setBody={(e)=>this.body(e, this)}
-                                setScore={(value)=>this.score(value, this)}
-                                setMedia={(value)=>this.media(value, this)}
-                                unsetMedia={(value) => this.removeMedia(this)}
-                                onClickDelete={(e)=>this.delete(e, this)}
-                                onClickUpdate={(e)=>this.update(e, this)}
-                                onClickClose={(e) => this.close(this)}
-                            />
-                        </form>
+
+                        </Grid>
+                      </Grid>
                     </div>
-                </div>
+                    
             </div>
+
             }
         </div>
 

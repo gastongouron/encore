@@ -12,10 +12,12 @@ const UserProfileQuery = (gql`
             followers {
                 id
                 display_name
+                profile_picture
             }
             following_users {
                 id
                 display_name
+                profile_picture
             }
 			reviews {
                 artist_id

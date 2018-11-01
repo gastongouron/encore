@@ -4,9 +4,9 @@ import _ from 'underscore'
 
 class Review extends Component {
 
-	// constructor(props){
-	// 	super(props)
-	// }
+	constructor(props){
+		super(props)
+	}
 
 	sort(objects){
 		return _.sortBy(objects,function(node){
