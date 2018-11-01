@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withApollo } from 'react-apollo'
 import { initUserReviews, loadingUserReviews, failedUserReviews, setUserReviews, updateUserReview, deleteUserReview, selectUserReview} from '../../actions/reviews'
 import { initUserProfile, loadingUserProfile, failedUserProfile, setUserProfile } from '../../actions/userProfile'
+
 import followUserMutation from '../../mutations/followUser'
 
 import { onUpdate, onDelete, setScore, setBody, setMedia, unsetMedia, handleModalShow, handleModalClose} from '../Reviews/Utils'
@@ -81,6 +82,7 @@ class Profile extends Component {
     componentWillMount(){
         this.props.loadingUserReviews();
         this.props.loadingUserProfile();
+
         this.props.client.networkInterface.query({query: UserProfileQuery, variables: {id: this.props.match.params.id }, fetchPolicy: 'network-only'})
         .then(
             (res) => {
@@ -119,9 +121,10 @@ class Profile extends Component {
 
     render() {
         const user = this.onCurrentUserProfile() ? this.props.userInfo : this.props.userProfile.userProfile
+
         return (
             <div>
-                {this.state.loading ? <EncoreLoader /> : this.props.reviews.error ? <h1>Error...</h1> :
+                {this.props.userProfile.loading ? <EncoreLoader /> : this.props.reviews.error ? <h1>Error...</h1> :
 
                 <div>                
                     <Paper style={paddedAndMarginBottom}>
@@ -143,16 +146,16 @@ class Profile extends Component {
 
                                         <br />
                                         <br />
+                                            <div>                                            
+                                                <SocialList 
+                                                    title="Followers"
+                                                    users={this.props.userProfile.userProfile.followers}/>
 
-                                        <div>
-                                            <SocialList 
-                                                title="Followers"
-                                                users={this.props.userProfile.userProfile.followers}/>
+                                                <SocialList 
+                                                    title="Follows"
+                                                    users={this.props.userProfile.userProfile.following_users}/>
+                                            </div>
 
-                                            <SocialList 
-                                                title="Follows"
-                                                users={this.props.userProfile.userProfile.following_users}/>
-                                        </div>
 
                                     </Grid>
                                     <Grid style={clear} item xs={12} md={6}>
