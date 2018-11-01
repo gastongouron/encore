@@ -76,6 +76,8 @@ class Profile extends Component {
             enabledButton: true,
             review:null,
             isUpdate:false,
+            followers: null,
+            following_users: null
         };
     }
 
@@ -86,6 +88,7 @@ class Profile extends Component {
         this.props.client.networkInterface.query({query: UserProfileQuery, variables: {id: this.props.match.params.id }, fetchPolicy: 'network-only'})
         .then(
             (res) => {
+                console.log(res)
                 this.props.setUserReviews(res.data.user.reviews);
                 this.props.setUserProfile(res.data.user)
                 this.setState({ loading: false });
@@ -122,9 +125,11 @@ class Profile extends Component {
     render() {
         const user = this.onCurrentUserProfile() ? this.props.userInfo : this.props.userProfile.userProfile
 
+        console.log(user)
+
         return (
             <div>
-                {this.props.userProfile.loading ? <EncoreLoader /> : this.props.reviews.error ? <h1>Error...</h1> :
+                {this.state.loading ? <EncoreLoader /> : this.props.reviews.error ? <h1>Error...</h1> :
 
                 <div>                
                     <Paper style={paddedAndMarginBottom}>
@@ -146,14 +151,14 @@ class Profile extends Component {
 
                                         <br />
                                         <br />
-                                            <div>                                            
+                                            <div>
                                                 <SocialList 
                                                     title="Followers"
-                                                    users={this.props.userProfile.userProfile.followers}/>
+                                                    users={this.props.userProfile.userProfile !== null ? this.props.userProfile.userProfile.followers : undefined}/>
 
                                                 <SocialList 
                                                     title="Follows"
-                                                    users={this.props.userProfile.userProfile.following_users}/>
+                                                    users={this.props.userProfile.userProfile !== null ? this.props.userProfile.userProfile.following_users : undefined}/>
                                             </div>
 
 
