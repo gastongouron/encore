@@ -10,6 +10,8 @@ import frenchStrings from 'react-timeago/lib/language-strings/fr'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
 import theme from '../../theme'
 import Divider from 'material-ui/Divider';
+import Avatar from 'material-ui/Avatar'
+import {List, ListItem} from 'material-ui/List'
 
 const ReviewListItem = (props) => {
 
@@ -38,14 +40,14 @@ const ReviewListItem = (props) => {
 	}
 
 	const header = {
-		padding:20,
-		paddingTop: 12,
+		// padding:20,
+		// paddingTop: 20,
 	}
 
 	const body = {
 		padding: 20,
-		paddingTop: 12,
-		paddingBottom: 12,
+		paddingTop: 20,
+		paddingBottom: 20,
 	}
 
 	const paperStyle = { marginBottom: 20 };
@@ -63,14 +65,12 @@ const ReviewListItem = (props) => {
 				<div style={header}>
 				
 					{ !onUserProfile ? 
-						<div style={{float:'left', display: 'flex', alignItems: 'center'}}> 
-	                        <img alt='meaningful text' style={style} src={review.author_profile_picture}/>
-	                        <div style={{lineHeight: 1}}>
-								<Link style={{color: theme.palette.primary1Color}} to={'/user/'+ review.user_id}>{review.author_display_name}</Link>
-								<br />
-							{ 
-								review.created_at !== undefined 
-							?
+						<div style={{minWidth:'100%'}}>
+					      <ListItem
+						      href={'/user/'+ review.user_id}
+					          key={review.id}
+					          primaryText={review.author_display_name}
+					          secondaryText={review.created_at !== undefined ?
 								<span style={{color: 'grey', fontSize: '0.77em'}}>
 									{ review.created_at === review.updated_at ? props.locales.locales.created_at : props.locales.locales.updated_at}
 									<TimeAgo date={review.created_at === review.updated_at ? review.created_at : review.updated_at} formatter={props.locales.locales._language === 'en' ? undefined : formatter}/>
@@ -79,24 +79,22 @@ const ReviewListItem = (props) => {
 								<span style={{color: 'grey', fontSize: '0.77em'}}>
 									{props.locales.locales.justNow}
 								</span>
-							}
-							</div>
-						</div> 
+					          }
+					          rightIcon={<div style={right}> {review.score} </div>}
+					          leftAvatar={<Avatar src={review.author_profile_picture} />}/>
 
+						</div>
 					: 	
-						<div style={left}>
-							<h3>
-		                        <img alt='meaningful text' style={style} src={review.artist_profile_picture}/>
-								<Link style={{color: theme.palette.primary1Color}} to={'/artists/'+ review.artist_id}>{review.artist_name}</Link>
-							</h3>
+						<div style={{minWidth:'100%'}}>
+					      <ListItem
+						      href={'/artists/'+ review.artist_id}
+					          key={review.id}
+					          primaryText={review.artist_name}
+					          rightIcon={<div style={right}> {review.score} </div>}
+					          leftAvatar={<Avatar src={review.artist_profile_picture} />}/>
+
 						</div>
 					}
-
-					<div style={right}>
-						<h3><span>{review.score}</span></h3>
-					</div>
-
-				<br />
 
 				</div>
 

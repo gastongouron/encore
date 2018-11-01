@@ -93,7 +93,6 @@ class Profile extends Component {
         this.props.client.networkInterface.query({query: UserProfileQuery, variables: {id: this.props.match.params.id }, fetchPolicy: 'network-only'})
         .then(
             (res) => {
-                console.log(res)
                 this.props.setUserReviews(res.data.user.reviews);
                 this.props.setUserProfile(res.data.user)
                 this.setState({ loading: false });
@@ -140,7 +139,7 @@ class Profile extends Component {
 
                     <div style={rootz}>
                       <Grid container spacing={24}>
-                        <Grid item xs={12} sm={5} md={3} style={{textAlign: 'center'}}>
+                        <Grid item xs={12} sm={5} md={3} style={{textAlign: 'center', position: "relative", overflow: "auto"}}>
 
                             <Paper>
 
@@ -162,18 +161,18 @@ class Profile extends Component {
                                             followingUsers={this.props.userProfile.userProfile !== null ? this.props.userProfile.userProfile.following_users : undefined}
                                             followers={this.props.userProfile.userProfile !== null ? this.props.userProfile.userProfile.followers : undefined}/>
 
-                                    <br />
-                                {
+                                         <br />
+                                        {
 
-                                    this.onCurrentUserProfile() ? 
-                                    null
-                                    :
-                                    <RaisedButton 
-                                        onClick={ (e) => this.onClickFollow(e) }
-                                        // onClick={ (e) => this.alreadyFollows(e) }
-                                        default={true}
-                                        label={this.alreadyFollows() ? "unfollow" : "follow"}/> 
-                                }
+                                            this.onCurrentUserProfile() ? 
+                                            null
+                                            :
+                                            <RaisedButton 
+                                                onClick={ (e) => this.onClickFollow(e) }
+                                                // onClick={ (e) => this.alreadyFollows(e) }
+                                                default={true}
+                                                label={this.alreadyFollows() ? "unfollow" : "follow"}/> 
+                                        }
 
                                     </div>
 
