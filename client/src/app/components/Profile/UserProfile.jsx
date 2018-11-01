@@ -59,9 +59,6 @@ class Profile extends Component {
     constructor(props){
         super(props);
 
-
-        console.log('------_>>>>>>', props)
-
         this.update = onUpdate.bind(this)
         this.delete = onDelete.bind(this)
         this.body = setBody.bind(this)
@@ -99,12 +96,10 @@ class Profile extends Component {
     }
  
     onClickFollow(){
-        console.log(this.props)
         this.props.client.mutate({mutation: followUserMutation, variables: {follower_id: this.props.userInfo.user_id, followee_id: this.props.userProfile.userProfile.id}}).then(
         (res) => {
-            console.log(res)
               this.props.setUserProfile(res.data.followUser.user)
-              // turn button to off
+              // this.setState({ loading: false });
         },
         (err) => { }
         );
@@ -124,7 +119,6 @@ class Profile extends Component {
 
     render() {
         const user = this.onCurrentUserProfile() ? this.props.userInfo : this.props.userProfile.userProfile
-        console.log("->>>>>", user)
         return (
             <div>
                 {this.state.loading ? <EncoreLoader /> : this.props.reviews.error ? <h1>Error...</h1> :
@@ -151,15 +145,14 @@ class Profile extends Component {
                                         <br />
 
                                         <div>
-                                        <SocialList 
-                                            title="Followers"
-                                            users={this.props.userProfile.userProfile ? this.props.userProfile.userProfile.followers : null}/>
+                                            <SocialList 
+                                                title="Followers"
+                                                users={this.props.userProfile.userProfile.followers}/>
 
-                                        <SocialList 
-                                            title="Follows"
-                                            users={this.props.userProfile.userProfile ? this.props.userProfile.userProfile.following_users : null}/>
+                                            <SocialList 
+                                                title="Follows"
+                                                users={this.props.userProfile.userProfile.following_users}/>
                                         </div>
-
 
                                     </Grid>
                                     <Grid style={clear} item xs={12} md={6}>

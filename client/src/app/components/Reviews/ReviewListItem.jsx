@@ -30,11 +30,6 @@ const ReviewListItem = (props) => {
 		displat: 'block'
 	}
 
-	const paperStyle = {
-	  marginBottom: 20,
-	  // padding: 20,
-	};
-
 	const imageStyle = {
 	    objectFit: 'cover',
 	    backgroundSize: 'cover',
@@ -53,13 +48,9 @@ const ReviewListItem = (props) => {
 		paddingBottom: 12,
 	}
 
-	const left = {
-		float: 'left',
-	}
-
-	const right = {
-  	    float: 'right',
-	}
+	const paperStyle = { marginBottom: 20 };
+	const left = { float: 'left' }
+	const right = { float: 'right' }
 
 	return (
 			<Paper

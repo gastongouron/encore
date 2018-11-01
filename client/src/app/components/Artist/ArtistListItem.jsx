@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import Taglist from './Taglist'
 import Grid from '@material-ui/core/Grid'
 import Divider from 'material-ui/Divider';
-import Typography from '@material-ui/core/Typography';
 import Truncate from 'react-truncate';
 import theme from '../../theme'
 
