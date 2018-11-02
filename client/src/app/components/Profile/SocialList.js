@@ -4,6 +4,7 @@ import {List, ListItem} from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import Subheader from 'material-ui/Subheader';
 import { Link } from 'react-router-dom'
+import Divider from 'material-ui/Divider';
 import _ from 'underscore'
 
 // import ActionGrade from 'material-ui/svg-icons/action/grade';
@@ -75,6 +76,7 @@ class SocialList extends Component {
 				              primaryTogglesNestedList={true}
 				              nestedItems={followerItems}
 				            />
+							<Divider />
 				            <ListItem
 				              primaryText={<span style={label}>{followingUsersCount > 1 ? followingUsersCount + " " + this.props.locales.locales.followings : followingUsersCount + " " + this.props.locales.locales.following}</span> }
 				              initiallyOpen={false}

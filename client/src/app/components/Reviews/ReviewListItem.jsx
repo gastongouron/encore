@@ -86,13 +86,13 @@ const ReviewListItem = (props) => {
 				       </ListItem>
 					</div>
 				</div>
-
+				<Divider />
 				<div>
 					{
 						review.media ? 
 							isImage(review.media) ? <img alt="" style={imageStyle} src={review.media} /> : <ReactPlayer width='100%' height='auto' url={review.media} controls={true} />
 					:
-						<Divider />
+						null
 					}
 				</div>
 
