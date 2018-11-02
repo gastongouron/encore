@@ -179,7 +179,7 @@ class MainLayout extends Component {
   render() {
     const {currentUser, doLogout, children, location: {state: {notice} = {}}, muiTheme: {palette}} = this.props;
     return (
-      <Main>
+      <Main style={{maxWidth: 800, margin: '0 auto'}}>
         <MainAppBar
           style={{background: '#F1F1F1', boxShadow: 'none', position: 'sticky', top: 0}}
           // style={{ background: 'white', boxShadow: 'none', position: 'sticky', top: 0}}

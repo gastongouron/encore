@@ -137,13 +137,23 @@ class Profile extends Component {
 
                 <div>                
 
-                    <div style={rootz}>
-                      <Grid container spacing={24}>
-                        <Grid item xs={12} sm={5} md={3} style={{textAlign: 'center', position: "relative", overflow: "auto"}}>
 
                             <Paper>
 
                                 <div style={padded}>
+                                     <br />
+                                    {
+
+                                        this.onCurrentUserProfile() ? 
+                                        null
+                                        :
+                                        <RaisedButton 
+                                            style={{float: 'right'}}
+                                            onClick={ (e) => this.onClickFollow(e) }
+                                            // onClick={ (e) => this.alreadyFollows(e) }
+                                            default={true}
+                                            label={this.alreadyFollows() ? "unfollow" : "follow"}/> 
+                                    }
                                     <img alt='...' style={style} src={user.profile_picture?user.profile_picture:''}/>
                                     <h2 style={{marginTop:3}}>
                                         {user.display_name}
@@ -160,26 +170,10 @@ class Profile extends Component {
                                         <SocialList 
                                             followingUsers={this.props.userProfile.userProfile !== null ? this.props.userProfile.userProfile.following_users : undefined}
                                             followers={this.props.userProfile.userProfile !== null ? this.props.userProfile.userProfile.followers : undefined}/>
-
-                                         <br />
-                                        {
-
-                                            this.onCurrentUserProfile() ? 
-                                            null
-                                            :
-                                            <RaisedButton 
-                                                onClick={ (e) => this.onClickFollow(e) }
-                                                // onClick={ (e) => this.alreadyFollows(e) }
-                                                default={true}
-                                                label={this.alreadyFollows() ? "unfollow" : "follow"}/> 
-                                        }
-
                                     </div>
 
                             </Paper>
-
-                        </Grid>
-                        <Grid item xs={12} sm={7} md={9}>
+                            <br />
 
                             <div>
                                 <div>
@@ -216,9 +210,6 @@ class Profile extends Component {
                                 </div>
                             </div>
 
-                        </Grid>
-                      </Grid>
-                    </div>
                     
             </div>
 
