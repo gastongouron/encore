@@ -65,6 +65,7 @@ class ArtistDetail extends Component {
     componentWillMount(){
         this.props.loadingArtistDetail();
 
+        // let observable = this.props.client.subscribe({ query: reviewSubscription, variables: {user_id: this.props.userInfo.user_id} })
         let observable = this.props.client.subscribe({ query: reviewSubscription })
         this.setState({observable: observable})
 
@@ -83,8 +84,14 @@ class ArtistDetail extends Component {
         this.state.observable.subscribe({
             next(data) {
                 if(data){
-                    ctx.props.setArtistDetail(data.reviewWasAdded);
-                    ctx.checkEnableNewReview(data.reviewWasAdded.reviews)
+                    console.log(Number(ctx.props.match.params.id))
+                    console.log(Number(data.reviewWasAdded.id))
+                    if(Number(ctx.props.match.params.id)===Number(data.reviewWasAdded.id)){
+                        ctx.props.setArtistDetail(data.reviewWasAdded);
+                        ctx.checkEnableNewReview(data.reviewWasAdded.reviews)
+                    }
+                    // if (Number(ctx.props.match.params.id)===Number(data.userWasChanged.id)){
+                    // }
                 }
             },
             error(err) { console.error('err', err); },

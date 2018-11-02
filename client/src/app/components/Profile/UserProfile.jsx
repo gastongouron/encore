@@ -103,6 +103,9 @@ class Profile extends Component {
         this.props.loadingUserReviews();
         this.props.loadingUserProfile();
 
+        console.log(this.props.match.params.id)
+
+        // let observable = this.props.client.subscribe({ query: socialSubscription, variables: {id: this.props.match.params.id } })
         let observable = this.props.client.subscribe({ query: socialSubscription })
         this.setState({observable: observable})
 
@@ -111,7 +114,6 @@ class Profile extends Component {
             (res) => {
                 this.props.setUserReviews(res.data.user.reviews);
                 this.props.setUserProfile(res.data.user)
-                this.setState({ loading: false });
             },
             (err) => {
                 this.props.failedUserReviews(err.data);
@@ -122,14 +124,14 @@ class Profile extends Component {
  
     componentDidMount(){
         const ctx = this
+        console.log('HERE?')
         this.state.observable.subscribe({
             next(data) {
-                console.log(ctx)
-                console.log(data)
                 if(data){
-                    console.log(data.userWasChanged)
-                    ctx.props.setUserProfile(data.userWasChanged);
-                    ctx.props.setUserReviews(data.userWasChanged.reviews)
+                    if (Number(ctx.props.match.params.id)===Number(data.userWasChanged.id)){
+                        ctx.props.setUserProfile(data.userWasChanged);
+                        ctx.props.setUserReviews(data.userWasChanged.reviews)
+                    }
                 }
             },
             error(err) { console.error('err', err); },
