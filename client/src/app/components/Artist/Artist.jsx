@@ -79,15 +79,10 @@ class ArtistDetail extends Component {
     }
 
     componentDidMount(){
-        console.log("COMPONENTDIDMOUNT")
         const ctx = this
-        console.log(this.props.client)
         this.state.observable.subscribe({
             next(data) {
-                console.log(ctx)
-                console.log(data)
                 if(data){
-                    console.log('DATAAA')
                     ctx.props.setArtistDetail(data.reviewWasAdded);
                     ctx.checkEnableNewReview(data.reviewWasAdded.reviews)
                 }

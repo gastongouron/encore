@@ -109,9 +109,9 @@ class CustomForm extends Component {
             contentStyle={customContentStyle}
             open={this.props.onShow}
             title={
-              <div>
-              <h1>{strings.formatString(this.props.locales.locales.review, {name: this.props.formTitle || this.props.artistDetail.artistDetail.name})}</h1>
-              <IconButton style={{float: 'right', top: 0, right: 0, position: 'absolute'}} onClick={this.props.onClickClose}><NavigationClose /></IconButton>
+              <div style={{padding: 20, paddingTop: 10, paddingBottom: 10, fontSize: 14, fontWeight: 500}}>
+              <span>{strings.formatString(this.props.locales.locales.review, {name: this.props.formTitle || this.props.artistDetail.artistDetail.name})}</span>
+              <IconButton style={{float: 'right', top: 2, right: 5, position: 'absolute'}} onClick={this.props.onClickClose}><NavigationClose /></IconButton>
               </div>
             }
             modal={false}

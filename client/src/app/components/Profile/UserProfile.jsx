@@ -23,6 +23,8 @@ import Divider from 'material-ui/Divider'
 import Subheader from 'material-ui/Subheader';
 import _ from 'underscore'
 
+import socialSubscription from '../../subscriptions/socialSubscription'
+
 const padded = {
     padding: 20,
 }
@@ -93,13 +95,16 @@ class Profile extends Component {
             review:null,
             isUpdate:false,
             followers: null,
-            following_users: null
+            following_users: null,
         };
     }
 
     componentWillMount(){
         this.props.loadingUserReviews();
         this.props.loadingUserProfile();
+
+        let observable = this.props.client.subscribe({ query: socialSubscription })
+        this.setState({observable: observable})
 
         this.props.client.networkInterface.query({query: UserProfileQuery, variables: {id: this.props.match.params.id }, fetchPolicy: 'network-only'})
         .then(
@@ -115,6 +120,26 @@ class Profile extends Component {
         );
     }
  
+    componentDidMount(){
+        console.log("COMPONENTDIDMOUNT")
+        const ctx = this
+        console.log(this.props.client)
+        this.state.observable.subscribe({
+            next(data) {
+                console.log(ctx)
+                console.log(data)
+                if(data){
+                    console.log('DATAAA')
+                    ctx.props.setUserProfile(data.userWasChanged);
+                    ctx.props.setUserReviews(data.userWasChanged.reviews)
+                    ctx.setState({ loading: false });
+
+                }
+            },
+            error(err) { console.error('err', err); },
+          });
+    }
+
     onClickFollow(){
         this.props.client.mutate({mutation: followUserMutation, variables: {follower_id: this.props.userInfo.user_id, followee_id: this.props.userProfile.userProfile.id}}).then(
         (res) => {
