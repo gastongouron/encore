@@ -55,11 +55,11 @@ const ArtistListItem = (props) => {
 				<div style={rootz}>
 					<Grid container>
 
-				        <Grid item xs={12} sm={4} md={3} onClick={ () => onArtistSelect(artist) }>
+				        <Grid item xs={12} sm={4} md={4} onClick={ () => onArtistSelect(artist) }>
 							<img alt="todo" style={imageStyle} src={artist.cover_url}></img>
 				        </Grid>
 
-				        <Grid item xs={12} sm={8} md={9}>
+				        <Grid item xs={12} sm={8} md={8}>
 							<Grid style={padded} container onClick={ () => onArtistSelect(artist) }>
 					        	<Grid style={floatLeft} item xs={9}>
 					        		<h1>
@@ -88,7 +88,7 @@ const ArtistListItem = (props) => {
 								<Grid style={floatLeft} item xs={12}>
 
 
-							<Truncate lines={4} ellipsis={<span>... <Link style={{color: theme.palette.primary1Color}} to={'/artists/'+ artist.id}>{props.locales.locales.readMore}</Link></span>}>
+							<Truncate lines={2} ellipsis={<span>... <Link style={{color: theme.palette.primary1Color}} to={'/artists/'+ artist.id}>{props.locales.locales.readMore}</Link></span>}>
 								{props.locales.locales._language === 'en' ? artist.description_en : artist.description_fr}
             				</Truncate>
 

@@ -25,22 +25,19 @@ import _ from 'underscore'
 
 import socialSubscription from '../../subscriptions/socialSubscription'
 
-const padded = {
-    padding: 20,
-}
-
 const style = {
     objectFit: 'cover',
     width: 100,
     height: 100,
-    marginTop: 10,
+    marginTop: 5,
     borderRadius: 50,
     background: 'white',
 }
 
 const paperStyle = {
-  height: 120,
-  width: 120,
+  height: 110,
+  width: 110,
+  marginLeft: -10,
   marginTop: -70,
   textAlign: 'center',
   display: 'inline-block',
@@ -172,7 +169,7 @@ class Profile extends Component {
 
                             <Paper>
 
-                                <div style={{padding: 16, paddingBottom: 4, marginTop: 70}}>
+                                <div style={{padding: 16, paddingBottom: 4, marginTop: 60}}>
                                     <Paper style={paperStyle} zDepth={1} circle={true}>
                                         <img alt='...' style={style} src={user.profile_picture?user.profile_picture:''}/>
                                     </Paper>

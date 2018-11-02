@@ -183,7 +183,7 @@ class MainLayout extends Component {
   render() {
     const {currentUser, doLogout, children, location: {state: {notice} = {}}, muiTheme: {palette}} = this.props;
     return (
-      <Main style={{maxWidth: 800, margin: '0 auto'}}>
+      <Main style={{maxWidth: 840, margin: '0 auto'}}>
         <MainAppBar
           style={{background: '#F1F1F1', boxShadow: 'none', position: 'sticky', top: 0}}
           // style={{ background: 'white', boxShadow: 'none', position: 'sticky', top: 0}}
@@ -199,7 +199,7 @@ class MainLayout extends Component {
 
         ? 
         
-          <MainToolbar>
+          <MainToolbar style={{paddingRight:0}}>
             <ToolbarGroup>
               <MenuItem
                 containerElement={<Link to="/artists"/>}
