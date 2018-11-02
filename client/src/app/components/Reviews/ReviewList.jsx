@@ -14,7 +14,6 @@ class Review extends Component {
 		});
 	}
 
-		// sort:
 	render(){
 
 		const reviews = this.sort(this.props.reviews).reverse()
@@ -25,7 +24,7 @@ class Review extends Component {
 				return (
 					<ReviewListItem
 						onReviewSelect={this.props.onReviewSelect}
-						key={review.id}
+						key={review.id+Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5)}
 						match={this.props.match}
 						userId={this.props.user.user_id}
 						review={review} 

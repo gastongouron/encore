@@ -10,6 +10,9 @@ Mutations::DeleteReviewMutation = GraphQL::Relay::Mutation.define do
     review = Review.find(input[:id])
 
     artist = review.artist
+
+    user =  review.user
+    Schema.subscriptions.trigger("userWasChanged", {}, user )
     Schema.subscriptions.trigger("reviewWasAdded", {}, artist)
 
     review.destroy!

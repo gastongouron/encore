@@ -121,19 +121,15 @@ class Profile extends Component {
     }
  
     componentDidMount(){
-        console.log("COMPONENTDIDMOUNT")
         const ctx = this
-        console.log(this.props.client)
         this.state.observable.subscribe({
             next(data) {
                 console.log(ctx)
                 console.log(data)
                 if(data){
-                    console.log('DATAAA')
+                    console.log(data.userWasChanged)
                     ctx.props.setUserProfile(data.userWasChanged);
                     ctx.props.setUserReviews(data.userWasChanged.reviews)
-                    ctx.setState({ loading: false });
-
                 }
             },
             error(err) { console.error('err', err); },

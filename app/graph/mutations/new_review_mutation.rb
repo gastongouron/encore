@@ -11,9 +11,9 @@ Mutations::NewReviewMutation = GraphQL::Relay::Mutation.define do
 
   resolve(->(_, input, ctx){
     review = Review.create(input.to_h)
-    # set or remove most reviewed tag
-    # review.artist.most_reviewed
     artist = review.artist
+    user =  User.find(input.to_h["user_id"])
+    Schema.subscriptions.trigger("userWasChanged", {}, user )
     Schema.subscriptions.trigger("reviewWasAdded", {}, artist)
 
     review.save!
