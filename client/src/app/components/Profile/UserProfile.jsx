@@ -29,15 +29,14 @@ const style = {
     objectFit: 'cover',
     width: 100,
     height: 100,
-    marginTop: 5,
+    marginTop: 10,
     borderRadius: 50,
     background: 'white',
 }
 
 const paperStyle = {
-  height: 110,
-  width: 110,
-  marginLeft: -10,
+  height: 120,
+  width: 120,
   marginTop: -70,
   textAlign: 'center',
   display: 'inline-block',
@@ -169,10 +168,20 @@ class Profile extends Component {
 
                             <Paper>
 
-                                <div style={{padding: 16, paddingBottom: 4, marginTop: 60}}>
+                                <div style={{padding: 16, paddingBottom: 4, marginTop: 60, textAlign: 'center'}}>
                                     <Paper style={paperStyle} zDepth={1} circle={true}>
                                         <img alt='...' style={style} src={user.profile_picture?user.profile_picture:''}/>
                                     </Paper>
+
+                                    <h2 style={{marginTop:16, marginBottom: 0}}>
+                                        {user.display_name}
+                                        {/* strings.formatString(this.props.locales.locales.reviews, {username: user.display_name})*/}
+                                     </h2>
+                                    { user.email?user.email:'' }
+                                </div>
+
+                                <div style={{padding: 16, paddingBottom: 0}}>
+
                                     {
 
                                         this.onCurrentUserProfile() ? 
@@ -185,12 +194,7 @@ class Profile extends Component {
                                             onClick={ (e) => this.onClickFollow(e) }
                                             label={this.alreadyFollows() ? this.props.locales.locales.unfollow : this.props.locales.locales.follow}/> 
                                     }
-                                    <h2 style={{marginTop:16, marginBottom: 0}}>
-                                        {user.display_name}
-                                        {/* strings.formatString(this.props.locales.locales.reviews, {username: user.display_name})*/}
-                                     </h2>
                                     <Subheader style={{paddingLeft: 0}}>{ this.props.userProfile.userProfile !== null ? Object.keys(this.props.reviews.reviews).length + " experiences" : ""}</Subheader>
-                                    {/* user.email?user.email:'' */}
 
                                 </div>
 
