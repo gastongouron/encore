@@ -61,6 +61,9 @@ class CustomForm extends Component {
     this.props.setMedia(obj.public)
     this.setState({hiddenProgress: true})
     this.setState({hiddenError:true})
+
+    setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 100);
+
   }  
 
   onClickRemove(){
@@ -71,6 +74,7 @@ class CustomForm extends Component {
   }
 
   onSignedUrl(context, resp){
+    
     if(resp.status === "error" ){
       this.setState({error:resp.message})
       this.setState({hiddenError:false})
@@ -127,7 +131,6 @@ class CustomForm extends Component {
                <LinearProgress hidden={this.state.hiddenProgress} variant="determinate" value={this.state.progress} />
 
               </div>
-        
               <div>
                {isImage(this.props.formMedia) ? <img alt="" style={imageStyle} src={this.props.formMedia} /> : <ReactPlayer width='100%' height='auto' url={this.props.formMedia} controls={true} />}
                {
