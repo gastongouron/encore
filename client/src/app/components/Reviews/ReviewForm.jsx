@@ -15,6 +15,10 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close';
 // import Delete from 'material-ui/svg-icons/action/delete';
 import IconButton from 'material-ui/IconButton';
 
+const customContentStyle = {
+  width: '100%',
+  maxWidth: '460px',
+};
 
 class CustomForm extends Component {
 
@@ -101,6 +105,8 @@ class CustomForm extends Component {
 
     return (
            <Dialog
+            style={{paddingLeft: 20, paddingRight: 20}}
+            contentStyle={customContentStyle}
             open={this.props.onShow}
             title={
               <div>

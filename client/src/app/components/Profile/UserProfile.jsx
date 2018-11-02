@@ -16,10 +16,11 @@ import SocialList from './SocialList'
 
 import EncoreLoader from '../EncoreLoader'
 import Paper from 'material-ui/Paper'
-import strings from '../../locales/strings'
+// import strings from '../../locales/strings'
 import RaisedButton from 'material-ui/RaisedButton';
 import Grid from '@material-ui/core/Grid'
 import Divider from 'material-ui/Divider'
+import Subheader from 'material-ui/Subheader';
 import _ from 'underscore'
 
 const padded = {
@@ -28,10 +29,20 @@ const padded = {
 
 const style = {
     objectFit: 'cover',
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+    width: 100,
+    height: 100,
+    marginTop: 10,
+    borderRadius: 50,
+    background: 'white',
 }
+
+const paperStyle = {
+  height: 120,
+  width: 120,
+  marginTop: -70,
+  textAlign: 'center',
+  display: 'inline-block',
+};
 
 const inline = {
     display: 'inline-block'
@@ -129,8 +140,6 @@ class Profile extends Component {
     render() {
         const user = this.onCurrentUserProfile() ? this.props.userInfo : this.props.userProfile.userProfile
 
-        console.log(user)
-
         return (
             <div>
                 {this.state.loading ? <EncoreLoader /> : this.props.reviews.error ? <h1>Error...</h1> : 
@@ -140,33 +149,35 @@ class Profile extends Component {
 
                             <Paper>
 
-                                <div style={padded}>
-                                     <br />
+                                <div style={{padding: 16, paddingBottom: 4, marginTop: 70}}>
+                                    <Paper style={paperStyle} zDepth={1} circle={true}>
+                                        <img alt='...' style={style} src={user.profile_picture?user.profile_picture:''}/>
+                                    </Paper>
                                     {
 
                                         this.onCurrentUserProfile() ? 
                                         null
                                         :
-                                        <RaisedButton 
-                                            style={{float: 'right'}}
+                                        <RaisedButton
+                                            style={right}
+                                            default={this.alreadyFollows() ? true : false}
+                                            primary={!this.alreadyFollows() ? true : false}
                                             onClick={ (e) => this.onClickFollow(e) }
-                                            // onClick={ (e) => this.alreadyFollows(e) }
-                                            default={true}
-                                            label={this.alreadyFollows() ? "unfollow" : "follow"}/> 
+                                            label={this.alreadyFollows() ? this.props.locales.locales.unfollow : this.props.locales.locales.follow}/> 
                                     }
-                                    <img alt='...' style={style} src={user.profile_picture?user.profile_picture:''}/>
-                                    <h2 style={{marginTop:3}}>
+                                    <h2 style={{marginTop:16, marginBottom: 0}}>
                                         {user.display_name}
                                         {/* strings.formatString(this.props.locales.locales.reviews, {username: user.display_name})*/}
                                      </h2>
-                                    { this.props.userProfile.userProfile !== null ? Object.keys(this.props.reviews.reviews).length + " experiences" : ""}
+                                    <Subheader style={{paddingLeft: 0}}>{ this.props.userProfile.userProfile !== null ? Object.keys(this.props.reviews.reviews).length + " experiences" : ""}</Subheader>
                                     {/* user.email?user.email:'' */}
+
                                 </div>
 
                                 <Divider />
 
 
-                                    <div style={{textAlign: 'left'}}>
+                                    <div>
                                         <SocialList 
                                             followingUsers={this.props.userProfile.userProfile !== null ? this.props.userProfile.userProfile.following_users : undefined}
                                             followers={this.props.userProfile.userProfile !== null ? this.props.userProfile.userProfile.followers : undefined}/>

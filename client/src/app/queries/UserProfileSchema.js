@@ -9,6 +9,7 @@ const UserProfileQuery = (gql`
             id
             display_name
             profile_picture
+            locale
             followers {
                 id
                 display_name

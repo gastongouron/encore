@@ -3,14 +3,20 @@ import { connect } from 'react-redux'
 import {List, ListItem} from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import Subheader from 'material-ui/Subheader';
+import { Link } from 'react-router-dom'
 import _ from 'underscore'
 
+// import ActionGrade from 'material-ui/svg-icons/action/grade';
+// import ContentInbox from 'material-ui/svg-icons/content/inbox';
+// import ContentDrafts from 'material-ui/svg-icons/content/drafts';
+// import ContentSend from 'material-ui/svg-icons/content/send';
+// import Toggle from 'material-ui/Toggle';
 
-import ActionGrade from 'material-ui/svg-icons/action/grade';
-import ContentInbox from 'material-ui/svg-icons/content/inbox';
-import ContentDrafts from 'material-ui/svg-icons/content/drafts';
-import ContentSend from 'material-ui/svg-icons/content/send';
-import Toggle from 'material-ui/Toggle';
+const label = {
+	color: "rgba(33, 33, 33, 0.54)",
+	fontSize: '14px',
+	fontWeight: '500'
+}
 
 class SocialList extends Component {
 
@@ -36,45 +42,47 @@ class SocialList extends Component {
 
 			const followerItems = followers.map((follower) => {
 				return (
-				      <ListItem
-				      href={"/user/" + follower.id}
-			        key={follower.id}
-			        primaryText={follower.display_name}
-			        leftAvatar={<Avatar src={follower.profile_picture} />}
-			      />
+					<ListItem key={follower.id} innerDivStyle={{ textDecoration: 'none', padding: 0, margin: 0}}>
+						<Link to={"/user/" + follower.id}  style={{ textDecoration: 'none' }}>
+					      <ListItem
+					        primaryText={follower.display_name}
+					        leftAvatar={<Avatar src={follower.profile_picture} />}
+					      />
+						</Link>
+					</ListItem>
 				) 
 			})
 
 			const followingUserItems = followingUsers.map((followingUser) => {
 				return (
-				<ListItem
-				    href={"/user/" + followingUser.id}
-			        key={followingUser.id}
-			        primaryText={followingUser.display_name}
-			        leftAvatar={<Avatar src={followingUser.profile_picture} />}
-			      />
+					<ListItem key={followingUser.id} innerDivStyle={{ textDecoration: 'none', padding: 0, margin: 0}}>
+						<Link to={"/user/" + followingUser.id}  style={{ textDecoration: 'none' }}>
+					      <ListItem
+					        primaryText={followingUser.display_name}
+					        leftAvatar={<Avatar src={followingUser.profile_picture} />}
+					      />
+						</Link>
+					</ListItem>
 				) 
 			})
 
 			return (
-				<div>
-					<div>
-						<List>
+
+						<List style={{padding: 0}}>
 				            <ListItem
-				              primaryText={followersCount > 1 ? followersCount + " " + this.props.locales.locales.followers : followersCount + " " + this.props.locales.locales.follower }
+				              primaryText={<span style={label}>{followersCount > 1 ? followersCount + " " + this.props.locales.locales.followers : followersCount + " " + this.props.locales.locales.follower}</span> }
 				              initiallyOpen={false}
 				              primaryTogglesNestedList={true}
 				              nestedItems={followerItems}
 				            />
 				            <ListItem
-				              primaryText={followingUsersCount > 1 ? followingUsersCount + " " + this.props.locales.locales.followings : followingUsersCount + " " + this.props.locales.locales.following }
+				              primaryText={<span style={label}>{followingUsersCount > 1 ? followingUsersCount + " " + this.props.locales.locales.followings : followingUsersCount + " " + this.props.locales.locales.following}</span> }
 				              initiallyOpen={false}
 				              primaryTogglesNestedList={true}
 				              nestedItems={followingUserItems}
 				            />
 				          </List>
-					</div>
-				</div>
+
 			)
 		} else {
 			return null

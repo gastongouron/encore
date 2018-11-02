@@ -12,6 +12,8 @@ import theme from '../../theme'
 import Divider from 'material-ui/Divider';
 import Avatar from 'material-ui/Avatar'
 import {List, ListItem} from 'material-ui/List'
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentEdit from 'material-ui/svg-icons/image/edit';
 
 const ReviewListItem = (props) => {
 
@@ -63,39 +65,26 @@ const ReviewListItem = (props) => {
 
 
 				<div style={header}>
-				
-					{ !onUserProfile ? 
-						<div style={{minWidth:'100%'}}>
-					      <ListItem
-						      href={'/user/'+ review.user_id}
-					          key={review.id}
-					          primaryText={review.author_display_name}
-					          secondaryText={review.created_at !== undefined ?
-								<span style={{color: 'grey', fontSize: '0.77em'}}>
-									{ review.created_at === review.updated_at ? props.locales.locales.created_at : props.locales.locales.updated_at}
-									<TimeAgo date={review.created_at === review.updated_at ? review.created_at : review.updated_at} formatter={props.locales.locales._language === 'en' ? undefined : formatter}/>
-								</span>
-							: 
-								<span style={{color: 'grey', fontSize: '0.77em'}}>
-									{props.locales.locales.justNow}
-								</span>
-					          }
-					          rightIcon={<div style={right}> {review.score} </div>}
-					          leftAvatar={<Avatar src={review.author_profile_picture} />}/>
-
-						</div>
-					: 	
-						<div style={{minWidth:'100%'}}>
-					      <ListItem
-						      href={'/artists/'+ review.artist_id}
-					          key={review.id}
-					          primaryText={review.artist_name}
-					          rightIcon={<div style={right}> {review.score} </div>}
-					          leftAvatar={<Avatar src={review.artist_profile_picture} />}/>
-
-						</div>
-					}
-
+					<div style={{minWidth:'100%'}}>
+					<ListItem key={review.id} innerDivStyle={{ textDecoration: 'none', padding: 0, margin: 0}}>
+						<Link to={onUserProfile ? '/artists/'+ review.artist_id : '/user/'+ review.user_id}  style={{ textDecoration: 'none' }}>
+				      <ListItem
+				          primaryText={onUserProfile ? review.artist_name : review.author_display_name}
+				          secondaryText={review.created_at !== undefined ?
+							<span style={{color: 'grey', fontSize: '0.77em'}}>
+								{ review.created_at === review.updated_at ? props.locales.locales.created_at : props.locales.locales.updated_at}
+								<TimeAgo date={review.created_at === review.updated_at ? review.created_at : review.updated_at} formatter={props.locales.locales._language === 'en' ? undefined : formatter}/>
+							</span>
+						  : 
+							<span style={{color: 'grey', fontSize: '0.77em'}}>
+								{props.locales.locales.justNow}
+							</span>
+				          }
+				          rightIcon={<div style={right}> {review.score} </div>}
+				          leftAvatar={<Avatar src={onUserProfile ? review.artist_profile_picture : review.author_profile_picture} />}/>
+				         </Link>
+				       </ListItem>
+					</div>
 				</div>
 
 				<div>
@@ -108,14 +97,12 @@ const ReviewListItem = (props) => {
 				</div>
 
 				<div style={body}>
-					<p>{review.body}</p>
-
-				</div>
-
-				<div>
                     { belongsToUser && onUserProfile ? 
 						<div  style={header}>
+
+
 							<RaisedButton 
+								style={{float: 'right', marginTop: -10}}
 								onClick={ () => onReviewSelect(review) }
 								default={true}
 								label={props.locales.locales.edit}/> 
@@ -123,6 +110,8 @@ const ReviewListItem = (props) => {
                     : 
                     	null
                    	}
+					<p>{review.body}</p>
+
 				</div>
 
 

@@ -108,6 +108,7 @@ class MainLayout extends Component {
        width: 0,
        height: 0
     }
+
     this.props.setLocales(strings)
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
@@ -121,7 +122,7 @@ class MainLayout extends Component {
       // console.log('meeee')      
       // this.updateWindowDimensions();
       window.removeEventListener('resize', this.updateWindowDimensions);
-      console.log(strings.getLanguage())
+      // console.log(strings.getLanguage())
       strings.setLanguage(strings.getLanguage()) 
   }
 
@@ -158,16 +159,19 @@ class MainLayout extends Component {
   }
 
   onSwitchLanguage = (event) => {
+    
     let lang = (strings.getLanguage() === 'en') ? 'fr' : 'en'
-    if (!Object.keys(this.props.currentUser).length === 0) {
+    // console.log(!Object.keys(this.props.currentUser).length === 0)
+    if (this.props.currentUser) {
       this.props.client.mutate({mutation: updateUserMutation, variables: {user_id: this.props.currentUser.user_id, locale: lang}}).then(
         (res) => {
-          // console.log(res.data.editUser.user.locale)
+          console.log(res.data)
         },
         (err) => {
           // console.log('HANDLE ERROR!!!')
         })
       }
+      console.log(lang)
     strings.setLanguage(lang);
     initDevise()
     this.props.setLocales(strings)
