@@ -98,7 +98,7 @@ class CustomForm extends Component {
         height: '30%',
     }
 
-    const create = [ <RaisedButton style={style} label={this.props.locales.locales.save} primary={true} keyboardFocused={true} onClick={this.props.onClickSave}/>]
+    const create = [ <RaisedButton label={this.props.locales.locales.save} fullWidth={true} primary={true} keyboardFocused={true} onClick={this.props.onClickSave}/>]
     const update = [ <RaisedButton style={style} label={this.props.locales.locales.update} primary={true} keyboardFocused={true} onClick={this.props.onClickUpdate}/>,
                      <RaisedButton style={style} label={this.props.locales.locales.delete} secondary={true} onClick={this.props.onClickDelete}/>]
 

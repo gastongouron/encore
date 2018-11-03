@@ -102,7 +102,7 @@ class Profile extends Component {
         console.log(this.props.match.params.id)
 
         // let observable = this.props.client.subscribe({ query: socialSubscription, variables: {id: this.props.match.params.id } })
-        let observable = this.props.client.subscribe({ query: socialSubscription })
+        let observable = this.props.client.subscribe({ query: socialSubscription, variables: {user_id: this.props.match.params.id} })
         this.setState({observable: observable})
 
         this.props.client.networkInterface.query({query: UserProfileQuery, variables: {id: this.props.match.params.id }, fetchPolicy: 'network-only'})
@@ -124,10 +124,10 @@ class Profile extends Component {
         this.state.observable.subscribe({
             next(data) {
                 if(data){
-                    if (Number(ctx.props.match.params.id)===Number(data.userWasChanged.id)){
+                    // if (Number(ctx.props.match.params.id)===Number(data.userWasChanged.id)){
                         ctx.props.setUserProfile(data.userWasChanged);
                         ctx.props.setUserReviews(data.userWasChanged.reviews)
-                    }
+                    // }
                 }
             },
             error(err) { console.error('err', err); },

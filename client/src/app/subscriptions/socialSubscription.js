@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 const profileSubscription = (gql`
-    subscription reviewWasAdded {
-    	userWasChanged {
+    subscription reviewWasAdded($user_id: ID!) {
+    	userWasChanged(user_id: $user_id) {
             email
             first_name
             last_name

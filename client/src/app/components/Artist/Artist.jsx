@@ -65,8 +65,8 @@ class ArtistDetail extends Component {
     componentWillMount(){
         this.props.loadingArtistDetail();
 
-        // let observable = this.props.client.subscribe({ query: reviewSubscription, variables: {user_id: this.props.userInfo.user_id} })
-        let observable = this.props.client.subscribe({ query: reviewSubscription })
+        let observable = this.props.client.subscribe({ query: reviewSubscription, variables: {artist_id: this.props.match.params.id} })
+        // let observable = this.props.client.subscribe({ query: reviewSubscription })
         this.setState({observable: observable})
 
         this.props.client.query({query: artistDetailQuery, variables: {id: this.props.match.params.id}, fetchPolicy: 'network-only'}).then(
@@ -84,12 +84,12 @@ class ArtistDetail extends Component {
         this.state.observable.subscribe({
             next(data) {
                 if(data){
-                    console.log(Number(ctx.props.match.params.id))
-                    console.log(Number(data.reviewWasAdded.id))
-                    if(Number(ctx.props.match.params.id)===Number(data.reviewWasAdded.id)){
+                    // console.log(Number(ctx.props.match.params.id))
+                    // console.log(Number(data.reviewWasAdded.id))
+                    // if(Number(ctx.props.match.params.id)===Number(data.reviewWasAdded.id)){
                         ctx.props.setArtistDetail(data.reviewWasAdded);
                         ctx.checkEnableNewReview(data.reviewWasAdded.reviews)
-                    }
+                    // }
                     // if (Number(ctx.props.match.params.id)===Number(data.userWasChanged.id)){
                     // }
                 }

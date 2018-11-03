@@ -8,9 +8,9 @@ class GraphqlChannel < ApplicationCable::Channel
     query = data["query"]
     variables = ensure_hash(data["variables"])
     operation_name = data["operationName"]
+
     context = {
       current_user: current_user,
-      # Make sure the channel is in the context
       channel: self,
     }
 

@@ -13,8 +13,8 @@ Mutations::NewReviewMutation = GraphQL::Relay::Mutation.define do
     review = Review.create(input.to_h)
     artist = review.artist
     user =  User.find(input.to_h["user_id"])
-    Schema.subscriptions.trigger("userWasChanged", {}, user )
-    Schema.subscriptions.trigger("reviewWasAdded", {}, artist)
+    # Schema.subscriptions.trigger("userWasChanged", {user_id: user.id}, user )
+    Schema.subscriptions.trigger("reviewWasAdded", {artist_id: artist.id}, artist)
 
     review.save!
     { review: review }

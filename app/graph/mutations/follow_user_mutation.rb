@@ -14,10 +14,10 @@ Mutations::FollowUserMutation = GraphQL::Relay::Mutation.define do
 
     unless followee.followed_by?(user)
       user.follow(followee)
-      Schema.subscriptions.trigger("userWasChanged", {}, followee)
+      Schema.subscriptions.trigger("userWasChanged", {user_id: followee.id}, followee)
     else
       user.stop_following(followee)
-      Schema.subscriptions.trigger("userWasChanged", {}, followee)
+      Schema.subscriptions.trigger("userWasChanged", {user_id: followee.id}, followee)
     end
     { user: followee }
   }

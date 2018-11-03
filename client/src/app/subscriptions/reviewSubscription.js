@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 const reviewSubscription = (gql`
-    subscription reviewWasAdded {
-    	reviewWasAdded {
+    subscription reviewWasAdded($artist_id: ID!) {
+    	reviewWasAdded(artist_id: $artist_id) {
 			id
 	        name
 			description_en

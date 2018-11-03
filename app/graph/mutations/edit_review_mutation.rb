@@ -13,8 +13,9 @@ Mutations::EditReviewMutation = GraphQL::Relay::Mutation.define do
     review.update!(input.to_h)
     artist = review.artist
     user = review.user
-    Schema.subscriptions.trigger("userWasChanged", {}, user )
-    Schema.subscriptions.trigger("reviewWasAdded", {}, artist)
+
+    # Schema.subscriptions.trigger("userWasChanged", {user_id: user.id}, user )
+    Schema.subscriptions.trigger("reviewWasAdded", {artist_id: artist.id}, artist)
 
     { review: review }
 
