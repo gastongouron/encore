@@ -92,6 +92,7 @@ class Profile extends Component {
             isUpdate:false,
             followers: null,
             following_users: null,
+            disabled: false,
         };
     }
 
@@ -132,9 +133,11 @@ class Profile extends Component {
     }
 
     onClickFollow(){
+        this.setState({disabled: true})
         this.props.client.mutate({mutation: followUserMutation, variables: {follower_id: this.props.userInfo.user_id, followee_id: this.props.userProfile.userProfile.id}}).then(
         (res) => {
               this.props.setUserProfile(res.data.followUser.user)
+              this.setState({disabled: false})
               // this.setState({ loading: false });
         },
         (err) => { }
@@ -186,6 +189,7 @@ class Profile extends Component {
                                         :
                                         <RaisedButton
                                             style={right}
+                                            disabled={this.state.disabled}
                                             default={this.alreadyFollows() ? true : false}
                                             primary={!this.alreadyFollows() ? true : false}
                                             onClick={ (e) => this.onClickFollow(e) }
