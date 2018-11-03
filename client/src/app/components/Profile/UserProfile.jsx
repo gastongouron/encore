@@ -120,14 +120,11 @@ class Profile extends Component {
  
     componentDidMount(){
         const ctx = this
-        console.log('HERE?')
         this.state.observable.subscribe({
             next(data) {
                 if(data){
-                    // if (Number(ctx.props.match.params.id)===Number(data.userWasChanged.id)){
-                        ctx.props.setUserProfile(data.userWasChanged);
-                        ctx.props.setUserReviews(data.userWasChanged.reviews)
-                    // }
+                    ctx.props.setUserProfile(data.userWasChanged);
+                    ctx.props.setUserReviews(data.userWasChanged.reviews)
                 }
             },
             error(err) { console.error('err', err); },
