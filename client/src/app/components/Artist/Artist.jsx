@@ -55,6 +55,8 @@ class ArtistDetail extends Component {
             enabledButton: true,
             review:null,
             isUpdate:false,
+            observable: null,
+            subscription: null,
         };
     };
     
@@ -79,27 +81,37 @@ class ArtistDetail extends Component {
         );
     }
 
+    // unsubscribe(){
+    //     this.state.observable.subscribe((data) => {});
+    // }
+
     componentDidMount(){
         const ctx = this
-        this.state.observable.subscribe({
+        console.log('HELLO Im MOUNTING')
+        // const id = this.props.match.params.id
+
+        const subscription = this.state.observable.subscribe({
             next(data) {
                 if(data){
-                    // console.log(Number(ctx.props.match.params.id))
-                    // console.log(Number(data.reviewWasAdded.id))
-                    // if(Number(ctx.props.match.params.id)===Number(data.reviewWasAdded.id)){
+                    // console.log('ID???', id)
+                    // UGLY FIX
+                    // if(Number(id)===Number(data.reviewWasAdded.id)){
                         ctx.props.setArtistDetail(data.reviewWasAdded);
                         ctx.checkEnableNewReview(data.reviewWasAdded.reviews)
-                    // }
-                    // if (Number(ctx.props.match.params.id)===Number(data.userWasChanged.id)){
                     // }
                 }
             },
             error(err) { console.error('err', err); },
           });
+        this.setState({subscription: subscription})
     }
-    
+
     isConnected() {
         return this.props.userInfo.isLoggedIn ? true : false
+    }
+
+    componentWillUnmount(){
+        this.state.subscription.unsubscribe()
     }
 
     toggleEditFromArtist(){

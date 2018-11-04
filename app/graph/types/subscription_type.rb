@@ -3,7 +3,7 @@ Types::SubscriptionType = GraphQL::ObjectType.define do
 
   field :userWasChanged, Types::UserType do
 	argument 'user_id', !types.ID
-	subscription_scope :user_id
+	# subscription_scope :user_id
 	resolve ->(obj, args, ctx) {
 		obj
     }
@@ -11,7 +11,7 @@ Types::SubscriptionType = GraphQL::ObjectType.define do
 
   field :reviewWasAdded, Types::ArtistType do
 	argument 'artist_id', !types.ID
-	subscription_scope :artist_id
+	# subscription_scope :artist_id
 	resolve ->(obj, args, ctx) {
 		obj
     }

@@ -93,6 +93,8 @@ class Profile extends Component {
             followers: null,
             following_users: null,
             disabled: false,
+            observable: null,
+            subscription: null,
         };
     }
 
@@ -100,9 +102,6 @@ class Profile extends Component {
         this.props.loadingUserReviews();
         this.props.loadingUserProfile();
 
-        console.log(this.props.match.params.id)
-
-        // let observable = this.props.client.subscribe({ query: socialSubscription, variables: {id: this.props.match.params.id } })
         let observable = this.props.client.subscribe({ query: socialSubscription, variables: {user_id: this.props.match.params.id} })
         this.setState({observable: observable})
 
@@ -121,7 +120,7 @@ class Profile extends Component {
  
     componentDidMount(){
         const ctx = this
-        this.state.observable.subscribe({
+        const subscription = this.state.observable.subscribe({
             next(data) {
                 if(data){
                     ctx.props.setUserProfile(data.userWasChanged);
@@ -130,6 +129,11 @@ class Profile extends Component {
             },
             error(err) { console.error('err', err); },
           });
+        this.setState({subscription: subscription})
+    }
+
+    componentWillUnmount(){
+        this.state.subscription.unsubscribe()
     }
 
     onClickFollow(){
@@ -138,7 +142,6 @@ class Profile extends Component {
         (res) => {
               this.props.setUserProfile(res.data.followUser.user)
               this.setState({disabled: false})
-              // this.setState({ loading: false });
         },
         (err) => { }
         );
@@ -162,96 +165,78 @@ class Profile extends Component {
         return (
             <div>
                 {this.state.loading ? <EncoreLoader /> : this.props.reviews.error ? <h1>Error...</h1> : 
-
                 <div>                
-
-
-                            <Paper>
-
-                                <div style={{padding: 16, paddingBottom: 4, marginTop: 60, textAlign: 'center'}}>
-                                    <Paper style={paperStyle} zDepth={1} circle={true}>
-                                        <img alt='...' style={style} src={user.profile_picture?user.profile_picture:''}/>
-                                    </Paper>
-
-                                    <h2 style={{marginTop:16, marginBottom: 0}}>
-                                        {user.display_name}
-                                        {/* strings.formatString(this.props.locales.locales.reviews, {username: user.display_name})*/}
-                                     </h2>
-                                    { user.email?user.email:'' }
-                                </div>
-
-                                <div style={{padding: 16, paddingBottom: 0}}>
-
-                                    {
-
-                                        this.onCurrentUserProfile() ? 
-                                        null
-                                        :
-                                        <RaisedButton
-                                            style={right}
-                                            disabled={this.state.disabled}
-                                            default={this.alreadyFollows() ? true : false}
-                                            primary={!this.alreadyFollows() ? true : false}
-                                            onClick={ (e) => this.onClickFollow(e) }
-                                            label={this.alreadyFollows() ? this.props.locales.locales.unfollow : this.props.locales.locales.follow}/> 
-                                    }
-                                    <Subheader style={{paddingLeft: 0}}>{ this.props.userProfile.userProfile !== null ? Object.keys(this.props.reviews.reviews).length + " experiences" : ""}</Subheader>
-
-                                </div>
-
-                                <Divider />
-
-
-                                    <div>
-                                        <SocialList 
-                                            followingUsers={this.props.userProfile.userProfile !== null ? this.props.userProfile.userProfile.following_users : undefined}
-                                            followers={this.props.userProfile.userProfile !== null ? this.props.userProfile.userProfile.followers : undefined}/>
-                                    </div>
-
+                    <Paper>
+                        <div style={{padding: 16, paddingBottom: 4, marginTop: 60, textAlign: 'center'}}>
+                            <Paper style={paperStyle} zDepth={1} circle={true}>
+                                <img alt='...' style={style} src={user.profile_picture?user.profile_picture:''}/>
                             </Paper>
-                            <br />
-
+                            <h2 style={{marginTop:16, marginBottom: 0}}>
+                                {user.display_name}
+                                {/* strings.formatString(this.props.locales.locales.reviews, {username: user.display_name})*/}
+                             </h2>
+                            { user.email?user.email:'' }
+                        </div>
+                        <div style={{padding: 16, paddingBottom: 0}}>
+                            {
+                                this.onCurrentUserProfile() ? 
+                                null
+                                :
+                                <RaisedButton
+                                    style={right}
+                                    disabled={this.state.disabled}
+                                    default={this.alreadyFollows() ? true : false}
+                                    primary={!this.alreadyFollows() ? true : false}
+                                    onClick={ (e) => this.onClickFollow(e) }
+                                    label={this.alreadyFollows() ? this.props.locales.locales.unfollow : this.props.locales.locales.follow}/> 
+                            }
+                            <Subheader style={{paddingLeft: 0}}>{ this.props.userProfile.userProfile !== null ? Object.keys(this.props.reviews.reviews).length + " experiences" : ""}</Subheader>
+                        </div>
+                        <Divider />
+                        <div>
+                            <SocialList 
+                                followingUsers={this.props.userProfile.userProfile !== null ? this.props.userProfile.userProfile.following_users : undefined}
+                                followers={this.props.userProfile.userProfile !== null ? this.props.userProfile.userProfile.followers : undefined}/>
+                        </div>
+                    </Paper>
+                    <br />
+                    <div>
+                        <div>
                             <div>
-                                <div>
-                                    <div>
-                                        <ReviewList
-                                            current={this.onCurrentUserProfile()}
-                                            onReviewSelect={selectedReview =>this.show(selectedReview, this)}
-                                            reviews={this.props.reviews.reviews}
-                                            user={this.props.userInfo}
-                                            match={this.props.match.url}
-                                        />
-                                    </div>
-                                </div>
-                                <div>
-                                    <form>
-                                    <ReviewForm
-                                        isUpdate={this.state.isUpdate}
-                                        onShow={this.state.showModal}
-                                        onHide={(e) => this.close(this)}
-                                        editable={true}
-                                        formTitle={this.state.review!=null?this.state.review.artist_name:''}
-                                        formValue={this.state.review!==null?this.state.review.body:''}
-                                        formScore={this.state.review!==null?this.state.review.score:''}
-                                        formMedia={this.state.review!=null?this.state.review.media:null}
-                                        setBody={(e)=>this.body(e, this)}
-                                        setScore={(value)=>this.score(value, this)}
-                                        setMedia={(value)=>this.media(value, this)}
-                                        unsetMedia={(value) => this.removeMedia(this)}
-                                        onClickDelete={(e)=>this.delete(e, this)}
-                                        onClickUpdate={(e)=>this.update(e, this)}
-                                        onClickClose={(e) => this.close(this)}
-                                    />
-                                    </form>
-                                </div>
+                                <ReviewList
+                                    current={this.onCurrentUserProfile()}
+                                    onReviewSelect={selectedReview =>this.show(selectedReview, this)}
+                                    reviews={this.props.reviews.reviews}
+                                    user={this.props.userInfo}
+                                    match={this.props.match.url}
+                                />
                             </div>
-
-                    
-            </div>
-
+                        </div>
+                        <div>
+                            <form>
+                            <ReviewForm
+                                isUpdate={this.state.isUpdate}
+                                onShow={this.state.showModal}
+                                onHide={(e) => this.close(this)}
+                                editable={true}
+                                formTitle={this.state.review!=null?this.state.review.artist_name:''}
+                                formValue={this.state.review!==null?this.state.review.body:''}
+                                formScore={this.state.review!==null?this.state.review.score:''}
+                                formMedia={this.state.review!=null?this.state.review.media:null}
+                                setBody={(e)=>this.body(e, this)}
+                                setScore={(value)=>this.score(value, this)}
+                                setMedia={(value)=>this.media(value, this)}
+                                unsetMedia={(value) => this.removeMedia(this)}
+                                onClickDelete={(e)=>this.delete(e, this)}
+                                onClickUpdate={(e)=>this.update(e, this)}
+                                onClickClose={(e) => this.close(this)}
+                            />
+                            </form>
+                        </div>
+                    </div>
+                </div>
             }
         </div>
-
         )
     }
 }
