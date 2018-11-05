@@ -13,6 +13,9 @@ import { setLocales } from '../app/actions/locales'
 import { initDevise } from '../app/devisesetup'
 import { StyledFooter } from '../shared'
 import updateUserMutation from '../app/mutations/updateUser'
+import Badge from 'material-ui/Badge';
+import NotificationsIcon from 'material-ui/svg-icons/social/notifications'
+import IconButton from 'material-ui/IconButton'
 
 const MainAppBar = styled(AppBar)`
   &:hover {
@@ -168,10 +171,9 @@ class MainLayout extends Component {
           console.log(res.data)
         },
         (err) => {
-          // console.log('HANDLE ERROR!!!')
+          console.log('Handle this error, N@W!')
         })
       }
-      console.log(lang)
     strings.setLanguage(lang);
     initDevise()
     this.props.setLocales(strings)
@@ -187,8 +189,20 @@ class MainLayout extends Component {
         <MainAppBar
           style={{background: '#F1F1F1', boxShadow: 'none', position: 'sticky', top: 0}}
           // style={{ background: 'white', boxShadow: 'none', position: 'sticky', top: 0}}
-          showMenuIconButton={this.state.width > 500 ? false : true}
-          title={<b>encore!</b>}
+          showMenuIconButton={ this.props.currentUser.isLoggedIn && (this.state.width < 500) ? true : false}
+          title={<div>
+                  <b>encore!</b>
+                  { 1 > 0 ? 
+                    <Badge
+                    badgeContent={1}
+                    secondary={true}
+                    badgeStyle={{top: 0, right: 8}}
+                    />
+                  : 
+                    null
+                  }
+
+                </div>}
           titleStyle={{fontSize: 28, fontWeight: 900}}
           onTitleTouchTap={this.goHome}
           onLeftIconButtonTouchTap={this.handleToggle}
@@ -196,11 +210,11 @@ class MainLayout extends Component {
 
         {
           this.state.width > 500 
-
         ? 
         
           <MainToolbar style={{paddingRight:0}}>
             <ToolbarGroup>
+
               <MenuItem
                 containerElement={<Link to="/artists"/>}
                 primaryText={strings.artists}
@@ -219,21 +233,19 @@ class MainLayout extends Component {
             </ToolbarGroup>
           </MainToolbar>        
         : 
-        
+         
+         this.props.currentUser.isLoggedIn 
+
+         ?
         <Drawer open={this.state.open} docked={false} onRequestChange={(e) => this.closeDrawer(e)}>
           <MenuItem 
             onClick={this.drawerToggleHome}
             primaryText="Hot"
             />
-            {this.props.currentUser.isLoggedIn ? 
-              <MenuItem
-                onClick={this.drawerToggleProfile}
-                primaryText={currentUser.first_name || currentUser.email}
-              />
-            :
-              null
-            }
-
+          <MenuItem
+            onClick={this.drawerToggleProfile}
+            primaryText={currentUser.first_name || currentUser.email}
+          />
           <MenuItem
             onClick={this.drawerToggleArtists}
             primaryText={strings.artists}
@@ -249,6 +261,8 @@ class MainLayout extends Component {
          }
         </Drawer> 
 
+         :
+          null
         }
         </MainAppBar>
         <MainContainer style={{margin: '0 auto'}}> 
@@ -257,15 +271,14 @@ class MainLayout extends Component {
           {notice && <Notice>{notice}</Notice>}
           {children}
         </MainContainer>
-          {/* 
+
           {currentUser.isLoggedIn ? 
             null
           :
           <StyledFooter>
-          { this.props.locales ? <Link to='/policy'>{this.props.locales.locales.policy.link}</Link> : undefined}
-          <Link style={{float:'left'}} to='/policy'>policy</Link> 
+          { this.props.locales.locales.policy != undefined ? <Link to='/policy'>{this.props.locales.locales.policy.link}</Link> : undefined}
           </StyledFooter>
-          */}
+          }
           
       </Main>
     );

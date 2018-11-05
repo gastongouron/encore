@@ -13,5 +13,6 @@ Types::UserType = GraphQL::ObjectType.define do
   field :artists, types[Types::ArtistType]
   field :followers, types[Types::UserType]
   field :following_users, types[Types::UserType]
+  field :notifications, types[Types::NotificationType]
 
 end
