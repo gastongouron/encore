@@ -6,11 +6,11 @@ Types::NotificationType = GraphQL::ObjectType.define do
   field :user_id, !types.ID
   field :kind, !types.String
   field :read, !types.String
-  field :follower_display_name, !types.String
-  field :artist_name, !types.String
-  field :author_display_name, !types.String
+  field :follower_display_name, types.String
+  field :artist_name, types.String
+  field :author_display_name, types.String
   field :created_at, !types.String
-  field :updated_at, !types.String
+  field :updated_at, types.String
 
   field :user, types[Types::UserType]
 

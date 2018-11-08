@@ -1,5 +1,5 @@
 import React from 'react';
-
+//  todo use connect and translate this
 const NotFound = () => {
   return (
     <div>

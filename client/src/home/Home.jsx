@@ -5,6 +5,7 @@ import { ViewContainer } from '../shared';
 import { initLocales } from '../app/actions/locales'
 import { initArtists } from '../app/actions/artists'
 import { initUserReviews } from '../app/actions/reviews'
+import Notifications from '../app/components/Notifications/notifications'
 
 const Home = ({currentUser, locales, auth: {AuthLinks}, initLocales, initArtists, initMyReviews}) => {
 
@@ -12,6 +13,7 @@ const Home = ({currentUser, locales, auth: {AuthLinks}, initLocales, initArtists
     <div>
       <ViewContainer>
         <h1>{locales.locales.welcome}</h1>
+        <Notifications userId={currentUser.user_id}/>
         <AuthLinks />
       </ViewContainer>
     </div>

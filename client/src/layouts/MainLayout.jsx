@@ -76,7 +76,7 @@ class UserMenuItem extends Component {
             targetOrigin={{horizontal: 'left', vertical: 'top'}}
             onRequestClose={this.handleRequestClose}
           >
-            <Menu>
+            <Menu style={{padding: '0px'}}>
               <MenuItem primaryText={strings.profile}
                 containerElement={<Link to={"/user/" + currentUser.user_id}/>
               }
