@@ -14,10 +14,21 @@ Mutations::FollowUserMutation = GraphQL::Relay::Mutation.define do
 
     unless followee.followed_by?(user)
       user.follow(followee)
-      # create a new notification for the use who's been followed
+      Notification.create(
+        kind: 'follow',
+        user_id: followee.id,
+        follower_display_name: user.display_name
+      )
+      Schema.subscriptions.trigger("notificationsTicker", {user_id: followee.id}, followee)      
       Schema.subscriptions.trigger("userWasChanged", {user_id: followee.id}, followee)
     else
       user.stop_following(followee)
+      Notification.create(
+        kind: 'unfollow',
+        user_id: followee.id,
+        follower_display_name: user.display_name
+      )
+      Schema.subscriptions.trigger("notificationsTicker", {user_id: followee.id}, followee)      
       Schema.subscriptions.trigger("userWasChanged", {user_id: followee.id}, followee)
     end
     { user: followee }

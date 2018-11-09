@@ -1,11 +1,10 @@
 import gql from 'graphql-tag';
 
-const UserNotificationsQuery = (gql`
-    query UserNotificationsQuery($id: ID!) {
-	    user(id: $id) {
+const notificationsSubscription = (gql`
+    subscription notificationsTicker($user_id: ID!) {
+    	notificationsTicker(user_id: $user_id) {
             id
-            locale
-            notifications {
+			notifications {
                 id
                 kind
                 read
@@ -13,9 +12,9 @@ const UserNotificationsQuery = (gql`
                 artist_name
                 author_display_name
                 created_at
-            }
-	    }
+    		}
+    	}
     }
 `);
 
-export default UserNotificationsQuery
+export default notificationsSubscription;

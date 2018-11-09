@@ -67,6 +67,7 @@ const translations = {
       p3:"Nous ne partageons pas vos informations personnelles avec des tiers, sauf si requis par la loi. Nous ne conserverons ces informations que le temps nécessaire pour vous fournir un service",
       p4:"Nous ne stockons pas vos informations personnelles sur nos serveurs, sauf si cela est nécessaire pour vous fournir un service. Ce que nous stockons, nous le protégerons par des moyens commercialement acceptables afin de protéger vos informations personnelles contre la perte ou le vol, ainsi que contre les attaques non autorisées. accès, divulgation, copie, utilisation ou modification.!)",
    },
+   notFound: "Désolé, impossible de mettre la main sur ce que vous cherchez...",
 
  },
  en:{
@@ -135,7 +136,7 @@ const translations = {
       p3:"We don’t share your personal information with third-parties, except where required by law. We will only retain personal information for as long as necessary to provide you with a service",
       p4:"We don’t store your personal information on our servers unless it’s required for providing a service to you. What we store, we’ll protect within commercially acceptable means to protect your personal information from loss or theft, as well as unauthorized access, disclosure, copying, use or modification.!)",
    },
-
+   notFound: "Sorry, we can't find what you're looking for...",
  }
 }
 const strings = new LocalizedStrings(translations);

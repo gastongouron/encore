@@ -2,68 +2,89 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { withApollo } from 'react-apollo'
 import UserNotificationsQuery from '../../queries/UserNotificationsSchema'
+import readNotifications from '../../mutations/readNotifications'
+
+import { initUserNotifications, loadingUserNotifications, failedUserNotifications, setUserNotifications } from '../../actions/notifications'
+import NotificationList from './notificationList'
+import notificationsSubscription from '../../subscriptions/notificationsSubscription'
 
 class Notifications extends Component {
 
 	constructor(props){
 		super(props)
-		console.log(props)
-		// INIT WITH USER_ID
-		// do the query thing for notifications
-		// display notifications
 	}
 
     componentWillMount(){
-        // this.props.loadingUserProfile();
-        // let observable = this.props.client.subscribe({ query: socialSubscription, variables: {user_id: this.props.match.params.id} })
-        // this.setState({observable: observable})
+        this.props.loadingUserNotifications();
+
+	    let observable = this.props.client.subscribe({ query: notificationsSubscription, variables: {user_id: this.props.userId}})
+	    this.setState({observable: observable})
 
         this.props.client.networkInterface.query({query: UserNotificationsQuery, variables: {id: this.props.userId }, fetchPolicy: 'network-only'})
         .then(
             (res) => {
             	console.log(res)
-                // this.props.setUserReviews(res.data.user.reviews);
-                // this.props.setUserProfile(res.data.user)
+                this.props.setUserNotifications(res.data.user.notifications)
             },
             (err) => {
-            	console.log(err)
-                // this.props.failedUserReviews(err.data);
-                // this.props.failedUserProfile(err.data);
+                this.props.failedUserNotifications(err.data);
             }
         );
+    }
+
+
+    componentDidMount(){
+        this.props.client.mutate({mutation: readNotifications, variables: {user_id: this.props.userId}}).then(
+        (res) => {
+        	console.log('------_>>>>>>>>>>>>>')
+    		console.log(res)
+    		// debounce response do change visual effect of currently read notif vs make the mas read manually?
+            // this.props.setUserProfile(res.data.followUser.user)
+            // this.setState({disabled: false})
+        },
+        (err) => { }
+        );
+
+	    const ctx = this
+	    const subscription = this.state.observable.subscribe({
+	        next(data) {
+	            if(data){
+	            	console.log(data.notificationsTicker.notifications)
+	                ctx.props.setUserNotifications(data.notificationsTicker.notifications)
+	            }
+	        },
+	        error(err) { console.error('err', err); },
+	      });
+	    this.setState({subscription: subscription})
+    }
+
+    componentWillUnmount(){
+        this.state.subscription.unsubscribe()
     }
 
 	render(){	
 
 		return(
-
-				<div>
-					cool
-				</div>
-
+			<div>
+				<NotificationList notifications={this.props.notifications.notifications}/>
+			</div>
 		)		
 	}
 }
 
 const mapStateToProps = state => {
     return { 
-        locales: state.locales
+        locales: state.locales,
+        notifications: state.notifications
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        // initUserProfile: () => dispatch(initUserProfile()),
-        // loadingUserProfile: () => dispatch(loadingUserProfile()),
-        // failedUserProfile: (message) => dispatch(failedUserProfile(message)),
-        // setUserProfile: (user) => dispatch(setUserProfile(user)),
-        // updateUserReview: (review) => dispatch(updateUserReview(review)),
-        // deleteUserReview: (review) => dispatch(deleteUserReview(review)),
-        // initUserReviews: () => dispatch(initUserReviews()),
-        // loadingUserReviews: () => dispatch(loadingUserReviews()),
-        // failedUserReviews: (message) => dispatch(failedUserReviews(message)),
-        // setUserReviews: (reviews) => dispatch(setUserReviews(reviews)),
-        // selectUserReview: (review) => dispatch(selectUserReview(review))
+        initUserNotifications: () => dispatch(initUserNotifications()),
+        loadingUserNotifications: () => dispatch(loadingUserNotifications()),
+        failedUserNotifications: (message) => dispatch(failedUserNotifications(message)),
+        setUserNotifications: (notifications) => dispatch(setUserNotifications(notifications)),
     };
 };
 

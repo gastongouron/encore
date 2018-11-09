@@ -16,6 +16,8 @@ import updateUserMutation from '../app/mutations/updateUser'
 import Badge from 'material-ui/Badge';
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications'
 import IconButton from 'material-ui/IconButton'
+import notificationsSubscription from '../app/subscriptions/notificationsSubscription'
+import _ from 'underscore'
 
 const MainAppBar = styled(AppBar)`
   &:hover {
@@ -109,8 +111,13 @@ class MainLayout extends Component {
        drawerOpen: false,
        open: false,
        width: 0,
-       height: 0
+       height: 0,
+       observable: null,
+       subscription: null,
+       counter: 0,
     }
+
+    console.log(this.props.match.path == "/")
 
     this.props.setLocales(strings)
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -122,11 +129,29 @@ class MainLayout extends Component {
   }
 
   componentWillMount(){
-      // console.log('meeee')      
-      // this.updateWindowDimensions();
       window.removeEventListener('resize', this.updateWindowDimensions);
-      // console.log(strings.getLanguage())
       strings.setLanguage(strings.getLanguage()) 
+      let observable = this.props.client.subscribe({ query: notificationsSubscription, variables: {user_id: this.props.currentUser.user_id}})
+      this.setState({observable: observable})
+  }
+
+  componentDidMount(){
+      const ctx = this
+      const subscription = this.state.observable.subscribe({
+          next(data) {
+              if(data){
+                let counter = data.notificationsTicker.notifications.filter(function(x){return x["read"]==="false"}).length
+                console.log('HEADER NOTIFICATION UPDATED WITH: ', counter)
+                ctx.setState({counter: counter})
+              }
+          },
+          error(err) { console.error('err', err); },
+        });
+      this.setState({subscription: subscription})
+  }
+
+  componentWillUnmount(){
+      this.state.subscription.unsubscribe()
   }
 
   updateWindowDimensions() {
@@ -162,7 +187,6 @@ class MainLayout extends Component {
   }
 
   onSwitchLanguage = (event) => {
-    
     let lang = (strings.getLanguage() === 'en') ? 'fr' : 'en'
     // console.log(!Object.keys(this.props.currentUser).length === 0)
     if (this.props.currentUser) {
@@ -192,9 +216,9 @@ class MainLayout extends Component {
           showMenuIconButton={ this.props.currentUser.isLoggedIn && (this.state.width < 500) ? true : false}
           title={<div>
                   <b>encore!</b>
-                  { 1 > 0 ? 
+                  { this.state.counter > 0 ? 
                     <Badge
-                    badgeContent={1}
+                    badgeContent={this.state.counter}
                     secondary={true}
                     badgeStyle={{top: 0, right: 8}}
                     />

@@ -5,4 +5,5 @@ Mutations::AllMutation = GraphQL::ObjectType.define do
   field :editReview, field: Mutations::EditReviewMutation.field
   field :editUser, field: Mutations::EditUserMutation.field
   field :followUser, field: Mutations::FollowUserMutation.field
+  field :readNotifications, field: Mutations::ReadNotificationsMutation.field
 end

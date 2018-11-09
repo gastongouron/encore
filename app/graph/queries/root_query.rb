@@ -53,6 +53,15 @@ RootQuery = GraphQL::ObjectType.define do
     })
   end
 
+  # get unread notifications
+  # field :notifications do
+  #   type Types::NotificationType
+  #   argument :id, !types.ID
+  #   resolve (->(_, args, _) {
+  #     Notifications.find_by(user_id: args[:id])
+  #   })
+  # end
+
   # Search fiels
   field :allArtists, function: Resolvers::ArtistsSearch
 
