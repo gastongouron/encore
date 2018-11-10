@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { withApollo } from 'react-apollo'
 import UserNotificationsQuery from '../../queries/UserNotificationsSchema'
 import readNotifications from '../../mutations/readNotifications'
-
 import { initUserNotifications, loadingUserNotifications, failedUserNotifications, setUserNotifications } from '../../actions/notifications'
 import NotificationList from './notificationList'
 import notificationsSubscription from '../../subscriptions/notificationsSubscription'
@@ -12,6 +11,9 @@ class Notifications extends Component {
 
 	constructor(props){
 		super(props)
+		this.state = {
+			hasMore: true
+		}
 	}
 
     componentWillMount(){
@@ -32,19 +34,17 @@ class Notifications extends Component {
         );
     }
 
-
-    componentDidMount(){
-        this.props.client.mutate({mutation: readNotifications, variables: {user_id: this.props.userId}}).then(
+    readAll(){
+    	this.props.client.mutate({mutation: readNotifications, variables: {user_id: this.props.userId}}).then(
         (res) => {
-        	console.log('------_>>>>>>>>>>>>>')
     		console.log(res)
-    		// debounce response do change visual effect of currently read notif vs make the mas read manually?
-            // this.props.setUserProfile(res.data.followUser.user)
-            // this.setState({disabled: false})
         },
         (err) => { }
         );
+    }
 
+    componentDidMount(){
+    	this.readAll()
 	    const ctx = this
 	    const subscription = this.state.observable.subscribe({
 	        next(data) {
@@ -66,7 +66,7 @@ class Notifications extends Component {
 
 		return(
 			<div>
-				<NotificationList notifications={this.props.notifications.notifications}/>
+				<NotificationList hasMore={this.state.hasMore} notifications={this.props.notifications.notifications}/>
 			</div>
 		)		
 	}

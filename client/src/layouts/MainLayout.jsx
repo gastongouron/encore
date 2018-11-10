@@ -133,6 +133,7 @@ class MainLayout extends Component {
       strings.setLanguage(strings.getLanguage()) 
       let observable = this.props.client.subscribe({ query: notificationsSubscription, variables: {user_id: this.props.currentUser.user_id}})
       this.setState({observable: observable})
+      // query to get amount of notifs...?
   }
 
   componentDidMount(){
@@ -262,10 +263,6 @@ class MainLayout extends Component {
 
          ?
         <Drawer open={this.state.open} docked={false} onRequestChange={(e) => this.closeDrawer(e)}>
-          <MenuItem 
-            onClick={this.drawerToggleHome}
-            primaryText="Hot"
-            />
           <MenuItem
             onClick={this.drawerToggleProfile}
             primaryText={currentUser.first_name || currentUser.email}

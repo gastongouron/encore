@@ -26,6 +26,24 @@ class NotificationsList extends Component {
     // SOMEONE YOU FOLLOW... SHARED AN EXPERIENCE WITH ... ARTIST + LINK
     // SOMEONE YOU FOLLOW... RECOMENDS THIS ARTIST TO YOU 
 
+    // <InfiniteScroll
+      // dataLength={this.props.notifications.length}
+      // next={this.fetchMoreData}
+      // hasMore={this.props.hasMore}
+      // loader={<h4 style={{textAlign: 'center', paddingBottom: 10}}>...</h4>}
+      // endMessage={
+      //     <p style={{textAlign: 'center'}}>
+      //       <b></b>
+      //     </p>
+      //  }>
+      //  {notifications.map((notification, index) => (
+      //     <NotificationItem
+      //       key={index}
+      //       notification={notification} 
+      //     />
+      //   ))}
+    // </InfiniteScroll>
+
     return (
       <div>
            {notifications.map((notification, index) => (
