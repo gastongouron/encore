@@ -10,6 +10,9 @@ const UserNotificationsQuery = (gql`
                 kind
                 read
                 follower_display_name
+                follower_id
+                artist_id
+                author_id
                 artist_name
                 author_display_name
                 created_at

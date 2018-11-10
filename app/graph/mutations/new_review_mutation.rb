@@ -15,11 +15,17 @@ Mutations::NewReviewMutation = GraphQL::Relay::Mutation.define do
     user =  User.find(input.to_h["user_id"])
 
     
-    # Notification.create(
-    #   kind: 'follow',
-    #   user_id: followee.id,
-    #   follower_display_name: user.display_name
-    # )
+    user.followers.each do |follower|
+      Notification.create(
+        kind: 'recommend',
+        user_id: follower.id,
+        author_display_name: user.display_name,
+        author_id: user.id,
+        artist_name: artist.name,
+        artist_id: artist.id,
+      )      
+      Schema.subscriptions.trigger("notificationsTicker", {user_id: follower.id}, follower)
+    end
     
     # create a new notification for each of users that follows this user such as: <user> shared experience on <artist>
     # create a new notification for each users that also experienced this artist

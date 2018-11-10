@@ -8,6 +8,9 @@ const notificationsSubscription = (gql`
                 id
                 kind
                 read
+                follower_id
+                artist_id
+                author_id
                 follower_display_name
                 artist_name
                 author_display_name

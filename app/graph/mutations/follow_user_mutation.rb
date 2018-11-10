@@ -17,6 +17,7 @@ Mutations::FollowUserMutation = GraphQL::Relay::Mutation.define do
       Notification.create(
         kind: 'follow',
         user_id: followee.id,
+        follower_id: user.id, 
         follower_display_name: user.display_name
       )
       Schema.subscriptions.trigger("notificationsTicker", {user_id: followee.id}, followee)      
@@ -26,6 +27,7 @@ Mutations::FollowUserMutation = GraphQL::Relay::Mutation.define do
       Notification.create(
         kind: 'unfollow',
         user_id: followee.id,
+        follower_id: user.id, 
         follower_display_name: user.display_name
       )
       Schema.subscriptions.trigger("notificationsTicker", {user_id: followee.id}, followee)      

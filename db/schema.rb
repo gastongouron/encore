@@ -43,6 +43,9 @@ ActiveRecord::Schema.define(version: 20181104171735) do
 
   create_table "notifications", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "follower_id"
+    t.integer "artist_id"
+    t.integer "author_id"
     t.boolean "read", default: false
     t.string "kind"
     t.string "follower_display_name"

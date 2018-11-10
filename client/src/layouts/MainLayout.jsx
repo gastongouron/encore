@@ -17,6 +17,7 @@ import Badge from 'material-ui/Badge';
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications'
 import IconButton from 'material-ui/IconButton'
 import notificationsSubscription from '../app/subscriptions/notificationsSubscription'
+import UserNotificationsQuery from '../app/queries/UserNotificationsSchema'
 import _ from 'underscore'
 
 const MainAppBar = styled(AppBar)`
@@ -117,23 +118,33 @@ class MainLayout extends Component {
        counter: 0,
     }
 
-    console.log(this.props.match.path == "/")
-
     this.props.setLocales(strings)
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
   componentDidMount() {
-    // window.addEventListener('resize', this.updateWindowDimensions);
     this.updateWindowDimensions();
   }
 
   componentWillMount(){
       window.removeEventListener('resize', this.updateWindowDimensions);
       strings.setLanguage(strings.getLanguage()) 
+
       let observable = this.props.client.subscribe({ query: notificationsSubscription, variables: {user_id: this.props.currentUser.user_id}})
       this.setState({observable: observable})
-      // query to get amount of notifs...?
+
+      this.props.client.networkInterface.query({query: UserNotificationsQuery, variables: {id: this.props.currentUser.user_id }, fetchPolicy: 'network-only'}).then(
+          (res) => {
+            console.log('HEREE')
+            console.log(res)
+                let counter = res.data.user.notifications.filter(function(x){return x["read"]==="false"}).length
+                this.setState({counter: counter})
+          },
+          (err) => {
+            console.log(err)
+          }
+      );      
+
   }
 
   componentDidMount(){
@@ -189,7 +200,6 @@ class MainLayout extends Component {
 
   onSwitchLanguage = (event) => {
     let lang = (strings.getLanguage() === 'en') ? 'fr' : 'en'
-    // console.log(!Object.keys(this.props.currentUser).length === 0)
     if (this.props.currentUser) {
       this.props.client.mutate({mutation: updateUserMutation, variables: {user_id: this.props.currentUser.user_id, locale: lang}}).then(
         (res) => {
@@ -217,7 +227,7 @@ class MainLayout extends Component {
           showMenuIconButton={ this.props.currentUser.isLoggedIn && (this.state.width < 500) ? true : false}
           title={<div>
                   <b>encore!</b>
-                  { this.state.counter > 0 ? 
+                  { (this.state.counter > 0) && (this.props.match.path != "/") ? 
                     <Badge
                     badgeContent={this.state.counter}
                     secondary={true}

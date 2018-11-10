@@ -19,8 +19,8 @@ Types::SubscriptionType = GraphQL::ObjectType.define do
 
   field :notificationsTicker, Types::UserType do
   	argument 'user_id', !types.ID
-	resolve ->(obj, args, ctx) {
-		obj
+  	resolve ->(obj, args, ctx) {
+	   	obj
     }
   end
 

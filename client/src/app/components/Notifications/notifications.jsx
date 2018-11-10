@@ -59,6 +59,7 @@ class Notifications extends Component {
     }
 
     componentWillUnmount(){
+        this.readAll()
         this.state.subscription.unsubscribe()
     }
 
