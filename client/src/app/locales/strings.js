@@ -57,6 +57,11 @@ const translations = {
    followings: "abonnements",
    follower: "abonné",
    followers: "abonnés",
+
+   followedBy: "Vous avez été suivi par ",
+   unfollowedBy: " à cessé de vous suivre.",
+   recommend: "vient de partager une expérience à propos de ",
+
    people: "personnes",
    person: "personne",
    policy: {
@@ -126,6 +131,9 @@ const translations = {
    followings: "people followed",
    follower: "follower",
    followers: "followers",
+   followedBy: "You have been followed by ",
+   unfollowedBy: " has stopped following you.",
+   recommend: "shared an experience about ",
    people: "people",
    person: "person",
    policy: {
