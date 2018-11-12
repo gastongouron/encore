@@ -124,30 +124,7 @@ class MainLayout extends Component {
 
   componentDidMount() {
     this.updateWindowDimensions();
-  }
-
-  componentWillMount(){
-      window.removeEventListener('resize', this.updateWindowDimensions);
-      strings.setLanguage(strings.getLanguage()) 
-
-      let observable = this.props.client.subscribe({ query: notificationsSubscription, variables: {user_id: this.props.currentUser.user_id}})
-      this.setState({observable: observable})
-
-      this.props.client.networkInterface.query({query: UserNotificationsQuery, variables: {id: this.props.currentUser.user_id }, fetchPolicy: 'network-only'}).then(
-          (res) => {
-            console.log('HEREE')
-            console.log(res)
-                let counter = res.data.user.notifications.filter(function(x){return x["read"]==="false"}).length
-                this.setState({counter: counter})
-          },
-          (err) => {
-            console.log(err)
-          }
-      );      
-
-  }
-
-  componentDidMount(){
+    if (this.props.currentUser.isLoggedIn){
       const ctx = this
       const subscription = this.state.observable.subscribe({
           next(data) {
@@ -160,10 +137,33 @@ class MainLayout extends Component {
           error(err) { console.error('err', err); },
         });
       this.setState({subscription: subscription})
+    }
   }
 
+  componentWillMount(){
+      window.removeEventListener('resize', this.updateWindowDimensions);
+      strings.setLanguage(strings.getLanguage()) 
+    if (this.props.currentUser.isLoggedIn){
+      let observable = this.props.client.subscribe({ query: notificationsSubscription, variables: {user_id: this.props.currentUser.user_id}})
+      this.setState({observable: observable})
+
+      this.props.client.networkInterface.query({query: UserNotificationsQuery, variables: {id: this.props.currentUser.user_id }, fetchPolicy: 'network-only'}).then(
+          (res) => {
+                let counter = res.data.user.notifications.filter(function(x){return x["read"]==="false"}).length
+                this.setState({counter: counter})
+          },
+          (err) => {
+            console.log(err)
+          }
+      );      
+    }
+  }
+
+
   componentWillUnmount(){
+    if (this.state.subscription){
       this.state.subscription.unsubscribe()
+    }
   }
 
   updateWindowDimensions() {

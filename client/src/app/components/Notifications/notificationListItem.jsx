@@ -5,18 +5,16 @@ import { Link } from 'react-router-dom'
 import TimeAgo from 'react-timeago'
 import frenchStrings from 'react-timeago/lib/language-strings/fr'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
-// import Taglist from './Taglist'
-// import Grid from '@material-ui/core/Grid'
-// import Divider from 'material-ui/Divider';
-// import Truncate from 'react-truncate';
-// import theme from '../../theme'
+
 
 const NotificationItem = (props) => {
 
 	const notification = props.notification
 	const formatter = buildFormatter(frenchStrings)
+	const color = notification.read === 'true' ? 'white' : '#EEF7FA'
 
 	const paperStyle = {
+	  background: color,
 	  textAlign: 'left',
       margin: 2,
 	  marginBottom: 20,
@@ -27,15 +25,14 @@ const NotificationItem = (props) => {
 
 	let expr = notification.kind
 	const date = <TimeAgo style={{float: 'right'}} date={notification.created_at} formatter={props.locales.locales._language === 'en' ? undefined : formatter}/>
-	const depth = notification.read ? 1 : 3
 
 	switch (expr) {
 		case 'follow':
 			return (
 				<Paper
-				style={paperStyle} zDepth={depth} 
+				style={paperStyle} zDepth={1} 
 				rounded={true} >
-					{props.locales.locales.followedBy} <Link to={"/user/" + notification.follower_id}>{notification.follower_display_name}</Link>.
+					<Link to={"/user/" + notification.follower_id}>{notification.follower_display_name}</Link> {props.locales.locales.followedBy}.
 					{date}					
 				</Paper>
 				)
@@ -43,9 +40,9 @@ const NotificationItem = (props) => {
 		case 'unfollow':
 			return (
 				<Paper
-				style={paperStyle} zDepth={depth} 
+				style={paperStyle} zDepth={1} 
 				rounded={true} >
-					<Link to={"/user/" + notification.follower_id}>{notification.follower_display_name}</Link> {props.locales.locales.unfollowedBy}
+					<Link to={"/user/" + notification.follower_id}>{notification.follower_display_name}</Link> {props.locales.locales.unfollowedBy}.
 					{date}
 				</Paper>
 				)
@@ -54,7 +51,7 @@ const NotificationItem = (props) => {
 			console.log(notification)
 			return (
 				<Paper
-				style={paperStyle} zDepth={depth} 
+				style={paperStyle} zDepth={1} 
 				rounded={true} >
 					<Link to={"/user/" + notification.author_id}>{notification.author_display_name}</Link> {props.locales.locales.recommend} <Link to={"/artists/" + notification.artist_id}>{notification.artist_name}</Link>.
 					{date}
