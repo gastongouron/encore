@@ -205,7 +205,7 @@ class ArtistDetail extends Component {
                                 editable={true}
                                 formTitle={this.state.review!=null?this.state.review.artist_name:''}
                                 formValue={this.state.review!=null?this.state.review.body:''}
-                                formScore={this.state.review!=null?this.state.review.score:''}
+                                formPerformanceScore={this.state.review!=null?this.state.review.score:''}
                                 formMedia={this.state.review!=null?this.state.review.media:null}
                                 setBody={(e)=>this.body(e, this)}
                                 setScore={(value)=>this.score(value, this)}

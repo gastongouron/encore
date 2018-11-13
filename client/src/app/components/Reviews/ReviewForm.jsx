@@ -25,7 +25,7 @@ class CustomForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      rating: parseFloat(this.props.formScore),
+      performance: parseFloat(this.props.formPerformanceScore),
       userId: this.props.currentUser.user_id,
       artistId: this.props.artistDetail.artistDetail.artist_id, 
       progress: 0,
@@ -36,7 +36,7 @@ class CustomForm extends Component {
   }
 
   onSlide(e, value) {
-    this.setState({rating: value});
+    this.setState({performance: value});
     this.props.setScore(value)
   }
 
@@ -62,7 +62,7 @@ class CustomForm extends Component {
     this.setState({hiddenProgress: true})
     this.setState({hiddenError:true})
 
-    setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 100);
+    setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 500);
 
   }  
 
@@ -92,9 +92,10 @@ class CustomForm extends Component {
     }
 
     const imageStyle = {
-        objectFit: 'cover',
-        backgroundSize: 'cover',
-        width: '100%',
+        // objectFit: 'cover',
+        // backgroundSize: 'cover',
+        margin: '0 auto',
+        width: '50%',
         height: '30%',
     }
 
@@ -113,7 +114,7 @@ class CustomForm extends Component {
             contentStyle={customContentStyle}
             open={this.props.onShow}
             title={
-              <div style={{padding: 20, paddingTop: 10, paddingBottom: 10, fontSize: 14, fontWeight: 500}}>
+              <div style={{padding: 22, paddingTop: 10, paddingBottom: 10, fontSize: 14, fontWeight: 500}}>
               <span>{strings.formatString(this.props.locales.locales.review, {name: this.props.formTitle || this.props.artistDetail.artistDetail.name})}</span>
               <IconButton style={{float: 'right', top: 2, right: 5, position: 'absolute'}} onClick={this.props.onClickClose}><NavigationClose /></IconButton>
               </div>
@@ -131,6 +132,36 @@ class CustomForm extends Component {
                <LinearProgress hidden={this.state.hiddenProgress} variant="determinate" value={this.state.progress} />
 
               </div>
+
+
+            <span>Performance </span>
+            <span style={{float: 'right'}}>{Number(this.props.formPerformanceScore) !== NaN ? this.props.formPerformanceScore : '0'} / 5</span>
+            <Slider 
+              style={{marginTop: '-20px', marginBottom: '-20px'}}
+              step={1} 
+              value={parseFloat(this.props.formPerformanceScore)}
+              min={0}
+              max={5}
+              onChange={this.onSlide.bind(this)}
+              required={true}
+              />
+
+
+              
+            <TextField
+              floatingLabelText={this.props.locales.locales.reviewBodyLabel}
+              hintText={this.props.locales.locales.reviewHint}
+              id="body"
+              type="text"
+              label="Review"
+              multiLine={true}
+              rows={1}
+              value={this.props.formValue}
+              onChange={this.props.setBody}      
+              fullWidth={true}       
+            />
+            <br />
+
               <div>
                {isImage(this.props.formMedia) ? <img alt="" style={imageStyle} src={this.props.formMedia} /> : <ReactPlayer width='100%' height='auto' url={this.props.formMedia} controls={true} />}
                {
@@ -168,29 +199,6 @@ class CustomForm extends Component {
                 </FlatButton>
 
               </div>
-
-            <Slider 
-              step={1} 
-              value={parseFloat(this.props.formScore)}
-              min={0}
-              max={5}
-              onChange={this.onSlide.bind(this)}
-              required={true}
-              />
-              
-            <TextField
-              floatingLabelText={this.props.locales.locales.reviewBodyLabel}
-              hintText={this.props.locales.locales.reviewHint}
-              id="body"
-              type="text"
-              label="Review"
-              multiLine={true}
-              rows={1}
-              value={this.props.formValue}
-              onChange={this.props.setBody}      
-              fullWidth={true}       
-            />
-            <br />
 
           </Dialog>
      )
