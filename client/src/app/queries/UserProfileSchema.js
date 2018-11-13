@@ -26,6 +26,9 @@ const UserProfileQuery = (gql`
                 artist_profile_picture
 				body
                 score
+                generosity
+                technics
+                ambiant
                 media
                 user_id
                 created_at

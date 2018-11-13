@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withApollo } from 'react-apollo'
 import { initArtistDetail, loadingArtistDetail, failedArtistDetail, setArtistDetail, addUserReview, selectUserReview, updateUserReview, deleteUserReview } from '../../actions/artistDetail'
-import { onUpdate, onDelete, onSave, setBody, setScore, setMedia, unsetMedia, handleModalShow, handleModalClose} from '../Reviews/Utils'
+import { onUpdate, onDelete, onSave, setBody, setPerformanceScore, setGenerosityScore, setTechnicsScore, setAmbiantScore, setMedia, unsetMedia, handleModalShow, handleModalClose} from '../Reviews/Utils'
 import artistDetailQuery from '../../queries/ReviewsSchema'
 import ReviewForm from '../Reviews/ReviewForm'
 import ReviewList from '../Reviews/ReviewList'
@@ -44,7 +44,10 @@ class ArtistDetail extends Component {
         this.update = onUpdate.bind(this)
         this.delete = onDelete.bind(this)
         this.body = setBody.bind(this)
-        this.score = setScore.bind(this)
+        this.performanceScore = setPerformanceScore.bind(this)
+        this.generosityScore = setGenerosityScore.bind(this) 
+        this.technicsScore = setTechnicsScore.bind(this)  
+        this.ambiantScore = setAmbiantScore.bind(this)                     
         this.media = setMedia.bind(this)
         this.removeMedia = unsetMedia.bind(this)
         this.show = handleModalShow.bind(this)
@@ -60,10 +63,6 @@ class ArtistDetail extends Component {
         };
     };
     
-    testSubscription(data){
-        console.log(data)
-    }
-
     componentWillMount(){
         this.props.loadingArtistDetail();
 
@@ -81,10 +80,6 @@ class ArtistDetail extends Component {
         );
     }
 
-    // unsubscribe(){
-    //     this.state.observable.subscribe((data) => {});
-    // }
-
     componentDidMount(){
         const ctx = this
         console.log('HELLO Im MOUNTING')
@@ -93,12 +88,8 @@ class ArtistDetail extends Component {
         const subscription = this.state.observable.subscribe({
             next(data) {
                 if(data){
-                    // console.log('ID???', id)
-                    // UGLY FIX
-                    // if(Number(id)===Number(data.reviewWasAdded.id)){
-                        ctx.props.setArtistDetail(data.reviewWasAdded);
-                        ctx.checkEnableNewReview(data.reviewWasAdded.reviews)
-                    // }
+                    ctx.props.setArtistDetail(data.reviewWasAdded);
+                    ctx.checkEnableNewReview(data.reviewWasAdded.reviews)
                 }
             },
             error(err) { console.error('err', err); },
@@ -206,9 +197,15 @@ class ArtistDetail extends Component {
                                 formTitle={this.state.review!=null?this.state.review.artist_name:''}
                                 formValue={this.state.review!=null?this.state.review.body:''}
                                 formPerformanceScore={this.state.review!=null?this.state.review.score:''}
+                                formGenerosityScore={this.state.review!=null?this.state.review.generosity:''}
+                                formTechnicsScore={this.state.review!=null?this.state.review.technics:''}
+                                formAmbiantScore={this.state.review!=null?this.state.review.ambiant:''}
                                 formMedia={this.state.review!=null?this.state.review.media:null}
                                 setBody={(e)=>this.body(e, this)}
-                                setScore={(value)=>this.score(value, this)}
+                                setPerformanceScore={(value)=>this.performanceScore(value, this)}
+                                setGenerosityScore={(value)=>this.generosityScore(value, this)}
+                                setTechnicsScore={(value)=>this.technicsScore(value, this)}
+                                setAmbiantScore={(value)=>this.ambiantScore(value, this)}
                                 setMedia={(value)=>this.media(value, this)}
                                 unsetMedia={(value) => this.removeMedia(this)}
                                 onClickSave={(e)=>this.save(e, this)}

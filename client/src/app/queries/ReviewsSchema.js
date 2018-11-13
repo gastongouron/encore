@@ -18,6 +18,9 @@ const artistDetailQuery = (gql`
                 author_profile_picture
 				body
                 score
+                generosity
+                technics
+                ambiant
                 media
                 user_id
                 created_at

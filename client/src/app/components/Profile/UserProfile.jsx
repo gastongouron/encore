@@ -6,7 +6,7 @@ import { initUserProfile, loadingUserProfile, failedUserProfile, setUserProfile 
 
 import followUserMutation from '../../mutations/followUser'
 
-import { onUpdate, onDelete, setScore, setBody, setMedia, unsetMedia, handleModalShow, handleModalClose} from '../Reviews/Utils'
+import { onUpdate, onDelete, setPerformanceScore, setGenerosityScore, setTechnicsScore, setAmbiantScore, setBody, setMedia, unsetMedia, handleModalShow, handleModalClose} from '../Reviews/Utils'
 
 import UserProfileQuery from '../../queries/UserProfileSchema'
 import ReviewList from '../Reviews/ReviewList'
@@ -77,7 +77,10 @@ class Profile extends Component {
         this.update = onUpdate.bind(this)
         this.delete = onDelete.bind(this)
         this.body = setBody.bind(this)
-        this.score = setScore.bind(this)
+        this.performanceScore = setPerformanceScore.bind(this)
+        this.generosityScore = setGenerosityScore.bind(this) 
+        this.technicsScore = setTechnicsScore.bind(this)  
+        this.ambiantScore = setAmbiantScore.bind(this)                     
         this.show = handleModalShow.bind(this)
         this.close = handleModalClose.bind(this)
         this.media = setMedia.bind(this)
@@ -215,10 +218,16 @@ class Profile extends Component {
                                 editable={true}
                                 formTitle={this.state.review!=null?this.state.review.artist_name:''}
                                 formValue={this.state.review!==null?this.state.review.body:''}
-                                formScore={this.state.review!==null?this.state.review.score:''}
+                                formPerformanceScore={this.state.review!=null?this.state.review.score:''}
+                                formGenerosityScore={this.state.review!=null?this.state.review.generosity:''}
+                                formTechnicsScore={this.state.review!=null?this.state.review.technics:''}
+                                formAmbiantScore={this.state.review!=null?this.state.review.ambiant:''}
                                 formMedia={this.state.review!=null?this.state.review.media:null}
                                 setBody={(e)=>this.body(e, this)}
-                                setScore={(value)=>this.score(value, this)}
+                                setPerformanceScore={(value)=>this.performanceScore(value, this)}
+                                setGenerosityScore={(value)=>this.generosityScore(value, this)}
+                                setTechnicsScore={(value)=>this.technicsScore(value, this)}
+                                setAmbiantScore={(value)=>this.ambiantScore(value, this)}
                                 setMedia={(value)=>this.media(value, this)}
                                 unsetMedia={(value) => this.removeMedia(this)}
                                 onClickDelete={(e)=>this.delete(e, this)}

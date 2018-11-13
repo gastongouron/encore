@@ -14,11 +14,8 @@ import strings from '../../../app/locales/strings'
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 // import Delete from 'material-ui/svg-icons/action/delete';
 import IconButton from 'material-ui/IconButton';
+import Grid from '@material-ui/core/Grid'
 
-const customContentStyle = {
-  width: '100%',
-  maxWidth: '460px',
-};
 
 class CustomForm extends Component {
 
@@ -26,6 +23,9 @@ class CustomForm extends Component {
     super(props)
     this.state = {
       performance: parseFloat(this.props.formPerformanceScore),
+      generosity: parseFloat(this.props.formGenerosityScore),
+      technics: parseFloat(this.props.formTechnicsScore),
+      ambiant: parseFloat(this.props.formAmbiantScore),
       userId: this.props.currentUser.user_id,
       artistId: this.props.artistDetail.artistDetail.artist_id, 
       progress: 0,
@@ -35,9 +35,24 @@ class CustomForm extends Component {
     };
   }
 
-  onSlide(e, value) {
+  onSlidePerf(e, value) {
     this.setState({performance: value});
-    this.props.setScore(value)
+    this.props.setPerformanceScore(value)
+  }
+
+  onSlideGenerosity(e, value) {
+    this.setState({generosity: value});
+    this.props.setGenerosityScore(value)
+  }
+
+  onSlideTechnics(e, value) {
+    this.setState({technics: value});
+    this.props.setTechnicsScore(value)
+  }
+
+  onSlideAmbiant(e, value) {
+    this.setState({ambiant: value});
+    this.props.setAmbiantScore(value)
   }
 
   onUploadProgress(context, val){
@@ -91,13 +106,39 @@ class CustomForm extends Component {
       marginLeft: 10
     }
 
+    const sliderStyle = {
+      marginTop: '-20px', 
+      marginBottom: '-30px',
+      paddingLeft: 5,
+      paddingRight: 10,
+    }
+
     const imageStyle = {
-        // objectFit: 'cover',
-        // backgroundSize: 'cover',
         margin: '0 auto',
         width: '50%',
         height: '30%',
     }
+
+    const rootz = {
+      flexGrow: 1,
+    }
+
+    const label = {
+      fontSize: 12,
+      paddingTop: 5,
+    }
+
+    const labelRight = {
+      fontSize: 12,
+      float: 'right',
+      paddingTop: 4,
+    }
+
+    const customContentStyle = {
+      width: '100%',
+      maxWidth: '460px',
+    };
+
 
     const create = [ <RaisedButton label={this.props.locales.locales.save} fullWidth={true} primary={true} keyboardFocused={true} onClick={this.props.onClickSave}/>]
     const update = [ <RaisedButton style={style} label={this.props.locales.locales.update} primary={true} keyboardFocused={true} onClick={this.props.onClickUpdate}/>,
@@ -134,19 +175,85 @@ class CustomForm extends Component {
               </div>
 
 
-            <span>Performance </span>
-            <span style={{float: 'right'}}>{Number(this.props.formPerformanceScore) !== NaN ? this.props.formPerformanceScore : '0'} / 5</span>
-            <Slider 
-              style={{marginTop: '-20px', marginBottom: '-20px'}}
-              step={1} 
-              value={parseFloat(this.props.formPerformanceScore)}
-              min={0}
-              max={5}
-              onChange={this.onSlide.bind(this)}
-              required={true}
-              />
+        <div style={rootz}>
+          <Grid container>
+            
+            <Grid item xs={3}>
+              <span style={label}>Performance </span>
+            </Grid>
+            <Grid item xs={8}>
+              <Slider 
+                style={sliderStyle}
+                step={1} 
+                value={parseFloat(this.props.formPerformanceScore)}
+                min={0}
+                max={5}
+                onChange={this.onSlidePerf.bind(this)}
+                required={true}
+                />
+              </Grid>
+            <Grid item xs={1}>
+              <span style={labelRight}>{this.props.formPerformanceScore ? this.props.formPerformanceScore + " / 5" : "0 / 5" }</span>
+            </Grid>
+
+            <Grid item xs={3}>
+              <span style={label}>Generosity </span>
+            </Grid>
+            <Grid item xs={8}>
+              <Slider 
+                style={sliderStyle}
+                step={1} 
+                value={parseFloat(this.props.formGenerosityScore)}
+                min={0}
+                max={5}
+                onChange={this.onSlideGenerosity.bind(this)}
+                required={true}
+                />
+            </Grid>
+            <Grid item xs={1}>
+              <span style={labelRight}>{this.props.formGenerosityScore ? this.props.formGenerosityScore + " / 5" : "0 / 5" }</span>
+            </Grid>
+
+            <Grid item xs={3}>
+              <span style={label}>Technics </span>
+            </Grid>
+            <Grid item xs={8}>
+              <Slider 
+                style={sliderStyle}
+                step={1} 
+                value={parseFloat(this.props.formTechnicsScore)}
+                min={0}
+                max={5}
+                onChange={this.onSlideTechnics.bind(this)}
+                required={true}
+                />
+            </Grid>
+            <Grid item xs={1}>
+              <span style={labelRight}>{this.props.formTechnicsScore ? this.props.formTechnicsScore + " / 5" : "0 / 5" }</span>
+            </Grid>
 
 
+            <Grid item xs={3}>
+              <span style={label}>Ambiant </span>
+            </Grid>
+            <Grid item xs={8}>
+              <Slider 
+                style={sliderStyle}
+                step={1} 
+                value={parseFloat(this.props.formAmbiantScore)}
+                min={0}
+                max={5}
+                onChange={this.onSlideAmbiant.bind(this)}
+                required={true}
+                />
+            </Grid>
+            <Grid item xs={1}>
+              <span style={labelRight}>{this.props.formAmbiantScore ? this.props.formAmbiantScore + " / 5" : "0 / 5" }</span>
+            </Grid>
+
+
+          </Grid>
+        </div>
               
             <TextField
               floatingLabelText={this.props.locales.locales.reviewBodyLabel}
