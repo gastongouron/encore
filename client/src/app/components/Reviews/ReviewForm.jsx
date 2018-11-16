@@ -15,7 +15,11 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close';
 // import Delete from 'material-ui/svg-icons/action/delete';
 import IconButton from 'material-ui/IconButton';
 import Grid from '@material-ui/core/Grid'
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import FileAttachment from 'material-ui/svg-icons/file/attachment';
+import ContentRemove from 'material-ui/svg-icons/action/delete';
 
+import Divider from 'material-ui/Divider'
 
 class CustomForm extends Component {
 
@@ -26,12 +30,14 @@ class CustomForm extends Component {
       generosity: parseFloat(this.props.formGenerosityScore),
       technics: parseFloat(this.props.formTechnicsScore),
       ambiant: parseFloat(this.props.formAmbiantScore),
+      body: this.props.formValue,
       userId: this.props.currentUser.user_id,
       artistId: this.props.artistDetail.artistDetail.artist_id, 
       progress: 0,
       hiddenProgress: true,
       error: '',
       hiddenError: true,
+      // disabled: true,
     };
   }
 
@@ -76,9 +82,7 @@ class CustomForm extends Component {
     this.props.setMedia(obj.public)
     this.setState({hiddenProgress: true})
     this.setState({hiddenError:true})
-
     setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 500);
-
   }  
 
   onClickRemove(){
@@ -89,7 +93,6 @@ class CustomForm extends Component {
   }
 
   onSignedUrl(context, resp){
-    
     if(resp.status === "error" ){
       this.setState({error:resp.message})
       this.setState({hiddenError:false})
@@ -98,6 +101,25 @@ class CustomForm extends Component {
       this.setState({error:''})      
       this.setState({hiddenError:true})
     }
+  }
+
+  shouldBeDisabled(){
+    let form = {
+      body: this.props.formValue,
+      performance: this.props.formPerformanceScore,
+      generosity: this.props.formGenerosityScore,
+      technics: this.props.formTechnicsScore,
+      ambiant: this.props.formAmbiantScore
+    }
+    for (var prop in form) {
+      console.log(prop)
+      console.log(form[prop]);
+      if (!form[prop]) {
+        // Raise error
+        return true
+      }
+    }
+    return false
   }
 
   render(){
@@ -114,13 +136,22 @@ class CustomForm extends Component {
     }
 
     const imageStyle = {
+        display: 'block',
         margin: '0 auto',
-        width: '50%',
-        height: '30%',
+        width: '100%',
+        height: 120,
+        objectFit: 'cover'
     }
 
     const rootz = {
       flexGrow: 1,
+      padding: 20,
+      paddingBottom: 0,
+    }
+
+    const leftAndRightPadded = {
+      paddingLeft: 20,
+      paddingRight: 20
     }
 
     const label = {
@@ -139,47 +170,56 @@ class CustomForm extends Component {
       maxWidth: '460px',
     };
 
-
-    const create = [ <RaisedButton label={this.props.locales.locales.save} fullWidth={true} primary={true} keyboardFocused={true} onClick={this.props.onClickSave}/>]
-    const update = [ <RaisedButton style={style} label={this.props.locales.locales.update} primary={true} keyboardFocused={true} onClick={this.props.onClickUpdate}/>,
+    const disabled = this.shouldBeDisabled()
+    const create = [ <RaisedButton label={this.props.locales.locales.save} disabled={disabled} fullWidth={true} primary={true} keyboardFocused={true} onClick={this.props.onClickSave}/>]
+    const update = [ <RaisedButton style={style} label={this.props.locales.locales.update} disabled={this.shouldBeDisabled()} primary={true} keyboardFocused={true} onClick={this.props.onClickUpdate}/>,
                      <RaisedButton style={style} label={this.props.locales.locales.delete} secondary={true} onClick={this.props.onClickDelete}/>]
 
     const actions = this.props.isUpdate ? update : create
     const user_id = this.props.currentUser.user_id
     const artist_id = this.props.artistDetail.artistDetail.id
 
-
     return (
            <Dialog
-            style={{paddingLeft: 20, paddingRight: 20}}
             contentStyle={customContentStyle}
+            bodyStyle={{padding: 0}}
             open={this.props.onShow}
             title={
               <div style={{padding: 22, paddingTop: 10, paddingBottom: 10, fontSize: 14, fontWeight: 500}}>
-              <span>{strings.formatString(this.props.locales.locales.review, {name: this.props.formTitle || this.props.artistDetail.artistDetail.name})}</span>
-              <IconButton style={{float: 'right', top: 2, right: 5, position: 'absolute'}} onClick={this.props.onClickClose}><NavigationClose /></IconButton>
+                <span>{strings.formatString(this.props.locales.locales.review, {name: this.props.formTitle || this.props.artistDetail.artistDetail.name})}</span>
+                <IconButton style={{float: 'right', top: 2, right: 5, position: 'absolute'}} onClick={this.props.onClickClose}><NavigationClose /></IconButton>
               </div>
             }
             modal={false}
             actions={actions}
             autoScrollBodyContent={true}
           >
-            <br />
 
               <div>
-                <Alert hidden={this.state.hiddenError}>
+                <Alert style={{marginTop: 0, marginBottom: 0, textAlign: 'center'}} hidden={this.state.hiddenError}>
                   {this.state.error}
                 </Alert>
                <LinearProgress hidden={this.state.hiddenProgress} variant="determinate" value={this.state.progress} />
-
               </div>
 
+
+
+              {isImage(this.props.formMedia) ? <img alt="" style={imageStyle} src={this.props.formMedia} /> : <ReactPlayer width='100%' height='auto' url={this.props.formMedia} controls={true} />}
+               {
+                this.props.formMedia ? 
+                  <div>
+                    <FloatingActionButton mini={true} style={{float: 'right', marginRight: 15, marginTop: -20}} secondary={true} onClick={(e) => this.onClickRemove(e, this)}> <ContentRemove /></FloatingActionButton>
+                    <br />
+                  </div>
+                :
+                  null
+               }
 
         <div style={rootz}>
           <Grid container>
             
             <Grid item xs={3}>
-              <span style={label}>Performance </span>
+              <span style={label}>{this.props.locales.locales.performance}</span>
             </Grid>
             <Grid item xs={8}>
               <Slider 
@@ -197,7 +237,7 @@ class CustomForm extends Component {
             </Grid>
 
             <Grid item xs={3}>
-              <span style={label}>Generosity </span>
+              <span style={label}>{this.props.locales.locales.generosity}</span>
             </Grid>
             <Grid item xs={8}>
               <Slider 
@@ -215,7 +255,7 @@ class CustomForm extends Component {
             </Grid>
 
             <Grid item xs={3}>
-              <span style={label}>Technics </span>
+              <span style={label}>{this.props.locales.locales.technics}</span>
             </Grid>
             <Grid item xs={8}>
               <Slider 
@@ -234,7 +274,7 @@ class CustomForm extends Component {
 
 
             <Grid item xs={3}>
-              <span style={label}>Ambiant </span>
+              <span style={label}>{this.props.locales.locales.ambiant}</span>
             </Grid>
             <Grid item xs={8}>
               <Slider 
@@ -254,7 +294,10 @@ class CustomForm extends Component {
 
           </Grid>
         </div>
-              
+
+        <Divider />
+
+        <div style={leftAndRightPadded}>
             <TextField
               floatingLabelText={this.props.locales.locales.reviewBodyLabel}
               hintText={this.props.locales.locales.reviewHint}
@@ -267,45 +310,42 @@ class CustomForm extends Component {
               onChange={this.props.setBody}      
               fullWidth={true}       
             />
-            <br />
+         </div>
 
-              <div>
-               {isImage(this.props.formMedia) ? <img alt="" style={imageStyle} src={this.props.formMedia} /> : <ReactPlayer width='100%' height='auto' url={this.props.formMedia} controls={true} />}
-               {
-                this.props.formMedia ? 
-                  <FlatButton style={{float: 'right'}} label={this.props.locales.locales.deleteMedia} secondary={true} onClick={(e) => this.onClickRemove(e, this)} />
-                :
-                  null
-               }
-                <FlatButton
-                   primary={true}
+
+              <div style={{paddingTop: 10, textAlign: 'center', paddingLeft: 40, paddingRight: 40}}>
+              <span style={label}>{strings.formatString(this.props.locales.locales.enrich, {artistname: this.props.artistDetail.artistDetail.name})}</span><br/>
+              <br/>
+                <RaisedButton
+                   default={true}
+                   icon={<FileAttachment />}
                    containerElement='label'
                    label={this.props.formMedia ? this.props.locales.locales.changeMedia : this.props.locales.locales.addMedia}>
-
-                <ReactS3Uploader
-                  style={{display:"none"}}
-                  className="btn"
-                  htmlFor="flat-button-file"
-                  signingUrl={`/s3/sign`}
-                  signingUrlMethod="GET"
-                  accept="*"
-                  s3path={"/user_uploads/" + user_id + "/reviews/" + artist_id}
-                  getSignedUrl={this.getSignedUrl}
-                  onSignedUrl={(resp) => this.onSignedUrl(this, resp)}
-                  onProgress={(val) => this.onUploadProgress(this, val)}
-                  onError={(msg) => this.onUploadError(this, msg)}
-                  onFinish={(obj) => this.onUploadFinish(this, obj)}
-                  signingUrlHeaders={ this.headers }
-                  signingUrlQueryParams={{ user_id: user_id, artist_id: artist_id }}
-                  signingUrlWithCredentials={ true }      // in case when need to pass authentication credentials via CORS
-                  contentDisposition="auto"
-                  scrubFilename={(filename) => filename.replace(/[^\w\d_\-.]+/ig, '')}
-                  inputRef={cmp => this.uploadInput = cmp}
-                  autoUpload={true}
-                  /> 
-                </FlatButton>
+                  <ReactS3Uploader
+                    style={{display:"none"}}
+                    className="btn"
+                    htmlFor="flat-button-file"
+                    signingUrl={`/s3/sign`}
+                    signingUrlMethod="GET"
+                    accept="*"
+                    s3path={"/user_uploads/" + user_id + "/reviews/" + artist_id}
+                    getSignedUrl={this.getSignedUrl}
+                    onSignedUrl={(resp) => this.onSignedUrl(this, resp)}
+                    onProgress={(val) => this.onUploadProgress(this, val)}
+                    onError={(msg) => this.onUploadError(this, msg)}
+                    onFinish={(obj) => this.onUploadFinish(this, obj)}
+                    signingUrlHeaders={ this.headers }
+                    signingUrlQueryParams={{ user_id: user_id, artist_id: artist_id }}
+                    signingUrlWithCredentials={ true }      // in case when need to pass authentication credentials via CORS
+                    contentDisposition="auto"
+                    scrubFilename={(filename) => filename.replace(/[^\w\d_\-.]+/ig, '')}
+                    inputRef={cmp => this.uploadInput = cmp}
+                    autoUpload={true}
+                    /> 
+                </RaisedButton>
 
               </div>
+              <br />
 
           </Dialog>
      )

@@ -29,6 +29,7 @@ const translations = {
    switch:"Changer de langue",
    welcome:"Bienvenue!",
    reviews:'Profil de {username}',
+   enrich:"Afin d'améliorer votre retour d'expérience, nous vous recommendons de partager une image ou une vidéo de la prestation effectuée par {artistname}. Ce champ n'est pas obligatoire.",
    review:"Votre avis à propos de {name}",  
    reviewHint:"Parlez de vorte expérience!", 
    reviewBodyLabel:"Votre expérience", 
@@ -73,7 +74,10 @@ const translations = {
       p4:"Nous ne stockons pas vos informations personnelles sur nos serveurs, sauf si cela est nécessaire pour vous fournir un service. Ce que nous stockons, nous le protégerons par des moyens commercialement acceptables afin de protéger vos informations personnelles contre la perte ou le vol, ainsi que contre les attaques non autorisées. accès, divulgation, copie, utilisation ou modification.!)",
    },
    notFound: "Désolé, impossible de mettre la main sur ce que vous cherchez...",
-
+   performance: "Performance",
+   generosity: "Générosité",
+   technics: "Technicité",
+   ambiant: "Ambiance",
  },
  en:{
    login:"Login",
@@ -104,6 +108,7 @@ const translations = {
    welcome:"Welcome!",
    reviews:"{username}'s profile",
    review:"Your review for {name}",   
+   enrich:"In order to enrich your feedback, we encourage you in sharing an image or a video of your experience with {artistname}. Nevertheless, this field is not mendatory.",
    reviewHint:"Something you wanna share with the world!", 
    reviewBodyLabel:"Review text", 
    wanna:"Wanna leave a review?",
@@ -145,6 +150,10 @@ const translations = {
       p4:"We don’t store your personal information on our servers unless it’s required for providing a service to you. What we store, we’ll protect within commercially acceptable means to protect your personal information from loss or theft, as well as unauthorized access, disclosure, copying, use or modification.!)",
    },
    notFound: "Sorry, we can't find what you're looking for...",
+   performance: "Performance",
+   generosity: "Generosity",
+   technics: "Technicity",
+   ambiant: "Ambiant",
  }
 }
 const strings = new LocalizedStrings(translations);

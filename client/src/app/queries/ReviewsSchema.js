@@ -17,6 +17,7 @@ const artistDetailQuery = (gql`
                 author_display_name
                 author_profile_picture
 				body
+				total
                 score
                 generosity
                 technics

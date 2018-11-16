@@ -13,7 +13,7 @@ const newReviewMutation = (gql`
             media: $media
         })
         {
-            review{
+            review {
                 id
                 user_id
                 body
@@ -21,13 +21,13 @@ const newReviewMutation = (gql`
                 author_profile_picture
                 created_at
                 updated_at
+                total
                 score
                 generosity
                 technics
                 ambiant
                 media
             }
-            
         }
     }
 `);

@@ -82,9 +82,6 @@ class ArtistDetail extends Component {
 
     componentDidMount(){
         const ctx = this
-        console.log('HELLO Im MOUNTING')
-        // const id = this.props.match.params.id
-
         const subscription = this.state.observable.subscribe({
             next(data) {
                 if(data){
@@ -124,6 +121,7 @@ class ArtistDetail extends Component {
 
     render() {
         const artist = this.props.artistDetail.artistDetail
+
         return (
             <div>
                 {this.props.artistDetail.loading ? <EncoreLoader /> : 
@@ -165,15 +163,8 @@ class ArtistDetail extends Component {
                                         :
                                             <p>{artist.description_fr}</p>
                                         }
-
                                     </Grid>
-                                {/*
-                                    <Grid item xs={12} sm={12}>
-                                        <Taglist onClickTag={() => console.log('cool')} tags={artist.tags} />
-                                    </Grid> 
-                                */}
                                 </Grid>
-
                             </div>
                         </Paper>
 

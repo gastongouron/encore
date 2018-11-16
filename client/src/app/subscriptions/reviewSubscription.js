@@ -17,7 +17,11 @@ const reviewSubscription = (gql`
                 author_display_name
                 author_profile_picture
 				body
+                total
                 score
+                generosity
+                technics
+                ambiant
                 media
                 user_id
                 created_at

@@ -41,9 +41,11 @@ const ReviewListItem = (props) => {
 	    height: '100%',
 	}
 
-	const header = {
-		// padding:20,
-		// paddingTop: 20,
+	const notation = {
+		textAlign: 'center',
+		paddingTop: 10,
+		paddingBottom: 10,
+		padding:20,
 	}
 
 	const body = {
@@ -64,7 +66,7 @@ const ReviewListItem = (props) => {
 				</div>
 
 
-				<div style={header}>
+				<div>
 					<div style={{minWidth:'100%'}}>
 					<ListItem key={review.id} innerDivStyle={{ textDecoration: 'none', padding: 0, margin: 0}}>
 						<Link to={onUserProfile ? '/artists/'+ review.artist_id : '/user/'+ review.user_id}  style={{ textDecoration: 'none' }}>
@@ -80,13 +82,28 @@ const ReviewListItem = (props) => {
 								{props.locales.locales.justNow}
 							</span>
 				          }
-				          rightIcon={<div style={right}> {review.score} </div>}
+				          rightIcon={
+				          	<div style={right}>
+				          		{review.total}
+				          	</div>
+				          }
 				          leftAvatar={<Avatar src={onUserProfile ? review.artist_profile_picture : review.author_profile_picture} />}/>
 				         </Link>
 				       </ListItem>
 					</div>
 				</div>
+
 				<Divider />
+
+				<div style={notation}>
+					{props.locales.locales.performance} <b>{review.score}</b>&nbsp;—&nbsp;
+					{props.locales.locales.generosity} <b>{review.generosity}</b>&nbsp;—&nbsp;
+					{props.locales.locales.technics} <b>{review.technics}</b>&nbsp;—&nbsp;
+					{props.locales.locales.ambiant} <b>{review.ambiant}</b>			
+				</div>
+
+				<Divider />
+
 				<div>
 					{
 						review.media ? 
@@ -98,7 +115,7 @@ const ReviewListItem = (props) => {
 
 				<div style={body}>
                     { belongsToUser && onUserProfile ? 
-						<div  style={header}>
+						<div>
 
 
 							<RaisedButton 

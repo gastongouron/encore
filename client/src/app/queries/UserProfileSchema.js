@@ -25,6 +25,7 @@ const UserProfileQuery = (gql`
                 artist_name
                 artist_profile_picture
 				body
+                total
                 score
                 generosity
                 technics

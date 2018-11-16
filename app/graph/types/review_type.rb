@@ -9,6 +9,7 @@ Types::ReviewType = GraphQL::ObjectType.define do
   field :author_profile_picture, types.String
   field :artist_id, !types.ID
   field :artist_name, !types.String
+  field :total, !types.Float
   field :score, !types.Float
   field :generosity, !types.Float
   field :technics, !types.Float

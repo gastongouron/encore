@@ -21,7 +21,6 @@ export const onUpdate = (e, context) => {
     const ambiant = review.ambiant;
     const media = review.media;
 
-    // do validations...
     if(body!=='' && score !==''){
         context.props.client.mutate({
             mutation: updateMutation, 
@@ -40,6 +39,7 @@ export const onUpdate = (e, context) => {
 				context.setState({showModal:false})
             },
             (err) => {
+                console.log(err)
             	console.log('HANDLE ERROR!!!')
             }
         );
@@ -86,11 +86,14 @@ export const onSave = (e, context) => {
             }).then(
     	    (res) => {
     	        const newArr = res.data.newReview.review
+                console.log('RES')
+                console.log(newArr)
     	        context.props.addUserReview(newArr)
 			    context.setState({ showModal: false })
 				context.setState({ enabledButton: false })
     	    },
     	    (err) => { 
+                console.log(err)
             	console.log('HANDLE ERROR!!!')
     	    }
     	);

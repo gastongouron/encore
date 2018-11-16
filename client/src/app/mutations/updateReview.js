@@ -19,6 +19,7 @@ const updateMutation = (gql`
                 author_profile_picture
                 artist_profile_picture
 				body
+                total
                 score
                 generosity
                 technics

@@ -12,6 +12,11 @@ class Review < ApplicationRecord
 	belongs_to :artist
 	belongs_to :user
 
+	def total
+		values = [self.score, self.generosity, self.ambiant, self.technics]
+		return (values.sum / values.length).round(1)
+	end
+
 	def artist_name
 		return self.artist.name
 	end
