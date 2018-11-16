@@ -184,6 +184,7 @@ class CustomForm extends Component {
             contentStyle={customContentStyle}
             bodyStyle={{padding: 0}}
             open={this.props.onShow}
+            repositionOnUpdate={true}
             title={
               <div style={{padding: 22, paddingTop: 10, paddingBottom: 10, fontSize: 14, fontWeight: 500}}>
                 <span>{strings.formatString(this.props.locales.locales.review, {name: this.props.formTitle || this.props.artistDetail.artistDetail.name})}</span>

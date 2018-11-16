@@ -41,13 +41,6 @@ const ReviewListItem = (props) => {
 	    height: '100%',
 	}
 
-	const notation = {
-		textAlign: 'center',
-		paddingTop: 10,
-		paddingBottom: 10,
-		padding:20,
-	}
-
 	const body = {
 		padding: 20,
 		paddingTop: 20,
@@ -95,15 +88,6 @@ const ReviewListItem = (props) => {
 
 				<Divider />
 
-				<div style={notation}>
-					{props.locales.locales.performance} <b>{review.score}</b>&nbsp;—&nbsp;
-					{props.locales.locales.generosity} <b>{review.generosity}</b>&nbsp;—&nbsp;
-					{props.locales.locales.technics} <b>{review.technics}</b>&nbsp;—&nbsp;
-					{props.locales.locales.ambiant} <b>{review.ambiant}</b>			
-				</div>
-
-				<Divider />
-
 				<div>
 					{
 						review.media ? 
@@ -113,6 +97,7 @@ const ReviewListItem = (props) => {
 					}
 				</div>
 
+				<Divider />
 				<div style={body}>
                     { belongsToUser && onUserProfile ? 
 						<div>
@@ -127,6 +112,11 @@ const ReviewListItem = (props) => {
                     : 
                     	null
                    	}
+					{props.locales.locales.performance} <b>{review.score}</b>&nbsp;—&nbsp;
+					{props.locales.locales.generosity} <b>{review.generosity}</b>&nbsp;—&nbsp;
+					{props.locales.locales.technics} <b>{review.technics}</b>&nbsp;—&nbsp;
+					{props.locales.locales.ambiant} <b>{review.ambiant}</b>			
+					<br />
 					<p>{review.body}</p>
 
 				</div>
