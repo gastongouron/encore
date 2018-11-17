@@ -5050,6 +5050,11 @@ marked@^0.5.0:
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.5.1.tgz#062f43b88b02ee80901e8e8d8e6a620ddb3aa752"
   integrity sha512-iUkBZegCZou4AdwbKTwSW/lNDcz5OuRSl3qdcl31Ia0B2QPG0Jn+tKblh/9/eP9/6+4h27vpoh8wel/vQOV0vw==
 
+material-ui-country-flags@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/material-ui-country-flags/-/material-ui-country-flags-3.0.1.tgz#9f010861b476b94d2bc71bb2224862c11927bcef"
+  integrity sha1-nwEIYbR2uU0rxxuyIkhiwRknvO8=
+
 material-ui@^0.17.4:
   version "0.17.4"
   resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.17.4.tgz#193999ecb49c3ec15ae0abb4e90fdf9a7bd343e0"

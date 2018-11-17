@@ -18,6 +18,8 @@ import NotificationsIcon from 'material-ui/svg-icons/social/notifications'
 import IconButton from 'material-ui/IconButton'
 import notificationsSubscription from '../app/subscriptions/notificationsSubscription'
 import UserNotificationsQuery from '../app/queries/UserNotificationsSchema'
+import { Icon_Flag_FR, Icon_Flag_US } from 'material-ui-country-flags';
+
 import _ from 'underscore'
 
 const MainAppBar = styled(AppBar)`
@@ -130,7 +132,6 @@ class MainLayout extends Component {
           next(data) {
               if(data){
                 let counter = data.notificationsTicker.notifications.filter(function(x){return x["read"]==="false"}).length
-                console.log('HEADER NOTIFICATION UPDATED WITH: ', counter)
                 ctx.setState({counter: counter})
               }
           },
@@ -262,9 +263,13 @@ class MainLayout extends Component {
               />
               <MenuItem
                 onClick={this.onSwitchLanguage}
-                primaryText={strings.getLanguage()}
-                style={{color: palette.textColor}}
-              />
+                // primaryText={strings.getLanguage() === 'en' ? }
+                // style={{color: palette.textColor}}
+              >
+                <div style={{paddingTop: 10}}>
+                  {strings.getLanguage() === 'en' ? <Icon_Flag_US/> : <Icon_Flag_FR />}
+                </div>           
+              </MenuItem>
             </ToolbarGroup>
           </MainToolbar>        
         : 
@@ -283,8 +288,11 @@ class MainLayout extends Component {
           />
           <MenuItem
             onClick={this.drawerSwitchLanguage}
-            primaryText={strings.getLanguage()}
-          />
+          >
+            <div style={{paddingTop: 10}}>
+              {strings.getLanguage() === 'en' ? <Icon_Flag_US/> : <Icon_Flag_FR />}
+            </div>           
+          </MenuItem>
           {this.props.currentUser.isLoggedIn ? 
             <MenuItem primaryText={strings.logout} onClick={doLogout} />
           :
