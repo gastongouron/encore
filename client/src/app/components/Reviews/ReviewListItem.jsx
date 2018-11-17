@@ -14,6 +14,8 @@ import Avatar from 'material-ui/Avatar'
 import {List, ListItem} from 'material-ui/List'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentEdit from 'material-ui/svg-icons/image/edit';
+import Grid from '@material-ui/core/Grid'
+import LinearProgress from 'material-ui/LinearProgress';
 
 const ReviewListItem = (props) => {
 
@@ -50,6 +52,14 @@ const ReviewListItem = (props) => {
 	const paperStyle = { marginBottom: 20 };
 	const left = { float: 'left' }
 	const right = { float: 'right' }
+
+    const label = {
+      fontSize: 12,
+    }
+
+	const rootz = {
+	  flexGrow: 1,
+	}
 
 	return (
 			<Paper
@@ -97,28 +107,74 @@ const ReviewListItem = (props) => {
 					}
 				</div>
 
-				<Divider />
-				<div style={body}>
-                    { belongsToUser && onUserProfile ? 
-						<div>
+				<div >
+					<div style={body}>
+						<p>{review.body}</p>
+					</div>
+					<Divider />
+					<div style={body}>
+						<div style={rootz}>
+							<Grid container spacing={16}>
 
+								<Grid item xs={12} sm={6} md={3}>
+									<Grid container>
+										<Grid style={label} item xs={3} sm={3} md={5}>
+											{props.locales.locales.performance}	
+										</Grid> 
+										<Grid item xs={9} sm={9} md={7}>
+											<LinearProgress style={{marginTop: 8}} mode="determinate" value={review.score * 20} />
+										</Grid>
+									</Grid>
+								</Grid>
 
-							<RaisedButton 
-								style={{float: 'right', marginTop: -10}}
-								onClick={ () => onReviewSelect(review) }
-								default={true}
-								label={props.locales.locales.edit}/> 
+								<Grid item xs={12} sm={6} md={3}>
+									<Grid container>
+										<Grid style={label} item xs={3} sm={3} md={5}>
+											{props.locales.locales.generosity}	
+										</Grid> 
+										<Grid item xs={9} sm={9} md={7}>
+											<LinearProgress style={{marginTop: 8}} mode="determinate" value={review.generosity * 20} />
+										</Grid>
+									</Grid>
+								</Grid>
+
+								<Grid item xs={12} sm={6} md={3}>
+									<Grid container>
+										<Grid style={label} item xs={3} sm={3} md={5}>
+											{props.locales.locales.technics}	
+										</Grid> 
+										<Grid item xs={9} sm={9} md={7}>
+											<LinearProgress style={{marginTop: 8}} mode="determinate" value={review.technics * 20} />
+										</Grid>
+									</Grid>
+								</Grid>
+
+								<Grid item xs={12} sm={6} md={3}>
+									<Grid container>
+										<Grid style={label} item xs={3} sm={3} md={5}>
+											{props.locales.locales.ambiant}	
+										</Grid> 
+										<Grid item xs={9} sm={9} md={7}>
+											<LinearProgress style={{marginTop: 8}} mode="determinate" value={review.ambiant * 20} />
+										</Grid>
+									</Grid>
+								</Grid>
+
+			                    { belongsToUser && onUserProfile ? 
+									<Grid item xs={12}>
+										<RaisedButton 
+											style={{float: 'right', marginTop: -10}}
+											onClick={ () => onReviewSelect(review) }
+											default={true}
+											label={props.locales.locales.edit}/> 
+									</Grid>
+			                    : 
+			                    	null
+			                   	}
+							</Grid>
+
 						</div>
-                    : 
-                    	null
-                   	}
-					{props.locales.locales.performance} <b>{review.score}</b>&nbsp;—&nbsp;
-					{props.locales.locales.generosity} <b>{review.generosity}</b>&nbsp;—&nbsp;
-					{props.locales.locales.technics} <b>{review.technics}</b>&nbsp;—&nbsp;
-					{props.locales.locales.ambiant} <b>{review.ambiant}</b>			
-					<br />
-					<p>{review.body}</p>
-
+					</div>
 				</div>
 
 

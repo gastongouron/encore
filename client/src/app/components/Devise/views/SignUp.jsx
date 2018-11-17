@@ -8,6 +8,7 @@ import FileBase64 from './FileBase64';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import strings from '../../../locales/strings'
+import DatePicker from 'material-ui/DatePicker';
 
 const styles = {
   uploadButton: {
@@ -39,6 +40,7 @@ const adaptFileEventToValue = delegate => files => {
   delegate(files.base64);
 }
 
+
 const FileInput = ({ 
   input: { value: omitValue, onChange, onBlur, ...inputProps }, 
   meta: omitMeta, 
@@ -69,19 +71,17 @@ const SignUpFormz = reduxForm({
   // initialValues: {
   //   "locale": strings.getLanguage()
   // }
-})(({error, valid, submitting, submitSucceeded, locales, handleSubmit, onSubmit, auth: {messages: {signUpSucceeded: signUpSucceededMessage}, viewPlugin: {renderInput, SubmitButton, Form, FormError}}}) => {
+})(({error, valid, submitting, submitSucceeded, locales, handleSubmit, onSubmit, auth: {messages: {signUpSucceeded: signUpSucceededMessage}, viewPlugin: {renderInput, datePicker, SubmitButton, Form, FormError}}}) => {
   console.log(strings)
   if (submitSucceeded) {
     return <Redirect to={{
       pathname: '/artists',
       state: {
         // notice: signUpSucceededMessage
-        notice: strings.welcome
+        // notice: strings.welcome
       }}}
     />;
   }
-  console.log('WHEN ARE YOU RENDERING?')
-  console.log(locales)
 
   return (
     <Form onSubmit={handleSubmit(formAction(onSubmit))}>
@@ -111,6 +111,7 @@ const SignUpFormz = reduxForm({
         label={strings.password}
         validate={required}
       />
+
       <Field
         name="password_confirmation"
         type="password"
@@ -119,7 +120,33 @@ const SignUpFormz = reduxForm({
         validate={required}
       />
 
+{/*      <Field
+        name="city"
+        type="city"
+        component={renderInput}
+        label="City"
+        validate={required}
+      />
+
+      <Field
+        name="gender"
+        type="gender"
+        component={renderInput}
+        label="Gender"
+        validate={required}
+      />
+
+      <Field
+        name="birth_date"
+        type="birth_date"
+        component={DatePicker} format={null} hintText="What day is the event?"
+        label="Birth date"
+        validate={false}
+      />
+*/}
+
       <br />
+
       <Field 
         name="profile_picture" 
         component={FileInput} 

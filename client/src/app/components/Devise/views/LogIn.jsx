@@ -98,8 +98,10 @@ const Login = ({currentUser, locales, doLogin, location: {state: {alert, from: {
         </Heading>
         {alert && <Alert>{alert}</Alert>}
         <LoginForm locales={locales} onSubmit={submit} {...rest} />
+        {/*
         <br />
         <OauthView locales={locales}/>
+      */}
       </View>
     </Paper>
     </div>
