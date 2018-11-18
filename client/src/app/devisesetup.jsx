@@ -51,6 +51,10 @@ export const initDevise = () => {
         path: '/hello',
         linkText: strings.login
       },
+      // user: {
+      //   component: User,
+      //   path: '/edituser'
+      // },
       requestResetPassword: { 
         component: RequestResetPasswordContainer,
         linkText: strings.resetPassword
