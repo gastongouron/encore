@@ -18,7 +18,7 @@ import EncoreLoader from '../EncoreLoader'
 import Paper from 'material-ui/Paper'
 // import strings from '../../locales/strings'
 import RaisedButton from 'material-ui/RaisedButton';
-import Grid from '@material-ui/core/Grid'
+// import Grid from '@material-ui/core/Grid'
 import Divider from 'material-ui/Divider'
 import Subheader from 'material-ui/Subheader';
 import _ from 'underscore'
@@ -42,33 +42,10 @@ const paperStyle = {
   display: 'inline-block',
 };
 
-const inline = {
-    display: 'inline-block'
-}
-
-const clear = {
-    clear: 'both'
-}
-
-// const circle = {
-//   height: 100,
-//   width: 100,
-
-// };
 
 const right = {
     float: 'right'
 }
-
-const marginRight = {
-    display: 'inline-block',
-    marginRight: 16,
-}
-
-const rootz = {
-    flexGrow: 1,
-}
-
 
 class Profile extends Component {
     constructor(props){

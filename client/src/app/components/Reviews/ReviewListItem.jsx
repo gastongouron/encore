@@ -8,12 +8,12 @@ import ReactPlayer from 'react-player'
 import TimeAgo from 'react-timeago'
 import frenchStrings from 'react-timeago/lib/language-strings/fr'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
-import theme from '../../theme'
+// import theme from '../../theme'
 import Divider from 'material-ui/Divider';
 import Avatar from 'material-ui/Avatar'
-import {List, ListItem} from 'material-ui/List'
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentEdit from 'material-ui/svg-icons/image/edit';
+import {ListItem} from 'material-ui/List'
+// import FloatingActionButton from 'material-ui/FloatingActionButton';
+// import ContentEdit from 'material-ui/svg-icons/image/edit';
 import Grid from '@material-ui/core/Grid'
 import LinearProgress from 'material-ui/LinearProgress';
 
@@ -25,16 +25,6 @@ const ReviewListItem = (props) => {
 	const belongsToUser = (Number(userId) === Number(review.user_id))
 	const onUserProfile = props.match.includes('user')
 	const formatter = buildFormatter(frenchStrings)
-
-	const style = {
-	    objectFit: 'cover',
-	    width: 26,
-	    height: 26,
-	    borderRadius: 13,
-	    marginRight: 6,
-		float: 'left',
-		displat: 'block'
-	}
 
 	const imageStyle = {
 	    objectFit: 'cover',
@@ -50,7 +40,6 @@ const ReviewListItem = (props) => {
 	}
 
 	const paperStyle = { marginBottom: 20 };
-	const left = { float: 'left' }
 	const right = { float: 'right' }
 
     const label = {

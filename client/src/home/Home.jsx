@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { withAuth } from 'react-devise';
-import { ViewContainer } from '../shared';
+// import { ViewContainer } from '../shared';
 import { initLocales } from '../app/actions/locales'
 import { initArtists } from '../app/actions/artists'
 import { initUserReviews } from '../app/actions/reviews'

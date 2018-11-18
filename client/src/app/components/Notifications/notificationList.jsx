@@ -5,20 +5,9 @@ import _ from 'underscore'
 
 class NotificationsList extends Component {
 
-
-  sort(objects){
-    return _.sortBy(objects,function(node){
-      - (new Date(node.created_at).getTime());
-    });
-  }
-
-	// fetchMoreData = () => {
-	//     this.props.onFetch(20, this.props.artists.length)      	
-	// };
-
   render() {
 
-    const notifications = this.sort(this.props.notifications).reverse()
+    const notifications = this.props.notifications
 
     // CREATE FEW DIFFERENT TYPES OF NOTIFICATIOBN ITEMS SUCH AS:
     // FOLLOWS: YOU ARE NOW FOLLOWING ...

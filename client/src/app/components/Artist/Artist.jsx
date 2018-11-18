@@ -141,7 +141,7 @@ class ArtistDetail extends Component {
 
                                 <Grid style={padded} container>
                                     <Grid item xs={12}>
-                                        <h1><span style={{float:'left'}}>{artist.name}</span><span style={{float:'right'}}>{ Number(artist.reviews_count) != 0 ? (Math.round( artist.score * 10 ) / 10) : ""}</span></h1>
+                                        <h1><span style={{float:'left'}}>{artist.name}</span><span style={{float:'right'}}>{ Number(artist.reviews_count) !== 0 ? (Math.round( artist.score * 10 ) / 10) : ""}</span></h1>
                                         <br />
                                         <span><b>
                                         {

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {List, ListItem} from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
-import Subheader from 'material-ui/Subheader';
+// import Subheader from 'material-ui/Subheader';
 import { Link } from 'react-router-dom'
 import Divider from 'material-ui/Divider';
 import _ from 'underscore'

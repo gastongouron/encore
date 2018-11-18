@@ -14,11 +14,11 @@ import { initDevise } from '../app/devisesetup'
 import { StyledFooter } from '../shared'
 import updateUserMutation from '../app/mutations/updateUser'
 import Badge from 'material-ui/Badge';
-import NotificationsIcon from 'material-ui/svg-icons/social/notifications'
-import IconButton from 'material-ui/IconButton'
+// import NotificationsIcon from 'material-ui/svg-icons/social/notifications'
+// import IconButton from 'material-ui/IconButton'
 import notificationsSubscription from '../app/subscriptions/notificationsSubscription'
 import UserNotificationsQuery from '../app/queries/UserNotificationsSchema'
-import { Icon_Flag_FR, Icon_Flag_US } from 'material-ui-country-flags';
+import ReactCountryFlag from "react-country-flag";
 
 import _ from 'underscore'
 
@@ -204,7 +204,7 @@ class MainLayout extends Component {
     if (this.props.currentUser) {
       this.props.client.mutate({mutation: updateUserMutation, variables: {user_id: this.props.currentUser.user_id, locale: lang}}).then(
         (res) => {
-          console.log(res.data)
+
         },
         (err) => {
           console.log('Handle this error, N@W!')
@@ -228,7 +228,7 @@ class MainLayout extends Component {
           showMenuIconButton={ this.props.currentUser.isLoggedIn && (this.state.width < 500) ? true : false}
           title={<div>
                   <b>encore!</b>
-                  { (this.state.counter > 0) && (this.props.match.path != "/") ? 
+                  { (this.state.counter > 0) && (this.props.match.path !== "/") ? 
                     <Badge
                     badgeContent={this.state.counter}
                     secondary={true}
@@ -266,8 +266,8 @@ class MainLayout extends Component {
                 // primaryText={strings.getLanguage() === 'en' ? }
                 // style={{color: palette.textColor}}
               >
-                <div style={{paddingTop: 10}}>
-                  {strings.getLanguage() === 'en' ? <Icon_Flag_US/> : <Icon_Flag_FR />}
+                <div style={{marginTop: -3}}>
+                  {strings.getLanguage() === 'en' ? <ReactCountryFlag styleProps={{ width: '20px', height: '20px' }} code="us" svg/> : <ReactCountryFlag styleProps={{ width: '20px', height: '20px' }} code="fr" svg/>}
                 </div>           
               </MenuItem>
             </ToolbarGroup>
@@ -289,8 +289,8 @@ class MainLayout extends Component {
           <MenuItem
             onClick={this.drawerSwitchLanguage}
           >
-            <div style={{paddingTop: 10}}>
-              {strings.getLanguage() === 'en' ? <Icon_Flag_US/> : <Icon_Flag_FR />}
+            <div style={{marginTop: -3}}>
+                  {strings.getLanguage() === 'en' ? <ReactCountryFlag styleProps={{ width: '20px', height: '20px' }} code="us" svg/> : <ReactCountryFlag styleProps={{ width: '20px', height: '20px' }} code="fr" svg/>}
             </div>           
           </MenuItem>
           {this.props.currentUser.isLoggedIn ? 
@@ -315,7 +315,7 @@ class MainLayout extends Component {
             null
           :
           <StyledFooter>
-          { this.props.locales.locales.policy != undefined ? <Link to='/policy'>{this.props.locales.locales.policy.link}</Link> : undefined}
+          { this.props.locales.locales.policy !== undefined ? <Link to='/policy'>{this.props.locales.locales.policy.link}</Link> : undefined}
           </StyledFooter>
           }
           

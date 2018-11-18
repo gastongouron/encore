@@ -6,7 +6,7 @@ import {Redirect} from 'react-router-dom';
 import {reduxForm, Field, SubmissionError} from 'redux-form';
 // import {required, email} from 'react-devise/lib/views/validation';
 import {required, email} from './Validation';
-import {OauthView} from './OauthLinks'
+// import {OauthView} from './OauthLinks'
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 // import AuthLinks from './AuthLinks'

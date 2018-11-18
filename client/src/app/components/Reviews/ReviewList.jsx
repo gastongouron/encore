@@ -4,19 +4,13 @@ import _ from 'underscore'
 
 class Review extends Component {
 
-	constructor(props){
-		super(props)
-	}
-
-	sort(objects){
-		return _.sortBy(objects,function(node){
-		  - (new Date(node.created_at).getTime());
-		});
-	}
+	// constructor(props){
+	// 	super(props)
+	// }
 
 	render(){
 
-		const reviews = this.sort(this.props.reviews).reverse()
+		const reviews = this.props.reviews
 
 		if(reviews !== undefined){
 								

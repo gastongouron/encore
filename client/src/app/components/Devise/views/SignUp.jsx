@@ -8,7 +8,7 @@ import FileBase64 from './FileBase64';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import strings from '../../../locales/strings'
-import DatePicker from 'material-ui/DatePicker';
+// import DatePicker from 'material-ui/DatePicker';
 
 const styles = {
   uploadButton: {

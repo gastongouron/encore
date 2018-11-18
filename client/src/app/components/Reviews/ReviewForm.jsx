@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
-import FlatButton from 'material-ui/FlatButton'
+// import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
 import Slider from 'material-ui/Slider';
@@ -112,9 +112,7 @@ class CustomForm extends Component {
       ambiant: this.props.formAmbiantScore
     }
     for (var prop in form) {
-      console.log(prop)
-      console.log(form[prop]);
-      if (!form[prop]) {
+      if (!form[prop] && this.state.progres !== 0) {
         // Raise error
         return true
       }
@@ -167,7 +165,7 @@ class CustomForm extends Component {
 
     const customContentStyle = {
       width: '100%',
-      maxWidth: '460px',
+      maxWidth: '460px'
     };
 
     const disabled = this.shouldBeDisabled()
@@ -202,8 +200,6 @@ class CustomForm extends Component {
                 </Alert>
                <LinearProgress hidden={this.state.hiddenProgress} variant="determinate" value={this.state.progress} />
               </div>
-
-
 
               {isImage(this.props.formMedia) ? <img alt="" style={imageStyle} src={this.props.formMedia} /> : <ReactPlayer width='100%' height='auto' url={this.props.formMedia} controls={true} />}
                {

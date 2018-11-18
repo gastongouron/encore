@@ -36,7 +36,7 @@ const NotificationItem = (props) => {
 					{date}					
 				</Paper>
 				)
-			break;
+			
 		case 'unfollow':
 			return (
 				<Paper
@@ -46,7 +46,7 @@ const NotificationItem = (props) => {
 					{date}
 				</Paper>
 				)
-			break
+			
 		case 'recommend':
 			console.log(notification)
 			return (
@@ -57,7 +57,7 @@ const NotificationItem = (props) => {
 					{date}
 				</Paper>
 				)
-			break
+			
 
 		default:
 			console.log('unknown ' + expr + '.');
