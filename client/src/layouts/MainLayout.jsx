@@ -18,7 +18,8 @@ import Badge from 'material-ui/Badge';
 // import IconButton from 'material-ui/IconButton'
 import notificationsSubscription from '../app/subscriptions/notificationsSubscription'
 import UserNotificationsQuery from '../app/queries/UserNotificationsSchema'
-import ReactCountryFlag from "react-country-flag";
+import Flag from 'react-world-flags'
+
 
 import _ from 'underscore'
 
@@ -266,8 +267,8 @@ class MainLayout extends Component {
                 // primaryText={strings.getLanguage() === 'en' ? }
                 // style={{color: palette.textColor}}
               >
-                <div style={{marginTop: -3}}>
-                  {strings.getLanguage() === 'en' ? <ReactCountryFlag styleProps={{ width: '20px', height: '20px' }} code="us" svg/> : <ReactCountryFlag styleProps={{ width: '20px', height: '20px' }} code="fr" svg/>}
+                <div style={{marginTop: 3}}>
+                  {strings.getLanguage() === 'en' ? <Flag code="usa" height="16" /> : <Flag code="fra" height="16" />}
                 </div>           
               </MenuItem>
             </ToolbarGroup>
@@ -289,8 +290,8 @@ class MainLayout extends Component {
           <MenuItem
             onClick={this.drawerSwitchLanguage}
           >
-            <div style={{marginTop: -3}}>
-                  {strings.getLanguage() === 'en' ? <ReactCountryFlag styleProps={{ width: '20px', height: '20px' }} code="us" svg/> : <ReactCountryFlag styleProps={{ width: '20px', height: '20px' }} code="fr" svg/>}
+            <div style={{marginTop: 3}}>
+                  {strings.getLanguage() === 'en' ? <Flag code="usa" height="16" /> : <Flag code="fra" height="16" />}
             </div>           
           </MenuItem>
           {this.props.currentUser.isLoggedIn ? 

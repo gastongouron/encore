@@ -7,6 +7,8 @@ class SingleReviewValidator < ActiveModel::Validator
 end
 
 class Review < ApplicationRecord
+	default_scope { order("created_at ASC") }
+
 	include ActiveModel::Validations	
 	validates_with SingleReviewValidator
 	belongs_to :artist
