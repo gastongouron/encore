@@ -37,8 +37,10 @@ class Resolvers::ArtistsSearch
     # puts scope
 
     # scope.order('score').limit(value)
-
-    scope.order('random()').limit(value)
+    # scope.all.group_by({ |a| a.score }).limit(value)
+    # scope.order('updated_at').limit(value)
+    scope.includes(:reviews).order("reviews.created_at").limit(value)
+    # scope.find(:all, :include => [:review], :order => "review.created_at ASC")
   end
 
   def apply_skip(scope, value)
