@@ -43,7 +43,7 @@ class SocialList extends Component {
 
 			const followerItems = followers.map((follower) => {
 				return (
-					<ListItem key={follower.id} innerDivStyle={{ textDecoration: 'none', padding: 0, margin: 0}}>
+					<ListItem key={follower.id} onClick={() => this.props.updateUser(follower.id)} innerDivStyle={{ textDecoration: 'none', padding: 0, margin: 0}}>
 						<Link to={"/user/" + follower.id} replace style={{ textDecoration: 'none' }}>
 					      <ListItem
 					        primaryText={follower.display_name}
@@ -56,7 +56,7 @@ class SocialList extends Component {
 
 			const followingUserItems = followingUsers.map((followingUser) => {
 				return (
-					<ListItem key={followingUser.id} onClick={console.log('NICEEEE')} innerDivStyle={{ textDecoration: 'none', padding: 0, margin: 0}}>
+					<ListItem key={followingUser.id} onClick={() => this.props.updateUser(followingUser.id)} innerDivStyle={{ textDecoration: 'none', padding: 0, margin: 0}}>
 						<Link to={"/user/" + followingUser.id} style={{ textDecoration: 'none' }}>
 					      <ListItem
 					        primaryText={followingUser.display_name}

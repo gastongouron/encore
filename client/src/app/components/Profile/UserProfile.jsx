@@ -42,7 +42,6 @@ const paperStyle = {
   display: 'inline-block',
 };
 
-
 const right = {
     float: 'right'
 }
@@ -64,6 +63,7 @@ class Profile extends Component {
         this.removeMedia = unsetMedia.bind(this)
 
         this.onClickFollow.bind(this)
+        this.getUser.bind(this)
 
         this.state = {
             showModal: false,
@@ -78,8 +78,8 @@ class Profile extends Component {
         };
     }
 
-    getUser(){
-        this.props.client.networkInterface.query({query: UserProfileQuery, variables: {id: this.props.match.params.id }, fetchPolicy: 'network-only'})
+    getUser(id){
+        this.props.client.networkInterface.query({query: UserProfileQuery, variables: {id: id }, fetchPolicy: 'network-only'})
         .then(
             (res) => {
                 this.props.setUserReviews(res.data.user.reviews);
@@ -97,7 +97,7 @@ class Profile extends Component {
         this.props.loadingUserProfile();
         let observable = this.props.client.subscribe({ query: socialSubscription, variables: {user_id: this.props.match.params.id} })
         this.setState({observable: observable})
-        this.getUser()
+        this.getUser(this.props.match.params.id)
     }
  
     componentDidMount(){
@@ -165,11 +165,11 @@ class Profile extends Component {
                             { user.email?user.email:'' }
                         </div>
                         <div style={{padding: 16, paddingBottom: 0}}>
-                            {this.props.userInfo.isLoggedIn ? 
+                             {this.props.userInfo.isLoggedIn ? 
                                 this.onCurrentUserProfile() ? null : <RaisedButton style={right} disabled={this.state.disabled} default={this.alreadyFollows() ? true : false} primary={!this.alreadyFollows() ? true : false} onClick={ (e) => this.onClickFollow(e) } label={this.alreadyFollows() ? this.props.locales.locales.unfollow : this.props.locales.locales.follow}/> 
                             : 
                                 <RaisedButton style={right} secondary={true} onClick={ () => this.props.history.push('/users/getstarted') } label={this.props.locales.locales.follow}/>
-                            }
+                            } 
 
                             <Subheader style={{paddingLeft: 0}}>{ user !== null ? Object.keys(this.props.reviews.reviews).length + " experiences" : ""}</Subheader>
                         </div>
@@ -177,6 +177,7 @@ class Profile extends Component {
                         <div>
                             <SocialList 
                                 followingUsers={user !== null ? user.following_users : undefined}
+                                updateUser={userId => this.getUser(userId)}
                                 followers={user !== null ? user.followers : undefined}/>
                         </div>
                     </Paper>
