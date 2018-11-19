@@ -1,6 +1,7 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
+import { connect } from 'react-redux'
 
 const WithMainLayout = ({component: Component, ...more}) => {
   return <Route {...more} render={props => {
@@ -12,4 +13,4 @@ const WithMainLayout = ({component: Component, ...more}) => {
   }}/>;
 };
 
-export default WithMainLayout;
+export default connect(null, null)(WithMainLayout);

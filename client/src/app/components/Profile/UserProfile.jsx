@@ -78,13 +78,7 @@ class Profile extends Component {
         };
     }
 
-    componentWillMount(){
-        this.props.loadingUserReviews();
-        this.props.loadingUserProfile();
-
-        let observable = this.props.client.subscribe({ query: socialSubscription, variables: {user_id: this.props.match.params.id} })
-        this.setState({observable: observable})
-
+    getUser(){
         this.props.client.networkInterface.query({query: UserProfileQuery, variables: {id: this.props.match.params.id }, fetchPolicy: 'network-only'})
         .then(
             (res) => {
@@ -96,6 +90,14 @@ class Profile extends Component {
                 this.props.failedUserProfile(err.data);
             }
         );
+    }
+
+    componentWillMount(){
+        this.props.loadingUserReviews();
+        this.props.loadingUserProfile();
+        let observable = this.props.client.subscribe({ query: socialSubscription, variables: {user_id: this.props.match.params.id} })
+        this.setState({observable: observable})
+        this.getUser()
     }
  
     componentDidMount(){
@@ -140,7 +142,12 @@ class Profile extends Component {
     }
 
     render() {
-        const user = this.onCurrentUserProfile() ? this.props.userInfo : this.props.userProfile.userProfile
+
+        // this.getUser()
+        const user = this.props.userProfile.userProfile
+
+        console.log(this.props.userProfile)
+        console.log('--------')
 
         return (
             <div>
@@ -164,13 +171,13 @@ class Profile extends Component {
                                 <RaisedButton style={right} secondary={true} onClick={ () => this.props.history.push('/users/getstarted') } label={this.props.locales.locales.follow}/>
                             }
 
-                            <Subheader style={{paddingLeft: 0}}>{ this.props.userProfile.userProfile !== null ? Object.keys(this.props.reviews.reviews).length + " experiences" : ""}</Subheader>
+                            <Subheader style={{paddingLeft: 0}}>{ user !== null ? Object.keys(this.props.reviews.reviews).length + " experiences" : ""}</Subheader>
                         </div>
                         <Divider />
                         <div>
                             <SocialList 
-                                followingUsers={this.props.userProfile.userProfile !== null ? this.props.userProfile.userProfile.following_users : undefined}
-                                followers={this.props.userProfile.userProfile !== null ? this.props.userProfile.userProfile.followers : undefined}/>
+                                followingUsers={user !== null ? user.following_users : undefined}
+                                followers={user !== null ? user.followers : undefined}/>
                         </div>
                     </Paper>
                     <br />
@@ -181,7 +188,7 @@ class Profile extends Component {
                                     current={this.onCurrentUserProfile()}
                                     onReviewSelect={selectedReview =>this.show(selectedReview, this)}
                                     reviews={this.props.reviews.reviews}
-                                    user={this.props.userInfo}
+                                    user={user}
                                     match={this.props.match.url}
                                 />
                             </div>

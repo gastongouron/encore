@@ -21,9 +21,10 @@ const Routes = () => {
       <WithMainLayout exact path="/policy"      component={Policy} />
       <WithMainLayout exact path="/"            component={Home} />
       <WithMainLayout exact path="/artists/:id" component={Artist} />
+      <WithMainLayout exact path="/user/:id"    component={Profile} />
 
       <PrivateRoute   exact path="/artists"     layout={MainLayout} component={Artists} />
-      <PrivateRoute   exact path="/user/:id"    layout={MainLayout} component={Profile} />
+      {/*<PrivateRoute   exact path="/user/:id"    layout={MainLayout} component={Profile} />*/}
 
       <WithMainLayout component={NotFound} />
 
