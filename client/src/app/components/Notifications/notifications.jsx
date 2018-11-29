@@ -25,7 +25,6 @@ class Notifications extends Component {
         this.props.client.networkInterface.query({query: UserNotificationsQuery, variables: {id: this.props.userId }, fetchPolicy: 'network-only'})
         .then(
             (res) => {
-            	console.log(res)
                 this.props.setUserNotifications(res.data.user.notifications)
             },
             (err) => {
@@ -37,7 +36,7 @@ class Notifications extends Component {
     readAll(){
     	this.props.client.mutate({mutation: readNotifications, variables: {user_id: this.props.userId}}).then(
         (res) => {
-    		console.log(res)
+    		// console.log(res)
         },
         (err) => { }
         );

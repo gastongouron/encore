@@ -7,4 +7,9 @@ class Notification < ApplicationRecord
 		self.save!
 	end
 
+	def picture
+		id = self.author_id? ? self.author_id : self.follower_id
+		User.find(id.to_i).profile_picture
+	end
+
 end

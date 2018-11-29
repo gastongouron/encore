@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom'
 import TimeAgo from 'react-timeago'
 import frenchStrings from 'react-timeago/lib/language-strings/fr'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
-
+import Avatar from 'material-ui/Avatar'
+import Grid from '@material-ui/core/Grid'
 
 const NotificationItem = (props) => {
 
@@ -14,6 +15,7 @@ const NotificationItem = (props) => {
 	const color = notification.read === 'true' ? 'white' : '#EEF7FA'
 
 	const paperStyle = {
+	  display: "flex",
 	  background: color,
 	  textAlign: 'left',
       margin: 2,
@@ -22,9 +24,13 @@ const NotificationItem = (props) => {
 	  padding: 20
 	};
 
+	const rootz = {
+	  flexGrow: 1,
+	}
 
 	let expr = notification.kind
-	const date = <TimeAgo style={{float: 'right'}} date={notification.created_at} formatter={props.locales.locales._language === 'en' ? undefined : formatter}/>
+	const date = <TimeAgo style={{color: 'grey', fontSize: '0.77em'}} date={notification.created_at} formatter={props.locales.locales._language === 'en' ? undefined : formatter}/>
+	const avatar = <Avatar style={{marginRight: 10}} src={notification.picture ? notification.picture : null} />
 
 	switch (expr) {
 		case 'follow':
@@ -32,8 +38,12 @@ const NotificationItem = (props) => {
 				<Paper
 				style={paperStyle} zDepth={1} 
 				rounded={true} >
-					<Link to={"/user/" + notification.follower_id}>{notification.follower_display_name}</Link> {props.locales.locales.followedBy}.
-					{date}					
+					{avatar}
+					<div style={{display: "block"}}>
+						<Link to={"/user/" + notification.follower_id}>{notification.follower_display_name}</Link> {props.locales.locales.followedBy}.
+						<br />
+						{date}					
+					</div>
 				</Paper>
 				)
 			
@@ -42,19 +52,26 @@ const NotificationItem = (props) => {
 				<Paper
 				style={paperStyle} zDepth={1} 
 				rounded={true} >
-					<Link to={"/user/" + notification.follower_id}>{notification.follower_display_name}</Link> {props.locales.locales.unfollowedBy}.
-					{date}
+					{avatar}
+					<div style={{display: "block"}}>
+						<Link to={"/user/" + notification.follower_id}>{notification.follower_display_name}</Link> {props.locales.locales.unfollowedBy}.
+						<br />
+						{date}
+					</div>
 				</Paper>
 				)
 			
 		case 'recommend':
-			console.log(notification)
 			return (
 				<Paper
 				style={paperStyle} zDepth={1} 
 				rounded={true} >
-					<Link to={"/user/" + notification.author_id}>{notification.author_display_name}</Link> {props.locales.locales.recommend} <Link to={"/artists/" + notification.artist_id}>{notification.artist_name}</Link>.
-					{date}
+					{avatar}
+					<div style={{display: "block"}}>
+						<Link to={"/user/" + notification.author_id}>{notification.author_display_name}</Link> {props.locales.locales.recommend} <Link to={"/artists/" + notification.artist_id}>{notification.artist_name}</Link>.
+						<br />
+						{date}
+					</div>
 				</Paper>
 				)
 			

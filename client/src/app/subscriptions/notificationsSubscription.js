@@ -12,6 +12,7 @@ const notificationsSubscription = (gql`
                 artist_id
                 author_id
                 follower_display_name
+                picture
                 artist_name
                 author_display_name
                 created_at

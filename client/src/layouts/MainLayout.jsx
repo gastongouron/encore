@@ -19,8 +19,9 @@ import Badge from 'material-ui/Badge';
 import notificationsSubscription from '../app/subscriptions/notificationsSubscription'
 import UserNotificationsQuery from '../app/queries/UserNotificationsSchema'
 import Flag from 'react-world-flags'
-
-
+import { initUserProfile, loadingUserProfile, failedUserProfile, setUserProfile } from '../app/actions/userProfile'
+import { initUserReviews, loadingUserReviews, failedUserReviews, setUserReviews, updateUserReview, deleteUserReview, selectUserReview} from '../app/actions/reviews'
+import UserProfileQuery from '../app/queries/UserProfileSchema'
 import _ from 'underscore'
 
 const MainAppBar = styled(AppBar)`
@@ -47,6 +48,11 @@ const Main = styled.div`
 `;
 
 class UserMenuItem extends Component {
+
+  constructor(props){
+    super(props)
+  }
+
   state = {
     open: false
   }
@@ -63,6 +69,18 @@ class UserMenuItem extends Component {
       open: false
     });
   };
+
+  navigateToProfile = () => {
+    this.props.history.push("/user/" + this.props.currentUser.user_id)
+    this.props.client.networkInterface.query({query: UserProfileQuery, variables: {id: this.props.currentUser.user_id }, fetchPolicy: 'network-only'})
+    .then(
+        (res) => {
+            this.props.setUserProfile(res.data.user)
+        },
+        (err) => {
+        }
+    );
+  }
 
   render() {
     const {currentUser, logout, textColor} = this.props;
@@ -83,11 +101,7 @@ class UserMenuItem extends Component {
             onRequestClose={this.handleRequestClose}
           >
             <Menu style={{padding: '0px'}}>
-              <MenuItem primaryText={strings.profile}
-                containerElement={<Link to={"/user/" + currentUser.user_id}/>
-              }
-              onTouchTap={this.handleRequestClose}
-              />
+              <MenuItem onTouchTap={this.handleRequestClose} onClick={this.navigateToProfile}>{strings.profile}</MenuItem>
               <MenuItem primaryText={strings.logout} onTouchTap={logout} />
             </Menu>
           </Popover>
@@ -258,6 +272,9 @@ class MainLayout extends Component {
                 style={{color: palette.textColor}}
               />
               <UserMenuItem
+                history={this.props.history}
+                setUserProfile={this.props.setUserProfile}
+                client={this.props.client}
                 logout={doLogout}
                 currentUser={currentUser}
                 textColor={palette.textColor}
@@ -336,6 +353,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    setUserProfile: (user) => dispatch(setUserProfile(user)),
     setLocales: (locales) => dispatch(setLocales(locales)),
     doLogout: () => logout(dispatch)
   };

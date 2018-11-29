@@ -15,6 +15,7 @@ const UserNotificationsQuery = (gql`
                 author_id
                 artist_name
                 author_display_name
+                picture
                 created_at
             }
 	    }

@@ -11,6 +11,7 @@ Types::NotificationType = GraphQL::ObjectType.define do
   field :read, !types.String
   field :follower_display_name, types.String
   field :artist_name, types.String
+  field :picture, types.String
   field :author_display_name, types.String
   field :created_at, !types.String
   field :updated_at, types.String
