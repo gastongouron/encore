@@ -19,6 +19,8 @@ gem 'rails-i18n'
 gem 'devise'
 gem 'devise-jwt'
 gem 'administrate'
+gem 'jekyll', '~> 3.2'
+gem 'minima'
 
 # gem 'aws-sdk', '~> 3'
 gem 'fog'
