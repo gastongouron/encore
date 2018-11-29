@@ -22,6 +22,7 @@ import Flag from 'react-world-flags'
 import { initUserProfile, loadingUserProfile, failedUserProfile, setUserProfile } from '../app/actions/userProfile'
 import { initUserReviews, loadingUserReviews, failedUserReviews, setUserReviews, updateUserReview, deleteUserReview, selectUserReview} from '../app/actions/reviews'
 import UserProfileQuery from '../app/queries/UserProfileSchema'
+import { SocialIcon } from 'react-social-icons';
 import _ from 'underscore'
 
 const MainAppBar = styled(AppBar)`
@@ -335,15 +336,19 @@ class MainLayout extends Component {
       :
       <StyledFooter>
         <div className="footer">
-      { this.props.locales.locales.policy !== undefined ? 
-        <Link to='/policy'>{this.props.locales.locales.policy.link}</Link>
-      : 
-        undefined
-      }
-      &nbsp;—&nbsp;
-      <Link to="#">Contact us</Link>&nbsp;—&nbsp;
-      <Link to="#">About us</Link>
-      <Link style={{float: 'right'}} to="#">Blog</Link>
+          { this.props.locales.locales.policy !== undefined ? 
+            <Link to='/policy'>{this.props.locales.locales.policy.link}</Link>
+          : 
+            undefined
+          }
+          &nbsp;—&nbsp;
+          <Link to="#">Contact</Link>&nbsp;—&nbsp;
+          <Link to="#">Blog</Link>
+          <div style={{float: 'right', marginTop: -2}}>
+            <SocialIcon color="#FFFFFF" style={{height: 25, width: 25 }} network="twitter" url="https://twitter.com/gastongouron" />
+            <SocialIcon color="#FFFFFF" style={{height: 25, width: 25, marginLeft: "5px" }} network="instagram" url="https://www.instagram.com/tentsile" />
+            <SocialIcon color="#FFFFFF" style={{height: 25, width: 25, marginLeft: "5px" }} network="facebook" url="https://www.facebook.com/gastongouron" />
+          </div>
         </div>
       </StyledFooter>
       }

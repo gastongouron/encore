@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid'
 import Divider from 'material-ui/Divider';
 import Truncate from 'react-truncate';
 import theme from '../../theme'
+import Star from 'material-ui/svg-icons/toggle/star';
 
 const ArtistListItem = (props) => {
 
@@ -34,6 +35,7 @@ const ArtistListItem = (props) => {
 
 	const floatRight = {
 	  float: 'right',
+	  color: theme.palette.primary1Color,
 	}
 
 	const paperStyle = {
@@ -80,7 +82,10 @@ const ArtistListItem = (props) => {
 					        	</Grid>
 
 					        	<Grid item xs={3}>
-					        		<h1 style={floatRight}>{ Number(artist.reviews_count) !== 0 ? (Math.round( artist.score * 10 ) / 10) : ""}</h1>
+					        		<h1 style={floatRight}>
+										<Star color={theme.palette.primary1Color} viewBox="0 0 21 21"/>
+					        			{ Number(artist.reviews_count) !== 0 ? (Math.round( artist.score * 10 ) / 10) : ""}
+					        		</h1>
 					        	</Grid>
 					        </Grid>
 					        <Divider />
@@ -100,7 +105,6 @@ const ArtistListItem = (props) => {
 									<Taglist 
 										onClickTag={onClickTag}
 										tags={tags} />
-									
 						        </Grid>
 						    </Grid>
 

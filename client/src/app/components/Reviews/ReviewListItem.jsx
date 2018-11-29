@@ -16,6 +16,8 @@ import {ListItem} from 'material-ui/List'
 // import ContentEdit from 'material-ui/svg-icons/image/edit';
 import Grid from '@material-ui/core/Grid'
 import LinearProgress from 'material-ui/LinearProgress';
+import theme from '../../theme'
+import Star from 'material-ui/svg-icons/toggle/star';
 
 const ReviewListItem = (props) => {
 
@@ -40,7 +42,7 @@ const ReviewListItem = (props) => {
 	}
 
 	const paperStyle = { marginBottom: 20 };
-	const right = { float: 'right' }
+	const right = { float: 'right', clear: 'none'}
 
     const label = {
       fontSize: 12,
@@ -75,9 +77,10 @@ const ReviewListItem = (props) => {
 							</span>
 				          }
 				          rightIcon={
-				          	<div style={right}>
-				          		{review.total}
-				          	</div>
+				          		<div style={{display: 'flex', minWidth: '50px', color: theme.palette.primary1Color}}>
+					          		<Star color={theme.palette.primary1Color} viewBox="-4 2 31 31"/>
+					          		<b>{review.total}</b>
+				          		</div>
 				          }
 				          leftAvatar={<Avatar src={onUserProfile ? review.artist_profile_picture : review.author_profile_picture} />}/>
 				         </Link>

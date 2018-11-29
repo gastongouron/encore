@@ -33,12 +33,8 @@ class Resolvers::ArtistsSearch
   end
 
   def apply_first(scope, value)
-    # puts '-----------'
-    # puts scope
-
     # scope.order('score').limit(value)
-
-    scope.order('random()').limit(value)
+    scope.joins(:reviews).order('reviews.created_at DESC').limit(value)
   end
 
   def apply_skip(scope, value)
