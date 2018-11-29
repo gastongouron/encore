@@ -6,19 +6,19 @@ const StyledFooter = styled.div`
    width: 100%;
    padding: 20px;
    font-size: 500;
-   color: #FFFFFF;
+   color: #999999;
    bottom: 0;
-   background:rgba(0,0,0,0.2);
+   background:rgba(0,0,0,0.1);
    margin-top: -58px;
    div.footer {
 	margin: 0 auto;
    	maxWidth: 840px;
    }
    a {
-   	color: #FFFFFF;
+   	color: #000000;
    };
    a:hover {
-   	color: #FFFFFF;
+   	color: #000000;
    };
 `;
 

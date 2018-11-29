@@ -25,6 +25,15 @@ import UserProfileQuery from '../app/queries/UserProfileSchema'
 import { SocialIcon } from 'react-social-icons';
 import _ from 'underscore'
 
+
+const StyledSocialIcon = styled(SocialIcon)`
+   background: #ececec;
+   border-radius: 50%;
+   &:hover {
+    background: white;
+   }
+`;
+
 const MainAppBar = styled(AppBar)`
   &:hover {
     cursor: pointer;
@@ -345,9 +354,9 @@ class MainLayout extends Component {
           <Link to="#">Contact</Link>&nbsp;—&nbsp;
           <Link to="#">Blog</Link>
           <div style={{float: 'right', marginTop: -2}}>
-            <SocialIcon color="#FFFFFF" style={{height: 25, width: 25 }} network="twitter" url="https://twitter.com/gastongouron" />
-            <SocialIcon color="#FFFFFF" style={{height: 25, width: 25, marginLeft: "5px" }} network="instagram" url="https://www.instagram.com/tentsile" />
-            <SocialIcon color="#FFFFFF" style={{height: 25, width: 25, marginLeft: "5px" }} network="facebook" url="https://www.facebook.com/gastongouron" />
+            <StyledSocialIcon style={{height: 25, width: 25 }} network="twitter" url="https://twitter.com/gastongouron" />
+            <StyledSocialIcon style={{height: 25, width: 25, marginLeft: "5px"}} network="instagram" url="https://www.instagram.com/tentsile" />
+            <StyledSocialIcon style={{height: 25, width: 25, marginLeft: "5px"}} network="facebook" url="https://www.facebook.com/gastongouron" />
           </div>
         </div>
       </StyledFooter>
@@ -377,6 +386,3 @@ const mapDispatchToProps = dispatch => {
 const MainLayoutContainer = withApollo(connect(mapStateToProps, mapDispatchToProps)(MainLayout));
 
 export default MainLayoutContainer;
-
-
-
