@@ -31,7 +31,7 @@ plugins:
   - jekyll-feed
 
 source: 'blog_homepage'
-destination: 'public'
+destination: 'client/public/blog'
 keep_files: [assets]
 
 # Exclude from processing.
