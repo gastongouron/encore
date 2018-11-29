@@ -236,6 +236,7 @@ class MainLayout extends Component {
   render() {
     const {currentUser, doLogout, children, location: {state: {notice} = {}}, muiTheme: {palette}} = this.props;
     return (
+      <div>
       <Main style={{maxWidth: 840, margin: '0 auto'}}>
         <MainAppBar
           style={{background: '#F1F1F1', boxShadow: 'none', position: 'sticky', top: 0}}
@@ -327,17 +328,26 @@ class MainLayout extends Component {
 
           {notice && <Notice>{notice}</Notice>}
           {children}
-        </MainContainer>
-
-          {currentUser.isLoggedIn ? 
-            null
-          :
-          <StyledFooter>
-          { this.props.locales.locales.policy !== undefined ? <Link to='/policy'>{this.props.locales.locales.policy.link}</Link> : undefined}
-          </StyledFooter>
-          }
-          
+        </MainContainer>          
       </Main>
+      {currentUser.isLoggedIn ? 
+        null
+      :
+      <StyledFooter>
+        <div className="footer">
+      { this.props.locales.locales.policy !== undefined ? 
+        <Link to='/policy'>{this.props.locales.locales.policy.link}</Link>
+      : 
+        undefined
+      }
+      &nbsp;—&nbsp;
+      <Link to="#">Contact us</Link>&nbsp;—&nbsp;
+      <Link to="#">About us</Link>
+      <Link style={{float: 'right'}} to="#">Blog</Link>
+        </div>
+      </StyledFooter>
+      }
+      </div>
     );
   }
 }
