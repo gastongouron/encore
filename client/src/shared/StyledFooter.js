@@ -8,7 +8,7 @@ const StyledFooter = styled.div`
    font-size: 500;
    color: #FFFFFF;
    bottom: 0;
-   background:rgba(0,0,0,0.5);
+   background:rgba(0,0,0,0.2);
    margin-top: -58px;
    div.footer {
 	margin: 0 auto;
