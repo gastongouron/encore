@@ -21,27 +21,4 @@ class Artist < ApplicationRecord
 		self.tag_list
 	end
 
-	# def is_a_star
-	# 	self.tag_list.include?('Most reviewed')
-	# end
-
-	# def check_if_most_reviewed
-	# 	if Artist.joins(:reviews).group('artists.id').order('count(reviews.id) desc').limit(3).include?(self)
-	# 		puts "#{self.name} IS IN TOP!"
-	# 		self.is_a_star ? return : self.tag_list.add("Most reviewed")
-	# 	else
-	# 		puts "#{self.name} IS Not IN TOP anymore!"
-	# 		self.is_a_star ? self.tag_list.remove("Most reviewed") : return
-	# 	end
-	# 	self.save
-	# end
-
 end
-
-
-# Artist.all.each do |artist|
-# if artist.tag_list.include?('Most reviewed')
-# artist.tag_list.remove('Most reviewed')
-# artist.save
-# end
-# end

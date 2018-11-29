@@ -4,14 +4,13 @@ Rails.application.routes.draw do
     %i(
       artists
       reviews
+      posts
     ).each do |name|
       resources name, only: %i(index show new create edit update destroy)
     end
     resources :users
     root to: "users#index"
   end
-
-  # get '/blog', :to => redirect('/public/index.html')
 
   devise_for :users, path: :auth, controllers: {
     registrations:  'users/registrations'

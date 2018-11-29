@@ -29,11 +29,15 @@ markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
-  
+
 permalink: pretty
 source: 'blog_homepage'
 destination: 'client/public/blog/'
 keep_files: [assets]
+
+collections:
+  posts:
+    permalink: /posts/:title.html
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

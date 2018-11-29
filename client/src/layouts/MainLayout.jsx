@@ -23,6 +23,7 @@ import { initUserProfile, loadingUserProfile, failedUserProfile, setUserProfile 
 import { initUserReviews, loadingUserReviews, failedUserReviews, setUserReviews, updateUserReview, deleteUserReview, selectUserReview} from '../app/actions/reviews'
 import UserProfileQuery from '../app/queries/UserProfileSchema'
 import { SocialIcon } from 'react-social-icons';
+import Mailto from 'react-mailto'
 import _ from 'underscore'
 
 
@@ -351,8 +352,11 @@ class MainLayout extends Component {
             undefined
           }
           &nbsp;—&nbsp;
-          <Link to="#">Contact</Link>&nbsp;—&nbsp;
-          <Link to="#">Blog</Link>
+          <Mailto email="gastongouron@gmail.com" obfuscate={true}>
+            Contact
+          </Mailto>
+          &nbsp;—&nbsp;
+          <a href="/blog">Blog</a>
           <div style={{float: 'right', marginTop: -2}}>
             <StyledSocialIcon style={{height: 25, width: 25 }} network="twitter" url="https://twitter.com/gastongouron" />
             <StyledSocialIcon style={{height: 25, width: 25, marginLeft: "5px"}} network="instagram" url="https://www.instagram.com/tentsile" />

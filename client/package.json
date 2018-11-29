@@ -27,6 +27,7 @@
     "react-infinite-scroll-component": "^4.2.0",
     "react-loader-spinner": "^2.0.6",
     "react-localization": "^1.0.12",
+    "react-mailto": "^0.4.0",
     "react-material-icons": "^1.0.3",
     "react-player": "^1.6.6",
     "react-redux": "^5.0.4",

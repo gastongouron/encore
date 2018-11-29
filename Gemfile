@@ -21,7 +21,7 @@ gem 'devise-jwt'
 gem 'administrate'
 gem 'jekyll', '~> 3.2'
 gem 'minima'
-
+gem 'administrate-field-rich_text', git: 'git@github.com:gastongouron/administrate-field-rich_text.git'
 # gem 'aws-sdk', '~> 3'
 gem 'fog'
 
