@@ -356,7 +356,7 @@ class MainLayout extends Component {
             Contact
           </Mailto>
           &nbsp;—&nbsp;
-          <a href="/blog">Blog</a>
+          <Link to='/posts'>Blog</Link>
           <div style={{float: 'right', marginTop: -2}}>
             <StyledSocialIcon style={{height: 25, width: 25 }} network="twitter" url="https://twitter.com/gastongouron" />
             <StyledSocialIcon style={{height: 25, width: 25, marginLeft: "5px"}} network="instagram" url="https://www.instagram.com/tentsile" />

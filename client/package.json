@@ -9,6 +9,7 @@
     "actioncable": "^5.2.1",
     "apollo-boost": "^0.1.16",
     "apollo-client": "1.9.3",
+    "disqus-react": "^1.0.5",
     "exif-js": "^2.3.0",
     "immutability-helper": "^2.8.1",
     "is-image-filename": "^1.0.0",
