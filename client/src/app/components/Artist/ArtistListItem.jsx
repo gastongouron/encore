@@ -83,7 +83,11 @@ const ArtistListItem = (props) => {
 
 					        	<Grid item xs={3}>
 					        		<h1 style={floatRight}>
-										<Star color={theme.palette.primary1Color} viewBox="0 0 21 21"/>
+										{ Number(artist.reviews_count) !== 0 ? 
+											<Star color={theme.palette.primary1Color} viewBox="0 0 21 21"/>
+										:
+											null
+										}
 					        			{ Number(artist.reviews_count) !== 0 ? (Math.round( artist.score * 10 ) / 10) : ""}
 					        		</h1>
 					        	</Grid>

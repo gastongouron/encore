@@ -145,7 +145,11 @@ class ArtistDetail extends Component {
                                         <h1>
                                             <span style={{float:'left'}}>{artist.name}</span>
                                             <span style={{float:'right', color: theme.palette.primary1Color}}>
-                                                <Star color={theme.palette.primary1Color} viewBox="0 0 21 21"/>
+                                                { Number(artist.reviews_count) !== 0 ? 
+                                                    <Star color={theme.palette.primary1Color} viewBox="0 0 21 21"/>
+                                                :
+                                                    null
+                                                }
                                                 { Number(artist.reviews_count) !== 0 ? (Math.round( artist.score * 10 ) / 10) : ""} 
                                             </span>
                                         </h1>

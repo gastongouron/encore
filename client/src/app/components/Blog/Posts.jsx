@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withApollo } from 'react-apollo'
-import Disqus from 'disqus-react'
-import __ from 'lodash';
+import {Link} from 'react-router-dom';
 
 class Artists extends Component {
 
@@ -23,18 +22,9 @@ class Artists extends Component {
     }
 
     render() {
-        const disqusShortname = 'example';
-        const disqusConfig = {
-            url: '/posts/1',
-            identifier: 1,
-            title: 'cool',
-        };
         return (
-            <div> cool
-                <Disqus.CommentCount shortname={disqusShortname} config={disqusConfig}>
-                    Comments
-                </Disqus.CommentCount>
-                 <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+            <div> Post list<br/>
+                <Link to='/posts/1'>Post1</Link>
             </div>
         )
     }
