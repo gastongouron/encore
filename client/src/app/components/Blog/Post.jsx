@@ -25,7 +25,7 @@ class Artists extends Component {
     render() {
         const disqusShortname = 'encore-2';
         const disqusConfig = {
-            url: '/posts/1',
+            url: 'https://encore-playground.herokuapp.com/posts/1',
             identifier: 1,
             title: 'cool',
         };
