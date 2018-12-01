@@ -23,7 +23,7 @@ class Artists extends Component {
     }
 
     render() {
-        const disqusShortname = 'example';
+        const disqusShortname = 'encore';
         const disqusConfig = {
             url: '/posts/1',
             identifier: 1,
