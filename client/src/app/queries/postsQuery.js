@@ -7,6 +7,7 @@ const postsQuery = (gql`
           title
           body
           created_at
+          image_url
           author
       }
     }

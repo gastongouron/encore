@@ -14,21 +14,29 @@ module Admin
 
     def update
         super
-        img = params["post"]["image_url"]
+        img = params["post"]["image_url"]    
         if img
-            puts '---------------------------------------------'
-            puts params["post"]["original_filename"]
-            puts '---------------------------------------------'
-            puts img
-            puts '---------------------------------------------'
-            File.open(Rails.root.join('public', 'uploads', img.original_filename), 'wb') do |file|
-              file.write(img.read)
-            end
+
+            bucket = Rails.env.development? ? ENV['S3_BUCKET_DEVELOPMENT'] : ENV['S3_BUCKET_PRODUCTION']
+
+            storage = Fog::Storage.new(
+                provider: 'AWS',
+                aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+                aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+                region: ENV['AWS_REGION'],
+                path_style: true
+            )
+
+            path = "blog/post#{params[:id]}/#{img.original_filename}"
+            public_url = "https://#{bucket}.s3.amazonaws.com/#{path}"
+            directory = storage.directories.get(bucket)
+            uploaded = directory.files.create( key: path, body: img, public: true)
+            post = Post.find(params[:id])
+            post.image_url = public_url
+            post.save!
+    
         end
-      # post = Post.find(params[:id])
-      #   puts '-------------'
-      #   puts params
-      # post.update(params["post"])
+
     end
 
   end
