@@ -252,7 +252,7 @@ class MainLayout extends Component {
         <MainAppBar
           style={{background: '#F1F1F1', boxShadow: 'none', position: 'sticky', top: 0}}
           // style={{ background: 'white', boxShadow: 'none', position: 'sticky', top: 0}}
-          showMenuIconButton={ this.props.currentUser.isLoggedIn && (this.state.width < 500) ? true : false}
+          showMenuIconButton={ this.state.width < 500 ? true : false}
           title={<div>
                   <b>encore!</b>
                   { (this.state.counter > 0) && (this.props.match.path !== "/") ? 
@@ -277,7 +277,6 @@ class MainLayout extends Component {
         
           <MainToolbar style={{paddingRight:0}}>
             <ToolbarGroup>
-
               <MenuItem
                 containerElement={<Link to="/artists"/>}
                 primaryText={strings.artists}
@@ -304,18 +303,22 @@ class MainLayout extends Component {
           </MainToolbar>        
         : 
          
-         this.props.currentUser.isLoggedIn 
 
-         ?
         <Drawer open={this.state.open} docked={false} onRequestChange={(e) => this.closeDrawer(e)}>
+        {this.props.currentUser.isLoggedIn ? 
           <MenuItem
             onClick={this.drawerToggleProfile}
             primaryText={currentUser.first_name || currentUser.email}
           />
+          :
+          null
+          }
+
           <MenuItem
             onClick={this.drawerToggleArtists}
             primaryText={strings.artists}
           />
+          {this.props.currentUser.isLoggedIn ? <MenuItem primaryText={strings.logout} onClick={doLogout} /> : null }
           <MenuItem
             onClick={this.drawerSwitchLanguage}
           >
@@ -323,15 +326,9 @@ class MainLayout extends Component {
                   {strings.getLanguage() === 'en' ? <Flag code="usa" height="16" /> : <Flag code="fra" height="16" />}
             </div>           
           </MenuItem>
-          {this.props.currentUser.isLoggedIn ? 
-            <MenuItem primaryText={strings.logout} onClick={doLogout} />
-          :
-            null
-         }
         </Drawer> 
 
-         :
-          null
+
         }
         </MainAppBar>
         <MainContainer style={{margin: '0 auto'}}> 
@@ -352,15 +349,12 @@ class MainLayout extends Component {
             undefined
           }
           &nbsp;—&nbsp;
-          <Mailto email="gastongouron@gmail.com" obfuscate={true}>
-            Contact
-          </Mailto>
-          &nbsp;—&nbsp;
-          <Link to='/posts'>Blog</Link>
-          <div style={{float: 'right', marginTop: -2}}>
-            <StyledSocialIcon style={{height: 25, width: 25 }} network="twitter" url="https://twitter.com/gastongouron" />
-            <StyledSocialIcon style={{height: 25, width: 25, marginLeft: "5px"}} network="instagram" url="https://www.instagram.com/tentsile" />
-            <StyledSocialIcon style={{height: 25, width: 25, marginLeft: "5px"}} network="facebook" url="https://www.facebook.com/gastongouron" />
+          <Link to='/blog/posts'>Blog</Link>
+          <div style={{float: 'right', marginTop: -4}}>
+            <StyledSocialIcon style={{height: 28, width: 28 }} network="email" url="gastongouron@gmail.com" />
+            <StyledSocialIcon style={{height: 28, width: 28, marginLeft: "6px" }} network="twitter" url="https://twitter.com/gastongouron" />
+            <StyledSocialIcon style={{height: 28, width: 28, marginLeft: "6px"}} network="instagram" url="https://www.instagram.com/tentsile" />
+            <StyledSocialIcon style={{height: 28, width: 28, marginLeft: "6px"}} network="facebook" url="https://www.facebook.com/gastongouron" />
           </div>
         </div>
       </StyledFooter>

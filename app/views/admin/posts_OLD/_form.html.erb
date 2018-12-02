@@ -38,15 +38,10 @@ and renders all form fields for a resource's editable attributes.
 
   <% page.attributes.each do |attribute| -%>
     <div class="field-unit field-unit--<%= attribute.html_class %>">
-        <% unless attribute.name == "image_url" %>
-          <%= render_field attribute, f: f %>
-        <% else %>
-          <%= f.file_field :image_url %>
-        <% end %>
+      <%= render_field attribute, f: f %>
     </div>
+
   <% end -%>
-
-
 
   <div class="form-actions">
     <%= f.submit %>

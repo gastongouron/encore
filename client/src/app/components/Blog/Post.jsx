@@ -19,13 +19,14 @@ class Artists extends Component {
     }
 
 	componentWillMount(){
+        console.log(window.location.href)
 
     }
 
     render() {
         const disqusShortname = 'encore-2';
         const disqusConfig = {
-            url: 'https://encore-playground.herokuapp.com/posts/1',
+            url: window.location.href,
             identifier: 1,
             title: 'cool',
         };

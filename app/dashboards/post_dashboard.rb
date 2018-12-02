@@ -11,6 +11,8 @@ class PostDashboard < Administrate::BaseDashboard
     id: Field::Number,
     title: Field::String,
     body: Field::Text,
+    author: Field::String,
+    image_url: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -24,7 +26,7 @@ class PostDashboard < Administrate::BaseDashboard
     :id,
     :title,
     :body,
-    :created_at,
+    :author,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -33,6 +35,8 @@ class PostDashboard < Administrate::BaseDashboard
     :id,
     :title,
     :body,
+    :author,
+    :image_url,
     :created_at,
     :updated_at,
   ].freeze
@@ -43,6 +47,8 @@ class PostDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :title,
     :body,
+    :author,
+    :image_url,
   ].freeze
 
   # Overwrite this method to customize how posts are displayed
