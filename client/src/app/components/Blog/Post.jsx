@@ -52,7 +52,7 @@ class Post extends Component {
                         {/*<Disqus.CommentCount shortname={disqusShortname} config={disqusConfig}>
                             Comments
                         </Disqus.CommentCount>*/}
-                        <Disqus.DiscussionEmbed shortname="encore-2" config={{url: window.location.href, identifier: this.props.match.params.id, title: this.props.postDetail.post.title}} />
+                        <Disqus.DiscussionEmbed shortname="encore-2" config={{url: window.location.href, identifier: this.props.match.params.id }} />
                     </div> 
                 }
             </div>
