@@ -35,7 +35,7 @@ class Post extends Component {
         const disqusShortname = 'encore-2';
         const disqusConfig = {
             url: window.location.href,
-            identifier: this.props.postDetail.post.id,
+            identifier: this.props.match.params.id,
             title: this.props.postDetail.post.title,
         };
 
