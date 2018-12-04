@@ -17,9 +17,9 @@ export function failedPost(message) {
   }
 }
 
-export function setPost(post) {
+export function setPost(postDetail) {
   return {
     type: 'POSTDETAIL_LOADED',
-    post
+    postDetail
   }
 }
