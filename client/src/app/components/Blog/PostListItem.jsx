@@ -9,6 +9,7 @@ import theme from '../../theme'
 import TimeAgo from 'react-timeago'
 import frenchStrings from 'react-timeago/lib/language-strings/fr'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
+import Disqus from 'disqus-react'
 
 const PostListItem = (props) => {
 
@@ -29,7 +30,6 @@ const PostListItem = (props) => {
 
 	const floatRight = {
 	  float: 'right',
-	  color: theme.palette.primary1Color,
 	}
 
 	const paperStyle = {
@@ -63,6 +63,11 @@ const PostListItem = (props) => {
 					        		</h1>
 								{post.author}&nbsp;					        	
 								<TimeAgo style={{color: 'grey', fontSize: '0.77em'}} date={post.created_at} formatter={props.locales.locales._language === 'en' ? undefined : formatter}/>
+								<div style={floatRight}>
+		                        <Disqus.CommentCount shortname='encore-2' config={{ url: window.location.href, identifier: post.id, title: post.title}}>
+		                            Comments
+		                        </Disqus.CommentCount>
+		                        </div>
 					        	</Grid>
 					        </Grid>
 						</Grid>
