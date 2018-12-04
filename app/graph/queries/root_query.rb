@@ -18,6 +18,14 @@ RootQuery = GraphQL::ObjectType.define do
     })
   end
 
+  field :postDetail do
+    type Types::PostType
+    argument :id, !types.ID
+    resolve(->(_, args, _) {
+      Post.find(args[:id])
+    })
+  end
+
   # get all reviews
   field :reviews, types[Types::ReviewType] do
     resolve(->(_, _, _) {
