@@ -349,9 +349,10 @@ class MainLayout extends Component {
             undefined
           }
           &nbsp;—&nbsp;
+          <a href="mailto:gastongouron@gmail.com">Contact</a>
+          &nbsp;—&nbsp;
           <Link to='/blog/posts'>Blog</Link>
           <div style={{float: 'right', marginTop: -4}}>
-            <StyledSocialIcon style={{height: 28, width: 28 }} network="email" url="gastongouron@gmail.com" />
             <StyledSocialIcon style={{height: 28, width: 28, marginLeft: "6px" }} network="twitter" url="https://twitter.com/gastongouron" />
             <StyledSocialIcon style={{height: 28, width: 28, marginLeft: "6px"}} network="instagram" url="https://www.instagram.com/tentsile" />
             <StyledSocialIcon style={{height: 28, width: 28, marginLeft: "6px"}} network="facebook" url="https://www.facebook.com/gastongouron" />

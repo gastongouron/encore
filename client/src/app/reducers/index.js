@@ -10,6 +10,7 @@ import userProfile from './userProfile'
 import locales from './locales'
 import notifications from './notifications'
 import posts from './posts'
+import postDetail from './postDetail'
 
 export default apolloClient => combineReducers({
   ...reactDeviseReducers,
@@ -22,5 +23,6 @@ export default apolloClient => combineReducers({
   reviews,
   locales,
   notifications,
-  posts
+  posts,
+  postDetail
 });

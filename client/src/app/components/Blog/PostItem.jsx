@@ -9,7 +9,6 @@ import theme from '../../theme'
 import TimeAgo from 'react-timeago'
 import frenchStrings from 'react-timeago/lib/language-strings/fr'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
-// import Disqus from 'disqus-react'
 
 const PostListItem = (props) => {
 
@@ -46,12 +45,6 @@ const PostListItem = (props) => {
 	    height: 200,
 	}
 
-    const disqusShortname = 'encore-2';
-    const disqusConfig = {
-        url: window.location.href,
-        identifier: post.id,
-        title: post.title,
-    };
 
 	return (
 			<Paper
@@ -63,18 +56,17 @@ const PostListItem = (props) => {
 				        <Grid item xs={12} sm={12} md={12}>
 							<Grid style={padded} container>
 					        	<Grid style={floatLeft} item xs={12}>
-					        		<h1>
-						        		<Link style={{color: theme.palette.primary1Color}} to={'/blog/posts/'+ post.id}>
-						        			{post.title}
-					        			</Link>
-					        		</h1>
+					        		<h1 >
+						        		{post.title}
+									</h1>
 								{post.author}&nbsp;					        	
 								<TimeAgo style={{color: 'grey', fontSize: '0.77em'}} date={post.created_at} formatter={props.locales.locales._language === 'en' ? undefined : formatter}/>
-		                        {/*<Disqus.CommentCount shortname={disqusShortname} config={disqusConfig}>
-		                            Comments
-		                        </Disqus.CommentCount>*/}
 					        	</Grid>
 					        </Grid>
+							<img alt="" style={coverStyle} src={post.image_url}/>
+							<Grid style={padded} container>
+								<p dangerouslySetInnerHTML={{ __html: post.body }}/>
+							</Grid>
 						</Grid>
 				    </Grid>
 				</div>

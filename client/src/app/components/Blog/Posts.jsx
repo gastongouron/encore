@@ -9,10 +9,6 @@ import {Link} from 'react-router-dom';
 
 class Posts extends Component {
 
-    // Fetch all posts and display a list such as
-    // Date -> Title -> Body -> Author -> Image
-    // Add a onclick event to navigate to specific post route :)
-
     constructor(props){
         super(props);
         this.state = {
