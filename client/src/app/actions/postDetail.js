@@ -1,25 +1,25 @@
 export function initPost() {
   return {
-    type: 'POST_INIT'
+    type: 'POSTDETAIL_INIT'
   }
 }
 
 export function loadingPost() {
   return {
-    type: 'POST_LOADING'
+    type: 'POSTDETAIL_LOADING'
   }
 }
 
 export function failedPost(message) {
   return {
-    type: 'POST_ERROR',
+    type: 'POSTDETAIL_ERROR',
     message
   }
 }
 
 export function setPost(post) {
   return {
-    type: 'POST_LOADED',
+    type: 'POSTDETAIL_LOADED',
     post
   }
 }

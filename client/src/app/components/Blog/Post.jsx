@@ -21,23 +21,24 @@ class Post extends Component {
         this.props.loadingPost();
         this.props.client.query({query: postQuery, fetchPolicy: 'network-only', variables: {id: this.props.match.params.id}}).then(
             (res) => {
+                console.log(res.data.postDetail)
                 this.props.setPost(res.data.postDetail);
                 this.setState({post: res.data.postDetail})
             },
             (err) => {
                 this.props.failedPost(err.data);
             }
-        );        
+        );
+        console.log(this.props)        
     }
 
     render() {
-
-        // const disqusShortname = 'encore-2';
-        // const disqusConfig = {
-        //     url: window.location.href,
-        //     identifier: this.props.match.params.id,
-        //     title: this.props.postDetail.post.title,
-        // };
+        const disqusShortname = 'encore-2';
+        const disqusConfig = {
+            url: window.location.href,
+            identifier: this.props.match.params.id,
+            title: this.props.postDetail.post.title,
+        };
 
         return (
             <div> { this.props.postDetail.loading 
@@ -46,13 +47,12 @@ class Post extends Component {
 
                 : this.props.postDetail.error ? <h1>Error...</h1> : 
                     <div>
-
                         <PostItem post={this.props.postDetail.post} />
 
-                        {/*<Disqus.CommentCount shortname={disqusShortname} config={disqusConfig}>
+                        <Disqus.CommentCount shortname={disqusShortname} config={disqusConfig}>
                             Comments
-                        </Disqus.CommentCount>*/}
-                        <Disqus.DiscussionEmbed shortname="encore-2" config={{url: window.location.href, identifier: this.props.match.params.id }} />
+                        </Disqus.CommentCount>
+                        <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
                     </div> 
                 }
             </div>

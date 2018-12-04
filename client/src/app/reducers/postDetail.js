@@ -2,27 +2,27 @@ const initialState = {
     loading: false,
     error: false,
     message: '',
-    postDetail: []
+    postDetail: ''
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case 'POST_INIT':
+        case 'POSTDETAIL_INIT':
             return initialState
-        case 'POST_LOADING':
+        case 'POSTDETAIL_LOADING':
             return {
                 ...state,
                 error: false,
                 loading: true
             }
-        case 'POST_ERROR':
+        case 'POSTDETAIL_ERROR':
             return {
                 ...state,
                 error: true,
                 message: action.message,
                 loading: false
             }
-        case 'POST_LOADED':
+        case 'POSTDETAIL_LOADED':
             return {
                 ...state,
                 error: false,

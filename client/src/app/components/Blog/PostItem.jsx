@@ -10,8 +10,9 @@ import TimeAgo from 'react-timeago'
 import frenchStrings from 'react-timeago/lib/language-strings/fr'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
 
-const PostListItem = (props) => {
+const PostItem = (props) => {
 
+	console.log(props)
 	const post = props.post
 	const formatter = buildFormatter(frenchStrings)
 	
@@ -44,7 +45,6 @@ const PostListItem = (props) => {
 	    width: '100%',
 	    height: 200,
 	}
-
 
 	return (
 			<Paper
@@ -85,4 +85,4 @@ const mapStateToProps = state => {
      };
 };
   
-export default connect(mapStateToProps, null)(PostListItem)
+export default connect(mapStateToProps, null)(PostItem)
