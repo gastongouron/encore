@@ -32,12 +32,12 @@ class Post extends Component {
 
     render() {
 
-        const disqusShortname = 'encore-2';
-        const disqusConfig = {
-            url: window.location.href,
-            identifier: this.props.match.params.id,
-            title: this.props.postDetail.post.title,
-        };
+        // const disqusShortname = 'encore-2';
+        // const disqusConfig = {
+        //     url: window.location.href,
+        //     identifier: this.props.match.params.id,
+        //     title: this.props.postDetail.post.title,
+        // };
 
         return (
             <div> { this.props.postDetail.loading 
@@ -49,10 +49,10 @@ class Post extends Component {
 
                         <PostItem post={this.props.postDetail.post} />
 
-                        <Disqus.CommentCount shortname={disqusShortname} config={disqusConfig}>
+                        {/*<Disqus.CommentCount shortname={disqusShortname} config={disqusConfig}>
                             Comments
-                        </Disqus.CommentCount>
-                        <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+                        </Disqus.CommentCount>*/}
+                        <Disqus.DiscussionEmbed shortname="encore-2" config={{url: window.location.href, identifier: this.props.match.params.id, title: this.props.postDetail.post.title}} />
                     </div> 
                 }
             </div>
