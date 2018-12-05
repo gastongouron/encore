@@ -45,7 +45,6 @@ const PostListItem = (props) => {
 	    height: 200,
 	}
 
-
 	return (
 			<Paper
 				style={paperStyle} zDepth={1} 
@@ -73,7 +72,9 @@ const PostListItem = (props) => {
 						</Grid>
 				    </Grid>
 				</div>
-
+				<br/>
+				<br/>
+				<br/>
 			</Paper>
 		)
 
