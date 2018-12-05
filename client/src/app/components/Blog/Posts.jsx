@@ -22,7 +22,6 @@ class Posts extends Component {
         this.props.loadingPosts();
         this.props.client.query({query: postsQuery, fetchPolicy: 'network-only'}).then(
             (res) => {
-                console.log('resposne->>>>>>>>>>',res)
                 this.props.setPosts(res.data.posts);
                 this.setState({posts: res.data.posts})
             },

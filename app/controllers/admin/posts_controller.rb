@@ -11,6 +11,10 @@ module Admin
     end
 
     # Define a custom finder by overriding the `find_resource` method:
+    def new
+        super
+    end
+
     def create
         super
     end
