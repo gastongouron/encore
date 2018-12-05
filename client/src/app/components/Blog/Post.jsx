@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withApollo } from 'react-apollo'
-import Disqus from 'disqus-react'
 import { initPost, loadingPost, failedPost, setPost } from '../../actions/postDetail'
 import EncoreLoader from '../EncoreLoader'
 import postQuery from '../../queries/postQuery'
@@ -32,16 +31,6 @@ class Post extends Component {
     }
 
     render() {
-/*        const disqusShortname = 'encore-2';
-        const disqusConfig = {
-            url: window.location.href,
-            identifier: this.props.match.params.id,
-            title: this.props.postDetail.postDetail.title,
-        };
-                        <Disqus.CommentCount shortname={disqusShortname} config={disqusConfig}>
-                            Comments
-                        </Disqus.CommentCount>
-*/
         return (
             <div> { this.props.postDetail.loading 
                 ? 
@@ -50,9 +39,11 @@ class Post extends Component {
                 : this.props.postDetail.error ? <h1>Error...</h1> : 
                     <div>
                         <PostItem post={this.props.postDetail.postDetail} />
-                        <Disqus.DiscussionEmbed shortname='encore-2' config={{ url: window.location.href, identifier: this.props.match.params.id, title: this.props.postDetail.postDetail.title}} />
                     </div> 
                 }
+            <br/>
+            <br/>
+            <br/>
             </div>
 
         )

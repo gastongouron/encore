@@ -9,6 +9,7 @@ import theme from '../../theme'
 import TimeAgo from 'react-timeago'
 import frenchStrings from 'react-timeago/lib/language-strings/fr'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
+import Disqus from 'disqus-react'
 
 const PostItem = (props) => {
 
@@ -67,10 +68,13 @@ const PostItem = (props) => {
 							<Grid style={padded} container>
 								<p dangerouslySetInnerHTML={{ __html: post.body }}/>
 							</Grid>
+							<Divider/>
+							<Grid style={padded}>
+		                        <Disqus.DiscussionEmbed shortname='encore-2' config={{ url: window.location.href, identifier: post.id, title: post.title}} />
+							</Grid>
 						</Grid>
 				    </Grid>
 				</div>
-
 			</Paper>
 		)
 

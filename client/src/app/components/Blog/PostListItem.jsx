@@ -72,9 +72,7 @@ const PostListItem = (props) => {
 						</Grid>
 				    </Grid>
 				</div>
-				<br/>
-				<br/>
-				<br/>
+
 			</Paper>
 		)
 
