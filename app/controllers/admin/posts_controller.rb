@@ -17,6 +17,28 @@ module Admin
 
     def create
         super
+        post = Post.find_by(title: params["post"]["title"])
+        img = params["post"]["image_url"]    
+        if img
+
+            bucket = Rails.env.development? ? ENV['S3_BUCKET_DEVELOPMENT'] : ENV['S3_BUCKET_PRODUCTION']
+
+            storage = Fog::Storage.new(
+                provider: 'AWS',
+                aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+                aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+                region: ENV['AWS_REGION'],
+                path_style: true
+            )
+
+            path = "blog/post#{params[:id]}/#{img.original_filename}"
+            public_url = "https://#{bucket}.s3.amazonaws.com/#{path}"
+            directory = storage.directories.get(bucket)
+            uploaded = directory.files.create( key: path, body: img, public: true)
+            post.image_url = public_url
+            post.save!
+        end
+
     end
 
     def update
