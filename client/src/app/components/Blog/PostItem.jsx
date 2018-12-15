@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 import React from 'react'
 import Paper from 'material-ui/Paper'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Divider from 'material-ui/Divider';
-import Truncate from 'react-truncate';
-import theme from '../../theme'
+// import Truncate from 'react-truncate';
+// import theme from '../../theme'
 import TimeAgo from 'react-timeago'
 import frenchStrings from 'react-timeago/lib/language-strings/fr'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
@@ -29,10 +29,10 @@ const PostItem = (props) => {
 	  float: 'left',
 	}
 
-	const floatRight = {
-	  float: 'right',
-	  color: theme.palette.primary1Color,
-	}
+	// const floatRight = {
+	//   float: 'right',
+	//   color: theme.palette.primary1Color,
+	// }
 
 	const paperStyle = {
       margin: 2,

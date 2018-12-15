@@ -48,7 +48,6 @@ class Notifications extends Component {
 	    const subscription = this.state.observable.subscribe({
 	        next(data) {
 	            if(data){
-	            	console.log(data.notificationsTicker.notifications)
 	                ctx.props.setUserNotifications(data.notificationsTicker.notifications)
 	            }
 	        },

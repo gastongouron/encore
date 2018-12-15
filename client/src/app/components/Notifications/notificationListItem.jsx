@@ -6,7 +6,7 @@ import TimeAgo from 'react-timeago'
 import frenchStrings from 'react-timeago/lib/language-strings/fr'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
 import Avatar from 'material-ui/Avatar'
-import Grid from '@material-ui/core/Grid'
+// import Grid from '@material-ui/core/Grid'
 
 const NotificationItem = (props) => {
 
@@ -24,9 +24,9 @@ const NotificationItem = (props) => {
 	  padding: 20
 	};
 
-	const rootz = {
-	  flexGrow: 1,
-	}
+	// const rootz = {
+	//   flexGrow: 1,
+	// }
 
 	let expr = notification.kind
 	const date = <TimeAgo style={{color: 'grey', fontSize: '0.77em'}} date={notification.created_at} formatter={props.locales.locales._language === 'en' ? undefined : formatter}/>

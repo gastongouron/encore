@@ -56,7 +56,7 @@ class SocialList extends Component {
 
 			const followingUserItems = followingUsers.map((followingUser) => {
 				return (
-					<ListItem key={followingUser.id} onClick={console.log('NICEEEE')} innerDivStyle={{ textDecoration: 'none', padding: 0, margin: 0}}>
+					<ListItem key={followingUser.id} innerDivStyle={{ textDecoration: 'none', padding: 0, margin: 0}}>
 						<Link to={"/user/" + followingUser.id}  style={{ textDecoration: 'none' }}>
 					      <ListItem
 					        primaryText={followingUser.display_name}

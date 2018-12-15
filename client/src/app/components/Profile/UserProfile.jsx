@@ -93,7 +93,6 @@ class Profile extends Component {
     }
 
     componentWillMount(){
-        console.log('MOUNTING')
         this.props.loadingUserReviews();
         this.props.loadingUserProfile();
         let observable = this.props.client.subscribe({ query: socialSubscription, variables: {user_id: this.props.match.params.id} })
@@ -157,7 +156,7 @@ class Profile extends Component {
                             </Paper>
                             <h2 style={{marginTop:16, marginBottom: 0}}>
                                 {user.display_name}
-                                {/* strings.formatString(this.props.locales.locales.reviews, {username: user.display_name})*/}
+
                              </h2>
                             { user.email?user.email:'' }
                         </div>

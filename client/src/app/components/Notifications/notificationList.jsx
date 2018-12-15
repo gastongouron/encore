@@ -1,50 +1,54 @@
 import React, { Component } from "react";
 import NotificationItem from './notificationListItem'
 import _ from 'underscore'
+import { connect } from "react-redux";
+import { withApollo } from 'react-apollo'
+import Paper from 'material-ui/Paper'
 // import InfiniteScroll from "react-infinite-scroll-component";
+
+const paperStyle = {
+  // display: "flex",
+  textAlign: 'center',
+  margin: 2,
+  marginBottom: 20,
+  minWidth: '100%',
+  padding: 20,
+  paddingTop: 40,
+  paddingBottom: 40,
+};
+
 
 class NotificationsList extends Component {
 
   render() {
 
     const notifications = this.props.notifications
-
-    // CREATE FEW DIFFERENT TYPES OF NOTIFICATIOBN ITEMS SUCH AS:
-    // FOLLOWS: YOU ARE NOW FOLLOWING ...
-    // HAS BEEN FOLLOWED: ... IS NOW FOLLOWING YOU
-    // SOMEONE YOU FOLLOW... SHARED AN EXPERIENCE WITH ... ARTIST + LINK
-    // SOMEONE YOU FOLLOW... RECOMENDS THIS ARTIST TO YOU 
-
-    // <InfiniteScroll
-      // dataLength={this.props.notifications.length}
-      // next={this.fetchMoreData}
-      // hasMore={this.props.hasMore}
-      // loader={<h4 style={{textAlign: 'center', paddingBottom: 10}}>...</h4>}
-      // endMessage={
-      //     <p style={{textAlign: 'center'}}>
-      //       <b></b>
-      //     </p>
-      //  }>
-      //  {notifications.map((notification, index) => (
-      //     <NotificationItem
-      //       key={index}
-      //       notification={notification} 
-      //     />
-      //   ))}
-    // </InfiniteScroll>
+    console.log(notifications.length)
 
     return (
       <div>
-           {notifications.map((notification, index) => (
+
+           {notifications.length > 0 ? notifications.map((notification, index) => (
       			  <NotificationItem
       			  	key={index}
       			  	notification={notification} 
       			  />
-            ))}
-
+            )) : 
+            <Paper style={paperStyle} zDepth={1} rounded={true} >
+              { this.props.locales.locales.noNotifications}
+           </Paper>}
       </div>
     );
   }
 
 }  
-export default NotificationsList
+
+
+const mapStateToProps = state => {
+    return { 
+        locales: state.locales,
+    };
+};
+
+export default withApollo(connect(mapStateToProps, null)(NotificationsList));
+

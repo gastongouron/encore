@@ -21,10 +21,10 @@ import Star from 'material-ui/svg-icons/toggle/star';
 
 const ReviewListItem = (props) => {
 
-	const userId = props.userId
+	const userId = props.user.id
 	const review = props.review
 	const onReviewSelect = props.onReviewSelect
-	const belongsToUser = (Number(userId) === Number(review.user_id))
+	const belongsToUser = (userId === review.user_id)
 	const onUserProfile = props.match.includes('user')
 	const formatter = buildFormatter(frenchStrings)
 
@@ -42,7 +42,7 @@ const ReviewListItem = (props) => {
 	}
 
 	const paperStyle = { marginBottom: 20 };
-	const right = { float: 'right', clear: 'none'}
+	// const right = { float: 'right', clear: 'none'}
 
     const label = {
       fontSize: 12,
@@ -155,7 +155,7 @@ const ReviewListItem = (props) => {
 			                    { belongsToUser && onUserProfile ? 
 									<Grid item xs={12}>
 										<RaisedButton 
-											style={{float: 'right', marginTop: -10}}
+											// style={{float: 'right', marginTop: -10}}
 											onClick={ () => onReviewSelect(review) }
 											default={true}
 											label={props.locales.locales.edit}/> 

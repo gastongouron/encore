@@ -19,11 +19,13 @@ import Badge from 'material-ui/Badge';
 import notificationsSubscription from '../app/subscriptions/notificationsSubscription'
 import UserNotificationsQuery from '../app/queries/UserNotificationsSchema'
 import Flag from 'react-world-flags'
-import { initUserProfile, loadingUserProfile, failedUserProfile, setUserProfile } from '../app/actions/userProfile'
-import { initUserReviews, loadingUserReviews, failedUserReviews, setUserReviews, updateUserReview, deleteUserReview, selectUserReview} from '../app/actions/reviews'
+// import { initUserProfile, loadingUserProfile, failedUserProfile, setUserProfile } from '../app/actions/userProfile'
+import { setUserProfile } from '../app/actions/userProfile'
+// import { initUserReviews, loadingUserReviews, failedUserReviews, setUserReviews, updateUserReview, deleteUserReview, selectUserReview} from '../app/actions/reviews'
+
 import UserProfileQuery from '../app/queries/UserProfileSchema'
 import { SocialIcon } from 'react-social-icons';
-import Mailto from 'react-mailto'
+// import Mailto from 'react-mailto'
 import _ from 'underscore'
 
 
@@ -60,9 +62,9 @@ const Main = styled.div`
 
 class UserMenuItem extends Component {
 
-  constructor(props){
-    super(props)
-  }
+  // constructor(props){
+  //   super(props)
+  // }
 
   state = {
     open: false

@@ -62,7 +62,6 @@ module Admin
             uploaded = directory.files.create( key: path, body: img, public: true)
             post = Post.find(params[:id])
             post.image_url = public_url
-            puts post.image_url
             post.save!
     
         end

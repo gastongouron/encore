@@ -5,7 +5,7 @@ import { initPosts, loadingPosts, failedPosts, setPosts } from '../../actions/po
 import postsQuery from '../../queries/postsQuery'
 import EncoreLoader from '../EncoreLoader'
 import PostsList from './PostsList'
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 
 class Posts extends Component {
 

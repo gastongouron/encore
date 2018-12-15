@@ -78,6 +78,7 @@ const translations = {
    generosity: "Générosité",
    technics: "Technicité",
    ambiant: "Ambiance",
+   noNotifications: "Vous n'avez pas encore reçu de notifications!",
  },
  en:{
    login:"Login",
@@ -154,6 +155,7 @@ const translations = {
    generosity: "Generosity",
    technics: "Technicity",
    ambiant: "Ambiant",
+   noNotifications: "You don't have any notification yet",
  }
 }
 const strings = new LocalizedStrings(translations);

@@ -4,13 +4,14 @@ import _ from 'underscore'
 
 class Review extends Component {
 
-	// constructor(props){
-	// 	super(props)
-	// }
+	constructor(props){
+		super(props)
+	}
 
 	render(){
 
 		const reviews = this.props.reviews
+		const user = this.props.user
 
 		if(reviews !== undefined){
 								
@@ -20,7 +21,7 @@ class Review extends Component {
 						onReviewSelect={this.props.onReviewSelect}
 						key={review.id+Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5)}
 						match={this.props.match}
-						userId={this.props.user.user_id}
+						user={user}
 						review={review} 
 					/>
 				) 

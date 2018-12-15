@@ -3,8 +3,8 @@ import React from 'react'
 import Paper from 'material-ui/Paper'
 import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
-import Divider from 'material-ui/Divider';
-import Truncate from 'react-truncate';
+// import Divider from 'material-ui/Divider';
+// import Truncate from 'react-truncate';
 import theme from '../../theme'
 import TimeAgo from 'react-timeago'
 import frenchStrings from 'react-timeago/lib/language-strings/fr'
@@ -38,12 +38,12 @@ const PostListItem = (props) => {
 	};
 
 	
-	const coverStyle = {
-	    objectFit: 'cover',
-	    backgroundSize: 'cover',
-	    width: '100%',
-	    height: 200,
-	}
+	// const coverStyle = {
+	//     objectFit: 'cover',
+	//     backgroundSize: 'cover',
+	//     width: '100%',
+	//     height: 200,
+	// }
 
 	return (
 			<Paper
@@ -51,7 +51,6 @@ const PostListItem = (props) => {
 				rounded={true} >
 				<div style={rootz}>
 					<Grid container>
-
 				        <Grid item xs={12} sm={12} md={12}>
 							<Grid style={padded} container>
 					        	<Grid style={floatLeft} item xs={12}>
