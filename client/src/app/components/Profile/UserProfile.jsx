@@ -11,11 +11,16 @@ import ReviewForm from '../Reviews/ReviewForm'
 import SocialList from './SocialList'
 import EncoreLoader from '../EncoreLoader'
 import Paper from 'material-ui/Paper'
-import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider'
 import Subheader from 'material-ui/Subheader';
 import _ from 'underscore'
 import socialSubscription from '../../subscriptions/socialSubscription'
+
+import RaisedButton from 'material-ui/RaisedButton'
+import ReactS3Uploader from 'react-s3-uploader'
+import FileAttachment from 'material-ui/svg-icons/file/attachment';
+import ContentEdit from 'material-ui/svg-icons/image/edit';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
 
 const style = {
     objectFit: 'cover',
@@ -68,6 +73,7 @@ class Profile extends Component {
             disabled: false,
             observable: null,
             subscription: null,
+            profilePicture: null,
         };
     }
 
@@ -77,6 +83,7 @@ class Profile extends Component {
             (res) => {
                 this.props.setUserReviews(res.data.user.reviews);
                 this.props.setUserProfile(res.data.user)
+                this.setState({profilePicture: res.data.user.profile_picture})
             },
             (err) => {
                 this.props.failedUserReviews(err.data);
@@ -122,6 +129,10 @@ class Profile extends Component {
         );
     }
 
+    onUploadFinish(context, obj){
+        this.setState({profilePicture: obj.public})
+    } 
+
     alreadyFollows(){
         let followeeId = this.props.userInfo.user_id
         let exists = _.find( this.props.userProfile.userProfile.followers, function( follower, followee ){
@@ -145,8 +156,9 @@ class Profile extends Component {
                     <Paper>
                         <div style={{padding: 16, paddingBottom: 4, marginTop: 60, textAlign: 'center'}}>
                             <Paper style={paperStyle} zDepth={1} circle={true}>
-                                <img alt='...' style={style} src={user.profile_picture?user.profile_picture:''}/>
+                                <img alt='...' style={style} src={this.state.profilePicture}/>
                             </Paper>
+
                             <h2 style={{marginTop:16, marginBottom: 0}}>
                                 {user.display_name}
                                 {/* strings.formatString(this.props.locales.locales.reviews, {username: user.display_name})*/}
@@ -155,7 +167,38 @@ class Profile extends Component {
                         </div>
                         <div style={{padding: 16, paddingBottom: 0}}>
                              {this.props.userInfo.isLoggedIn ? 
-                                this.onCurrentUserProfile() ? null : <RaisedButton style={right} disabled={this.state.disabled} default={this.alreadyFollows() ? true : false} primary={!this.alreadyFollows() ? true : false} onClick={ (e) => this.onClickFollow(e) } label={this.alreadyFollows() ? this.props.locales.locales.unfollow : this.props.locales.locales.follow}/> 
+                                this.onCurrentUserProfile() ?  
+                                    <RaisedButton
+                                       style={right}
+                                       default={true}
+                                       icon={<ContentEdit />}
+                                       containerElement='label'
+                                       label={this.props.locales.locales.picture}
+                                       >
+                                      <ReactS3Uploader
+                                        style={{display:"none"}}
+                                        className="btn"
+                                        htmlFor="flat-button-file"
+                                        signingUrl={`/s3/sign`}
+                                        signingUrlMethod="GET"
+                                        accept="*"
+                                        s3path={"/user_profile/" + this.props.userInfo.user_id}
+                                        getSignedUrl={this.getSignedUrl}
+                                        // onSignedUrl={(resp) => this.onSignedUrl(this, resp)}
+                                        // onProgress={(val) => this.onUploadProgress(this, val)}
+                                        // onError={(msg) => this.onUploadError(this, msg)}
+                                        onFinish={(obj) => this.onUploadFinish(this, obj)}
+                                        signingUrlHeaders={ this.headers }
+                                        signingUrlQueryParams={{ user_id: this.props.userInfo.user_id }}
+                                        signingUrlWithCredentials={ true }      // in case when need to pass authentication credentials via CORS
+                                        contentDisposition="auto"
+                                        scrubFilename={(filename) => filename.replace(/[^\w\d_\-.]+/ig, '')}
+                                        // inputRef={cmp => this.uploadInput = cmp}
+                                        autoUpload={true}
+                                        /> 
+                                    </RaisedButton>                                
+                                : 
+                                <RaisedButton style={right} disabled={this.state.disabled} default={this.alreadyFollows() ? true : false} primary={!this.alreadyFollows() ? true : false} onClick={ (e) => this.onClickFollow(e) } label={this.alreadyFollows() ? this.props.locales.locales.unfollow : this.props.locales.locales.follow}/> 
                             : 
                                 <RaisedButton style={right} secondary={true} onClick={ () => this.props.history.push('/users/getstarted') } label={this.props.locales.locales.follow}/>
                             } 

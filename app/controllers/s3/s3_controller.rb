@@ -9,7 +9,17 @@ class S3::S3Controller < ApiController
 
     bucket = Rails.env.development? ? ENV['S3_BUCKET_DEVELOPMENT'] : ENV['S3_BUCKET_PRODUCTION']
 
-    folder = "user_uploads/#{user_id}/reviews/#{artist_id}"
+    if artist_id
+      folder = "user_uploads/#{user_id}/reviews/#{artist_id}"
+      public_url = "https://#{bucket}.s3.amazonaws.com/user_uploads/#{user_id}/reviews/#{artist_id}/#{filename}"
+    else
+      folder = "user_profile/#{user_id}"
+      public_url = "https://#{bucket}.s3.amazonaws.com/user_profile/#{user_id}/#{filename}"    
+      user = User.find(user_id)
+      user.profile_picture = public_url
+      user.save!
+    end
+
     target_path = "#{folder}/#{filename}"
 
     options = {path_style: true}
@@ -28,8 +38,7 @@ class S3::S3Controller < ApiController
       )
   
       bucket_url = storage.put_object_url(bucket, target_path, 15.minutes.from_now.to_time.to_i, headers, options)
-      public_url = "https://#{bucket}.s3.amazonaws.com/user_uploads/#{user_id}/reviews/#{artist_id}/#{filename}"
-      render json: { signedUrl: bucket_url, public: public_url } 
+      render json: { signedUrl: bucket_url, public: public_url }
 
     else
 
