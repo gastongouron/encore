@@ -35,7 +35,8 @@ class NotificationsList extends Component {
       			  />
             )) : 
             <Paper style={paperStyle} zDepth={1} rounded={true} >
-              { this.props.locales.locales.noNotifications}
+              <h2>{ this.props.locales.locales.noNotifications}</h2><br/>
+              <p>{ this.props.locales.locales.noNotificationsP1}</p>
            </Paper>}
       </div>
     );

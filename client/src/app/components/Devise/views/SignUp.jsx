@@ -8,7 +8,9 @@ import FileBase64 from './FileBase64';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import strings from '../../../locales/strings'
-// import DatePicker from 'material-ui/DatePicker';
+import DatePicker from 'material-ui/DatePicker';
+import Checkbox from 'material-ui/Checkbox'
+import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton'
 
 const styles = {
   uploadButton: {
@@ -40,6 +42,28 @@ const adaptFileEventToValue = delegate => files => {
   delegate(files.base64);
 }
 
+const renderDatePicker = ({ input, ...rest }) =>
+  <DatePicker
+    {...input}
+    {...rest}
+    valueSelected={input.value}
+    onChange={(event, value) => input.onChange(value)}
+  />
+
+const renderRadioGroup = ({ input, ...rest }) =>
+  <RadioButtonGroup
+    {...input}
+    {...rest}
+    valueSelected={input.value}
+    onChange={(event, value) => input.onChange(value)}
+  />
+
+const renderCheckbox = ({ input, label }) =>
+  <Checkbox
+    label={label}
+    checked={input.value ? true : false}
+    onCheck={input.onChange}
+  />
 
 const FileInput = ({ 
   input: { value: omitValue, onChange, onBlur, ...inputProps }, 
@@ -120,6 +144,20 @@ const SignUpFormz = reduxForm({
         validate={required}
       />
 
+    <Field name="employed" component={renderCheckbox} label="Employed"         validate={required}/>
+
+        <Field name="sex" component={renderRadioGroup}        validate={required}>
+          <RadioButton value="male" label="male" />
+          <RadioButton value="female" label="female" />
+        </Field>
+
+      <Field
+        name="birth_date"
+        component={renderDatePicker} hintText="What day is the event?"
+        validate={required}
+      />
+
+
 {/*      <Field
         name="city"
         type="city"
@@ -136,13 +174,6 @@ const SignUpFormz = reduxForm({
         validate={required}
       />
 
-      <Field
-        name="birth_date"
-        type="birth_date"
-        component={DatePicker} format={null} hintText="What day is the event?"
-        label="Birth date"
-        validate={false}
-      />
 */}
 
       <br />

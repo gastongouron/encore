@@ -78,7 +78,8 @@ const translations = {
    generosity: "Générosité",
    technics: "Technicité",
    ambiant: "Ambiance",
-   noNotifications: "Vous n'avez pas encore reçu de notifications!",
+   noNotifications: "Bienvenue sur encore!",
+   noNotificationsP1: "Vous n'avez pas encore reçu de notification! Vous recevez des notifications lorsque une personne que vous suivez donne son avis à propos d'un artiste ainsi que lors de l'acquisition d'un nouveau follower!"
  },
  en:{
    login:"Login",
@@ -156,6 +157,7 @@ const translations = {
    technics: "Technicity",
    ambiant: "Ambiant",
    noNotifications: "You don't have any notification yet",
+   noNotificationsP1: "You haven't received a notification yet! You get notified when someone you follow shares an experience or when someone follows you!"
  }
 }
 const strings = new LocalizedStrings(translations);
