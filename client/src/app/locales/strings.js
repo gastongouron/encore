@@ -62,7 +62,10 @@ const translations = {
    followedBy: " vous suis désormais",
    unfollowedBy: " à cessé de vous suivre",
    recommend: "vient de partager une expérience à propos de ",
-
+   male: "Mr.",
+   female: "Mme.",
+   birthDate: "Date de naissance",
+   tos: "J'accepte les conditions d'utilisation",
    people: "personnes",
    person: "personne",
    policy: {
@@ -143,6 +146,10 @@ const translations = {
    recommend: "shared an experience about ",
    people: "people",
    person: "person",
+   male: "Mr.",
+   female: "Mrs.",
+   birthDate: "Birth date",
+   tos: "I accept terms of service",
    policy: {
       link:"Privacy policy",
       title:"Encore: Privacy Policy",

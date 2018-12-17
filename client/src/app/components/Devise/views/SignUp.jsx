@@ -65,20 +65,20 @@ const renderCheckbox = ({ input, label }) =>
     onCheck={input.onChange}
   />
 
-const FileInput = ({ 
-  input: { value: omitValue, onChange, onBlur, ...inputProps }, 
-  meta: omitMeta, 
-  ...props 
-}) => {
-  return (
-      <FileBase64
-        style={styles.uploadButton}
-        onChange={adaptFileEventToValue(onChange)}
-        onBlur={adaptFileEventToValue(onBlur)}
-        multiple={ false }
-        onDone={adaptFileEventToValue(onChange)} />
-    )
-};
+// const FileInput = ({ 
+//   input: { value: omitValue, onChange, onBlur, ...inputProps }, 
+//   meta: omitMeta, 
+//   ...props 
+// }) => {
+//   return (
+//       <FileBase64
+//         style={styles.uploadButton}
+//         onChange={adaptFileEventToValue(onChange)}
+//         onBlur={adaptFileEventToValue(onBlur)}
+//         multiple={ false }
+//         onDone={adaptFileEventToValue(onChange)} />
+//     )
+// };
 
 const SubmitButtonCustom = ({label, disabled}) => (
   <RaisedButton
@@ -109,6 +109,13 @@ const SignUpFormz = reduxForm({
 
   return (
     <Form onSubmit={handleSubmit(formAction(onSubmit))}>
+  
+      <br/>
+  
+      <Field name="gender" component={renderRadioGroup} validate={required}>
+        <RadioButton value="male" label={strings.male} />
+        <RadioButton value="female" label={strings.female} />
+      </Field>
 
       <Field
         name="first_name"
@@ -144,21 +151,20 @@ const SignUpFormz = reduxForm({
         validate={required}
       />
 
-    <Field name="employed" component={renderCheckbox} label="Employed"         validate={required}/>
-
-        <Field name="sex" component={renderRadioGroup}        validate={required}>
-          <RadioButton value="male" label="male" />
-          <RadioButton value="female" label="female" />
-        </Field>
-
+      <br/>
       <Field
         name="birth_date"
-        component={renderDatePicker} hintText="What day is the event?"
+        component={renderDatePicker} hintText={strings.birthDate}
         validate={required}
       />
+      <br/>
 
 
-{/*      <Field
+{/*      
+
+      <Field name="tos" component={renderCheckbox} label={strings.tos} validate={required}/>
+
+      <Field
         name="city"
         type="city"
         component={renderInput}
@@ -174,8 +180,6 @@ const SignUpFormz = reduxForm({
         validate={required}
       />
 
-*/}
-
       <br />
 
       <Field 
@@ -187,6 +191,9 @@ const SignUpFormz = reduxForm({
 
       <br />
       <br />
+
+*/}
+
       <SubmitButtonCustom
         label={ submitting ? locales.locales.logging : locales.locales.sign }
         disabled={!valid || submitting}
