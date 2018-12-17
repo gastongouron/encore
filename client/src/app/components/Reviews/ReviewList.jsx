@@ -22,7 +22,7 @@ class Review extends Component {
 					<ReviewListItem
 						onReviewSelect={this.props.onReviewSelect}
 						key={review.id+Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5)}
-						match={this.props.match.url}
+						match={this.props.match}
 						belongsToUser={this.props.onCurrentUserProfile}
 						review={review} 
 					/>

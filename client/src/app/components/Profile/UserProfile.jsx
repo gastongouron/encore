@@ -187,7 +187,7 @@ class Profile extends Component {
                                     onReviewSelect={selectedReview =>this.show(selectedReview, this)}
                                     reviews={this.props.reviews.reviews}
                                     onCurrentUserProfile={this.onCurrentUserProfile()}
-                                    match={this.props.match}
+                                    match={this.props.match.url}
                                 />
                             </div>
                         </div>

@@ -25,6 +25,8 @@ class User < ApplicationRecord
       last_name: last_name,
       display_name: display_name,
       profile_picture: profile_picture,
+      birth_date: birth_date,
+      gender: gender,
       locale: locale || I18n.locale
     }
   end
