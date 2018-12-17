@@ -24,6 +24,7 @@ const style = {
     marginTop: 10,
     borderRadius: 50,
     background: 'white',
+    padding: -10
 }
 
 const paperStyle = {
