@@ -21,10 +21,10 @@ import Star from 'material-ui/svg-icons/toggle/star';
 
 const ReviewListItem = (props) => {
 
-	const userId = props.user.id
+
 	const review = props.review
 	const onReviewSelect = props.onReviewSelect
-	const belongsToUser = (userId === review.user_id)
+	const belongsToUser = props.belongsToUser
 	const onUserProfile = props.match.includes('user')
 	const formatter = buildFormatter(frenchStrings)
 

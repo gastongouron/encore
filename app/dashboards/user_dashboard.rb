@@ -15,6 +15,8 @@ class UserDashboard < Administrate::BaseDashboard
     last_name: Field::String,
     profile_picture: Field::Text,
     email: Field::String,
+    birth_date: Field::DateTime,
+    gender: Field::String,
     encrypted_password: Field::String,
     reset_password_token: Field::String,
     reset_password_sent_at: Field::DateTime,
@@ -44,6 +46,9 @@ class UserDashboard < Administrate::BaseDashboard
     :artists,
     :id,
     :first_name,
+    :last_name,
+    :gender,
+    :birth_date,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -54,6 +59,8 @@ class UserDashboard < Administrate::BaseDashboard
     :id,
     :first_name,
     :last_name,
+    :gender,
+    :birth_date,
     :profile_picture,
     :email,
     :encrypted_password,
