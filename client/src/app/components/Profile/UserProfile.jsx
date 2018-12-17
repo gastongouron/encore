@@ -3,26 +3,18 @@ import { connect } from 'react-redux'
 import { withApollo } from 'react-apollo'
 import { initUserReviews, loadingUserReviews, failedUserReviews, setUserReviews, updateUserReview, deleteUserReview, selectUserReview} from '../../actions/reviews'
 import { initUserProfile, loadingUserProfile, failedUserProfile, setUserProfile } from '../../actions/userProfile'
-
 import followUserMutation from '../../mutations/followUser'
-
 import { onUpdate, onDelete, setPerformanceScore, setGenerosityScore, setTechnicsScore, setAmbiantScore, setBody, setMedia, unsetMedia, handleModalShow, handleModalClose} from '../Reviews/Utils'
-
 import UserProfileQuery from '../../queries/UserProfileSchema'
 import ReviewList from '../Reviews/ReviewList'
 import ReviewForm from '../Reviews/ReviewForm'
-
 import SocialList from './SocialList'
-
 import EncoreLoader from '../EncoreLoader'
 import Paper from 'material-ui/Paper'
-// import strings from '../../locales/strings'
 import RaisedButton from 'material-ui/RaisedButton';
-// import Grid from '@material-ui/core/Grid'
 import Divider from 'material-ui/Divider'
 import Subheader from 'material-ui/Subheader';
 import _ from 'underscore'
-
 import socialSubscription from '../../subscriptions/socialSubscription'
 
 const style = {
