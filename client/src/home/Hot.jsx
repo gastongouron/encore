@@ -11,13 +11,11 @@ const Home = ({currentUser, locales, auth: {AuthLinks}, initLocales, initArtists
 
   return (
     <div>
-        {/* <h1>{locales.locales.welcome}</h1> */}
         { currentUser.isLoggedIn ? 
           <Notifications userId={currentUser.user_id}/>
           :
           null
         }
-
         <AuthLinks />
     </div>
   );

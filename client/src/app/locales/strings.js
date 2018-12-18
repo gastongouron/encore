@@ -84,6 +84,7 @@ const translations = {
    noNotifications: "Bienvenue sur encore!",
    noNotificationsP1: "Vous recevez une notification lorsque une personne que vous suivez donne son avis à propos d'un artiste ainsi que lors de l'acquisition d'un nouveau follower!",
    picture: "photo de profil",
+   hot: "Hot",
  },
  en:{
    login:"Login",
@@ -167,6 +168,7 @@ const translations = {
    noNotifications: "You haven't been notified yet!",
    noNotificationsP1: "You get notified when someone you follow shares an experience or when someone follows you!",
    picture: "profile picture",
+   hot: "Hot",
  }
 }
 const strings = new LocalizedStrings(translations);

@@ -48,6 +48,7 @@ const renderDatePicker = ({ input, ...rest }) =>
     {...rest}
     valueSelected={input.value}
     onChange={(event, value) => input.onChange(value)}
+    value={input.value !== '' ? input.value : null}
   />
 
 const renderRadioGroup = ({ input, ...rest }) =>

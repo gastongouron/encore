@@ -151,7 +151,7 @@ class Profile extends Component {
 
         return (
             <div>
-                {this.state.loading ? <EncoreLoader /> : this.props.reviews.error ? <h1>Error...</h1> : 
+                {(this.state.loading || this.props.userProfile.loading) ? <EncoreLoader /> : this.props.reviews.error ? <h1>Error...</h1> : 
                 <div>                
                     <Paper>
                         <div style={{padding: 16, paddingBottom: 4, marginTop: 60, textAlign: 'center'}}>
@@ -160,10 +160,10 @@ class Profile extends Component {
                             </Paper>
 
                             <h2 style={{marginTop:16, marginBottom: 0}}>
-                                {user.display_name}
-                                {/* strings.formatString(this.props.locales.locales.reviews, {username: user.display_name})*/}
+                                {this.props.userProfile.userProfile.display_name}
+                                {/* strings.formatString(this.props.locales.locales.reviews, {username: this.props.userProfile.userProfile.display_name})*/}
                              </h2>
-                            { user.email?user.email:'' }
+                            { this.props.userProfile.userProfile.email?this.props.userProfile.userProfile.email:'' }
                         </div>
                         <div style={{padding: 16, paddingBottom: 0}}>
                              {this.props.userInfo.isLoggedIn ? 
@@ -209,9 +209,9 @@ class Profile extends Component {
                         <Divider />
                         <div>
                             <SocialList 
-                                followingUsers={user !== null ? user.following_users : undefined}
+                                followingUsers={user !== null ? this.props.userProfile.userProfile.following_users : undefined}
                                 updateUser={userId => this.getUser(userId)}
-                                followers={user !== null ? user.followers : undefined}/>
+                                followers={user !== null ? this.props.userProfile.userProfile.followers : undefined}/>
                         </div>
                     </Paper>
                     <br />

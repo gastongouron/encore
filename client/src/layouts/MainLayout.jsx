@@ -22,6 +22,9 @@ import Flag from 'react-world-flags'
 // import { initUserProfile, loadingUserProfile, failedUserProfile, setUserProfile } from '../app/actions/userProfile'
 import { setUserProfile } from '../app/actions/userProfile'
 // import { initUserReviews, loadingUserReviews, failedUserReviews, setUserReviews, updateUserReview, deleteUserReview, selectUserReview} from '../app/actions/reviews'
+import IconButton from 'material-ui/IconButton';
+import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
+import Typography from '@material-ui/core/Typography';
 
 import UserProfileQuery from '../app/queries/UserProfileSchema'
 import { SocialIcon } from 'react-social-icons';
@@ -209,6 +212,11 @@ class MainLayout extends Component {
     this.props.history.push("/user/" + this.props.currentUser.user_id)
   }
 
+  drawerToggleHot = () => {
+    this.handleToggle()
+    this.props.history.push("/hot")
+  }
+
   drawerToggleArtists = () => {
     this.handleToggle()
     this.props.history.push("/artists")
@@ -257,16 +265,6 @@ class MainLayout extends Component {
           showMenuIconButton={ this.state.width < 500 ? true : false}
           title={<div>
                   <b>encore!</b>
-                  { (this.state.counter > 0) && (this.props.match.path !== "/") ? 
-                    <Badge
-                    badgeContent={this.state.counter}
-                    secondary={true}
-                    badgeStyle={{top: 0, right: 8}}
-                    />
-                  : 
-                    null
-                  }
-
                 </div>}
           titleStyle={{fontSize: 28, fontWeight: 900}}
           onTitleTouchTap={this.goHome}
@@ -279,6 +277,35 @@ class MainLayout extends Component {
         
           <MainToolbar style={{paddingRight:0}}>
             <ToolbarGroup>
+              {this.props.currentUser.isLoggedIn ? 
+                <div>
+                { (this.state.counter > 0) && (this.props.match.path !== "/hot") ? 
+                    <Badge
+                    style={{display: 'inline'}}
+                    badgeContent={this.state.counter}
+                    secondary={true}
+                    badgeStyle={{top: -24, right: -35}}
+                    >
+                    <MenuItem
+                      containerElement={<Link to="/hot"/>}
+                      primaryText={strings.hot}
+                      style={{color: palette.textColor}}
+                    />
+                    </Badge>
+
+                  :
+              <MenuItem
+                containerElement={<Link to="/hot"/>}
+                primaryText={strings.hot}
+                style={{color: palette.textColor}}
+              />
+
+                } 
+                </div>
+                :
+                null 
+              }
+
               <MenuItem
                 containerElement={<Link to="/artists"/>}
                 primaryText={strings.artists}
@@ -304,18 +331,18 @@ class MainLayout extends Component {
             </ToolbarGroup>
           </MainToolbar>        
         : 
-         
-
+         <div>
         <Drawer open={this.state.open} docked={false} onRequestChange={(e) => this.closeDrawer(e)}>
         {this.props.currentUser.isLoggedIn ? 
+          
           <MenuItem
             onClick={this.drawerToggleProfile}
             primaryText={currentUser.first_name || currentUser.email}
           />
+
           :
           null
           }
-
           <MenuItem
             onClick={this.drawerToggleArtists}
             primaryText={strings.artists}
@@ -329,13 +356,39 @@ class MainLayout extends Component {
             </div>           
           </MenuItem>
         </Drawer> 
+          {this.props.currentUser.isLoggedIn ? 
+            <div>
+              
+               { (this.state.counter > 0) && (this.props.match.path !== "/hot") ? 
+                    <Badge
+                    badgeContent={this.state.counter}
+                    secondary={true}
+                    badgeStyle={{top: 5, right: 5}}
+                    >
+                      <IconButton style={{top: 10, right: 7, position: 'absolute'}} linkButton={true} containerElement={<Link to="hot" />} tooltip="Notifications">
+                        <NotificationsIcon />
+                      </IconButton>
+                 
+                    </Badge>
 
+                  :
+                      <IconButton style={{top: 10, right: 30, position: 'absolute'}} linkButton={true} containerElement={<Link to="hot" />} tooltip="Notifications">
+                        <NotificationsIcon />
+                      </IconButton>
 
+                } 
+
+            </div>
+
+            :
+            null
+          }
+
+          </div>
         }
+
         </MainAppBar>
         <MainContainer style={{margin: '0 auto'}}> 
-
-
           {notice && <Notice>{notice}</Notice>}
           {children}
         </MainContainer>          

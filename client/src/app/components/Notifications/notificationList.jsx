@@ -23,12 +23,11 @@ class NotificationsList extends Component {
   render() {
 
     const notifications = this.props.notifications
-    console.log(notifications.length)
 
     return (
       <div>
 
-           {notifications.length > 0 ? notifications.map((notification, index) => (
+           {(notifications && notifications.length > 0) ? notifications.map((notification, index) => (
       			  <NotificationItem
       			  	key={index}
       			  	notification={notification} 
