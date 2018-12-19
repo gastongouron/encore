@@ -34,11 +34,9 @@ class Resolvers::ArtistsSearch
 
   def apply_first(scope, value)
     # scope.order('score').limit(value)
-    # if scope.joins(:reviews)
-    #   scope.joins(:reviews).order('reviews.created_at DESC').limit(value)
-    # else
-      scope.order('random()').limit(value)
-    # end
+    scope.includes(:reviews).order('reviews.created_at ASC').limit(value)
+    # scope.order('random()').limit(value)
+
   end
 
   def apply_skip(scope, value)
