@@ -11,6 +11,7 @@ import strings from '../../../locales/strings'
 import DatePicker from 'material-ui/DatePicker';
 import Checkbox from 'material-ui/Checkbox'
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton'
+import Grid from '@material-ui/core/Grid'
 
 const styles = {
   uploadButton: {
@@ -19,8 +20,12 @@ const styles = {
   }
 };
 
+const rootz = {
+    flexGrow: 1,
+  }
+
 const paperStyle = {
-  padding: 30,
+  padding: 20,
   maxWidth: 300,
   display: 'flex', 
   justifyContent: 'center'
@@ -109,9 +114,7 @@ const SignUpFormz = reduxForm({
   }
 
   return (
-    <Form onSubmit={handleSubmit(formAction(onSubmit))}>
-  
-      <br/>
+    <Form style={rootz} onSubmit={handleSubmit(formAction(onSubmit))}>
   
       <Field name="gender" component={renderRadioGroup} validate={required}>
         <RadioButton value="male" label={strings.male} />
@@ -216,9 +219,9 @@ const SignUp = ({doSignUp, locales, ...rest}) => {
         style={paperStyle} zDepth={1} 
         rounded={true}>
     <View>
-      <Heading>
+{/*      <Heading>
         {locales.locales.signup}
-      </Heading>
+      </Heading> */}
       <SignUpForm initialValues={{locale: strings.getLanguage()}} locales={locales} onSubmit={doSignUp} {...rest} />
     </View>
     </Paper>

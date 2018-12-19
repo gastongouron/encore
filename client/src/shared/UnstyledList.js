@@ -4,6 +4,9 @@ import styled from 'styled-components';
 const UnstyledList = styled.ul`
   list-style: none;
   text-align: center;
+  color: #F1F1F1;
+  font-size: 10px;
+  letter-spacing: 1px;
 
   li {
     display: inline
@@ -19,11 +22,13 @@ const UnstyledList = styled.ul`
   }
   padding: 0;
   a {
+    text-transform: uppercase;
+    color: #F1F1F1;
   	font-weight: 300;
     text-decoration: none;
   }
   a:hover {
-    text-decoration: none;
+    color: #ffffff;
   }
 `;
 

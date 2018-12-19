@@ -12,7 +12,8 @@ const coolParent = {
 }
 
 const paperStyle = {
-  padding: 30,
+  padding: 20,
+  paddingTop:5,
   maxWidth: 300,
   display: 'flex', 
   justifyContent: 'center'
@@ -72,9 +73,9 @@ const RequestResetPassword = ({doRequestResetPassword, locales, ...rest}) => {
         style={paperStyle} zDepth={1} 
         rounded={true}>
       <View>
-        <Heading>
+{/*        <Heading>
           {locales.locales.request}
-        </Heading>
+        </Heading>*/}
         <RequestResetPasswordForm locales={locales} onSubmit={doRequestResetPassword} {...rest} />
       </View>
     </Paper>

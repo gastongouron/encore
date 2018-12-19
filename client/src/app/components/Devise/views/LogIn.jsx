@@ -71,6 +71,7 @@ const Login = ({currentUser, locales, doLogin, location: {state: {alert, from: {
 
   const paperStyle = {
     padding: 20,
+    paddingTop:5,
     maxWidth: 300,
     display: 'flex', 
     justifyContent: 'center'
@@ -93,12 +94,14 @@ const Login = ({currentUser, locales, doLogin, location: {state: {alert, from: {
         style={paperStyle} zDepth={1} 
         rounded={true}>
       <View>
-        <Heading>
-          {locales.locales.login}
-        </Heading>
+
         {alert && <Alert>{alert}</Alert>}
         <LoginForm locales={locales} onSubmit={submit} {...rest} />
         {/*
+        <Heading>
+          {locales.locales.login}
+        </Heading>
+
         <br />
         <OauthView locales={locales}/>
       */}

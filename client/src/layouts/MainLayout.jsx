@@ -62,6 +62,7 @@ const Main = styled.div`
   height: 100%;
 `;
 
+
 class UserMenuItem extends Component {
 
   // constructor(props){
@@ -103,6 +104,14 @@ capitalizeTxt(txt) {
 
   render() {
     const {currentUser, logout, textColor} = this.props;
+
+    const navbarElem = {
+      color: textColor,
+      fontSize: 12,
+      letterSpacing: '1px',
+      textTransform: 'uppercase',
+    }
+
     if (currentUser && currentUser.isLoggedIn) {
       return (
         <div>
@@ -110,7 +119,7 @@ capitalizeTxt(txt) {
             primaryText={this.capitalizeTxt(currentUser.first_name || currentUser.email)}
             onTouchTap={this.handleTouchTap}
             // leftIcon={<DropDownArrow color={textColor}/>}
-            style={{color: textColor}}
+            style={navbarElem}
           />
           <Popover
             open={this.state.open}
@@ -133,7 +142,7 @@ capitalizeTxt(txt) {
       <MenuItem
         containerElement={<Link to="/users/hello"/>}
         primaryText={strings.login}
-        style={{color: textColor}}
+        style={navbarElem}
       />
       </div>
     );
@@ -259,17 +268,24 @@ class MainLayout extends Component {
 
   render() {
     const {currentUser, doLogout, children, location: {state: {notice} = {}}, muiTheme: {palette}} = this.props;
+
+    const navbarElem = {
+      color: palette.alternateTextColor,
+      fontSize: 12,
+      letterSpacing: '1px',
+      textTransform: 'uppercase',
+    }
     return (
       <div>
       <Main style={{maxWidth: 840, margin: '0 auto'}}>
         <MainAppBar
           // style={{background: '#283593', boxShadow: 'none', position: 'sticky', top: 0}}
-          style={{ background: 'white', boxShadow: 'none', position: 'sticky', top: 0}}
+          style={{ background: 'transparent', boxShadow: 'none', top: 0}}
           showMenuIconButton={ this.state.width < 500 ? true : false}
           title={<div>
                   <b>encore!</b>
                 </div>}
-          titleStyle={{fontSize: 28, fontWeight: 900}}
+          titleStyle={{fontSize: 28, fontWeight: 900, color: palette.alternateTextColor}}
           onTitleTouchTap={this.goHome}
           onLeftIconButtonTouchTap={this.handleToggle}
         >
@@ -292,7 +308,7 @@ class MainLayout extends Component {
                     <MenuItem
                       containerElement={<Link to="/hot" />}
                       primaryText={strings.hot}
-                      style={{color: palette.textColor}}
+                      style={navbarElem}
                     />
                     </Badge>
 
@@ -300,7 +316,7 @@ class MainLayout extends Component {
               <MenuItem
                 containerElement={<Link to="/hot" />}
                 primaryText={strings.hot}
-                style={{color: palette.textColor}}
+                style={navbarElem}
               />
 
                 } 
@@ -312,20 +328,21 @@ class MainLayout extends Component {
               <MenuItem
                 containerElement={<Link to="/artists"/>}
                 primaryText={strings.artists}
-                style={{color: palette.textColor}}
+                style={navbarElem}
               />
+
               <UserMenuItem
                 history={this.props.history}
                 setUserProfile={this.props.setUserProfile}
                 client={this.props.client}
                 logout={doLogout}
                 currentUser={currentUser}
-                textColor={palette.textColor}
+                textColor={palette.alternateTextColor}
               />
               <MenuItem
                 onClick={this.onSwitchLanguage}
                 // primaryText={strings.getLanguage() === 'en' ? }
-                // style={{color: palette.textColor}}
+                // style={{color: palette.alternateTextColor}}
               >
                 <div style={{marginTop: 3}}>
                   {strings.getLanguage() === 'en' ? <Flag code="usa" height="16" /> : <Flag code="fra" height="16" />}
@@ -411,9 +428,9 @@ class MainLayout extends Component {
           &nbsp;—&nbsp;
           <Link to='/fanzine/posts'>Fanzine</Link>
           <div style={{float: 'right', marginTop: -4}}>
-            <StyledSocialIcon style={{height: 28, width: 28, marginLeft: "6px" }} network="twitter" url="https://twitter.com/gastongouron" />
-            <StyledSocialIcon style={{height: 28, width: 28, marginLeft: "6px"}} network="instagram" url="https://www.instagram.com/tentsile" />
-            <StyledSocialIcon style={{height: 28, width: 28, marginLeft: "6px"}} network="facebook" url="https://www.facebook.com/gastongouron" />
+            <StyledSocialIcon style={{height: 28, color:"red", width: 28, marginLeft: "6px" }} network="twitter" url="https://twitter.com/gastongouron" />
+            <StyledSocialIcon style={{height: 28, color:"red", width: 28, marginLeft: "6px"}} network="instagram" url="https://www.instagram.com/tentsile" />
+            <StyledSocialIcon style={{height: 28, color:"red", width: 28, marginLeft: "6px"}} network="facebook" url="https://www.facebook.com/gastongouron" />
           </div>
         </div>
       </StyledFooter>

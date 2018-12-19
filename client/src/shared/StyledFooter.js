@@ -5,8 +5,8 @@ const StyledFooter = styled.div`
    margin: 0 auto;
    width: 100%;
    padding: 20px;
-   font-size: 500;
-   color: #999999;
+   font-size: 12px;
+   color: #ffffff;
    bottom: 0;
    background:rgba(0,0,0,0.1);
    margin-top: -58px;
@@ -15,10 +15,10 @@ const StyledFooter = styled.div`
    	maxWidth: 840px;
    }
    a {
-   	color: #000000;
+   	color: #ffffff;
    };
    a:hover {
-   	color: #000000;
+   	color: #ffffff;
    };
 `;
 
