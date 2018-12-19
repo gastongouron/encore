@@ -10,6 +10,7 @@ import TimeAgo from 'react-timeago'
 import frenchStrings from 'react-timeago/lib/language-strings/fr'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
 import Disqus from 'disqus-react'
+import {List, ListItem} from 'material-ui/List';
 
 const PostListItem = (props) => {
 
@@ -37,6 +38,11 @@ const PostListItem = (props) => {
 	  marginBottom: 20,
 	};
 
+	const backgroundImage = {
+	  backgroundImage: 'url('+post.image_url+')',
+	  backgroundSize: 'cover',
+	}
+
 	
 	// const coverStyle = {
 	//     objectFit: 'cover',
@@ -46,6 +52,8 @@ const PostListItem = (props) => {
 	// }
 
 	return (
+            <ListItem innerDivStyle={{padding: 0, margin: 0}}>
+              <Link to={"/fanzine/posts/" + post.id} style={{ textDecoration: 'none' }}>
 			<Paper
 				style={paperStyle} zDepth={1} 
 				rounded={true} >
@@ -55,7 +63,7 @@ const PostListItem = (props) => {
 							<Grid style={padded} container>
 					        	<Grid style={floatLeft} item xs={12}>
 					        		<h1>
-						        		<Link style={{color: theme.palette.primary1Color}} to={'/fanzine/posts/'+ post.id}>
+						        		<Link style={{color: theme.palette.textColor}} to={'/fanzine/posts/'+ post.id}>
 						        			{post.title}
 					        			</Link>
 					        		</h1>
@@ -73,6 +81,8 @@ const PostListItem = (props) => {
 				</div>
 
 			</Paper>
+			</Link>
+			</ListItem>
 		)
 
 }

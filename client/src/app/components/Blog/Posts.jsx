@@ -24,6 +24,7 @@ class Posts extends Component {
             (res) => {
                 this.props.setPosts(res.data.posts);
                 this.setState({posts: res.data.posts})
+                console.log(res.data.posts)
             },
             (err) => {
                 this.props.failedPosts(err.data);

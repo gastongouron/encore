@@ -13,7 +13,6 @@ const content = {
   color: "#ffffff",
   margin: "auto",
   width: '50%',
-  border: '3px solid white',
   padding: 10,
   textAlign: 'center',
 }
@@ -32,9 +31,10 @@ const Home = ({currentUser, locales, auth: {AuthLinks}, initLocales, initArtists
   }else{
     return (
       <div style={content}>
-        <h1>Home text component</h1>
+        <h1>Welcome</h1>
         <br/>
-        <RaisedButton label="signup" />
+        <RaisedButton label="Partagez votre avis" />
+        <br/>
         <br/>Features: Donne ton avis, Partage les temps forts, Découvre artistes et autres fans
       </div>
     );

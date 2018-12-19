@@ -234,6 +234,17 @@ class MainLayout extends Component {
     this.props.history.push("/artists")
   }  
 
+  drawerToggleLogin = () => {
+    this.handleToggle()
+    this.props.history.push("/users/hello")
+  }  
+
+  drawerToggleFanzine = () => {
+    this.handleToggle()
+    this.props.history.push("/fanzine/posts")
+  }  
+
+
   goHome = () => {
     this.props.history.push('/');
   }
@@ -280,7 +291,7 @@ class MainLayout extends Component {
       <Main style={{maxWidth: 840, margin: '0 auto'}}>
         <MainAppBar
           // style={{background: '#283593', boxShadow: 'none', position: 'sticky', top: 0}}
-          style={{ background: 'transparent', boxShadow: 'none', top: 0}}
+          style={{ background: 'transparent', boxShadow: 'none', top: 0, color: '#ffffff'}}
           showMenuIconButton={ this.state.width < 500 ? true : false}
           title={<div>
                   <b>encore!</b>
@@ -302,7 +313,7 @@ class MainLayout extends Component {
                     <Badge
                     style={{display: 'inline'}}
                     badgeContent={this.state.counter}
-                    secondary={true}
+                    default={true}
                     badgeStyle={{top: -24, right: -35}}
                     >
                     <MenuItem
@@ -328,6 +339,12 @@ class MainLayout extends Component {
               <MenuItem
                 containerElement={<Link to="/artists"/>}
                 primaryText={strings.artists}
+                style={navbarElem}
+              />
+
+              <MenuItem
+                containerElement={<Link to="/fanzine/posts"/>}
+                primaryText="Fanzine"
                 style={navbarElem}
               />
 
@@ -359,17 +376,20 @@ class MainLayout extends Component {
             onClick={this.drawerToggleProfile}
             primaryText={currentUser.first_name || currentUser.email}
           />
-
           :
-          null
+          <MenuItem
+            onClick={this.drawerToggleLogin}
+            primaryText={strings.login}
+          />
+
           }
           <MenuItem
             onClick={this.drawerToggleArtists}
             primaryText={strings.artists}
           />
           <MenuItem
-            containerElement={<Link to="/users/hello"/>}
-            primaryText={strings.login}
+            onClick={this.drawerToggleFanzine}
+            primaryText="Fanzine"
           />
           {this.props.currentUser.isLoggedIn ? <MenuItem primaryText={strings.logout} onClick={doLogout} /> : null }
           <MenuItem
@@ -386,18 +406,18 @@ class MainLayout extends Component {
                { (this.state.counter > 0) && (this.props.match.path !== "/hot") ? 
                     <Badge
                     badgeContent={this.state.counter}
-                    secondary={true}
+                    default={true}
                     badgeStyle={{top: 5, right: 5}}
                     >
                       <IconButton style={{top: 10, right: 7, position: 'absolute'}} linkButton={true} containerElement={<Link to="/hot" />} tooltip="Notifications">
-                        <NotificationsIcon />
+                        <NotificationsIcon color='#ffffff'/>
                       </IconButton>
                  
                     </Badge>
 
                   :
                       <IconButton style={{top: 10, right: 30, position: 'absolute'}} linkButton={true} containerElement={<Link to="/hot" />} tooltip="Notifications">
-                        <NotificationsIcon />
+                        <NotificationsIcon color='#ffffff'/>
                       </IconButton>
 
                 } 
@@ -432,9 +452,9 @@ class MainLayout extends Component {
           &nbsp;—&nbsp;
           <Link to='/fanzine/posts'>Fanzine</Link>
           <div style={{float: 'right', marginTop: -4}}>
-            <StyledSocialIcon style={{height: 28, color:"red", width: 28, marginLeft: "6px" }} network="twitter" url="https://twitter.com/gastongouron" />
-            <StyledSocialIcon style={{height: 28, color:"red", width: 28, marginLeft: "6px"}} network="instagram" url="https://www.instagram.com/tentsile" />
-            <StyledSocialIcon style={{height: 28, color:"red", width: 28, marginLeft: "6px"}} network="facebook" url="https://www.facebook.com/gastongouron" />
+            <StyledSocialIcon color="white" style={{background: "radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%)", height: 28, color:"red", width: 28, marginLeft: "6px"}} network="instagram" url="https://www.instagram.com/tentsile" />
+            <StyledSocialIcon color="white" style={{background:"#00aced", height: 28, color:"red", width: 28, marginLeft: "6px" }} network="twitter" url="https://twitter.com/gastongouron" />
+            <StyledSocialIcon color="white" style={{background:"#3b5998", height: 28, color:"red", width: 28, marginLeft: "6px"}} network="facebook" url="https://www.facebook.com/gastongouron" />
           </div>
         </div>
       </StyledFooter>
