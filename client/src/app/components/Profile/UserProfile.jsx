@@ -145,6 +145,12 @@ class Profile extends Component {
         return Number(this.props.userInfo.user_id) === Number(this.props.match.params.id)
     }
 
+    toTitleCase(str) {
+        return str.replace(/\w\S*/g, function(txt){
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+    }
+
     render() {
 
         const user = this.props.userProfile.userProfile
@@ -160,7 +166,7 @@ class Profile extends Component {
                             </Paper>
 
                             <h2 style={{marginTop:16, marginBottom: 0}}>
-                                {this.props.userProfile.userProfile.display_name}
+                                {this.toTitleCase(this.props.userProfile.userProfile.display_name)}
                                 {/* strings.formatString(this.props.locales.locales.reviews, {username: this.props.userProfile.userProfile.display_name})*/}
                              </h2>
                             { this.props.userProfile.userProfile.email?this.props.userProfile.userProfile.email:'' }

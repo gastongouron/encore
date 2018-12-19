@@ -85,6 +85,10 @@ class UserMenuItem extends Component {
     });
   };
 
+capitalizeTxt(txt) {
+  return txt.charAt(0).toUpperCase() + txt.slice(1);
+}
+
   navigateToProfile = () => {
     this.props.history.push("/user/" + this.props.currentUser.user_id)
     this.props.client.networkInterface.query({query: UserProfileQuery, variables: {id: this.props.currentUser.user_id }, fetchPolicy: 'network-only'})
@@ -103,7 +107,7 @@ class UserMenuItem extends Component {
       return (
         <div>
           <MenuItem
-            primaryText={currentUser.first_name || currentUser.email}
+            primaryText={this.capitalizeTxt(currentUser.first_name || currentUser.email)}
             onTouchTap={this.handleTouchTap}
             // leftIcon={<DropDownArrow color={textColor}/>}
             style={{color: textColor}}
@@ -286,7 +290,7 @@ class MainLayout extends Component {
                     badgeStyle={{top: -24, right: -35}}
                     >
                     <MenuItem
-                      containerElement={<Link to="/hot"/>}
+                      containerElement={<Link to="/hot" />}
                       primaryText={strings.hot}
                       style={{color: palette.textColor}}
                     />
@@ -294,7 +298,7 @@ class MainLayout extends Component {
 
                   :
               <MenuItem
-                containerElement={<Link to="/hot"/>}
+                containerElement={<Link to="/hot" />}
                 primaryText={strings.hot}
                 style={{color: palette.textColor}}
               />

@@ -77,8 +77,8 @@ const ReviewListItem = (props) => {
 							</span>
 				          }
 				          rightIcon={
-				          		<div style={{display: 'flex', minWidth: '50px', color: theme.palette.primary1Color}}>
-					          		<Star color={theme.palette.primary1Color} viewBox="-4 2 31 31"/>
+				          		<div style={{display: 'flex', minWidth: '50px', color: theme.palette.textColor}}>
+					          		<Star color={theme.palette.starColor} viewBox="-4 2 31 31"/>
 					          		<b>{review.total}</b>
 				          		</div>
 				          }
@@ -155,7 +155,7 @@ const ReviewListItem = (props) => {
 			                    { belongsToUser && onUserProfile ? 
 									<Grid item xs={12}>
 										<RaisedButton 
-											// style={{float: 'right', marginTop: -10}}
+											style={{float: 'right'}}
 											onClick={ () => onReviewSelect(review) }
 											default={true}
 											label={props.locales.locales.edit}/> 

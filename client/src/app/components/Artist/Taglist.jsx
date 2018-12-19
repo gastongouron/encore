@@ -4,6 +4,7 @@ import Chip from 'material-ui/Chip';
 const styles = {
   chip: {
     margin: 4,
+    background: "#F1F1F1"
   },
   wrapper: {
     display: 'flex',

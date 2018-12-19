@@ -144,9 +144,9 @@ class ArtistDetail extends Component {
                                     <Grid item xs={12}>
                                         <h1>
                                             <span style={{float:'left'}}>{artist.name}</span>
-                                            <span style={{float:'right', color: theme.palette.primary1Color}}>
+                                            <span style={{float:'right', color: theme.palette.textColor}}>
                                                 { Number(artist.reviews_count) !== 0 ? 
-                                                    <Star color={theme.palette.primary1Color} viewBox="0 0 21 21"/>
+                                                    <Star color={theme.palette.starColor} viewBox="0 0 21 21"/>
                                                 :
                                                     null
                                                 }

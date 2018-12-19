@@ -35,7 +35,7 @@ const ArtistListItem = (props) => {
 
 	const floatRight = {
 	  float: 'right',
-	  color: theme.palette.primary1Color,
+	  color: theme.palette.textColor,
 	}
 
 	const paperStyle = {
@@ -65,7 +65,7 @@ const ArtistListItem = (props) => {
 							<Grid style={padded} container onClick={ () => onArtistSelect(artist) }>
 					        	<Grid style={floatLeft} item xs={9}>
 					        		<h1>
-						        		<Link style={{color: theme.palette.primary1Color}} to={'/artists/'+ artist.id}>
+						        		<Link style={{color: theme.palette.textColor}} to={'/artists/'+ artist.id}>
 						        			{artist.name}
 					        			</Link>
 					        		</h1>
@@ -84,7 +84,7 @@ const ArtistListItem = (props) => {
 					        	<Grid item xs={3}>
 					        		<h1 style={floatRight}>
 										{ Number(artist.reviews_count) !== 0 ? 
-											<Star color={theme.palette.primary1Color} viewBox="0 0 21 21"/>
+											<Star color={theme.palette.starColor} viewBox="0 0 21 21"/>
 										:
 											null
 										}
