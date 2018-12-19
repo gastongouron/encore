@@ -367,6 +367,10 @@ class MainLayout extends Component {
             onClick={this.drawerToggleArtists}
             primaryText={strings.artists}
           />
+          <MenuItem
+            containerElement={<Link to="/users/hello"/>}
+            primaryText={strings.login}
+          />
           {this.props.currentUser.isLoggedIn ? <MenuItem primaryText={strings.logout} onClick={doLogout} /> : null }
           <MenuItem
             onClick={this.drawerSwitchLanguage}
