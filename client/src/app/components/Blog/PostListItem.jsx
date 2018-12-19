@@ -55,7 +55,7 @@ const PostListItem = (props) => {
 							<Grid style={padded} container>
 					        	<Grid style={floatLeft} item xs={12}>
 					        		<h1>
-						        		<Link style={{color: theme.palette.primary1Color}} to={'/blog/posts/'+ post.id}>
+						        		<Link style={{color: theme.palette.primary1Color}} to={'/fanzine/posts/'+ post.id}>
 						        			{post.title}
 					        			</Link>
 					        		</h1>

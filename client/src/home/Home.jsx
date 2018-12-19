@@ -6,17 +6,18 @@ import { initLocales } from '../app/actions/locales'
 import { initArtists } from '../app/actions/artists'
 import { initUserReviews } from '../app/actions/reviews'
 import Notifications from '../app/components/Notifications/notifications'
+import AuthLinks from '../app/components/Devise/views/AuthLinks'
 
-const Hot = ({currentUser, locales, auth: {AuthLinks}, initLocales, initArtists, initMyReviews}) => {
+const Home = ({currentUser, locales, auth: {AuthLinks}, initLocales, initArtists, initMyReviews}) => {
 
   return (
     <div>
-        { currentUser.isLoggedIn ? 
-          <Notifications userId={currentUser.user_id}/>
-          :
-          null
-        }
-        <AuthLinks />
+      <br/>Home text component
+      <br/>Manual authlinks: login / signup / forgotten password?
+      <br/>Features: Donne ton avis, Partage les temps forts, Découvre artistes et autres fans
+      <br/>Top ranked artists
+      <br/>Last reviews
+      <br/>Last Blog post: titre
     </div>
   );
 };
@@ -40,4 +41,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withAuth(Hot));
+export default connect(mapStateToProps, mapDispatchToProps)(withAuth(Home));

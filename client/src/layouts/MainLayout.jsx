@@ -58,7 +58,6 @@ const MainContainer = styled.div`
 `;
 
 const Main = styled.div`
-  background-color: #F1F1F1;
   min-height: 100vh;
   height: 100%;
 `;
@@ -260,8 +259,8 @@ class MainLayout extends Component {
       <div>
       <Main style={{maxWidth: 840, margin: '0 auto'}}>
         <MainAppBar
-          style={{background: '#F1F1F1', boxShadow: 'none', position: 'sticky', top: 0}}
-          // style={{ background: 'white', boxShadow: 'none', position: 'sticky', top: 0}}
+          // style={{background: '#283593', boxShadow: 'none', position: 'sticky', top: 0}}
+          style={{ background: 'white', boxShadow: 'none', position: 'sticky', top: 0}}
           showMenuIconButton={ this.state.width < 500 ? true : false}
           title={<div>
                   <b>encore!</b>
@@ -365,14 +364,14 @@ class MainLayout extends Component {
                     secondary={true}
                     badgeStyle={{top: 5, right: 5}}
                     >
-                      <IconButton style={{top: 10, right: 7, position: 'absolute'}} linkButton={true} containerElement={<Link to="hot" />} tooltip="Notifications">
+                      <IconButton style={{top: 10, right: 7, position: 'absolute'}} linkButton={true} containerElement={<Link to="/hot" />} tooltip="Notifications">
                         <NotificationsIcon />
                       </IconButton>
                  
                     </Badge>
 
                   :
-                      <IconButton style={{top: 10, right: 30, position: 'absolute'}} linkButton={true} containerElement={<Link to="hot" />} tooltip="Notifications">
+                      <IconButton style={{top: 10, right: 30, position: 'absolute'}} linkButton={true} containerElement={<Link to="/hot" />} tooltip="Notifications">
                         <NotificationsIcon />
                       </IconButton>
 
@@ -406,7 +405,7 @@ class MainLayout extends Component {
           &nbsp;—&nbsp;
           <a href="mailto:gastongouron@gmail.com">Contact</a>
           &nbsp;—&nbsp;
-          <Link to='/blog/posts'>Blog</Link>
+          <Link to='/fanzine/posts'>Fanzine</Link>
           <div style={{float: 'right', marginTop: -4}}>
             <StyledSocialIcon style={{height: 28, width: 28, marginLeft: "6px" }} network="twitter" url="https://twitter.com/gastongouron" />
             <StyledSocialIcon style={{height: 28, width: 28, marginLeft: "6px"}} network="instagram" url="https://www.instagram.com/tentsile" />

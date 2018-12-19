@@ -1,14 +1,15 @@
 import React        from 'react';
 import {Switch}     from 'react-router-dom';
 import MainLayout   from '../layouts/MainLayout';
-import Hot         from '../home/Hot';
+import Hot          from '../home/Hot';
+import Home         from '../home/Home';
 import NotFound     from '../app/NotFound';
 import Artists      from './components/Artist/Artists';
 import {authRoutes, PrivateRoute} from 'react-devise';
 import WithMainLayout from './WithMainLayout';
-import Artist from './components/Artist/Artist';
-import Posts from './components/Blog/Posts'
-import Post from './components/Blog/Post'
+import Artist from  './components/Artist/Artist';
+import Posts from   './components/Blog/Posts'
+import Post from    './components/Blog/Post'
 import Policy       from '../app/PrivatePolicy';
 import Profile      from './components/Profile/UserProfile';
 
@@ -23,11 +24,11 @@ const Routes = () => {
       {authRoutes({wrapper: WithMainLayout, notFoundComponent: AuthNotFound})}
 
       <WithMainLayout exact path="/policy"      component={Policy} />
-      <WithMainLayout exact path="/"            component={Hot} />      
+      <WithMainLayout exact path="/"            component={Home} />      
       <WithMainLayout exact path="/hot"         component={Hot} />
       <WithMainLayout exact path="/artists/:id" component={Artist} />
-      <WithMainLayout exact path="/blog/posts"       component={Posts} />
-      <WithMainLayout exact path="/blog/posts/:id"   component={Post} />
+      <WithMainLayout exact path="/fanzine/posts"       component={Posts} />
+      <WithMainLayout exact path="/fanzine/posts/:id"   component={Post} />
 
       <PrivateRoute   exact path="/artists"     layout={MainLayout} component={Artists} />
       <PrivateRoute   exact path="/user/:id"    layout={MainLayout} component={Profile} />
