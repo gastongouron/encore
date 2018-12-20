@@ -80,7 +80,8 @@ const Login = ({currentUser, locales, doLogin, location: {state: {alert, from: {
 
   const coolParent = {
     display: 'flex', 
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingTop: 40,
   }
 
   if (currentUser.isLoggedIn) {

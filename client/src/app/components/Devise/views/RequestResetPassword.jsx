@@ -8,7 +8,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 const coolParent = {
   display: 'flex', 
-  justifyContent: 'center'
+  justifyContent: 'center',
+  paddingTop: 40,
 }
 
 const paperStyle = {

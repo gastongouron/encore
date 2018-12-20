@@ -33,6 +33,7 @@ const paperStyle = {
 
 const coolParent = {
   display: 'flex', 
+  paddingTop: 40,
   justifyContent: 'center'
 }
 

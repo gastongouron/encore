@@ -25,11 +25,11 @@ const Routes = () => {
 
       <WithMainLayout exact path="/policy"      component={Policy} />
       <WithMainLayout exact path="/"            component={Home} />      
-      <WithMainLayout exact path="/hot"         component={Hot} />
       <WithMainLayout exact path="/artists/:id" component={Artist} />
       <WithMainLayout exact path="/fanzine/posts"       component={Posts} />
       <WithMainLayout exact path="/fanzine/posts/:id"   component={Post} />
 
+      <PrivateRoute   exact path="/hot"         layout={MainLayout} component={Hot} />
       <PrivateRoute   exact path="/artists"     layout={MainLayout} component={Artists} />
       <PrivateRoute   exact path="/user/:id"    layout={MainLayout} component={Profile} />
 

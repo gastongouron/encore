@@ -13,9 +13,9 @@ import {Link} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 // import FaceIcon from 'material-ui/svg-icons/action/face';
 // import StarRate from 'material-ui/svg-icons/toggle/star';
-// import Camera from './icons/camera.png';
-// import Face from './icons/face.png';
-// import Star from './icons/star.png';
+import Camera from './icons/camera.png';
+import Face from './icons/face.png';
+import Star from './icons/star.png';
 
   const rootz = {
     flexGrow: 1,
@@ -25,7 +25,7 @@ const boss = {
   userSelect: 'none',
   display:'table', 
   width:'100%',
-  height: '65vh'
+  // height: '65vh'
 }
 
 const content = {

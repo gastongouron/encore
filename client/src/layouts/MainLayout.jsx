@@ -167,9 +167,11 @@ class MainLayout extends Component {
 
     this.props.setLocales(strings)
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
   }
 
   componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
     this.updateWindowDimensions();
     if (this.props.currentUser.isLoggedIn){
       const ctx = this
@@ -205,8 +207,12 @@ class MainLayout extends Component {
     }
   }
 
+  handleScroll(event) {
+    console.log('the scroll things', event)
+  };
 
   componentWillUnmount(){
+    window.removeEventListener('scroll', this.handleScroll);
     if (this.state.subscription){
       this.state.subscription.unsubscribe()
     }
@@ -288,12 +294,19 @@ class MainLayout extends Component {
       letterSpacing: '1px',
       textTransform: 'uppercase',
     }
+
+    const navbarMobileElem = {
+      fontSize: 12,
+      letterSpacing: '1px',
+      textTransform: 'uppercase',
+    }
+
     return (
       <div>
-      <Main style={{maxWidth: 840, margin: '0 auto'}}>
+      <Main style={this.props.currentUser.isLoggedIn ? {margin: '0 auto'} : {margin: '0 auto'} }>
         <MainAppBar
           // style={{background: '#283593', boxShadow: 'none', position: 'sticky', top: 0}}
-          style={{ background: 'transparent', boxShadow: 'none', top: 0, color: '#ffffff'}}
+          style={{align: 'center', margin: '0auto', width: '100%', background:'rgba(0,0,0,0.3)', boxShadow: 'none', position: 'sticky', top: 0, color: '#ffffff'}}
           showMenuIconButton={ this.state.width < 500 ? true : false}
           iconStyleLeft={{color: "#ffffff"}}
           iconElementLeft={<Hamburger color="#ffffff" style={{marginLeft: 10, marginTop: 13}}/>}
@@ -379,21 +392,25 @@ class MainLayout extends Component {
           <MenuItem
             onClick={this.drawerToggleProfile}
             primaryText={currentUser.first_name || currentUser.email}
+            style={navbarMobileElem}
           />
           :
           <MenuItem
             onClick={this.drawerToggleLogin}
             primaryText={strings.login}
+            style={navbarMobileElem}
           />
 
           }
           <MenuItem
             onClick={this.drawerToggleArtists}
             primaryText={strings.artists}
+            style={navbarMobileElem}
           />
           <MenuItem
             onClick={this.drawerToggleFanzine}
             primaryText="Fanzine"
+            style={navbarMobileElem}
           />
           {this.props.currentUser.isLoggedIn ? <MenuItem primaryText={strings.logout} onClick={doLogout} /> : null }
           <MenuItem
