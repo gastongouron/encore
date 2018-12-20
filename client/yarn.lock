@@ -6573,6 +6573,13 @@ react-material-icons@^1.0.3:
   dependencies:
     create-react-class "15.6.0"
 
+react-messenger-customer-chat@^0.7.2:
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/react-messenger-customer-chat/-/react-messenger-customer-chat-0.7.2.tgz#922aad45de0d6798dc549cfaf7aac2d907dbb395"
+  integrity sha512-loib6j9HHIx7XO4SrygYMSVFmXnbf47nqOBORC2+RRSU6Oj7OLNlsVYm3Bp286mRs8r4beLCB76RNoQXqiZpYQ==
+  dependencies:
+    prop-types "^15.6.0"
+
 react-overlays@^0.8.0:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-overlays/-/react-overlays-0.8.3.tgz#fad65eea5b24301cca192a169f5dddb0b20d3ac5"

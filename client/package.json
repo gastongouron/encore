@@ -30,6 +30,7 @@
     "react-localization": "^1.0.12",
     "react-mailto": "^0.4.0",
     "react-material-icons": "^1.0.3",
+    "react-messenger-customer-chat": "^0.7.2",
     "react-player": "^1.6.6",
     "react-redux": "^5.0.4",
     "react-reveal": "^1.2.2",

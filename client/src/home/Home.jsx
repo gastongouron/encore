@@ -16,6 +16,7 @@ import Grid from '@material-ui/core/Grid'
 import Camera from './icons/camera.png';
 import Face from './icons/face.png';
 import Star from './icons/star.png';
+import MessengerCustomerChat from 'react-messenger-customer-chat';
 
   const rootz = {
     flexGrow: 1,
@@ -94,10 +95,16 @@ const Home = ({currentUser, locales, auth: {AuthLinks}, initLocales, initArtists
                   <RaisedButton label="Commencer"></RaisedButton>
                 </Link>
               </Grid>
-
            </Grid>
           </div>
         </div>
+        
+        <MessengerCustomerChat
+            pageId="826064754401701"
+            appId="1351728908291385"
+          />
+
+
       </div>
     );
   }
