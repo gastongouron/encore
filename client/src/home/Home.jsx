@@ -9,12 +9,18 @@ import Notifications from '../app/components/Notifications/notifications'
 import AuthLinks from '../app/components/Devise/views/AuthLinks'
 import RaisedButton from 'material-ui/RaisedButton';
 import {Link} from 'react-router-dom' 
+// import Slide from 'react-reveal/Slide';
+import Grid from '@material-ui/core/Grid'
+
+  const rootz = {
+    flexGrow: 1,
+  }
 
 const boss = {
   userSelect: 'none',
   display:'table', 
   width:'100%',
-  height: '70vh'
+  height: '75vh'
 }
 
 const content = {
@@ -24,7 +30,7 @@ const content = {
   // verticalAlign: "middle",
   // margin: "0 auto",
   padding: 10,
-  textAlign: 'center',
+  textAlign: 'left',
 }
 
 
@@ -41,18 +47,26 @@ const Home = ({currentUser, locales, auth: {AuthLinks}, initLocales, initArtists
     );
   }else{
     return (
+
       <div style={boss}>      
-      <div style={content}>
-        <h1><span>Bienvenue sur encore: la communauté qui partage <br/>ses expériences de concert et vous fait découvrir<br/> les meilleurs artistes sur scène.</span></h1>
-          <div>Donne et consulte des avis sur des shows</div>
-          <div>Partage les temps forts du concert en images</div>
-          <div>Découvre des artistes avec les contenus de la communauté</div>
-        <br/>
-        <Link to="/users/getstarted">
-          <RaisedButton label="C'est parti"></RaisedButton>
-        </Link>
-      </div>
-      </div>
+        <div style={content}>
+          <div style={rootz}>
+            <Grid container>
+       
+                <Grid item xs={12} sm={12} md={12}>
+                    <h1><span>Bienvenue sur encore: la communauté qui partage ses expériences de concert et vous fait découvrir les meilleurs artistes sur scène.</span></h1>
+                      <div>Donne et consulte des avis sur des shows</div>
+                      <div>Partage les temps forts du concert en images</div>
+                      <div>Découvre des artistes avec les contenus de la communauté</div>
+                    <br/>
+                    <Link to="/users/getstarted">
+                      <RaisedButton label="C'est parti"></RaisedButton>
+                    </Link>
+                 </Grid>
+              </Grid>
+            </div>
+          </div>
+        </div>
     );
   }
 
