@@ -24,7 +24,9 @@ import { setUserProfile } from '../app/actions/userProfile'
 // import { initUserReviews, loadingUserReviews, failedUserReviews, setUserReviews, updateUserReview, deleteUserReview, selectUserReview} from '../app/actions/reviews'
 import IconButton from 'material-ui/IconButton';
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
+import Hamburger from 'material-ui/svg-icons/image/dehaze';
 import Typography from '@material-ui/core/Typography';
+
 
 import UserProfileQuery from '../app/queries/UserProfileSchema'
 import { SocialIcon } from 'react-social-icons';
@@ -293,6 +295,8 @@ class MainLayout extends Component {
           // style={{background: '#283593', boxShadow: 'none', position: 'sticky', top: 0}}
           style={{ background: 'transparent', boxShadow: 'none', top: 0, color: '#ffffff'}}
           showMenuIconButton={ this.state.width < 500 ? true : false}
+          iconStyleLeft={{color: "#ffffff"}}
+          iconElementLeft={<Hamburger color="#ffffff" style={{marginLeft: 10, marginTop: 13}}/>}
           title={<div>
                   <b>encore!</b>
                 </div>}

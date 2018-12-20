@@ -11,6 +11,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {Link} from 'react-router-dom' 
 // import Slide from 'react-reveal/Slide';
 import Grid from '@material-ui/core/Grid'
+// import FaceIcon from 'material-ui/svg-icons/action/face';
+// import StarRate from 'material-ui/svg-icons/toggle/star';
+// import Camera from './icons/camera.png';
+// import Face from './icons/face.png';
+// import Star from './icons/star.png';
 
   const rootz = {
     flexGrow: 1,
@@ -29,10 +34,16 @@ const content = {
   color: "#ffffff",
   // verticalAlign: "middle",
   // margin: "0 auto",
-  padding: 10,
-  textAlign: 'center',
+  textAlign: 'left',
 }
 
+const iconStyle = {
+
+}
+
+const legend = {
+  textAlign: 'left',
+}
 
 const Home = ({currentUser, locales, auth: {AuthLinks}, initLocales, initArtists, initMyReviews}) => {
 
@@ -52,21 +63,42 @@ const Home = ({currentUser, locales, auth: {AuthLinks}, initLocales, initArtists
         <div style={content}>
           <div style={rootz}>
             <Grid container>
-       
-                <Grid item xs={12} sm={12} md={12}>
-                    <h1><span>Bienvenue sur encore: la communauté qui partage ses expériences de concert et vous fait découvrir les meilleurs artistes sur scène.</span></h1>
-                      <div>Donne et consulte des avis sur des shows</div>
-                      <div>Partage les temps forts du concert en images</div>
-                      <div>Découvre des artistes avec les contenus de la communauté</div>
-                    <br/>
-                    <Link to="/users/getstarted">
-                      <RaisedButton label="C'est parti"></RaisedButton>
-                    </Link>
-                 </Grid>
+              
+              <Grid style={{textAlign: 'left', marginBottom: 10}} item xs={12} sm={12} md={12}>
+                <h1 style={{fontFamily: 'Roboto' , fontWeight: 300}}>Bienvenue sur <span style={{fontWeight:700, fontFamily: 'Roboto', fontVariant: 'none'}}>encore!</span> la communauté qui partage ses expériences de concert et vous fait découvrir les meilleurs artistes sur scène.</h1>
               </Grid>
-            </div>
+              {/*
+              <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
+                <div>
+                  <img style={{float: 'left', display: 'block', marginRight: '5px', marginTop: '-6px'}} src={Star} />
+                  <span style={legend}> Donne et consulte des<br/> avis sur des shows</span>
+                </div>
+              </Grid>
+
+              <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
+                <div>
+                  <img style={{float: 'left', display: 'block', marginRight: '5px', marginTop: '-6px'}} src={Camera} />
+                  <span style={legend}> Donne et consulte des<br/> avis sur des shows</span>
+                </div>
+              </Grid>
+
+              <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
+                <div>
+                  <img style={{float: 'left', display: 'block', marginRight: '5px', marginTop: '-6px'}} src={Face} />
+                  <span style={legend}> Donne et consulte des<br/> avis sur des shows</span>
+                </div>
+              </Grid>
+          */}
+              <Grid style={{textAlign: 'left', marginTop: 10}} item xs={12} sm={12} md={12}>
+                <Link to="/users/getstarted">
+                  <RaisedButton label="Commencer"></RaisedButton>
+                </Link>
+              </Grid>
+
+           </Grid>
           </div>
         </div>
+      </div>
     );
   }
 
