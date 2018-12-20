@@ -20,7 +20,7 @@ const boss = {
   userSelect: 'none',
   display:'table', 
   width:'100%',
-  height: '75vh'
+  height: '65vh'
 }
 
 const content = {
@@ -30,7 +30,7 @@ const content = {
   // verticalAlign: "middle",
   // margin: "0 auto",
   padding: 10,
-  textAlign: 'left',
+  textAlign: 'center',
 }
 
 
