@@ -41,6 +41,7 @@ const PostListItem = (props) => {
 	const backgroundImage = {
 	  backgroundImage: 'url('+post.image_url+')',
 	  backgroundSize: 'cover',
+	  height: 40,
 	}
 
 	
@@ -58,6 +59,7 @@ const PostListItem = (props) => {
 				style={paperStyle} zDepth={1} 
 				rounded={true} >
 				<div style={rootz}>
+				<div style={backgroundImage}></div>
 					<Grid container>
 				        <Grid item xs={12} sm={12} md={12}>
 							<Grid style={padded} container>
