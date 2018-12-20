@@ -8,14 +8,24 @@ import { initUserReviews } from '../app/actions/reviews'
 import Notifications from '../app/components/Notifications/notifications'
 import AuthLinks from '../app/components/Devise/views/AuthLinks'
 import RaisedButton from 'material-ui/RaisedButton';
+import {Link} from 'react-router-dom' 
+
+const boss = {
+  display:'table', 
+  width:'100%',
+  height: '70vh'
+}
 
 const content = {
+  display: 'table-cell', 
+  verticalAlign: 'middle', 
   color: "#ffffff",
-  margin: "auto",
-  width: '50%',
+  // verticalAlign: "middle",
+  // margin: "0 auto",
   padding: 10,
   textAlign: 'center',
 }
+
 
 const Home = ({currentUser, locales, auth: {AuthLinks}, initLocales, initArtists, initMyReviews}) => {
 
@@ -30,12 +40,17 @@ const Home = ({currentUser, locales, auth: {AuthLinks}, initLocales, initArtists
     );
   }else{
     return (
+      <div style={boss}>      
       <div style={content}>
-        <h1>Welcome</h1>
+        <h1><span>Bienvenue sur encore: la communauté qui partage <br/>ses expériences de concert et vous fait découvrir<br/> les meilleurs artistes sur scène.</span></h1>
+          <div>Donne et consulte des avis sur des shows</div>
+          <div>Partage les temps forts du concert en images</div>
+          <div>Découvre des artistes avec les contenus de la communauté</div>
         <br/>
-        <RaisedButton label="Partagez votre avis" />
-        <br/>
-        <br/>Features: Donne ton avis, Partage les temps forts, Découvre artistes et autres fans
+        <Link to="/users/getstarted">
+          <RaisedButton label="C'est parti"></RaisedButton>
+        </Link>
+      </div>
       </div>
     );
   }

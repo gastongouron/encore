@@ -313,7 +313,7 @@ class MainLayout extends Component {
                     <Badge
                     style={{display: 'inline'}}
                     badgeContent={this.state.counter}
-                    default={true}
+                    secondary={true}
                     badgeStyle={{top: -24, right: -35}}
                     >
                     <MenuItem
@@ -449,8 +449,6 @@ class MainLayout extends Component {
           }
           &nbsp;—&nbsp;
           <a href="mailto:gastongouron@gmail.com">Contact</a>
-          &nbsp;—&nbsp;
-          <Link to='/fanzine/posts'>Fanzine</Link>
           <div style={{float: 'right', marginTop: -4}}>
             <StyledSocialIcon color="white" style={{background: "radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%)", height: 28, color:"red", width: 28, marginLeft: "6px"}} network="instagram" url="https://www.instagram.com/tentsile" />
             <StyledSocialIcon color="white" style={{background:"#00aced", height: 28, color:"red", width: 28, marginLeft: "6px" }} network="twitter" url="https://twitter.com/gastongouron" />
