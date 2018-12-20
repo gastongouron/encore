@@ -11,6 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {Link} from 'react-router-dom' 
 
 const boss = {
+  userSelect: 'none',
   display:'table', 
   width:'100%',
   height: '70vh'
