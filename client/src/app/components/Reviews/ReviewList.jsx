@@ -9,7 +9,6 @@ class Review extends Component {
 
 	}
 
-
 	render(){
 
 		const reviews = this.props.reviews

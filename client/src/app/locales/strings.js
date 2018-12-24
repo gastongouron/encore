@@ -2,6 +2,8 @@ import LocalizedStrings from 'react-localization';
 
 const translations = {
  fr: {
+   homeHello:"Bienvenue sur encore, la communauté qui partage ses expériences de concert et vous fait découvrir les meilleurs artistes sur scène.",
+   getStarted:"je m'inscris",
    login:"Se connecter",
    mustLogin:"Veuillez vous identifier ou vous inscrire",
    facebook:"Avec Facebook",
@@ -87,6 +89,9 @@ const translations = {
    hot: "Hot",
  },
  en:{
+   homeHello:"Welcome! encore is a communinty of live music lovers sharing experiences about concerts to figure out who's the best on stage.",
+   getStarted:"Join us",
+
    login:"Login",
    mustLogin:"Please log in or sign up",
    facebook:"with Facebook",

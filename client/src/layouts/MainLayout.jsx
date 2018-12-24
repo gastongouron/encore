@@ -54,9 +54,11 @@ const MainToolbar = styled(Toolbar)`
 `;
 
 const MainContainer = styled.div`
-  padding-top: 5px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-top: 0px;
+  padding-left: 0px; 
+  padding-right: 0px;
+  width: 100%;
+  height: 100%;
 `;
 
 const Main = styled.div`
@@ -163,15 +165,17 @@ class MainLayout extends Component {
        observable: null,
        subscription: null,
        counter: 0,
+       scrolled: false,
     }
 
     this.props.setLocales(strings)
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
-    this.handleScroll = this.handleScroll.bind(this);
+    // this.handleScroll = this.handleScroll.bind(this);
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
+    // window.addEventListener('scroll', this.handleScroll);
+    this.setState({scrollHeight: document.getElementById('root').scrollHeight })
     this.updateWindowDimensions();
     if (this.props.currentUser.isLoggedIn){
       const ctx = this
@@ -207,12 +211,17 @@ class MainLayout extends Component {
     }
   }
 
-  handleScroll(event) {
-    console.log('the scroll things', event)
-  };
+  // handleScroll(event) {
+  //   if(window.pageYOffset > 0){
+  //     this.setState({scrolled: true})
+  //   } else {
+  //     this.setState({scrolled: false})      
+  //   }
+      
+  // };
 
   componentWillUnmount(){
-    window.removeEventListener('scroll', this.handleScroll);
+    // window.removeEventListener('scroll', this.handleScroll);
     if (this.state.subscription){
       this.state.subscription.unsubscribe()
     }
@@ -301,12 +310,36 @@ class MainLayout extends Component {
       textTransform: 'uppercase',
     }
 
+    const defaultNavbarStyle = {
+      align: 'center', 
+      margin: '0auto', 
+      width: '100%', 
+      transition: 'background 0.5s ease', 
+      background:'rgba(0,0,0,0.0)', 
+      boxShadow: 'none', 
+      // position: 'sticky', 
+      top: 0, 
+      color: '#ffffff'
+    }
+
+    const scrolledNavbarStyle = {
+      align: 'center', 
+      margin: '0auto', 
+      width: '100%', 
+      transition: 'background 0.5s ease', 
+      background:'rgba(0,0,0,0.4)', 
+      boxShadow: 'none', 
+      position: 'sticky', 
+      top: 0, 
+      color: '#ffffff'
+    }
+
     return (
       <div>
-      <Main style={this.props.currentUser.isLoggedIn ? {margin: '0 auto'} : {margin: '0 auto'} }>
+      <Main style={this.props.currentUser.isLoggedIn ? {maxWidth: 840, margin: '0 auto'} : {margin: '0 auto'} }>
         <MainAppBar
           // style={{background: '#283593', boxShadow: 'none', position: 'sticky', top: 0}}
-          style={{align: 'center', margin: '0auto', width: '100%', background:'rgba(0,0,0,0.3)', boxShadow: 'none', position: 'sticky', top: 0, color: '#ffffff'}}
+          style={defaultNavbarStyle}
           showMenuIconButton={ this.state.width < 500 ? true : false}
           iconStyleLeft={{color: "#ffffff"}}
           iconElementLeft={<Hamburger color="#ffffff" style={{marginLeft: 10, marginTop: 13}}/>}
@@ -453,7 +486,7 @@ class MainLayout extends Component {
         }
 
         </MainAppBar>
-        <MainContainer style={{margin: '0 auto'}}> 
+        <MainContainer style={{margin: '0 auto'}}>
           {notice && <Notice>{notice}</Notice>}
           {children}
         </MainContainer>          

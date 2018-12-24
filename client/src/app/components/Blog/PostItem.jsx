@@ -13,7 +13,6 @@ import Disqus from 'disqus-react'
 
 const PostItem = (props) => {
 
-	console.log(props)
 	const post = props.post
 	const formatter = buildFormatter(frenchStrings)
 	

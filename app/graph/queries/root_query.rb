@@ -14,7 +14,7 @@ RootQuery = GraphQL::ObjectType.define do
 
   field :posts, types[Types::PostType] do
     resolve(->(_, _, _) {
-      Post.all
+      Post.all.order('created_at DESC')
     })
   end
 

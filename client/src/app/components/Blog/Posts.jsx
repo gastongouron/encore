@@ -24,7 +24,6 @@ class Posts extends Component {
             (res) => {
                 this.props.setPosts(res.data.posts);
                 this.setState({posts: res.data.posts})
-                console.log(res.data.posts)
             },
             (err) => {
                 this.props.failedPosts(err.data);
@@ -39,7 +38,7 @@ class Posts extends Component {
                     <EncoreLoader />
 
                 : this.props.posts.error ? <h1>Error...</h1> : 
-                    <div>
+                    <div style={{margin: '0 auto', maxWidth: 840}}>
                         <PostsList posts={this.props.posts.posts}/>
                     </div> 
                 }
