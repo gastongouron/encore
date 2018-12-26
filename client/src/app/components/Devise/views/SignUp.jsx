@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {reduxForm, Field} from 'redux-form';
+import {reduxForm, Field, change} from 'redux-form';
 import {Redirect} from 'react-router-dom';
 import {signUp, formAction} from 'react-devise/lib/actions';
 import {required, email} from './Validation';
@@ -8,10 +8,14 @@ import FileBase64 from './FileBase64';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import strings from '../../../locales/strings'
-import DatePicker from 'material-ui/DatePicker';
+// import DatePicker from 'material-ui/DatePicker';
 import Checkbox from 'material-ui/Checkbox'
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton'
 import Grid from '@material-ui/core/Grid'
+import {
+  DatePicker
+} from 'redux-form-material-ui'
+
 
 const styles = {
   uploadButton: {
@@ -103,7 +107,11 @@ const SignUpFormz = reduxForm({
   //   "locale": strings.getLanguage()
   // }
 })(({error, valid, submitting, submitSucceeded, locales, handleSubmit, onSubmit, auth: {messages: {signUpSucceeded: signUpSucceededMessage}, viewPlugin: {renderInput, datePicker, SubmitButton, Form, FormError}}}) => {
-  console.log(strings)
+  
+  // const url = new URLSearchParams(window.location.search).get("email")
+  // { url != null ? console.log(url) : console.log('no URL buddy') }
+
+
   if (submitSucceeded) {
     return <Redirect to={{
       pathname: '/artists',
@@ -139,6 +147,7 @@ const SignUpFormz = reduxForm({
         component={renderInput}
         label={strings.email}
         validate={[required, email]}
+
       />
       <Field
         name="password"
@@ -159,8 +168,9 @@ const SignUpFormz = reduxForm({
       <br/>
       <Field
         name="birth_date"
-        component={renderDatePicker} hintText={strings.birthDate}
+        component={DatePicker} hintText={strings.birthDate}
         validate={required}
+        defaultValue={null}
       />
       <br/>
 
@@ -210,7 +220,6 @@ const SignUpFormz = reduxForm({
 
 
 const SignUp = ({doSignUp, locales, ...rest}) => {
-  console.log(strings.getLanguage())
 
   const {auth: {AuthLinks, viewPlugin: {View, Heading}}} = rest;
   return (

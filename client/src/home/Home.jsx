@@ -21,9 +21,9 @@ import styled, { keyframes } from 'styled-components'
 import BackgroundImage from './images/header.jpg'
 import theme from '../app/theme'
 
-  const rootz = {
-    flexGrow: 1,
-  }
+const rootz = {
+  flexGrow: 1,
+}
 
 const boss = {
   userSelect: 'none',
@@ -37,7 +37,7 @@ const iconStyle = {
 }
 
 const legend = {
-  textAlign: 'left',
+  textAlign: 'center',
   color: theme.palette.textColor,
 }
 
@@ -63,21 +63,28 @@ const baseline = {
 
 const header = {
   marginTop: -70,
-  paddingTop: 140,
+  paddingTop: 100,
   background: "url("+BackgroundImage+") no-repeat center fixed",
   backgroundSize: "cover",
   objectFit: 'cover',
   backgroundSize: 'cover',
-  height: 500,
+  height: 550,
 }
 
-const block = {
-  paddingTop: 100,
-  paddingBottom: 110,
+const headerBlock = {maxWidth: 840, margin: '0 auto', textAlign: 'left', marginBottom: 10, padding: 20}
+
+const features = {
+  paddingTop: 40,
+  paddingBottom: 60,
   background: "white"
 }
 
+const featuresBlock = {maxWidth: 840, margin: '0 auto'}
+
+const featureItem = {marginRight: '5px'}
+
 const block2 = {
+  padding: 40,
   paddingTop: 50,
   paddingBottom: 50,
   color: "white",
@@ -88,6 +95,8 @@ const block2 = {
   maxWidth: 840, 
   margin: '0 auto'
 }
+
+
 
 const Home = ({currentUser, locales, auth: {AuthLinks}, initLocales}) => {
 
@@ -102,42 +111,45 @@ const Home = ({currentUser, locales, auth: {AuthLinks}, initLocales}) => {
   }else{
     return (  
           <div style={rootz}>
+
+
             <Grid container style={header}>              
-              <Grid style={{maxWidth: 840, margin: '0 auto', textAlign: 'left', marginBottom: 10}} item xs={12} sm={12} md={12}>
+              <Grid style={headerBlock} item xs={12} sm={12} md={12}>
                 <h1 style={hashtag}>#Hashtag</h1>
                 <h1 style={baseline}>baseline</h1>
                 <h1 style={hello}>{locales.locales.homeHello}</h1>
-                <Link to="/users/getstarted">
+                <Link to="/users/getstarted" style={{float: "left"}}>
                   <RaisedButton label={locales.locales.getStarted}></RaisedButton>
                 </Link>
 
               </Grid>
             </Grid>
-
-            <div style={block}>              
-              <Grid container style={{maxWidth: 840, margin: '0 auto'}}>
+            <div style={features}>              
+              <Grid container style={featuresBlock}>
 
               <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
-                <div>
-                  <img style={{float: 'left', display: 'block', marginRight: '5px', marginTop: '-6px'}} src={Star} />
+                <div style={{textAlign: "center"}}>
+                  <img style={featureItem} src={Star} /><br/>
                   <span style={legend}> Donne et consulte des<br/> avis sur des shows</span>
                 </div>
               </Grid>
 
               <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
-                <div>
-                  <img style={{color: "black", float: 'left', display: 'block', marginRight: '5px', marginTop: '-6px'}} src={Camera} />
+                <div style={{textAlign: "center"}}>
+                  <img style={featureItem} src={Camera} /><br/>
                   <span style={legend}> Donne et consulte des<br/> avis sur des shows</span>
                 </div>
               </Grid>
 
               <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
-                <div>
-                  <img style={{color: "black", float: 'left', display: 'block', marginRight: '5px', marginTop: '-6px'}} src={Face} />
+                <div style={{textAlign: "center"}}>
+                  <img style={featureItem} src={Face} /><br/>
                   <span style={legend}> Donne et consulte des<br/> avis sur des shows</span>
                 </div>
               </Grid>
               </Grid>
+
+
             </div>
 
             <Grid container style={block2}>     
