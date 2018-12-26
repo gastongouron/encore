@@ -134,7 +134,7 @@ capitalizeTxt(txt) {
           >
             <Menu style={{padding: '0px'}}>
               <MenuItem onTouchTap={this.handleRequestClose} onClick={this.navigateToProfile}>{strings.profile}</MenuItem>
-              <MenuItem primaryText={strings.logout} onTouchTap={logout} style={navbarElem}/>
+              <MenuItem primaryText={strings.logout} onTouchTap={logout}/>
             </Menu>
           </Popover>
         </div>
