@@ -134,7 +134,7 @@ capitalizeTxt(txt) {
           >
             <Menu style={{padding: '0px'}}>
               <MenuItem onTouchTap={this.handleRequestClose} onClick={this.navigateToProfile}>{strings.profile}</MenuItem>
-              <MenuItem primaryText={strings.logout} onTouchTap={logout} />
+              <MenuItem primaryText={strings.logout} onTouchTap={logout} style={navbarElem}/>
             </Menu>
           </Popover>
         </div>
@@ -403,6 +403,7 @@ class MainLayout extends Component {
                 setUserProfile={this.props.setUserProfile}
                 client={this.props.client}
                 logout={doLogout}
+                style={navbarElem}
                 currentUser={currentUser}
                 textColor={palette.alternateTextColor}
               />
@@ -445,7 +446,7 @@ class MainLayout extends Component {
             primaryText="Fanzine"
             style={navbarMobileElem}
           />
-          {this.props.currentUser.isLoggedIn ? <MenuItem primaryText={strings.logout} onClick={doLogout} /> : null }
+          {this.props.currentUser.isLoggedIn ? <MenuItem primaryText={strings.logout} onClick={doLogout} style={navbarMobileElem} /> : null }
           <MenuItem
             onClick={this.drawerSwitchLanguage}
           >
