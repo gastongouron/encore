@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { withAuth } from 'react-devise';
+// import { withAuth } from 'react-devise';
+import { withApollo } from 'react-apollo';
 // import { ViewContainer } from '../shared';
 import { initLocales } from '../app/actions/locales'
-import { initArtists } from '../app/actions/artists'
-import { initUserReviews } from '../app/actions/reviews'
+import { initArtists, setArtists, failedArtists, loadingArtists } from '../app/actions/artists'
+// import { initUserReviews } from '../app/actions/reviews'
 import Notifications from '../app/components/Notifications/notifications'
 import AuthLinks from '../app/components/Devise/views/AuthLinks'
 import RaisedButton from 'material-ui/RaisedButton';
@@ -20,6 +21,7 @@ import MessengerCustomerChat from 'react-messenger-customer-chat';
 import styled, { keyframes } from 'styled-components'
 import BackgroundImage from './images/header.jpg'
 import theme from '../app/theme'
+import artistHomeQuery from '../app/queries/ArtistHomeQuery'
 
 const rootz = {
   flexGrow: 1,
@@ -81,7 +83,9 @@ const features = {
 
 const featuresBlock = {maxWidth: 840, margin: '0 auto'}
 
-const featureItem = {marginRight: '5px'}
+const featureItem = {marginRight: '0px'}
+
+const artistImage = {padding: '20px', borderRadius: '50%', maxWidth: 240}
 
 const block2 = {
   padding: 40,
@@ -100,9 +104,28 @@ class Home extends Component {
 
   constructor(props){
     super(props);
+      this.state = {
+          artists: this.props.artists.artistsHome
+        }
   }
 
+  componentWillMount(){
+      this.props.initArtists();
+      this.props.loadingArtists();
+      this.props.client.query({query: artistHomeQuery, fetchPolicy: 'network-only'}).then(
+          (res) => {
+              this.props.setArtists(res.data.artistsHome)
+              this.setState({artists: res.data.artistsHome})
+            },
+          (err) => {
+              this.props.failedArtists(err.data);
+          }
+      );
+  }
+
+
   render () {
+    console.log(this.props)
     if(this.props.currentUser && this.props.currentUser.isLoggedIn){
         return (
           <div>
@@ -111,7 +134,7 @@ class Home extends Component {
             <br/>Top rated users
           </div>
         );
-      }else{
+      } else {
     return (
       <div style={rootz}>
 
@@ -160,23 +183,15 @@ class Home extends Component {
 
             <div style={features}>              
               <Grid container style={featuresBlock}>
-                <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
-                  <div style={{textAlign: "center", color: "black"}}>
-                    some topranked artist
-                  </div>
-                </Grid>
+                 {this.props.artists.artists.map((artist, index) => (
+                    <Grid key={index} style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
+                      <div style={{textAlign: "center", color: "black", padding: 20}}>
+                        <img style={artistImage} src={artist.cover_url} /><br/>
+                        <span style={legend}>{artist.name}</span>
+                      </div>
+                    </Grid>
+                  ))}
 
-                <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
-                  <div style={{textAlign: "center", color: "black"}}>
-                    some topranked artist
-                  </div>
-                </Grid>
-
-                <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
-                  <div style={{textAlign: "center", color: "black"}}>
-                    some topranked artist
-                  </div>
-                </Grid>
               </Grid>
             </div>
 
@@ -194,11 +209,9 @@ class Home extends Component {
 }
 
 
-const mapStateToProps = state => {
-  initLocales();
-  // initArtists();
-  // initUserReviews();
+const mapStateToProps = state => { 
   return {
+    artists: state.artists,
     currentUser: state.currentUser,
     locales: state.locales
   };
@@ -208,9 +221,11 @@ const mapDispatchToProps = dispatch => {
 
   return {
       initLocales: () => dispatch(initLocales()),
-      // initArtists: () => dispatch(initArtists()),
-      // initUserReviews: () => dispatch(initUserReviews())
+      initArtists: () => dispatch(initArtists()),
+      loadingArtists: () => dispatch(loadingArtists()),
+      setArtists: (artists) => dispatch(setArtists(artists)),
+      failedArtists: (message) => dispatch(failedArtists(message))
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withAuth(Home));
+export default connect(mapStateToProps, mapDispatchToProps)(withApollo(Home));

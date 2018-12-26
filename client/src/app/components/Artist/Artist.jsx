@@ -68,7 +68,6 @@ class ArtistDetail extends Component {
         this.props.loadingArtistDetail();
 
         let observable = this.props.client.subscribe({ query: reviewSubscription, variables: {artist_id: this.props.match.params.id} })
-        // let observable = this.props.client.subscribe({ query: reviewSubscription })
         this.setState({observable: observable})
 
         this.props.client.query({query: artistDetailQuery, variables: {id: this.props.match.params.id}, fetchPolicy: 'network-only'}).then(

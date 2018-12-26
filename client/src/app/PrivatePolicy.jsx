@@ -13,6 +13,7 @@ class Policy extends Component {
 
     render() {
         return (
+            <div style={{margin: '0 auto', maxWidth: 840, padding: 20}}>
             <Paper zDepth={1}>
                 <div style={padded}>
                     <h2>{this.props.locales.locales.policy.title}</h2>
@@ -25,6 +26,7 @@ class Policy extends Component {
                     <p>{this.props.locales.locales.policy.p4}</p>
                 </div>
             </Paper>
+            </div>
         )
     }
 }

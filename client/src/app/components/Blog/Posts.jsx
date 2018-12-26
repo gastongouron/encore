@@ -38,7 +38,7 @@ class Posts extends Component {
                     <EncoreLoader />
 
                 : this.props.posts.error ? <h1>Error...</h1> : 
-                    <div style={{margin: '0 auto', maxWidth: 840}}>
+                    <div style={{margin: '0 auto', maxWidth: 840, padding: 20}}>
                         <PostsList posts={this.props.posts.posts}/>
                     </div> 
                 }

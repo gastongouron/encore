@@ -12,6 +12,12 @@ RootQuery = GraphQL::ObjectType.define do
     })
   end
 
+  field :artistsHome, types[Types::ArtistType] do
+    resolve(->(_, _, _) {
+      Artist.all.includes(:reviews).order('reviews.score ASC').limit(3)
+    })
+  end
+
   field :posts, types[Types::PostType] do
     resolve(->(_, _, _) {
       Post.all.order('created_at DESC')
