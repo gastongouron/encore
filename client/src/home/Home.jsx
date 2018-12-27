@@ -244,6 +244,7 @@ class Home extends Component {
             </Grid>
 
         <MessengerCustomerChat
+            style={{paddingBottom: 40}}
             pageId="826064754401701"
             appId="1351728908291385"
             language={this.props.locales.locales._language === 'en' ? "en_US" : "fr_FR"}
