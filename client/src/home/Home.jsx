@@ -14,9 +14,9 @@ import {Link} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 // import FaceIcon from 'material-ui/svg-icons/action/face';
 // import StarRate from 'material-ui/svg-icons/toggle/star';
-import Camera from './icons/camera.png';
-import Face from './icons/face.png';
-import Star from './icons/star.png';
+import Camera from './icons/camerazzz.png';
+import Face from './icons/facezz.png';
+import Star from './icons/starzz.png';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import styled, { keyframes } from 'styled-components'
 import BackgroundImage from './images/header.jpg'
@@ -39,13 +39,14 @@ const iconStyle = {
 }
 
 const legend = {
+  fontWeight: 300,
   textAlign: 'center',
   color: theme.palette.textColor,
 }
 
 const hello = {
-  fontFamily: 'Roboto', 
-  fontWeight: 300,
+  fontFamily: 'Roboto',
+  fontWeight: 100,
 }
 
 const encore = {
@@ -55,25 +56,29 @@ const encore = {
 }
 
 const hashtag = {
-  fontVariant: "uppercase",
-  fontSize: '3em',
+  fontFamily: 'Roboto',
+  fontVariant: 'uppercase',
+  fontWeight: 900,
+  letterSpacing: 3,
 }
 
 const baseline = {
-  fontSize: '2em'
+  fontFamily: 'Roboto',
+  fontWeight: '100',
 }
 
 const header = {
   marginTop: -70,
-  paddingTop: 100,
+  paddingTop: 200,
+  paddingBottom: 200,
   background: "url("+BackgroundImage+") no-repeat center fixed",
   backgroundSize: "cover",
   objectFit: 'cover',
   backgroundSize: 'cover',
-  height: 550,
+  minheight: '600px',
 }
 
-const headerBlock = {maxWidth: 840, margin: '0 auto', textAlign: 'left', marginBottom: 10, padding: 20}
+const headerBlock = {maxWidth: 840, margin: '0 auto', textAlign: 'left', marginBottom: 20, padding: 20}
 
 const features = {
   paddingTop: 40,
@@ -81,11 +86,11 @@ const features = {
   background: "white"
 }
 
-const featuresBlock = {maxWidth: 840, margin: '0 auto'}
+const featuresBlock = {maxWidth: 840, margin: '0 auto', padding: 20}
 
 const featureItem = {marginRight: '0px'}
 
-const artistImage = {padding: '20px', borderRadius: '50%', maxWidth: 240}
+const artistImage = {padding: '20px', borderRadius: '50%', maxWidth: 105}
 
 const block2 = {
   padding: 40,
@@ -140,36 +145,36 @@ class Home extends Component {
 
             <Grid container style={header}>              
               <Grid style={headerBlock} item xs={12} sm={12} md={12}>
-                <h1 style={hashtag}>#Hashtag</h1>
-                <h1 style={baseline}>baseline</h1>
-                <h1 style={hello}>{this.props.locales.locales.homeHello}</h1>
+                <h1 style={hashtag}>#SHARETHEVIBE</h1>
+                <h2 style={baseline}>every show should end with and <b>encore!</b></h2>
+                <h3 style={hello}>{this.props.locales.locales.homeHello} {this.props.locales.locales.homeHello}</h3>
                 <Link to="/users/getstarted" style={{float: "left"}}>
-                  <RaisedButton label={this.props.locales.locales.getStarted}></RaisedButton>
+                  <RaisedButton primary={true} label={this.props.locales.locales.getStarted}></RaisedButton>
                 </Link>
-
               </Grid>
             </Grid>
-
             <div style={features}>              
               <Grid container style={featuresBlock}>
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
                   <div style={{textAlign: "center"}}>
                     <img style={featureItem} src={Star} /><br/>
-                    <span style={legend}> Donne et consulte des<br/> avis sur des shows</span>
+
+                    <h4 style={legend}> Donne et consulte des<br/> avis sur des shows</h4>
+
                   </div>
                 </Grid>
 
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
                   <div style={{textAlign: "center"}}>
                     <img style={featureItem} src={Camera} /><br/>
-                    <span style={legend}> Donne et consulte des<br/> avis sur des shows</span>
+                    <h4 style={legend}> Donne et consulte des<br/> avis sur des shows</h4>
                   </div>
                 </Grid>
 
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
                   <div style={{textAlign: "center"}}>
-                    <img style={featureItem} src={Face} /><br/>
-                    <span style={legend}> Donne et consulte des<br/> avis sur des shows</span>
+                    <img style={featureItem} src={Face}/><br/>
+                    <h4 style={legend}> Donne et consulte des<br/> avis sur des shows</h4>
                   </div>
                 </Grid>
               </Grid>
@@ -177,21 +182,25 @@ class Home extends Component {
 
             <Grid container style={block2}>     
               <Grid item style={{textAlign: 'center', margin: '0 auto'}}>
-                <span>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</span>
+                <h1><b>encore!</b></h1>
+                <h3 style={hello}>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</h3>
+                <h2><b>Some meaningfull text</b></h2>
               </Grid>
             </Grid>
 
             <div style={features}>              
               <Grid container style={featuresBlock}>
+                <Grid style={{textAlign: 'center', color: theme.palette.textColor}} item xs={12} sm={12} md={12}>
+                  <h2>Découvrez les meilleurs artistes du moment recommandés par la communauté encore</h2>
+                </Grid>
                  {this.props.artists.artists.map((artist, index) => (
-                    <Grid key={index} style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
+                    <Grid key={index} style={{paddingTop: 20}} item xs={6} sm={4} md={3} lg={2}>
                       <div style={{textAlign: "center", color: "black", padding: 20}}>
                         <img style={artistImage} src={artist.cover_url} /><br/>
-                        <span style={legend}>{artist.name}</span>
+                        <h4 style={legend}>{artist.name}</h4>
                       </div>
                     </Grid>
                   ))}
-
               </Grid>
             </div>
 

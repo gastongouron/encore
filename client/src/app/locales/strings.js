@@ -2,7 +2,7 @@ import LocalizedStrings from 'react-localization';
 
 const translations = {
  fr: {
-   homeHello:"Bienvenue sur encore, la communauté qui partage ses expériences de concert et vous fait découvrir les meilleurs artistes sur scène.",
+   homeHello:"La communauté qui partage ses expériences de concert et vous fait découvrir les meilleurs artistes sur scène.",
    getStarted:"je m'inscris",
    login:"Se connecter",
    mustLogin:"Veuillez vous identifier ou vous inscrire",
@@ -89,8 +89,8 @@ const translations = {
    hot: "Hot",
  },
  en:{
-   homeHello:"Welcome! encore is a communinty of live music lovers sharing experiences about concerts to figure out who's the best on stage.",
-   getStarted:"Join us",
+   homeHello:"A community sharing experiences about concerts to figure out who's the best on stage",
+   getStarted:"Join us now",
 
    login:"Login",
    mustLogin:"Please log in or sign up",
