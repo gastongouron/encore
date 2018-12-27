@@ -248,15 +248,15 @@ class Home extends Component {
             <Grid container style={block2}>     
               <Grid item style={{textAlign: 'center', margin: '0 auto'}}>
                 <h1><b>encore!</b></h1>
-                <h3 style={hello}>Nous avons créés cette plateforme pour les artistes et leur musique  pour les fans, les groupies du premier rang, pour ceux qui tappent du pied au fond de la salle, pour tout ceux qui assistent à un concert pour vivre un moment unique...</h3>
-                <h3 style={hello}><b>...pour vous quoi!</b></h3>
+                <h3 style={hello}>{this.props.locales.locales.lorem}</h3>
+                <h3 style={hello}><b>{this.props.locales.locales.lorem2}</b></h3>
               </Grid>
             </Grid>
 
             <div style={features}>              
               <Grid container style={featuresBlock}>
                 <Grid style={{textAlign: 'center', color: theme.palette.textColor}} item xs={12} sm={12} md={12}>
-                  <h3>Découvrez les meilleurs artistes du moment recommandés par la communauté encore</h3>
+                  <h3>{this.props.locales.locales.community}</h3>
                 </Grid>
                  {this.props.artists.artists.map((artist, index) => (
                     <Grid key={index} style={{paddingTop: 20}} item xs={6} sm={4} md={3} lg={3}>
