@@ -3,10 +3,19 @@ import LocalizedStrings from 'react-localization';
 const translations = {
  fr: {
    homeHello:"La communauté qui partage ses expériences de concert et vous fait découvrir les meilleurs artistes sur scène.",
-
    baseline:"tout les concerts devraient finir avec un ",
 
-
+   feature1Bold:"Donne et consulte",
+   feature1Light1:" des avis",
+   feature1Light2:" sur des shows du moment ",
+   feature1Light3:"et les artistes à découvrir",
+   feature2Bold1:"Partage les temps forts du",
+   feature2Bold2:" concert en images",
+   feature2Light1:" avec les plus ",
+   feature2Light2:"belles photos et vidéos",
+   feature3Bold:"Découvre des artistes",
+   feature3Light1:" grâce aux contenus de la ",
+   feature3Light2:"communauté",
 
    getStarted:"je m'inscris",
    login:"Se connecter",
@@ -95,8 +104,21 @@ const translations = {
  },
  en:{
    homeHello:"A community sharing experiences about concerts to figure out who's the best on stage",
-
    baseline:"every show should end with an",
+
+   feature1Bold:"Share and consult",
+   feature1Light1:" reviews",
+   feature1Light2:" about current shows ",
+   feature1Light3:"and artists to discover",
+
+   feature2Bold1:"Share the highlights of the",
+   feature2Bold2:" concert in pictures",
+   feature2Light1:" with ",
+   feature2Light2:"your bests photos and videos",
+
+   feature3Bold:"Discover artists",
+   feature3Light1:" thanks to the contents ",
+   feature3Light2:"of the community",
 
 
    getStarted:"Join us now",

@@ -82,6 +82,7 @@ const subLegend = {
 }
 
 const hello = {
+  maxWidth: 500,
   fontFamily: 'Roboto',
   fontWeight: 100,
 }
@@ -222,7 +223,7 @@ class Home extends Component {
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
                   <div style={{textAlign: "center"}}>
                     <span style={{fontSize: "40px"}}>⭐</span>
-                    <h4 style={legend}> <span style={boldLegend}>Donne et consulte</span> des avis<br/> sur des shows du moment <br/>et les artistes à découvrir</h4>
+                    <h4 style={legend}> <span style={boldLegend}>{this.props.locales.locales.feature1Bold}</span>{this.props.locales.locales.feature1Light1}<br/>{this.props.locales.locales.feature1Light2}<br/>{this.props.locales.locales.feature1Light3}</h4>
 
                   </div>
                 </Grid>
@@ -230,7 +231,7 @@ class Home extends Component {
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
                   <div style={{textAlign: "center"}}>
                     <span style={{fontSize: "40px"}}>📸</span>
-                    <h4 style={legend}> <span style={boldLegend}>Partage les temps forts du<br/> concert en images</span> avec les plus <br/>belles photos et vidéos</h4>
+                    <h4 style={legend}> <span style={boldLegend}>{this.props.locales.locales.feature2Bold1}<br/>{this.props.locales.locales.feature2Bold2}</span>{this.props.locales.locales.feature2Light1}<br/>{this.props.locales.locales.feature2Light2}</h4>
                   </div>
                 </Grid>
 
@@ -238,7 +239,7 @@ class Home extends Component {
                   <div style={{textAlign: "center"}}>
                     {/* <img style={featureItem} src={Face}/><br/> */}
                     <span style={{fontSize: "40px"}}>🤩</span>
-                    <h4 style={legend}> <span style={boldLegend}>Découvre des artistes</span><br/> grâce aux contenus de la <br/>communauté</h4>
+                    <h4 style={legend}> <span style={boldLegend}>{this.props.locales.locales.feature3Bold}</span><br/>{this.props.locales.locales.feature3Light1}<br/>{this.props.locales.locales.feature3Light2}</h4>
                   </div>
                 </Grid>
               </Grid>
@@ -247,15 +248,15 @@ class Home extends Component {
             <Grid container style={block2}>     
               <Grid item style={{textAlign: 'center', margin: '0 auto'}}>
                 <h1><b>encore!</b></h1>
-                <h3 style={hello}>Nous avons créés cette plateforme pour les artistes et leur musique <br/> pour les fans, les groupies du premier rang, pour ceux qui tappent du pied<br/> au fond de la salle et pour tout ceux qui assistent à un concert pour vivre <br/>un moment unique.</h3>
-                <h3 style={hello}><b>Pour vous quoi!</b></h3>
+                <h3 style={hello}>Nous avons créés cette plateforme pour les artistes et leur musique  pour les fans, les groupies du premier rang, pour ceux qui tappent du pied au fond de la salle, pour tout ceux qui assistent à un concert pour vivre un moment unique...</h3>
+                <h3 style={hello}><b>...pour vous quoi!</b></h3>
               </Grid>
             </Grid>
 
             <div style={features}>              
               <Grid container style={featuresBlock}>
                 <Grid style={{textAlign: 'center', color: theme.palette.textColor}} item xs={12} sm={12} md={12}>
-                  <h2>Découvrez les meilleurs artistes du moment recommandés par la communauté encore</h2>
+                  <h3>Découvrez les meilleurs artistes du moment recommandés par la communauté encore</h3>
                 </Grid>
                  {this.props.artists.artists.map((artist, index) => (
                     <Grid key={index} style={{paddingTop: 20}} item xs={6} sm={4} md={3} lg={3}>
