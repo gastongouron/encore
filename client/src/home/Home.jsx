@@ -40,10 +40,20 @@ const iconStyle = {
 }
 
 const legend = {
+  fontFamily: 'Roboto',
+  marginTop: 0,
   fontWeight: 300,
   textAlign: 'center',
   color: theme.palette.textColor,
 }
+
+const boldLegend = {
+  fontFamily: 'Roboto',
+  fontWeight: 500,
+  textAlign: 'center',
+  color: theme.palette.primary1Color,
+}
+
 
 const hello = {
   fontFamily: 'Roboto',
@@ -61,17 +71,20 @@ const hashtag = {
   fontVariant: 'uppercase',
   fontWeight: 900,
   letterSpacing: 3,
+  marginBottom: 10
 }
 
 const baseline = {
+  marginTop: 0,
+  paddingTop: 0,
   fontFamily: 'Roboto',
-  fontWeight: '100',
+  fontWeight: 300,
 }
 
 const header = {
   marginTop: -70,
-  paddingTop: 230,
-  paddingBottom: 150,
+  paddingTop: 120,
+  paddingBottom: 130,
   background: "url("+BackgroundImage+") no-repeat center fixed",
   backgroundSize: "cover",
   objectFit: 'cover',
@@ -148,6 +161,7 @@ class Home extends Component {
     if(this.props.currentUser && this.props.currentUser.isLoggedIn){
         return (
           <div>
+            user search
             <br/>Last Blog post: titre
             <br/>Top rated artists
             <br/>Top rated users
@@ -159,10 +173,10 @@ class Home extends Component {
 
             <Grid container style={header}>              
               <Grid style={headerBlock} item xs={12} sm={12} md={12}>
-                <h1 style={hashtag}>#SHARETHEVIBE</h1>
-                <h2 style={baseline}>every show should end with and <b>encore!</b></h2>
-                <p >{this.props.locales.locales.homeHello}<br/> {this.props.locales.locales.homeHello}</p>
-                <Link to="/users/getstarted" style={{float: "left"}}>
+                <h1 style={hashtag}>🤟#SHARETHEVIBE</h1>
+                <h2 style={baseline}>every show should end with an <b>encore!</b></h2>
+                <h3 style={baseline}>{this.props.locales.locales.homeHello}<br/> {this.props.locales.locales.homeHello}</h3>
+                <Link to="/users/getstarted" style={{float: "left", paddingTop: 15}}>
                   <RaisedButton primary={true} label={this.props.locales.locales.getStarted}></RaisedButton>
                 </Link>
               </Grid>
@@ -173,7 +187,7 @@ class Home extends Component {
                   <div style={{textAlign: "center"}}>
                     <img style={featureItem} src={Star} /><br/>
 
-                    <h4 style={legend}> Donne et consulte des<br/> avis sur des shows</h4>
+                    <h4 style={legend}> <span style={boldLegend}>Donne et consulte</span> des avis<br/> sur des shows du moment <br/>et les artistes à découvrir</h4>
 
                   </div>
                 </Grid>
@@ -181,14 +195,14 @@ class Home extends Component {
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
                   <div style={{textAlign: "center"}}>
                     <img style={featureItem} src={Camera} /><br/>
-                    <h4 style={legend}> Donne et consulte des<br/> avis sur des shows</h4>
+                    <h4 style={legend}> <span style={boldLegend}>Partage les temps forts du<br/> concert en images</span> avec les plus <br/>belles photos et vidéos</h4>
                   </div>
                 </Grid>
 
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
                   <div style={{textAlign: "center"}}>
                     <img style={featureItem} src={Face}/><br/>
-                    <h4 style={legend}> Donne et consulte des<br/> avis sur des shows</h4>
+                    <h4 style={legend}> <span style={boldLegend}>Découvre des artistes</span><br/> grâce aux contenus de la <br/>communauté</h4>
                   </div>
                 </Grid>
               </Grid>

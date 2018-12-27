@@ -15,7 +15,7 @@ const underlineFocusStyle = {
 }
 
 const hintStyle = {
-    // color: 'white',
+    color: 'white',
 }
 
 
