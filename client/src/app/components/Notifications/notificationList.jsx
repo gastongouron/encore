@@ -25,7 +25,7 @@ class NotificationsList extends Component {
     const notifications = this.props.notifications
 
     return (
-      <div>
+      <div  style={{paddingTop: 20}}>
 
            {(notifications && notifications.length > 0) ? notifications.map((notification, index) => (
       			  <NotificationItem

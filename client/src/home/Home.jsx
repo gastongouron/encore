@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-// import { withAuth } from 'react-devise';
 import { withApollo } from 'react-apollo';
-// import { ViewContainer } from '../shared';
 import { initLocales } from '../app/actions/locales'
 import { initArtists, setArtists, failedArtists, loadingArtists } from '../app/actions/artists'
 // import { initUserReviews } from '../app/actions/reviews'
@@ -10,20 +8,25 @@ import Notifications from '../app/components/Notifications/notifications'
 import AuthLinks from '../app/components/Devise/views/AuthLinks'
 import RaisedButton from 'material-ui/RaisedButton';
 import {Link} from 'react-router-dom' 
-// import Slide from 'react-reveal/Slide';
 import Grid from '@material-ui/core/Grid'
-// import FaceIcon from 'material-ui/svg-icons/action/face';
-// import StarRate from 'material-ui/svg-icons/toggle/star';
-// import Camera from './icons/camerazzz.png';
-// import Face from './icons/facezz.png';
-// import Star from './icons/starzz.png';
 import Star from 'material-ui/svg-icons/toggle/star';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import styled, { keyframes } from 'styled-components'
 import BackgroundImage from './images/header.jpg'
 // import BackgroundImage2 from './images/prefooter.jpg'
+
 import theme from '../app/theme'
 import artistHomeQuery from '../app/queries/ArtistHomeQuery'
+
+import { SocialIcon } from 'react-social-icons';
+
+const StyledSocialIcon = styled(SocialIcon)`
+   background: #ececec;
+   border-radius: 50%;
+   &:hover {
+    background: white;
+   }
+`;
 
 const rootz = {
   flexGrow: 1,
@@ -115,6 +118,10 @@ const baseline2 = {
   paddingBottom: 30,
   fontFamily: 'Roboto',
   fontWeight: 300,
+  textAlign: "center",
+  align: "center",
+  margin: "0 auto",
+  maxWidth: 300,
 }
 
 const header = {
@@ -216,6 +223,12 @@ class Home extends Component {
                 <Link to="/users/getstarted" style={{float: "center", paddingTop: 40}}>
                   <RaisedButton primary={true} label={this.props.locales.locales.getStarted}></RaisedButton>
                 </Link>
+                <br/>
+                <div style={{paddingTop: 40}}>
+                  <StyledSocialIcon color="black" style={{background:"white", marginRight: 20, height: 28, width: 28}} network="instagram" url="https://www.instagram.com/tentsile" />
+                  <StyledSocialIcon color="black" style={{background:"white", marginRight: 20, height: 28, width: 28}} network="twitter" url="https://twitter.com/gastongouron" />
+                  <StyledSocialIcon color="black" style={{background:"white", height: 28, width: 28}} network="facebook" url="https://www.facebook.com/gastongouron" />
+                </div>
               </Grid>
             </Grid>
             <div style={features}>              
