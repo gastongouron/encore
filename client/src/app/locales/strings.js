@@ -3,7 +3,7 @@ import LocalizedStrings from 'react-localization';
 const translations = {
  fr: {
    homeHello:"La communauté qui partage ses expériences de concert et vous fait découvrir les meilleurs artistes sur scène.",
-   baseline:"tout les concerts devaient finir avec un ",
+   baseline:"les concerts devaient finir avec ",
 
    feature1Bold:"Donne et consulte",
    feature1Light1:" des avis",
@@ -11,7 +11,8 @@ const translations = {
    feature1Light3:"et les artistes à découvrir",
    feature2Bold1:"Partage les temps forts du",
    feature2Bold2:" concert en images",
-   feature2Light1:" avec les plus ",   feature2Light2:"belles photos et vidéos",
+   feature2Light1:" avec les plus ",   
+   feature2Light2:"belles photos et vidéos",
    feature3Bold:"Découvre des artistes",
    feature3Light1:" grâce aux contenus de la ",
    feature3Light2:"communauté",

@@ -11,6 +11,7 @@ import locales from './locales'
 import notifications from './notifications'
 import posts from './posts'
 import postDetail from './postDetail'
+import users from './users'
 
 export default apolloClient => combineReducers({
   ...reactDeviseReducers,
@@ -24,5 +25,6 @@ export default apolloClient => combineReducers({
   locales,
   notifications,
   posts,
-  postDetail
+  postDetail,
+  users
 });

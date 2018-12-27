@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withApollo } from 'react-apollo';
 import { initLocales } from '../app/actions/locales'
 import { initArtists, setArtists, failedArtists, loadingArtists } from '../app/actions/artists'
+import { initUsers, setUsers, failedUsers, loadingUsers } from '../app/actions/users'
 // import { initUserReviews } from '../app/actions/reviews'
 import Notifications from '../app/components/Notifications/notifications'
 import AuthLinks from '../app/components/Devise/views/AuthLinks'
@@ -14,11 +15,13 @@ import MessengerCustomerChat from 'react-messenger-customer-chat';
 import styled, { keyframes } from 'styled-components'
 import BackgroundImage from './images/header.jpg'
 // import BackgroundImage2 from './images/prefooter.jpg'
-
+import Divider from 'material-ui/Divider';
 import theme from '../app/theme'
 import artistHomeQuery from '../app/queries/ArtistHomeQuery'
-
+import usersHomeQuery from '../app/queries/UsersHomeQuery'
 import { SocialIcon } from 'react-social-icons';
+
+// import Artists from '../app/components/Artist/Artists'
 
 const StyledSocialIcon = styled(SocialIcon)`
    background: #ececec;
@@ -128,7 +131,7 @@ const header = {
   color: theme.palette.secondaryTextColor,
   marginTop: -70,
   paddingTop: 120,
-  paddingBottom: 130,
+  paddingBottom: 50,
   background: "url("+BackgroundImage+") no-repeat center fixed",
   backgroundSize: "cover",
   objectFit: 'cover',
@@ -158,10 +161,13 @@ const features = {
 }
 
 const featuresBlock = {maxWidth: 840, margin: '0 auto', padding: 20, paddingBottom: 5}
+const artistsBlock = {maxWidth: 840, margin: '0 auto', padding: 20, paddingBottom: 40}
 
 const featureItem = {marginRight: '0px'}
 
 const artistImage = {borderRadius: '50%', maxWidth: 105}
+const artistImageLoggedIn = {borderRadius: '50%', maxWidth: 50}
+const artistsBlockLoggedIn = {maxWidth: 840, margin: '0 auto', paddingBottom: 20}
 
 const block2 = {
   padding: 40,
@@ -187,7 +193,10 @@ class Home extends Component {
 
   componentWillMount(){
       this.props.initArtists();
+      this.props.initUsers();
       this.props.loadingArtists();
+      this.props.loadingUsers();
+
       this.props.client.query({query: artistHomeQuery, fetchPolicy: 'network-only'}).then(
           (res) => {
               this.props.setArtists(res.data.artistsHome)
@@ -197,6 +206,16 @@ class Home extends Component {
               this.props.failedArtists(err.data);
           }
       );
+
+      this.props.client.query({query: usersHomeQuery, fetchPolicy: 'network-only'}).then(
+          (res) => {
+              this.props.setUsers(res.data.usersHome)
+              this.setState({users: res.data.usersHome})
+            },
+          (err) => {
+              this.props.failedUsers(err.data);
+          }
+      );      
   }
 
 
@@ -204,13 +223,38 @@ class Home extends Component {
     console.log(this.props)
     if(this.props.currentUser && this.props.currentUser.isLoggedIn){
         return (
-          <div>
-            user search
-            <br/>Last Blog post: titre
-            <br/>Top rated artists
-            <br/>Top rated users
+
+          <div style={{paddingTop: 20}}>
+            {/* <Artists /> */}   
+            <h1 style={{marginTop: 0}}>Top contributors</h1>
+              <Grid container style={artistsBlockLoggedIn}>
+                 {this.props.users.users.map((user, index) => (
+                    <Grid key={index} item xs={3} sm={2} md={1} lg={1}>
+                      <div style={{textAlign: "center", color: "black", padding: 10}}>
+                        <img style={artistImageLoggedIn} src={user.profile_picture} /><br/>
+
+                      </div>
+                    </Grid>
+                  ))}
+              </Grid>
+            <Divider light={true}/>
+            <h1 style={{paddingTop: 10, marginTop: 0}}>Top rated artists</h1>
+              <Grid container style={artistsBlockLoggedIn}>
+                 {this.props.artists.artists.map((artist, index) => (
+                    <Grid key={index} item xs={3} sm={2} md={1} lg={1}>
+                      <div style={{textAlign: "center", color: "black", padding: 10}}>
+                        <img style={artistImageLoggedIn} src={artist.cover_url} /><br/>
+                      </div>
+                    </Grid>
+                  ))}
+              </Grid>
           </div>
         );
+
+
+
+
+
       } else {
     return (
       <div style={rootz}>
@@ -234,22 +278,22 @@ class Home extends Component {
             <div style={features}>              
               <Grid container style={featuresBlock}>
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
-                  <div style={{textAlign: "center"}}>
+                  <div style={{paddingTop: 10, textAlign: "center"}}>
                     <span style={{fontSize: "40px"}}>⭐</span>
                     <h4 style={legend}> <span style={boldLegend}>{this.props.locales.locales.feature1Bold}</span>{this.props.locales.locales.feature1Light1}<br/>{this.props.locales.locales.feature1Light2}<br/>{this.props.locales.locales.feature1Light3}</h4>
 
                   </div>
                 </Grid>
 
-                <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
-                  <div style={{textAlign: "center"}}>
+                <Grid item xs={12} sm={4} md={4}>
+                  <div style={{paddingTop: 20, textAlign: "center"}}>
                     <span style={{fontSize: "40px"}}>📸</span>
                     <h4 style={legend}> <span style={boldLegend}>{this.props.locales.locales.feature2Bold1}<br/>{this.props.locales.locales.feature2Bold2}</span>{this.props.locales.locales.feature2Light1}<br/>{this.props.locales.locales.feature2Light2}</h4>
                   </div>
                 </Grid>
 
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
-                  <div style={{textAlign: "center"}}>
+                  <div style={{paddingTop: 10, textAlign: "center"}}>
                     {/* <img style={featureItem} src={Face}/><br/> */}
                     <span style={{fontSize: "40px"}}>🤩</span>
                     <h4 style={legend}> <span style={boldLegend}>{this.props.locales.locales.feature3Bold}</span><br/>{this.props.locales.locales.feature3Light1}<br/>{this.props.locales.locales.feature3Light2}</h4>
@@ -271,9 +315,11 @@ class Home extends Component {
                 <Grid style={{textAlign: 'center', color: theme.palette.textColor}} item xs={12} sm={12} md={12}>
                   <h3>{this.props.locales.locales.community}</h3>
                 </Grid>
+              </Grid>
+              <Grid container style={artistsBlock}>
                  {this.props.artists.artists.map((artist, index) => (
-                    <Grid key={index} style={{paddingTop: 20}} item xs={6} sm={4} md={3} lg={3}>
-                      <div style={{textAlign: "center", color: "black", padding: 20}}>
+                    <Grid key={index} item xs={6} sm={4} md={3} lg={3}>
+                      <div style={{textAlign: "center", color: "black", padding: 10}}>
                         <img style={artistImage} src={artist.cover_url} /><br/>
                         <span style={artistLegend}>{artist.name}</span><br/>
                         <span style={subLegend}>{artist.tags.split(',').shift().toUpperCase()}</span><br/>
@@ -311,6 +357,7 @@ class Home extends Component {
 
 const mapStateToProps = state => { 
   return {
+    users: state.users,
     artists: state.artists,
     currentUser: state.currentUser,
     locales: state.locales
@@ -324,7 +371,11 @@ const mapDispatchToProps = dispatch => {
       initArtists: () => dispatch(initArtists()),
       loadingArtists: () => dispatch(loadingArtists()),
       setArtists: (artists) => dispatch(setArtists(artists)),
-      failedArtists: (message) => dispatch(failedArtists(message))
+      failedArtists: (message) => dispatch(failedArtists(message)),
+      initUsers: () => dispatch(initUsers()),
+      loadingUsers: () => dispatch(loadingUsers()),
+      setUsers: (users) => dispatch(setUsers(users)),
+      failedUsers: (message) => dispatch(failedUsers(message))
   };
 };
 

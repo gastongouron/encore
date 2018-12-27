@@ -18,6 +18,13 @@ RootQuery = GraphQL::ObjectType.define do
     })
   end
 
+  field :usersHome, types[Types::UserType] do
+    resolve(->(_, _, _) {
+      User.all.left_joins(:reviews).group(:id).order('COUNT(reviews.id) DESC').limit(10)
+    })
+  end
+
+
   field :posts, types[Types::PostType] do
     resolve(->(_, _, _) {
       Post.all.order('created_at DESC')

@@ -31,6 +31,11 @@ const padded = {
     padding: 20,
 }
 
+const marginBottom1 = {
+    marginTop: 20,
+    marginBottom: 20,
+}
+
 const marginBottom = {
     marginBottom: 20,
 }
@@ -128,7 +133,7 @@ class ArtistDetail extends Component {
                  this.props.artistDetail.error ? <h1>Error...</h1> :
                 <div>
 
-                        <Paper style={marginBottom} zDepth={1} rounded={true} >
+                        <Paper style={marginBottom1} zDepth={1} rounded={true} >
                             <img alt="" style={coverStyle} src={artist.cover_url}/>
                            <ActionButtons
                                 edit={(e) => this.toggleEditFromArtist()} 
