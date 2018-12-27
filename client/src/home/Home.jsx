@@ -256,7 +256,7 @@ class Home extends Component {
               <Grid alignItems="flex-end" container style={artistsBlockLoggedIn}>
                 {this.state.users.length > 0 ? 
                  this.props.users.users.map((user, index) => (
-                    <Grid style={{padding: 10}} key={index} item xs={6} sm={4} md={4} lg={3}>
+                    <Grid style={{padding: 10}} key={index} item xs={12} sm={6} md={4} lg={3}>
 
           <ListItem key={user.id} innerDivStyle={{ textDecoration: 'none', padding: 0, margin: 0}}>
             <Link to={'/user/'+ user.id}  style={{ textDecoration: 'none' }}>
@@ -288,7 +288,7 @@ class Home extends Component {
                         <div style={{textAlign: "center", color: "black", padding: 10}}>
                         <Link to={'/artists/'+artist.id}>
                           <img style={artistImageLoggedIn} src={artist.cover_url} /><br/>
-                          </Link>
+                        </Link>
                         </div>
                       </Grid>
                     ))}
