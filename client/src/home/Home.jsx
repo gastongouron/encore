@@ -198,6 +198,8 @@ class Home extends Component {
                       <div style={{textAlign: "center", color: "black", padding: 20}}>
                         <img style={artistImage} src={artist.cover_url} /><br/>
                         <h4 style={legend}>{artist.name}</h4>
+                        <span style={legend}>{artist.score}</span><br/>
+                        <span style={legend}>{artist.tags.split(',').shift()}</span>
                       </div>
                     </Grid>
                   ))}
