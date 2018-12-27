@@ -20,6 +20,7 @@ import Star from './icons/starzz.png';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import styled, { keyframes } from 'styled-components'
 import BackgroundImage from './images/header.jpg'
+// import BackgroundImage2 from './images/prefooter.jpg'
 import theme from '../app/theme'
 import artistHomeQuery from '../app/queries/ArtistHomeQuery'
 
@@ -69,8 +70,19 @@ const baseline = {
 
 const header = {
   marginTop: -70,
-  paddingTop: 200,
-  paddingBottom: 200,
+  paddingTop: 230,
+  paddingBottom: 150,
+  background: "url("+BackgroundImage+") no-repeat center fixed",
+  backgroundSize: "cover",
+  objectFit: 'cover',
+  backgroundSize: 'cover',
+  minheight: '600px',
+}
+
+const prefooter = {
+  marginTop: -70,
+  paddingTop: 100,
+  paddingBottom: 100,
   background: "url("+BackgroundImage+") no-repeat center fixed",
   backgroundSize: "cover",
   objectFit: 'cover',
@@ -79,6 +91,8 @@ const header = {
 }
 
 const headerBlock = {maxWidth: 840, margin: '0 auto', textAlign: 'left', marginBottom: 20, padding: 20}
+
+const prefooterBlock = {maxWidth: 840, margin: '0 auto', textAlign: 'left', marginBottom: 20, padding: 20, textAlign: "center"}
 
 const features = {
   paddingTop: 40,
@@ -147,7 +161,7 @@ class Home extends Component {
               <Grid style={headerBlock} item xs={12} sm={12} md={12}>
                 <h1 style={hashtag}>#SHARETHEVIBE</h1>
                 <h2 style={baseline}>every show should end with and <b>encore!</b></h2>
-                <h3 style={hello}>{this.props.locales.locales.homeHello} {this.props.locales.locales.homeHello}</h3>
+                <p >{this.props.locales.locales.homeHello}<br/> {this.props.locales.locales.homeHello}</p>
                 <Link to="/users/getstarted" style={{float: "left"}}>
                   <RaisedButton primary={true} label={this.props.locales.locales.getStarted}></RaisedButton>
                 </Link>
@@ -205,6 +219,15 @@ class Home extends Component {
                   ))}
               </Grid>
             </div>
+
+            <Grid container style={prefooter}>              
+              <Grid style={prefooterBlock} item xs={12} sm={12} md={12}>
+                <h1 style={{fontSize: 60, fontWeight: 900}}>Ready to share the vibe?</h1>
+                <Link to="/users/getstarted" style={{float: "center"}}>
+                  <RaisedButton secondary={true} label={this.props.locales.locales.getStarted}></RaisedButton>
+                </Link>
+              </Grid>
+            </Grid>
 
         <MessengerCustomerChat
             pageId="826064754401701"
