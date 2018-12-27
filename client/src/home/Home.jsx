@@ -14,9 +14,10 @@ import {Link} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 // import FaceIcon from 'material-ui/svg-icons/action/face';
 // import StarRate from 'material-ui/svg-icons/toggle/star';
-import Camera from './icons/camerazzz.png';
-import Face from './icons/facezz.png';
-import Star from './icons/starzz.png';
+// import Camera from './icons/camerazzz.png';
+// import Face from './icons/facezz.png';
+// import Star from './icons/starzz.png';
+import Star from 'material-ui/svg-icons/toggle/star';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import styled, { keyframes } from 'styled-components'
 import BackgroundImage from './images/header.jpg'
@@ -41,7 +42,7 @@ const iconStyle = {
 
 const legend = {
   fontFamily: 'Roboto',
-  marginTop: 0,
+  marginTop: 5,
   fontWeight: 300,
   textAlign: 'center',
   color: theme.palette.textColor,
@@ -51,9 +52,34 @@ const boldLegend = {
   fontFamily: 'Roboto',
   fontWeight: 500,
   textAlign: 'center',
-  color: theme.palette.primary1Color,
+  color: theme.palette.textColor,
 }
 
+const scoreLegend = {
+  color: theme.palette.textColor,
+  fontFamily: 'Roboto',
+  textAlign: 'center',
+  fontSize: 16,
+  fontWeight: 300,
+}
+
+const artistLegend = {
+  fontFamily: 'Roboto',
+  fontWeight: 500,
+  fontSize: 14,
+  textAlign: 'center',
+  color: theme.palette.textColor,
+}
+
+
+const subLegend = {
+  fontFamily: 'Roboto',
+  fontWeight: 300,
+  fontSize: 10,
+  fontVariant: 'uppercase',
+  textAlign: 'center',
+  color: theme.palette.textColor,
+}
 
 const hello = {
   fontFamily: 'Roboto',
@@ -71,17 +97,27 @@ const hashtag = {
   fontVariant: 'uppercase',
   fontWeight: 900,
   letterSpacing: 3,
-  marginBottom: 10
+  marginBottom: 0,
 }
 
 const baseline = {
   marginTop: 0,
   paddingTop: 0,
+  paddingBottom: 20,
+  fontFamily: 'Roboto',
+  fontWeight: 300,
+}
+
+const baseline2 = {
+  marginTop: 0,
+  paddingTop: 5,
+  paddingBottom: 30,
   fontFamily: 'Roboto',
   fontWeight: 300,
 }
 
 const header = {
+  color: theme.palette.secondaryTextColor,
   marginTop: -70,
   paddingTop: 120,
   paddingBottom: 130,
@@ -103,7 +139,7 @@ const prefooter = {
   minheight: '600px',
 }
 
-const headerBlock = {maxWidth: 840, margin: '0 auto', textAlign: 'left', marginBottom: 20, padding: 20}
+const headerBlock = {maxWidth: 840, margin: '0 auto', textAlign: 'center', marginBottom: 20, padding: 20}
 
 const prefooterBlock = {maxWidth: 840, margin: '0 auto', textAlign: 'left', marginBottom: 20, padding: 20, textAlign: "center"}
 
@@ -113,11 +149,11 @@ const features = {
   background: "white"
 }
 
-const featuresBlock = {maxWidth: 840, margin: '0 auto', padding: 20}
+const featuresBlock = {maxWidth: 840, margin: '0 auto', padding: 20, paddingBottom: 5}
 
 const featureItem = {marginRight: '0px'}
 
-const artistImage = {padding: '20px', borderRadius: '50%', maxWidth: 105}
+const artistImage = {borderRadius: '50%', maxWidth: 105}
 
 const block2 = {
   padding: 40,
@@ -173,10 +209,10 @@ class Home extends Component {
 
             <Grid container style={header}>              
               <Grid style={headerBlock} item xs={12} sm={12} md={12}>
-                <h1 style={hashtag}>🤟#SHARETHEVIBE</h1>
-                <h2 style={baseline}>every show should end with an <b>encore!</b></h2>
-                <h3 style={baseline}>{this.props.locales.locales.homeHello}<br/> {this.props.locales.locales.homeHello}</h3>
-                <Link to="/users/getstarted" style={{float: "left", paddingTop: 15}}>
+                <h1 style={hashtag}><b>#SHARETHEVIBE</b></h1>
+                <h3 style={baseline}>{this.props.locales.locales.baseline} <b>encore!</b></h3>
+                <h4 style={baseline2}>{this.props.locales.locales.homeHello}</h4>
+                <Link to="/users/getstarted" style={{float: "center", paddingTop: 40}}>
                   <RaisedButton primary={true} label={this.props.locales.locales.getStarted}></RaisedButton>
                 </Link>
               </Grid>
@@ -185,8 +221,7 @@ class Home extends Component {
               <Grid container style={featuresBlock}>
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
                   <div style={{textAlign: "center"}}>
-                    <img style={featureItem} src={Star} /><br/>
-
+                    <span style={{fontSize: "40px"}}>⭐</span>
                     <h4 style={legend}> <span style={boldLegend}>Donne et consulte</span> des avis<br/> sur des shows du moment <br/>et les artistes à découvrir</h4>
 
                   </div>
@@ -194,14 +229,15 @@ class Home extends Component {
 
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
                   <div style={{textAlign: "center"}}>
-                    <img style={featureItem} src={Camera} /><br/>
+                    <span style={{fontSize: "40px"}}>📸</span>
                     <h4 style={legend}> <span style={boldLegend}>Partage les temps forts du<br/> concert en images</span> avec les plus <br/>belles photos et vidéos</h4>
                   </div>
                 </Grid>
 
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
                   <div style={{textAlign: "center"}}>
-                    <img style={featureItem} src={Face}/><br/>
+                    {/* <img style={featureItem} src={Face}/><br/> */}
+                    <span style={{fontSize: "40px"}}>🤩</span>
                     <h4 style={legend}> <span style={boldLegend}>Découvre des artistes</span><br/> grâce aux contenus de la <br/>communauté</h4>
                   </div>
                 </Grid>
@@ -211,8 +247,8 @@ class Home extends Component {
             <Grid container style={block2}>     
               <Grid item style={{textAlign: 'center', margin: '0 auto'}}>
                 <h1><b>encore!</b></h1>
-                <h3 style={hello}>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</h3>
-                <h2><b>Some meaningfull text</b></h2>
+                <h3 style={hello}>Nous avons créés cette plateforme pour les artistes et leur musique <br/> pour les fans, les groupies du premier rang, pour ceux qui tappent du pied<br/> au fond de la salle et pour tout ceux qui assistent à un concert pour vivre <br/>un moment unique.</h3>
+                <h3 style={hello}><b>Pour vous quoi!</b></h3>
               </Grid>
             </Grid>
 
@@ -222,12 +258,13 @@ class Home extends Component {
                   <h2>Découvrez les meilleurs artistes du moment recommandés par la communauté encore</h2>
                 </Grid>
                  {this.props.artists.artists.map((artist, index) => (
-                    <Grid key={index} style={{paddingTop: 20}} item xs={6} sm={4} md={3} lg={2}>
+                    <Grid key={index} style={{paddingTop: 20}} item xs={6} sm={4} md={3} lg={3}>
                       <div style={{textAlign: "center", color: "black", padding: 20}}>
                         <img style={artistImage} src={artist.cover_url} /><br/>
-                        <h4 style={legend}>{artist.name}</h4>
-                        <span style={legend}>{artist.score}</span><br/>
-                        <span style={legend}>{artist.tags.split(',').shift()}</span>
+                        <span style={artistLegend}>{artist.name}</span><br/>
+                        <span style={subLegend}>{artist.tags.split(',').shift().toUpperCase()}</span><br/>
+                        <Star color={theme.palette.starColor} viewBox="-5 -10 30 30"/>
+                        <span style={scoreLegend}>{artist.score}</span><br/>
                       </div>
                     </Grid>
                   ))}

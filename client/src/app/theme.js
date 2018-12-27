@@ -40,7 +40,7 @@ export default {
     accent2Color: '#b71c1c',
     accent3Color: '#e57373',
     primary2Color: '#283593',
-    starColor: '#fbde56',
+    starColor: 'red',
     primary3Color: grey400,
     // textColor: darkBlack,
     secondaryTextColor: fade(darkBlack, 0.54),
