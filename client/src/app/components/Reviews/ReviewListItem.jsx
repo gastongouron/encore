@@ -33,6 +33,7 @@ const ReviewListItem = (props) => {
 	    backgroundSize: 'cover',
 	    width: '100%',
 	    height: '100%',
+	    maxHeight: 200,
 	}
 
 	const body = {

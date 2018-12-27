@@ -19,9 +19,13 @@ import Divider from 'material-ui/Divider';
 import theme from '../app/theme'
 import artistHomeQuery from '../app/queries/ArtistHomeQuery'
 import usersHomeQuery from '../app/queries/UsersHomeQuery'
+import userSearchQuery from '../app/queries/UserSearch'
 import { SocialIcon } from 'react-social-icons';
-
+import SearchBar from './UserSearchBar'
+import Paper from 'material-ui/Paper'
 // import Artists from '../app/components/Artist/Artists'
+import {ListItem} from 'material-ui/List'
+import Avatar from 'material-ui/Avatar'
 
 const StyledSocialIcon = styled(SocialIcon)`
    background: #ececec;
@@ -166,8 +170,8 @@ const artistsBlock = {maxWidth: 840, margin: '0 auto', padding: 20, paddingBotto
 const featureItem = {marginRight: '0px'}
 
 const artistImage = {borderRadius: '50%', maxWidth: 105}
-const artistImageLoggedIn = {borderRadius: '50%', maxWidth: 50}
-const artistsBlockLoggedIn = {maxWidth: 840, margin: '0 auto', paddingBottom: 20}
+const artistImageLoggedIn = {borderRadius: '50%', maxWidth: 50, marginRight: 10}
+const artistsBlockLoggedIn = {maxWidth: 840, margin: '0 auto', paddingBottom: 10, paddingTop: 0}
 
 const block2 = {
   padding: 40,
@@ -187,8 +191,12 @@ class Home extends Component {
   constructor(props){
     super(props);
       this.state = {
-          artists: this.props.artists.artistsHome
+          artists: this.props.artists,
+          users: this.props.users,
+          searchTerm: "",
+          searchPlaceholder: 'Top contributors',
         }
+        this.userSearch = this.userSearch.bind(this);
   }
 
   componentWillMount(){
@@ -207,10 +215,10 @@ class Home extends Component {
           }
       );
 
-      this.props.client.query({query: usersHomeQuery, fetchPolicy: 'network-only'}).then(
+      this.props.client.query({query: userSearchQuery, fetchPolicy: 'network-only', variables: {first:100}}).then(
           (res) => {
-              this.props.setUsers(res.data.usersHome)
-              this.setState({users: res.data.usersHome})
+              this.props.setUsers(res.data.allUsers)
+              this.setState({users: res.data.allUsers})
             },
           (err) => {
               this.props.failedUsers(err.data);
@@ -218,36 +226,74 @@ class Home extends Component {
       );      
   }
 
+    userSearch(term) {
+        this.setState({searchTerm: term.toLowerCase()})
+        this.props.client.query({query: userSearchQuery, fetchPolicy: 'network-only', variables: {input: term.toLowerCase() }}).then(
+            (res) => {
+                this.props.setUsers(res.data.allUsers)
+                this.setState({users: res.data.allUsers})
+            },
+            (err) => {
+                this.props.failedUsers(err.data);
+            }
+        )
+    }
 
   render () {
-    console.log(this.props)
     if(this.props.currentUser && this.props.currentUser.isLoggedIn){
         return (
-
-          <div style={{paddingTop: 20}}>
+          <div style={{paddingTop: 10}}>
             {/* <Artists /> */}   
-            <h1 style={{marginTop: 0}}>Top contributors</h1>
-              <Grid container style={artistsBlockLoggedIn}>
-                 {this.props.users.users.map((user, index) => (
-                    <Grid key={index} item xs={3} sm={2} md={1} lg={1}>
-                      <div style={{textAlign: "center", color: "black", padding: 10}}>
-                        <img style={artistImageLoggedIn} src={user.profile_picture} /><br/>
+            <div style={{padding:10}}>
+              <SearchBar 
+                  onRef={ref => (this.child = ref)} 
+                  onSearchTermChange={this.userSearch}
+              />
+            <h1 style={{marginTop: 0}}>{this.state.searchTerm !== "" ? this.state.searchTerm : this.state.searchPlaceholder}</h1>
+            <Divider />
+            </div>
 
-                      </div>
+              <Grid alignItems="flex-end" container style={artistsBlockLoggedIn}>
+                {this.state.users.length > 0 ? 
+                 this.props.users.users.map((user, index) => (
+                    <Grid style={{padding: 10}} key={index} item xs={6} sm={4} md={4} lg={3}>
+
+          <ListItem key={user.id} innerDivStyle={{ textDecoration: 'none', padding: 0, margin: 0}}>
+            <Link to={'/user/'+ user.id}  style={{ textDecoration: 'none' }}>
+                      <Paper zDepth={1} rounded={true}>
+
+              <ListItem
+                  primaryText={user.last_name}
+                  secondaryText={user.first_name}
+                  leftAvatar={<Avatar src={user.profile_picture} />}/>
+                       </Paper>
+
+                 </Link>
+               </ListItem>
+ 
                     </Grid>
-                  ))}
+                  ))
+                  :
+                    <span>Nothing found</span>
+                }
               </Grid>
-            <Divider light={true}/>
-            <h1 style={{paddingTop: 10, marginTop: 0}}>Top rated artists</h1>
-              <Grid container style={artistsBlockLoggedIn}>
-                 {this.props.artists.artists.map((artist, index) => (
-                    <Grid key={index} item xs={3} sm={2} md={1} lg={1}>
-                      <div style={{textAlign: "center", color: "black", padding: 10}}>
-                        <img style={artistImageLoggedIn} src={artist.cover_url} /><br/>
-                      </div>
-                    </Grid>
-                  ))}
-              </Grid>
+            <div style={{padding:10}}>
+              <Divider />
+              <h1 style={{paddingTop: 10, marginTop: 0}}>Top rated artists</h1>
+              <Divider />
+              </div>
+                <Grid container style={artistsBlockLoggedIn}>
+                   {this.props.artists.artists.map((artist, index) => (
+                      <Grid key={index} item xs={3} sm={2} md={1} lg={1}>
+                        <div style={{textAlign: "center", color: "black", padding: 10}}>
+                        <Link to={'/artists/'+artist.id}>
+                          <img style={artistImageLoggedIn} src={artist.cover_url} /><br/>
+                          </Link>
+                        </div>
+                      </Grid>
+                    ))}
+                </Grid>
+
           </div>
         );
 
@@ -277,6 +323,7 @@ class Home extends Component {
             </Grid>
             <div style={features}>              
               <Grid container style={featuresBlock}>
+
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
                   <div style={{paddingTop: 10, textAlign: "center"}}>
                     <span style={{fontSize: "40px"}}>⭐</span>
@@ -285,8 +332,8 @@ class Home extends Component {
                   </div>
                 </Grid>
 
-                <Grid item xs={12} sm={4} md={4}>
-                  <div style={{paddingTop: 20, textAlign: "center"}}>
+                <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
+                  <div style={{paddingTop: 10, textAlign: "center"}}>
                     <span style={{fontSize: "40px"}}>📸</span>
                     <h4 style={legend}> <span style={boldLegend}>{this.props.locales.locales.feature2Bold1}<br/>{this.props.locales.locales.feature2Bold2}</span>{this.props.locales.locales.feature2Light1}<br/>{this.props.locales.locales.feature2Light2}</h4>
                   </div>

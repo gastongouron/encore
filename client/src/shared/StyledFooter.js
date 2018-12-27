@@ -11,7 +11,6 @@ const StyledFooter = styled.div`
    color: #ffffff;
    bottom: 0;
    background:rgba(0,0,0,1);
-
    div.footer {
    	margin: 0 auto;
       text-align: center,

@@ -20,7 +20,7 @@ RootQuery = GraphQL::ObjectType.define do
 
   field :usersHome, types[Types::UserType] do
     resolve(->(_, _, _) {
-      User.all.left_joins(:reviews).group(:id).order('COUNT(reviews.id) DESC').limit(10)
+      User.all.left_joins(:reviews).group(:id).order('COUNT(reviews.id) DESC').limit(12)
     })
   end
 
@@ -82,5 +82,6 @@ RootQuery = GraphQL::ObjectType.define do
 
   # Search fiels
   field :allArtists, function: Resolvers::ArtistsSearch
+  field :allUsers, function: Resolvers::UsersSearch
 
 end

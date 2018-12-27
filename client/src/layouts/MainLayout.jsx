@@ -464,14 +464,14 @@ class MainLayout extends Component {
                     default={true}
                     badgeStyle={{top: 5, right: 5}}
                     >
-                      <IconButton style={{top: 10, right: 7, position: 'absolute'}} linkButton={true} containerElement={<Link to="/hot" />} tooltip="Notifications">
+                      <IconButton style={{top: 10, right: 7, position: 'absolute'}} containerElement={<Link to="/hot" />} tooltip="Notifications">
                         <NotificationsIcon color='#ffffff'/>
                       </IconButton>
                  
                     </Badge>
 
                   :
-                      <IconButton style={{top: 10, right: 30, position: 'absolute'}} linkButton={true} containerElement={<Link to="/hot" />} tooltip="Notifications">
+                      <IconButton style={{top: 10, right: 30, position: 'absolute'}} containerElement={<Link to="/hot" />} tooltip="Notifications">
                         <NotificationsIcon color='#ffffff'/>
                       </IconButton>
 
