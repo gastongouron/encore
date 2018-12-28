@@ -396,7 +396,6 @@ class Home extends Component {
             appId="1351728908291385"
             language={this.props.locales.locales._language === 'en' ? "en_US" : "fr_FR"}
           />
-          :
       </div>
 
       )
