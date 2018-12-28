@@ -4,7 +4,8 @@ const translations = {
  fr: {
    homeHello:"La communauté qui partage ses expériences de concert et vous fait découvrir les meilleurs artistes sur scène.",
    baseline:"les concerts devaient finir avec ",
-
+   contributor: "Contributeurs les plus actifs",
+   artistsHome: "Populaires en ce moment",
    feature1Bold:"Donne et consulte",
    feature1Light1:" des avis",
    feature1Light2:" sur des shows du moment ",
@@ -108,6 +109,8 @@ const translations = {
  en:{
    homeHello:"A community sharing experiences about concerts to figure out who's the best on stage",
    baseline:"every show should end with an",
+   contributor: "Top contributors",
+   artistsHome: "Most popular artists",
    feature1Bold:"Give and consult",
    feature1Light1:" reviews",
    feature1Light2:" about current shows ",

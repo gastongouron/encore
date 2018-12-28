@@ -194,7 +194,6 @@ class Home extends Component {
           artists: this.props.artists,
           users: this.props.users,
           searchTerm: "",
-          searchPlaceholder: 'Top contributors',
         }
         this.userSearch = this.userSearch.bind(this);
   }
@@ -249,7 +248,7 @@ class Home extends Component {
                   onRef={ref => (this.child = ref)} 
                   onSearchTermChange={this.userSearch}
               />
-            <h1 style={{marginTop: 0}}>{this.state.searchTerm !== "" ? this.state.searchTerm : this.state.searchPlaceholder}</h1>
+            <h1 style={{marginTop: 0, fontWeight: "100", fontFamilly: "Roboto"}}>{this.state.searchTerm !== "" ? this.state.searchTerm : this.props.locales.locales.contributor}</h1>
             <Divider />
             </div>
 
@@ -279,7 +278,7 @@ class Home extends Component {
               </Grid>
             <div style={{padding:10}}>
               <Divider />
-              <h1 style={{paddingTop: 10, marginTop: 0}}>Top rated artists</h1>
+              <h1 style={{paddingTop: 10, marginTop: 0, fontWeight: "100", fontFamilly: "Roboto"}}>{this.props.locales.locales.artistsHome}</h1>
               <Divider />
               </div>
                 <Grid container style={artistsBlockLoggedIn}>
