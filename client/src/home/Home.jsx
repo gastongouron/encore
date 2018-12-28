@@ -26,6 +26,7 @@ import Paper from 'material-ui/Paper'
 // import Artists from '../app/components/Artist/Artists'
 import {ListItem} from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
+import EncoreLoader from '../app/components/EncoreLoader'
 
 const StyledSocialIcon = styled(SocialIcon)`
    background: #ececec;
@@ -241,6 +242,7 @@ class Home extends Component {
   render () {
     if(this.props.currentUser && this.props.currentUser.isLoggedIn){
         return (
+          this.props.artists.loading ? <EncoreLoader /> : this.props.artists.error ? <h1>Error...</h1> : 
           <div style={{paddingTop: 10}}>
             {/* <Artists /> */}   
             <div style={{padding:10}}>
@@ -389,12 +391,12 @@ class Home extends Component {
             </Grid>
 
       {this.props.match.url === "/" ?
-      <div style={{paddingBottom: 40}}>
+
         <MessengerCustomerChat
             pageId="2079915298988137"
             appId="1351728908291385"
             language={this.props.locales.locales._language === 'en' ? "en_US" : "fr_FR"}
-          /></div>
+          />
           :
           null
         }
