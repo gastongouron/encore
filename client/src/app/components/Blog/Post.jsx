@@ -37,7 +37,7 @@ class Post extends Component {
                     <EncoreLoader />
 
                 : this.props.postDetail.error ? <h1>Error...</h1> : 
-                    <div style={{margin: '0 auto', maxWidth: 840, padding: 20}}>
+                    <div style={{margin: '0 auto', maxWidth: 840, padding: 0}}>
                         <PostItem post={this.props.postDetail.postDetail} />
                     </div> 
                 }
