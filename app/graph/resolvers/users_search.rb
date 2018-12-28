@@ -33,9 +33,7 @@ class Resolvers::UsersSearch
   end
 
   def apply_first(scope, value)
-    scope.limit(value)
-    # hohoho
-    # .left_joins(:reviews).group(:id).order('COUNT(reviews.id) DESC').limit(10)
+    scope.left_joins(:reviews).group(:id).order('COUNT(reviews.id) DESC').limit(12)
   end
 
   def apply_skip(scope, value)
