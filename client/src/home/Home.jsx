@@ -273,7 +273,9 @@ class Home extends Component {
                     </Grid>
                   ))
                   :
-                    <span>Nothing found</span>
+                    <div style={{textAlign: "center", margin: "0 auto", paddingTop:10}}>
+                    <h2 >{this.props.locales.locales.sorry}</h2>
+                    </div>
                 }
               </Grid>
             <div style={{padding:10}}>
