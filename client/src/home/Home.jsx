@@ -389,7 +389,7 @@ class Home extends Component {
             </Grid>
 
         <MessengerCustomerChat
-            style={{paddingBottom: 40}}
+            style={this.props.match.url === "/" ? {paddingBottom: 40} : {visibility: 'hidden', visible: 'none'}}
             pageId="826064754401701"
             appId="1351728908291385"
             language={this.props.locales.locales._language === 'en' ? "en_US" : "fr_FR"}
