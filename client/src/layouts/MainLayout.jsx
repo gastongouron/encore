@@ -26,6 +26,7 @@ import IconButton from 'material-ui/IconButton';
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
 import Hamburger from 'material-ui/svg-icons/image/dehaze';
 import Typography from '@material-ui/core/Typography';
+import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 
 import UserProfileQuery from '../app/queries/UserProfileSchema'
@@ -337,6 +338,14 @@ class MainLayout extends Component {
     return (
       <div>
       <Main style={this.props.currentUser.isLoggedIn ? {maxWidth: 840, margin: '0 auto', padding: 20} : {margin: '0 auto'} }>
+        {this.props.currentUser.isLoggedIn ? null : 
+        <MessengerCustomerChat
+            pageId="2079915298988137"
+            appId="1351728908291385"
+            language={this.props.locales.locales._language === 'en' ? "en_US" : "fr_FR"}
+          />
+        }
+
         <MainAppBar
           // style={{background: '#283593', boxShadow: 'none', position: 'sticky', top: 0}}
           style={defaultNavbarStyle}

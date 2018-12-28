@@ -11,7 +11,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {Link} from 'react-router-dom' 
 import Grid from '@material-ui/core/Grid'
 import Star from 'material-ui/svg-icons/toggle/star';
-import MessengerCustomerChat from 'react-messenger-customer-chat';
 import styled, { keyframes } from 'styled-components'
 import BackgroundImage from './images/header.jpg'
 // import BackgroundImage2 from './images/prefooter.jpg'
@@ -389,17 +388,6 @@ class Home extends Component {
                 </Link>
               </Grid>
             </Grid>
-
-      {this.props.match.url === "/" ?
-
-        <MessengerCustomerChat
-            pageId="2079915298988137"
-            appId="1351728908291385"
-            language={this.props.locales.locales._language === 'en' ? "en_US" : "fr_FR"}
-          />
-          :
-          null
-        }
       </div>
 
       )
