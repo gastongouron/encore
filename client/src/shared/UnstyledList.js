@@ -2,6 +2,7 @@ import styled from 'styled-components';
 // import theme from '../app/theme'
 
 const UnstyledList = styled.ul`
+  padding-bottom: 100px;
   list-style: none;
   text-align: center;
   color: #F1F1F1;

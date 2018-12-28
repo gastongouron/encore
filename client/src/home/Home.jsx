@@ -388,13 +388,16 @@ class Home extends Component {
               </Grid>
             </Grid>
 
+      {this.props.match.url === "/" ?
+      <div style={{paddingBottom: 40}}>
         <MessengerCustomerChat
-            style={this.props.match.url === "/" ? {paddingBottom: 40} : {visibility: 'hidden', visible: 'none'}}
-            pageId="826064754401701"
+            pageId="2079915298988137"
             appId="1351728908291385"
             language={this.props.locales.locales._language === 'en' ? "en_US" : "fr_FR"}
-          />
-
+          /></div>
+          :
+          null
+        }
       </div>
 
       )

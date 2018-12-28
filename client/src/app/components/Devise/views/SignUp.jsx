@@ -131,6 +131,13 @@ const SignUpFormz = reduxForm({
       </Field>
 
       <Field
+        name="birth_date"
+        component={DatePicker} hintText={strings.birthDate}
+        validate={required}
+        defaultValue={null}
+      />
+      
+      <Field
         name="first_name"
         component={renderInput}
         label={strings.firstName}
@@ -163,14 +170,6 @@ const SignUpFormz = reduxForm({
         component={renderInput}
         label={strings.passwordConfirmation}
         validate={required}
-      />
-
-      <br/>
-      <Field
-        name="birth_date"
-        component={DatePicker} hintText={strings.birthDate}
-        validate={required}
-        defaultValue={null}
       />
       <br/>
 
