@@ -387,12 +387,12 @@ class Home extends Component {
               </Grid>
             </Grid>
 
-        <MessengerCustomerChat
+{/*        <MessengerCustomerChat
             minimized={true}
             pageId="2079915298988137"
             appId="1351728908291385"
             language={this.props.locales.locales._language === 'en' ? "en_US" : "fr_FR"}
-          />
+          /> */}
       </div>
 
       )
