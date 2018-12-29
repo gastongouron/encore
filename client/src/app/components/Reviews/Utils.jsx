@@ -86,14 +86,11 @@ export const onSave = (e, context) => {
             }).then(
     	    (res) => {
     	        const newArr = res.data.newReview.review
-                console.log('RES')
-                console.log(newArr)
     	        context.props.addUserReview(newArr)
 			    context.setState({ showModal: false })
 				context.setState({ enabledButton: false })
     	    },
     	    (err) => { 
-                console.log(err)
             	console.log('HANDLE ERROR!!!')
     	    }
     	);

@@ -37,7 +37,7 @@ class Post extends Component {
                     <EncoreLoader />
 
                 : this.props.postDetail.error ? <h1>Error...</h1> : 
-                    <div style={{margin: '0 auto', maxWidth: 840, padding: 0}}>
+                    <div style={this.props.currentUser && this.props.currentUser.isLoggedIn ? {margin: '0 auto', maxWidth: 840, padding: 0} : {margin: '0 auto', maxWidth: 840, padding: 20}}>
                         <PostItem post={this.props.postDetail.postDetail} />
                     </div> 
                 }
@@ -53,6 +53,7 @@ class Post extends Component {
 
 const mapStateToProps = state => {
     return {
+        currentUser: state.currentUser,
         postDetail: state.postDetail,
         locales: state.locales
      };

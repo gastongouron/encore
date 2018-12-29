@@ -93,11 +93,11 @@ class Profile extends Component {
     }
 
     componentWillMount(){
+        this.getUser(this.props.match.params.id)        
         this.props.loadingUserReviews();
         this.props.loadingUserProfile();
         let observable = this.props.client.subscribe({ query: socialSubscription, variables: {user_id: this.props.match.params.id} })
         this.setState({observable: observable})
-        this.getUser(this.props.match.params.id)
     }
  
     componentDidMount(){

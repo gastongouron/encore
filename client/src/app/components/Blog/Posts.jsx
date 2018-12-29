@@ -15,6 +15,7 @@ class Posts extends Component {
             posts: this.props.posts.posts,
             locales: this.props.locales.locales,
           }
+          console.log(props)
 
     }
 
@@ -38,7 +39,7 @@ class Posts extends Component {
                     <EncoreLoader />
 
                 : this.props.posts.error ? <h1>Error...</h1> : 
-                    <div style={{margin: '0 auto', maxWidth: 840, padding: 0}}>
+                    <div style={this.props.currentUser && this.props.currentUser.isLoggedIn ? {margin: '0 auto', maxWidth: 840, padding: 0} : {margin: '0 auto', maxWidth: 840, padding: 20}}>
                         <PostsList posts={this.props.posts.posts}/>
                     </div> 
                 }
@@ -50,6 +51,7 @@ class Posts extends Component {
 
 const mapStateToProps = state => {
     return {
+        currentUser: state.currentUser,
         posts: state.posts,
         locales: state.locales
      };
