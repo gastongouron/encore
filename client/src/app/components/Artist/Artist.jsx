@@ -126,8 +126,10 @@ class ArtistDetail extends Component {
 
     render() {
         const artist = this.props.artistDetail.artistDetail
-        const uniq = {}
-        const filteredReviews = artist.reviews.filter(obj => !uniq[obj.id] && (uniq[obj.id] = true));
+        // const uniq = {}
+        // const arr = artist.reviews || []
+
+        // const artist.reviews = arr.filter(obj => !uniq[obj.id] && (uniq[obj.id] = true));
 
         return (
             <div>
@@ -189,7 +191,7 @@ class ArtistDetail extends Component {
                     <div>
                         <ReviewList
                             onReviewSelect={reviewReview => this.show(reviewReview, this)}
-                            reviews={filteredReviews}
+                            reviews={artist.reviews}
                             user={this.props.userInfo}
                             match={this.props.match.url}
                         />
