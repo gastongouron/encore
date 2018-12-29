@@ -6592,6 +6592,13 @@ react-messenger-customer-chat@^0.7.2:
   dependencies:
     prop-types "^15.6.0"
 
+react-messenger-message-us@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/react-messenger-message-us/-/react-messenger-message-us-0.1.0.tgz#b59e042dc384f113aa168c2af4c7079b7728bb90"
+  integrity sha512-jJ+gOdKmFzTqdY0HfJadsQ20CA4QHVPCarzZfMFNSMbn597MjQhzfQKOlBDoO5Auy8cDlrZdL/3pSeiEXkNFLw==
+  dependencies:
+    prop-types "^15.6.0"
+
 react-overlays@^0.8.0:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-overlays/-/react-overlays-0.8.3.tgz#fad65eea5b24301cca192a169f5dddb0b20d3ac5"
