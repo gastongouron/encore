@@ -251,7 +251,6 @@ class Home extends Component {
                   onSearchTermChange={this.userSearch}
               />
             <h1 style={{marginTop: 0, fontWeight: "100", fontFamilly: "Roboto"}}>{this.state.searchTerm !== "" ? this.state.searchTerm : this.props.locales.locales.contributor}</h1>
-            <Divider />
             </div>
 
               <Grid alignItems="flex-end" container style={artistsBlockLoggedIn}>
@@ -283,7 +282,6 @@ class Home extends Component {
             <div style={{padding:10}}>
               <Divider />
               <h1 style={{paddingTop: 10, marginTop: 0, fontWeight: "100", fontFamilly: "Roboto"}}>{this.props.locales.locales.artistsHome}</h1>
-              <Divider />
               </div>
                 <Grid container style={artistsBlockLoggedIn}>
                    {this.props.artists.artists.map((artist, index) => (
@@ -318,9 +316,8 @@ class Home extends Component {
                 </Link>
                 <br/>
                 <div style={{paddingTop: 40}}>
-                  <StyledSocialIcon color="black" style={{background:"white", marginRight: 20, height: 28, width: 28}} network="instagram" url="https://www.instagram.com/tentsile" />
-                  <StyledSocialIcon color="black" style={{background:"white", marginRight: 20, height: 28, width: 28}} network="twitter" url="https://twitter.com/gastongouron" />
-                  <StyledSocialIcon color="black" style={{background:"white", height: 28, width: 28}} network="facebook" url="https://www.facebook.com/gastongouron" />
+                  <StyledSocialIcon color="black" style={{background:"white", marginRight: 20, height: 28, width: 28}} network="instagram" url="https://www.instagram.com/encoreapp.co" />
+                  <StyledSocialIcon color="black" style={{background:"white", height: 28, width: 28}} network="facebook" url="https://www.facebook.com/Encore-2079915298988137/" />
                 </div>
               </Grid>
             </Grid>

@@ -40,7 +40,8 @@ const PostListItem = (props) => {
 
 	const backgroundImage = {
 	  backgroundImage: 'url('+post.image_url+')',
-      backgroundSize: 'cover',
+	  backgroundSize: 'cover',
+	  height: 300,
 	}
 
 	
@@ -57,31 +58,25 @@ const PostListItem = (props) => {
 			<Paper
 				style={paperStyle} zDepth={1} 
 				rounded={true} >
+				<div style={backgroundImage}></div>
 				        <Grid item xs={12} sm={12} md={12}>
-							<Grid container>
-					        	<Grid style={padded} item xs={8}>
-					        		<h2>
+							<Grid style={padded} container>
+					        	<Grid style={floatLeft} item xs={12}>
+					        		<h1>
 						        		<Link style={{color: theme.palette.textColor}} to={'/fanzine/posts/'+ post.id}>
 						        			{post.title}
 					        			</Link>
-					        		</h2>
-								{post.author}
-								<br/>
+					        		</h1>
+								{post.author}&nbsp;					        	
 								<TimeAgo style={{color: 'grey', fontSize: '0.77em'}} date={post.created_at} formatter={props.locales.locales._language === 'en' ? undefined : formatter}/>
-								<div style={{float:"right", color: 'grey', fontSize: '0.77em'}}>
+								<div style={floatRight}>
 		                        <Disqus.CommentCount shortname='encore-2' config={{ url: window.location.href, identifier: post.id, title: post.title}}>
 		                            Comments
 		                        </Disqus.CommentCount>
 		                        </div>
 					        	</Grid>
-						        
-						        <Grid style={backgroundImage} item xs={4}>
-						        </Grid>
-
 					        </Grid>
-
 						</Grid>
-				        
 
 			</Paper>
 			</Link>

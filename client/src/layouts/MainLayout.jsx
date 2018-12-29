@@ -509,9 +509,8 @@ class MainLayout extends Component {
       <StyledFooter>
         <div className="footer">
           <div style={{ marginTop: -4}}>
-            <StyledSocialIcon color="black" style={{background:"white", marginRight: 5, height: 28, width: 28}} network="instagram" url="https://www.instagram.com/tentsile" />
-            <StyledSocialIcon color="black" style={{background:"white", marginRight: 5, height: 28, width: 28}} network="twitter" url="https://twitter.com/gastongouron" />
-            <StyledSocialIcon color="black" style={{background:"white", marginRight: 5, height: 28, width: 28}} network="facebook" url="https://www.facebook.com/gastongouron" />
+            <StyledSocialIcon color="black" style={{background:"white", marginRight: 5, height: 28, width: 28}} network="instagram" url="https://www.instagram.com/encoreapp.co" />
+            <StyledSocialIcon color="black" style={{background:"white", marginRight: 5, height: 28, width: 28}} network="facebook" url="https://www.facebook.com/Encore-2079915298988137/" />
           { this.props.locales.locales.policy !== undefined ? 
             <Link to='/policy'>{this.props.locales.locales.policy.link}</Link>
           : 
