@@ -19,6 +19,7 @@
     "react-apollo": "^2.2.3",
     "react-avatar": "^3.4.4",
     "react-bootstrap": "^0.32.4",
+    "react-cookie-consent": "^2.0.0",
     "react-devise": "^0.0.18",
     "react-devise-material-ui": "^0.0.1",
     "react-dom": "^15.5.4",

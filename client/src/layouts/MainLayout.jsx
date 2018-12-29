@@ -26,8 +26,8 @@ import IconButton from 'material-ui/IconButton';
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
 import Hamburger from 'material-ui/svg-icons/image/dehaze';
 import Typography from '@material-ui/core/Typography';
-
-
+import CookieConsent, { Cookies } from "react-cookie-consent";
+import theme from "../app/theme"
 import UserProfileQuery from '../app/queries/UserProfileSchema'
 import { SocialIcon } from 'react-social-icons';
 // import Mailto from 'react-mailto'
@@ -491,6 +491,17 @@ class MainLayout extends Component {
           {notice && <Notice>{notice}</Notice>}
           {children}
         </MainContainer>          
+
+        <CookieConsent
+          location="bottom"
+          buttonText="Sounds good to me"
+          cookieName="encoreCookie"
+          style={{background: "#2B373B", display: "block"}}
+          buttonStyle={{ color: "white", background:"transparent", border: "1px solid white", fontSize: "13px" }}
+          expires={150}>
+          This website uses cookies to enhance the user experience.
+        </CookieConsent>
+
       </Main>
       {currentUser.isLoggedIn ? 
         null
