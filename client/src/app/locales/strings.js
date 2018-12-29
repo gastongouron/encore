@@ -89,6 +89,10 @@ const translations = {
    tos: "J'accepte les conditions d'utilisation",
    people: "personnes",
    person: "personne",
+   cookie: {
+      accept: "J'accepte",
+      text: "Nous vous informons que ce site utilise des cookies.",
+   },
    policy: {
       link:"Politique de confidentialité",
       title:"Encore: Politique de confidentialité",
@@ -194,6 +198,10 @@ const translations = {
    female: "Mrs.",
    birthDate: "Birth date",
    tos: "I accept terms of service",
+   cookie: {
+      accept: "I accept",
+      text: "We hereby inform you that we use cookies.",
+   },
    policy: {
       link:"Privacy policy",
       title:"Encore: Privacy Policy",

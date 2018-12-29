@@ -494,12 +494,12 @@ class MainLayout extends Component {
 
         <CookieConsent
           location="bottom"
-          buttonText="Sounds good to me"
+          buttonText={this.props.locales.locales.cookie.accept}
           cookieName="encoreCookie"
           style={{background: "#2B373B", display: "block"}}
           buttonStyle={{ color: "white", background:"transparent", border: "1px solid white", fontSize: "13px" }}
           expires={150}>
-          This website uses cookies to enhance the user experience.
+          {this.props.locales.locales.cookie.text}
         </CookieConsent>
 
       </Main>
