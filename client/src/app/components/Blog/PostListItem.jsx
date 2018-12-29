@@ -67,6 +67,7 @@ const PostListItem = (props) => {
 					        		</h2>
 								{post.author}
 								<br/>
+
 								<TimeAgo style={{color: 'grey', fontSize: '0.77em'}} date={post.created_at} formatter={props.locales.locales._language === 'en' ? undefined : formatter}/>
 								<div style={{float:"right", color: 'grey', fontSize: '0.77em'}}>
 		                        <Disqus.CommentCount shortname='encore-2' config={{ url: window.location.href, identifier: post.id, title: post.title}}>

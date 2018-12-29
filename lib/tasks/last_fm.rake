@@ -5,7 +5,7 @@ namespace :get_data do
 	desc 'Getdata from last fm'
 	key = ENV['LAST_FM_KEY']
 	last_fm = LastFm.new(key)
-	sleeptime = 1
+	sleeptime = 1.5
 
 	# rake get_data:last_fm_top_list'[100, 1, 'france', 10]'
 	task :last_fm_top_list, [:maxpages, :page, :country, :results_per_page] => [ :environment ] do |t, args|
@@ -27,6 +27,7 @@ namespace :get_data do
 	  	end
 	end
 
+	# works flawlessly <3
 	task :last_fm_artist_detail => [ :environment ] do
 	  	Artist.where(description_en: nil).or(Artist.where(description_fr: nil)).each do |a|
 	  		name = a.name.parameterize.underscore.humanize.downcase
