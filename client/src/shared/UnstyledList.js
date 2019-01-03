@@ -11,6 +11,7 @@ const UnstyledList = styled.ul`
 
   li {
     display: inline
+    margin-bottom: 100px;
   }
   li::after {
     content: "  —  ";

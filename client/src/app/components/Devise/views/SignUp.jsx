@@ -53,12 +53,17 @@ const adaptFileEventToValue = delegate => files => {
 }
 
 const renderDatePicker = ({ input, ...rest }) =>
+
   <DatePicker
     {...input}
     {...rest}
-    valueSelected={input.value}
-    onChange={(event, value) => input.onChange(value)}
-    value={input.value !== '' ? input.value : null}
+    // valueSelected={input.value}
+    // defaultValue={null}
+    // onChange={(event, value) => input.onChange(value)}
+    value = {input.value !== ''? new Date(input.value) : null}
+    onChange = {(event, value) => {console.log(value); input.onChange(value)}}
+    // value={input.value && new Date(input.value) || null}
+    // value={input.value !== '' ? input.value : null}
   />
 
 const renderRadioGroup = ({ input, ...rest }) =>
@@ -134,7 +139,9 @@ const SignUpFormz = reduxForm({
         name="birth_date"
         component={DatePicker} hintText={strings.birthDate}
         validate={required}
-        defaultValue={null}
+        autoOk={true} 
+        format={null}
+        // defaultValue={null}
       />
       
       <Field
