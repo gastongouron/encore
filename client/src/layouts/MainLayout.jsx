@@ -336,7 +336,7 @@ class MainLayout extends Component {
 
     return (
       <div>
-      <Main style={this.props.currentUser.isLoggedIn ? {maxWidth: 840, margin: '0 auto', padding: 20} : {margin: '0 auto'} }>
+      <Main style={this.props.currentUser.isLoggedIn ? {maxWidth: 840, margin: '0 auto', padding: 10} : {margin: '0 auto'} }>
         <MainAppBar
           // style={{background: '#283593', boxShadow: 'none', position: 'sticky', top: 0}}
           style={defaultNavbarStyle}

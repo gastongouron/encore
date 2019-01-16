@@ -14,7 +14,7 @@ RootQuery = GraphQL::ObjectType.define do
 
   field :artistsHome, types[Types::ArtistType] do
     resolve(->(_, _, _) {
-      Artist.all.includes(:reviews).order('reviews.score ASC').limit(12)
+      Artist.all.includes(:reviews).order('reviews.score ASC').limit(3)
     })
   end
 
