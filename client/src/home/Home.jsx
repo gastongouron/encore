@@ -366,7 +366,7 @@ class Home extends Component {
               </Grid>
               <Grid container style={artistsBlock}>
                  {this.props.artists.artists.map((artist, index) => (
-                    <Grid key={index} item xs={6} sm={4} md={3} lg={3}>
+                    <Grid key={index} item xs={12} sm={3} md={3} lg={3}>
                       <div style={{textAlign: "center", color: "black", padding: 10}}>
                         <img style={artistImage} src={artist.cover_url} /><br/>
                         <span style={artistLegend}>{artist.name}</span><br/>
