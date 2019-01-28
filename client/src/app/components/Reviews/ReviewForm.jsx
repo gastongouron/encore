@@ -37,7 +37,8 @@ class CustomForm extends Component {
       hiddenProgress: true,
       error: '',
       hiddenError: true,
-      // disabled: true,
+      errorText: '',
+      disabled: true,
     };
   }
 
@@ -103,21 +104,51 @@ class CustomForm extends Component {
     }
   }
 
+changeValue(e, type) {
+    const value = e.target.value;
+    const nextState = {};
+    nextState[type] = value;
+    this.setState(nextState);
+}
+  // displayError(){
+      // console.log("in displayError")
+      // console.log('has been called')
+      // this.setState({disabled: true})
+      // this.setState({error:"hahaha"})
+      // this.setState({hiddenError:false})
+  // }
+  
   shouldBeDisabled(){
+
     let form = {
       body: this.props.formValue,
       performance: this.props.formPerformanceScore,
       generosity: this.props.formGenerosityScore,
       technics: this.props.formTechnicsScore,
       ambiant: this.props.formAmbiantScore
-    }
-    for (var prop in form) {
-      if (!form[prop] && this.state.progres !== 0) {
-        // Raise error
-        return true
+    }  
+
+
+      for (var prop in form) {
+        if (!form[prop] && this.state.progres !== 0) {
+          return true
+        }      
       }
-    }
-    return false
+      
+      if (!this.state.hiddenProgress){
+        return true
+      } else if (form["body"].length < 20) {
+        console.log('case 1 error', form["body"].length)
+        return true
+      } else if (form["body"].length > 1000) {
+        console.log('case 2 error', form["body"].length)
+        return true
+      } else {
+        console.log('hide error')
+        return false
+      }
+      return false
+
   }
 
   render(){
@@ -169,7 +200,14 @@ class CustomForm extends Component {
     };
 
     const disabled = this.shouldBeDisabled()
-    const create = [ <RaisedButton label={this.props.locales.locales.save} disabled={disabled} fullWidth={true} primary={true} keyboardFocused={true} onClick={this.props.onClickSave}/>]
+    const create = [ <RaisedButton 
+                      label={this.props.locales.locales.save} 
+                      disabled={disabled} 
+                      fullWidth={true} 
+                      primary={true} 
+                      keyboardFocused={true} 
+                      onClick={this.props.onClickSave}/>
+                      ]
     const update = [ <RaisedButton style={style} label={this.props.locales.locales.update} disabled={this.shouldBeDisabled()} primary={true} keyboardFocused={true} onClick={this.props.onClickUpdate}/>,
                      <RaisedButton style={style} label={this.props.locales.locales.delete} secondary={true} onClick={this.props.onClickDelete}/>]
 
@@ -266,9 +304,7 @@ class CustomForm extends Component {
                 />
             </Grid>
             <Grid item xs={1}>
-              <span style={labelRight}>{this.props.formTechnicsScore ? this.props.formTechnicsScore + " / 5" : "0 / 5" }</span>
-            </Grid>
-
+              <span style={labelRight}>{this.props.formTechnicsScore ? this.props.formTechnicsScore + " / 5" : "0 / 5" }</span>            </Grid>
 
             <Grid item xs={3}>
               <span style={label}>{this.props.locales.locales.ambiant}</span>
@@ -295,14 +331,23 @@ class CustomForm extends Component {
         <Divider />
 
         <div style={leftAndRightPadded}>
+          
             <TextField
               floatingLabelText={this.props.locales.locales.reviewBodyLabel}
               hintText={this.props.locales.locales.reviewHint}
               id="body"
               type="text"
               label="Review"
+              // onChange={this.onChange.bind(this)}
               multiLine={true}
               rows={1}
+              errorText={ ((this.props.formValue.length > 20) || this.props.formValue.length < 1) ? false : "must be 20 chars minumum"}
+              // hintText="Hint Text"
+              // errorText={this.value.length > 20 ? "" : "This field is required"}
+              // floatingLabelText="Floating Label Text"
+              // errorStyle={}
+              maxLength="1000"
+              minLength="20"
               value={this.props.formValue}
               onChange={this.props.setBody}      
               fullWidth={true}       
