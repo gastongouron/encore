@@ -18,7 +18,7 @@ import Grid from '@material-ui/core/Grid'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import FileAttachment from 'material-ui/svg-icons/file/attachment';
 import ContentRemove from 'material-ui/svg-icons/action/delete';
-
+import theme from '../../theme'
 import Divider from 'material-ui/Divider'
 
 class CustomForm extends Component {
@@ -138,13 +138,10 @@ changeValue(e, type) {
       if (!this.state.hiddenProgress){
         return true
       } else if (form["body"].length < 20) {
-        console.log('case 1 error', form["body"].length)
         return true
       } else if (form["body"].length > 1000) {
-        console.log('case 2 error', form["body"].length)
         return true
       } else {
-        console.log('hide error')
         return false
       }
       return false
@@ -183,8 +180,22 @@ changeValue(e, type) {
       paddingRight: 20
     }
 
+    const title = {
+      color: theme.palette.textColor,
+      fontSize: 14,
+      paddingTop: 5,
+    }
+
+    const subtitle = {
+      color: theme.palette.secondaryTextColor,
+      fontSize: 12,
+      paddingTop: 4,
+      paddingBottom: 5
+    }
+
     const label = {
       fontSize: 12,
+      color: theme.palette.textColor,
       paddingTop: 5,
     }
 
@@ -251,6 +262,9 @@ changeValue(e, type) {
                }
 
         <div style={rootz}>
+          <span style={title}>{this.props.locales.locales.performance}</span>
+          <br/>
+          <span style={subtitle}>{this.props.locales.locales.performance}</span>
           <Grid container>
             
             <Grid item xs={3}>
@@ -341,7 +355,7 @@ changeValue(e, type) {
               // onChange={this.onChange.bind(this)}
               multiLine={true}
               rows={1}
-              errorText={ ((this.props.formValue.length > 20) || this.props.formValue.length < 1) ? false : "must be 20 chars minumum"}
+              errorText={ this.props.formValue === undefined || (this.props.formValue === "" || (this.props.formValue.length <= 1 || this.props.formValue.length >= 20)) ? false : "must be 20 chars minumum"}
               // hintText="Hint Text"
               // errorText={this.value.length > 20 ? "" : "This field is required"}
               // floatingLabelText="Floating Label Text"
