@@ -25,7 +25,7 @@ class Taglist extends Component {
 		if(this.props.tags !== undefined){
 			const tagItems = this.props.tags.split(',').map((tag, index) => {
 				return (
-					index < 4 ?
+					index < 5 ?
 			        <Chip 
 			        	key={index} 
 			        	style={styles.chip}

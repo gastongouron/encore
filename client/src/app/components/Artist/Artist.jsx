@@ -27,7 +27,7 @@ const coverStyle = {
 
 const rootz = {
     flexGrow: 1,
-    maxWidth: 840,
+    maxWidth: 500,
     margin: '0 auto',
 }
 
@@ -143,7 +143,7 @@ class ArtistDetail extends Component {
 
                         <Paper style={marginBottom1} zDepth={0} rounded={true} >
                             <img alt="" style={coverStyle} src={artist.cover_url}/>
-                            <div style={{maxWidth: 840, margin: '0 auto'}}>
+                            <div style={{maxWidth: 500, margin: '0 auto'}}>
                            <ActionButtons
                                 edit={(e) => this.toggleEditFromArtist()} 
                                 connected={this.isConnected()} 
@@ -183,7 +183,7 @@ class ArtistDetail extends Component {
                         </Paper>
 
                     
-                    <div style={{paddingLeft: 10, paddingRight: 10, maxWidth: 840, margin: '0 auto'}}>
+                    <div style={{paddingLeft: 10, paddingRight: 10, maxWidth: 500, margin: '0 auto'}}>
                                         <h1 style={{fontWeight: "100", textAlign: 'center',paddingBottom: 10}}>
                                         {
                                             Number(artist.reviews_count) > 1 
@@ -199,6 +199,9 @@ class ArtistDetail extends Component {
                             user={this.props.userInfo}
                             match={this.props.match.url}
                         />
+                        <br/>
+                        <br/>
+                        <br/>
                     </div>
 
                     <form>

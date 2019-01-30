@@ -156,7 +156,7 @@ class Profile extends Component {
         const user = this.props.userProfile.userProfile
 
         return (
-            <div style={{padding: 10, maxWidth: 840, margin: '0 auto', }}>
+            <div style={{padding: 10, maxWidth: 500, margin: '0 auto', }}>
                 {(this.state.loading || this.props.userProfile.loading) ? <EncoreLoader /> : this.props.reviews.error ? <h1>Error...</h1> : 
                 <div>                
                     <Paper>

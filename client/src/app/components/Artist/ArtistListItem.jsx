@@ -39,18 +39,19 @@ const ArtistListItem = (props) => {
 	}
 
 	const paperStyle = {
-      margin: 5,
+      margin: 2,
 	  marginBottom:10,
 	};
 
 	const imageStyle = {
-		padding: 10,
+		padding: 20,
 		borderRadius: '50%',
 
 	    objectFit: 'cover',
 	    backgroundSize: 'cover',
 	    height: '100%',
-	    width: '100%'
+	    width: '100%',
+		height: 'auto',
 	}
 
 	return (
@@ -104,6 +105,7 @@ const ArtistListItem = (props) => {
 
 									</Grid>
 							</Grid>
+						</Grid>
 							<Grid style={tagsContainer} container>
 								<Grid item xs={12}>
 									<Taglist 
@@ -112,12 +114,11 @@ const ArtistListItem = (props) => {
 						        </Grid>
 						    </Grid>
 
-						</Grid>
-
 
 				    </Grid>
 				</div>
 
+			<Divider/>
 			</Paper>
 		)
 

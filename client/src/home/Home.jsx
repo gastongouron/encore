@@ -185,8 +185,8 @@ const artistsBlock = {maxWidth: 840, margin: '0 auto', padding: 20, paddingBotto
 const featureItem = {height: 80, marginRight: '0px'}
 const featureItem2 = {marginTop: 50, height: 30, marginRight: '0px'}
 
-const artistImage = {borderRadius: '50%', maxWidth: 95}
-const artistImageLoggedIn = {borderRadius: '50%', maxWidth: 80}
+const artistImage = {borderRadius: '50%', maxWidth: 70}
+const artistImageLoggedIn = {borderRadius: '50%', maxWidth: 60}
 const artistsBlockLoggedIn = {maxWidth: 840, margin: '0 auto', paddingBottom: 10, paddingTop: 0}
 
 const block2 = {
@@ -276,7 +276,7 @@ class Home extends Component {
     if(this.props.currentUser && this.props.currentUser.isLoggedIn){
         return (
           this.props.artists.loading ? <EncoreLoader /> : this.props.artists.error ? <h1>Error...</h1> : 
-          <div style={{paddingTop: 10, maxWidth: 840, margin: '0 auto'}}>
+          <div style={{paddingTop: 10, maxWidth: 500, margin: '0 auto'}}>
             {/* <Artists /> */}   
             <div style={{padding:10}}>
               <h1 style={{marginTop: 20, fontWeight: "100", fontFamilly: "Raleway"}}>{this.state.searchTerm !== "" ? this.state.searchTerm : this.props.locales.locales.contributor}</h1>
@@ -289,17 +289,17 @@ class Home extends Component {
               <Grid style={{paddingLeft: 10, paddingRight: 10}} alignItems="flex-end" container style={artistsBlockLoggedIn}>
                 {this.state.users.length > 0 ? 
                  this.props.users.users.map((user, index) => (
-                    <Grid key={index} item xs={6} sm={4} md={3} lg={3}>
+                    <Grid key={index} item xs={6} sm={4} md={4} lg={4}>
 
           <ListItem key={user.id} innerDivStyle={{ textDecoration: 'none', padding: 0, margin: 0}}>
             <Link to={'/user/'+ user.id}  style={{ textDecoration: 'none' }}>
               <Paper zDepth={0} rounded={false}>
 
               <ListItem 
-                  primaryText={<div style={{fontSize: 12, paddingLeft: 8, paddingBottom: 0}}><b>{user.last_name.charAt(0).toUpperCase() + user.last_name.slice(1) + " " + user.first_name.charAt(0) + "."}</b></div>}
-                  secondaryText={<div style={{fontSize: 12, paddingLeft: 8, paddingBottom: 38, lineHeight: 1.4}}>{user.reviews.length} {user.reviews.length > 1 ? this.props.locales.locales.reviewsLabel : this.props.locales.locales.reviewLabel}<br/>{user.followers.length} {user.followers.length > 1 ? this.props.locales.locales.followers : this.props.locales.locales.follower}</div>}
+                  primaryText={<div style={{fontSize: 10, paddingLeft: 8, paddingBottom: 0}}><b>{user.last_name.charAt(0).toUpperCase() + user.last_name.slice(1) + " " + user.first_name.charAt(0) + "."}</b></div>}
+                  secondaryText={<div style={{fontSize: 10, paddingLeft: 8, paddingBottom: 38, lineHeight: 1.4}}>{user.reviews.length} {user.reviews.length > 1 ? this.props.locales.locales.reviewsLabel : this.props.locales.locales.reviewLabel}<br/>{user.followers.length} {user.followers.length > 1 ? this.props.locales.locales.followers : this.props.locales.locales.follower}</div>}
                   leftAvatar={
-                     <Avatar style={{marginRight: 10}} size={58} src={user.profile_picture} />
+                     <Avatar style={{marginRight: 10}} size={52} src={user.profile_picture} />
                   }/>
                        </Paper>
 
@@ -421,12 +421,11 @@ class Home extends Component {
 
             <Grid container style={block3}>     
               <Grid item style={{textAlign: 'center', margin: '0 auto'}}>
-                <h2 style={hello}>{this.props.locales.locales.lorem3}</h2><h4 style={{marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem4}</h4>
-                <h2 style={hello}>{this.props.locales.locales.lorem5}</h2><h4 style={{marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem6}<br/>{this.props.locales.locales.lorem6bis}</h4>
-                <h2 style={hello}>{this.props.locales.locales.lorem7}</h2><h4 style={{marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem8}<br/>{this.props.locales.locales.lorem8bis}</h4>
+                <h2 style={hello}>{this.props.locales.locales.lorem3}</h2><h4 style={{fontSize: "12px", marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem4}</h4>
+                <h2 style={hello}>{this.props.locales.locales.lorem5}</h2><h4 style={{fontSize: "12px", marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem6}<br/>{this.props.locales.locales.lorem6bis}</h4>
+                <h2 style={hello}>{this.props.locales.locales.lorem7}</h2><h4 style={{fontSize: "12px", marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem8}<br/>{this.props.locales.locales.lorem8bis}</h4>
               </Grid>
             </Grid>
-
 
 
         <MessengerCustomerChat

@@ -93,7 +93,7 @@ class Artists extends Component {
                     <EncoreLoader />
 
                 : this.props.artists.error ? <h1>Error...</h1> : 
-                    <div style={{maxWidth: 840, margin: '0 auto'}}>
+                    <div style={{maxWidth: 500, margin: '0 auto'}}>
                         <div style={{paddingTop: 10, margin: 10}}>
                         <h1 style={{marginTop: 20, fontWeight: "100", fontFamilly: "Roboto"}}>{this.props.locales.locales.artists}</h1>
                         <SearchBar 
