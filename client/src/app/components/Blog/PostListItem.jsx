@@ -76,6 +76,12 @@ const PostListItem = (props) => {
 		                            Comments
 		                        </Disqus.CommentCount>
 		                        </div>
+		                        <br/>
+		                        <br/>
+		                        <br/>
+		                        <br/>
+		                        <br/>
+		                        <br/>
 					        	</Grid>
 						        
 						

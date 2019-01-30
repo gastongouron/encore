@@ -18,6 +18,8 @@ const PostItem = (props) => {
 	
 	const rootz = {
 	top: 0,
+	// maddingBottom: 200,
+	display: "block",
 	position: 'absolute',
 	  flexGrow: 1,
 	}
@@ -25,6 +27,11 @@ const PostItem = (props) => {
 	const padded = {
 	  padding: 20,
 	}
+
+	// const paddedDiscus = {
+	//   padding: 20,
+	//   // paddingBottom: 400,
+	// }
 
 	const floatLeft = {
 	  float: 'left',
@@ -69,6 +76,21 @@ const PostItem = (props) => {
 							<Divider/>
 							<Grid style={padded}>
 		                        <Disqus.DiscussionEmbed shortname='encore-2' config={{ url: window.location.href, identifier: post.id, title: post.title}} />
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+
 							</Grid>
 						</Grid>
 				    </Grid>
