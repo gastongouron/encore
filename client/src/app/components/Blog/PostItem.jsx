@@ -75,22 +75,9 @@ const PostItem = (props) => {
 							</Grid>
 							<Divider/>
 							<Grid style={padded}>
+								<div style={{paddingBottom: 200}}>
 		                        <Disqus.DiscussionEmbed shortname='encore-2' config={{ url: window.location.href, identifier: post.id, title: post.title}} />
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-
+		                        </div>
 							</Grid>
 						</Grid>
 				    </Grid>
