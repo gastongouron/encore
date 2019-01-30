@@ -3,7 +3,9 @@ import Chip from 'material-ui/Chip';
 
 const styles = {
   chip: {
-    margin: 4,
+    marginLeft: 2,
+    padding:0,
+    fontSize: 10,
     background: "#F1F1F1"
   },
   wrapper: {
@@ -23,12 +25,16 @@ class Taglist extends Component {
 		if(this.props.tags !== undefined){
 			const tagItems = this.props.tags.split(',').map((tag, index) => {
 				return (
+					index < 4 ?
 			        <Chip 
 			        	key={index} 
 			        	style={styles.chip}
 			        	onClick={ () => this.props.onClickTag(tag)}>
-			        	{tag} 
+			        	<span style={{fontSize: 10}} s>{tag}</span> 
 			        </Chip>			
+					:
+						null
+					
 				) 
 			})
 			return (

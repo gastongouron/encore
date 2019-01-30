@@ -44,7 +44,7 @@ const ArtistListItem = (props) => {
 	};
 
 	const imageStyle = {
-		padding: 20,
+		padding: 10,
 		borderRadius: '50%',
 
 	    objectFit: 'cover',

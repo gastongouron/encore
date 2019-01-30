@@ -17,6 +17,8 @@ const PostItem = (props) => {
 	const formatter = buildFormatter(frenchStrings)
 	
 	const rootz = {
+	top: 0,
+	position: 'absolute',
 	  flexGrow: 1,
 	}
 
