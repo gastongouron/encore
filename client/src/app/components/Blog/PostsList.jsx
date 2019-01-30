@@ -20,7 +20,7 @@ class PostList extends Component {
     // make first elem 12
     // make others lower
     return (
-      <div>
+      <div style={{top: 0, position: 'absolute'}}>
         <List style={{margin: 0, padding: 0}}>
         <div style={rootz}>
           <Grid container>

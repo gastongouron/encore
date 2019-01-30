@@ -1,4 +1,4 @@
-import { withApollo } from 'react-apollo'
+ import { withApollo } from 'react-apollo'
 import React, {Component} from 'react';
 import {AppBar, Toolbar, ToolbarGroup, Menu, MenuItem, Popover} from 'material-ui';
 import {connect} from 'react-redux';
@@ -358,12 +358,12 @@ class MainLayout extends Component {
     //    position: 'sticky',
     //    top: 0
     // }
-
+    console.log(this.props.match.path.includes("fanzine"))
     return (
       <div>
       <Main style={this.props.currentUser.isLoggedIn ? {margin: '0 auto'} : {margin: '0 auto'} }>
         <MainAppBar
-          style={(this.props.match.path !== "/" || this.props.currentUser.isLoggedIn ? defaultNavbarStyle : scrolledNavbarStyle)}
+          style={(!this.props.match.path.includes("fanzine") && (this.props.match.path !== "/" || this.props.currentUser.isLoggedIn) ? defaultNavbarStyle : scrolledNavbarStyle)}
           // style={defaultNavbarStyle}
           showMenuIconButton={ this.state.width < 500 ? true : false}
           iconStyleLeft={{color: "#ffffff"}}
