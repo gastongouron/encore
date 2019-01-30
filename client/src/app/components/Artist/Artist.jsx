@@ -37,7 +37,7 @@ const padded = {
 
 const marginBottom1 = {
     // marginTop: 20,
-    marginBottom: 20,
+    marginBottom: 0,
 }
 
 const marginBottom = {
@@ -168,15 +168,6 @@ class ArtistDetail extends Component {
                                             </span>
                                         </h1>
                                         <br />
-                                        <span><b>
-                                        {
-                                            Number(artist.reviews_count) > 1 
-                                        ? 
-                                            artist.reviews_count + " " + this.props.locales.locales.reviewsLabel 
-                                        : 
-                                            Number(artist.reviews_count) === 1 ? artist.reviews_count + " " + this.props.locales.locales.reviewLabel : this.props.locales.locales.beTheFirst
-                                        }
-                                        </b></span>
 
                                     </Grid>
 
@@ -193,6 +184,15 @@ class ArtistDetail extends Component {
 
                     
                     <div style={{paddingLeft: 10, paddingRight: 10, maxWidth: 840, margin: '0 auto'}}>
+                                        <h1 style={{fontWeight: "100", textAlign: 'center',paddingBottom: 10}}>
+                                        {
+                                            Number(artist.reviews_count) > 1 
+                                        ? 
+                                            artist.reviews_count + " " + this.props.locales.locales.reviewsLabel 
+                                        : 
+                                            Number(artist.reviews_count) === 1 ? artist.reviews_count + " " + this.props.locales.locales.reviewLabel : this.props.locales.locales.beTheFirst
+                                        }
+                                        </h1>
                         <ReviewList
                             onReviewSelect={reviewReview => this.show(reviewReview, this)}
                             reviews={artist.reviews}

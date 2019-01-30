@@ -60,7 +60,7 @@ const iconStyle = {
 }
 
 const legend = {
-  fontFamily: 'Roboto',
+  fontFamily: 'Raleway',
   marginTop: 5,
   fontWeight: 300,
   textAlign: 'center',
@@ -68,7 +68,7 @@ const legend = {
 }
 
 const boldLegend = {
-  fontFamily: 'Roboto',
+  fontFamily: 'Raleway',
   fontWeight: 500,
   textAlign: 'center',
   color: theme.palette.textColor,
@@ -76,23 +76,24 @@ const boldLegend = {
 
 const scoreLegend = {
   color: theme.palette.textColor,
-  fontFamily: 'Roboto',
+  fontFamily: 'Raleway',
   textAlign: 'center',
   fontSize: 16,
   fontWeight: 300,
 }
 
 const artistLegend = {
-  fontFamily: 'Roboto',
+  fontFamily: 'Raleway',
   fontWeight: 500,
   fontSize: 14,
+  marginBottom: 0,
   textAlign: 'center',
   color: theme.palette.textColor,
 }
 
 
 const subLegend = {
-  fontFamily: 'Roboto',
+  fontFamily: 'Raleway',
   fontWeight: 300,
   fontSize: 10,
   fontVariant: 'uppercase',
@@ -102,20 +103,20 @@ const subLegend = {
 
 const hello = {
   maxWidth: 500,
-  fontFamily: 'Roboto',
+  fontFamily: 'Raleway',
   fontWeight: 100,
 }
 
 const encore = {
   color: 'white',
   fontWeight:700, 
-  fontFamily: 'Roboto',
+  fontFamily: 'Raleway',
   fontVariant: 'none'
 }
 
 const hashtag = {
   color: 'white' ,
-  fontFamily: 'Roboto',
+  fontFamily: 'Raleway',
   fontVariant: 'uppercase',
   fontWeight: 900,
   letterSpacing: 3,
@@ -127,7 +128,7 @@ const baseline = {
   marginTop: 0,
   paddingTop: 0,
   paddingBottom: 20,
-  fontFamily: 'Roboto',
+  fontFamily: 'Raleway',
   fontWeight: 300,
 }
 
@@ -136,7 +137,7 @@ const baseline2 = {
   marginTop: 0,
   paddingTop: 5,
   paddingBottom: 30,
-  fontFamily: 'Roboto',
+  fontFamily: 'Raleway',
   fontWeight: 300,
   // textAlign: "center",
   // align: "center",
@@ -183,18 +184,18 @@ const artistsBlock = {maxWidth: 840, margin: '0 auto', padding: 20, paddingBotto
 const featureItem = {height: 80, marginRight: '0px'}
 const featureItem2 = {marginTop: 50, height: 30, marginRight: '0px'}
 
-const artistImage = {borderRadius: '50%', maxWidth: 105}
-const artistImageLoggedIn = {borderRadius: '50%', maxWidth: 80, marginRight: 10}
+const artistImage = {borderRadius: '50%', maxWidth: 95}
+const artistImageLoggedIn = {borderRadius: '50%', maxWidth: 80}
 const artistsBlockLoggedIn = {maxWidth: 840, margin: '0 auto', paddingBottom: 10, paddingTop: 0}
 
 const block2 = {
-  // padding: 40,
+  padding: 20,
   paddingTop: 50,
   paddingBottom: 50,
   fontSize: "2em",
   color: "white",
   fontWeight: "200",
-  fontFamily: 'Roboto',
+  fontFamily: 'Raleway',
   lineHeight: "1.4em",
   // maxWidth: 840, 
   margin: '0 auto',
@@ -202,6 +203,19 @@ const block2 = {
       objectFit: 'cover',
     backgroundSize: 'cover',
   backgroundPosition: 'top', /* Position the image to the top center of the div */
+}
+
+const block3 = {
+  padding: 20,
+  paddingTop: 50,
+  paddingBottom: 50,
+  fontSize: "2em",
+  color: theme.palette.textColor,
+  fontWeight: "200",
+  fontFamily: 'Raleway',
+  lineHeight: "1.4em",
+  // maxWidth: 840, 
+  margin: '0 auto',
 }
 
 class Home extends Component {
@@ -264,7 +278,7 @@ class Home extends Component {
           <div style={{paddingTop: 10, maxWidth: 840, margin: '0 auto'}}>
             {/* <Artists /> */}   
             <div style={{padding:10}}>
-              <h1 style={{marginTop: 20, fontWeight: "100", fontFamilly: "Roboto"}}>{this.state.searchTerm !== "" ? this.state.searchTerm : this.props.locales.locales.contributor}</h1>
+              <h1 style={{marginTop: 20, fontWeight: "100", fontFamilly: "Raleway"}}>{this.state.searchTerm !== "" ? this.state.searchTerm : this.props.locales.locales.contributor}</h1>
               <SearchBar 
                   onRef={ref => (this.child = ref)} 
                   onSearchTermChange={this.userSearch}
@@ -301,7 +315,7 @@ class Home extends Component {
               </Grid>
             <div style={{padding:10}}>
               <Divider />
-              <h1 style={{paddingTop: 10, marginTop: 0, fontWeight: "100", fontFamilly: "Roboto"}}>{this.props.locales.locales.artistsHome}</h1>
+              <h1 style={{paddingTop: 10, marginTop: 0, fontWeight: "100", fontFamilly: "Raleway"}}>{this.props.locales.locales.artistsHome}</h1>
               </div>
                 <Grid container style={artistsBlockLoggedIn}>
                    {this.props.artists.artists.map((artist, index) => (
@@ -310,6 +324,9 @@ class Home extends Component {
                         <Link to={'/artists/'+artist.id}>
                           <img style={artistImageLoggedIn} src={artist.cover_url} /><br/>
                         </Link>
+                        <span style={artistLegend}>{artist.name}</span><br/>
+                        <Star color={theme.palette.starColor} viewBox="-5 -10 30 30"/>
+                        <span style={scoreLegend}>{artist.score}</span><br/>
                         </div>
                       </Grid>
                     ))}
@@ -379,7 +396,7 @@ class Home extends Component {
               </Grid>
               <Grid container style={artistsBlock}>
                  {this.props.artists.artists.map((artist, index) => (
-                    <Grid key={index} item xs={12} sm={4} md={4} lg={4}>
+                    <Grid key={index} item xs={4} sm={2} md={2} lg={2}>
                       <div style={{textAlign: "center", color: "black", padding: 10}}>
                         <img style={artistImage} src={artist.cover_url} /><br/>
                         <span style={artistLegend}>{artist.name}</span><br/>
@@ -394,12 +411,21 @@ class Home extends Component {
 
             <Grid container style={prefooter}>              
               <Grid style={prefooterBlock} item xs={12} sm={12} md={12}>
-                <h1 style={{fontSize: 60, fontWeight: 900}}>Ready to share the vibe?</h1>
+                <h1 style={{fontFamily: 'Raleway', fontSize: 50, fontWeight: 800}}>Ready to share the vibe?</h1>
                 <Link to="/users/getstarted" style={{float: "center"}}>
                   <RaisedButton default={true} label={this.props.locales.locales.getStarted}></RaisedButton>
                 </Link>
               </Grid>
             </Grid>
+
+            <Grid container style={block3}>     
+              <Grid item style={{textAlign: 'center', margin: '0 auto'}}>
+                <h1><b>encore!</b></h1>
+                <h3 style={hello}>{this.props.locales.locales.lorem}</h3>
+                <h3 style={hello}><b>{this.props.locales.locales.lorem2}</b></h3>
+              </Grid>
+            </Grid>
+
 {/*        <MessengerCustomerChat
             minimized={true}
             pageId="2079915298988137"

@@ -34,14 +34,26 @@ const PostListItem = (props) => {
 	}
 
 	const paperStyle = {
-      margin: 0,
+      color: 'white',
+      paddingTop: 170,
+      paddingBottom: 170,
+      textAlign: "center",
 	  marginBottom: 0,
 	};
 
+
+
 	const backgroundImage = {
 	  backgroundImage: 'url('+post.image_url+')',
+      textAlign: "center",
+      "-webkit-filter": "grayscale(100%)",
+      filter: "grayscale(5%)",
 	  backgroundSize: 'cover',
-	  height: 300,
+	  margin: '0 auto',
+	  "&:hover":{
+	      "-webkit-filter": "none",
+	      filter: "none",
+	  }
 	}
 
 	
@@ -53,32 +65,25 @@ const PostListItem = (props) => {
 	// }
 
 	return (
-            <ListItem innerDivStyle={{padding: 0, margin: 0}}>
-              <Link to={"/fanzine/posts/" + post.id} style={{ textDecoration: 'none' }}>
-			<Paper
-				style={paperStyle} zDepth={1} 
-				rounded={true} >
-				<div style={backgroundImage}></div>
-				        <Grid item xs={12} sm={12} md={12}>
-							<Grid style={padded} container>
-					        	<Grid style={floatLeft} item xs={12}>
-					        		<h1>
-						        		<Link style={{color: theme.palette.textColor}} to={'/fanzine/posts/'+ post.id}>
+            <ListItem innerDivStyle={backgroundImage}>
+              <Link  to={"/fanzine/posts/" + post.id} style={{ textDecoration: 'none' }}>
+					<div style={paperStyle}>
+	
+					        		<span style={{color: "white", fontSize: 40, fontWeight: 800, lineHeight: 1}}>
 						        			{post.title}
-					        			</Link>
-					        		</h1>
-								{post.author}&nbsp;					        	
-								<TimeAgo style={{color: 'grey', fontSize: '0.77em'}} date={post.created_at} formatter={props.locales.locales._language === 'en' ? undefined : formatter}/>
-								<div style={floatRight}>
+					        		</span>
+					        		<br/>
+					        		<br/>
+								Par {post.author}&nbsp;—&nbsp;		
+
+								<TimeAgo date={post.created_at} formatter={props.locales.locales._language === 'en' ? undefined : formatter}/>
+								<br/>
+								<br/>
 		                        <Disqus.CommentCount shortname='encore-2' config={{ url: window.location.href, identifier: post.id, title: post.title}}>
 		                            Comments
 		                        </Disqus.CommentCount>
-		                        </div>
-					        	</Grid>
-					        </Grid>
-						</Grid>
+						</div>
 
-			</Paper>
 			</Link>
 			</ListItem>
 		)

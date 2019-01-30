@@ -33,6 +33,7 @@ import { SocialIcon } from 'react-social-icons';
 // import Mailto from 'react-mailto'
 import _ from 'underscore'
 import MessengerMessageUs from 'react-messenger-message-us';
+import Bandeau1 from './bandeau.jpg'
 import Bandeau from './bandeau_2.jpg'
 
 const StyledSocialIcon = styled(SocialIcon)`
@@ -311,9 +312,21 @@ class MainLayout extends Component {
       // textTransform: 'uppercase',
     }
 
+    const imageBackground = {
+        backgroundImage: "url(" + Bandeau1 + ")",
+      width: '100%',
+      margin: '0 auto', 
+      padding: 20,
+      paddingBottom: 50,
+      paddingTop: 50,
+       backgroundSize: '100%', /* Always size the image to the width of the div */
+      backgroundPosition: 'top', /* Position the image to the top center of the div */
+ 
+    }
+
     const defaultNavbarStyle = {
       align: 'center', 
-      margin: '0auto', 
+      margin: '0 auto', 
       width: '100%', 
       transition: 'background 0.5s ease', 
       // background:'rgba(0,0,0,0.0)', 
@@ -525,11 +538,24 @@ class MainLayout extends Component {
       {currentUser.isLoggedIn ? 
         null
       :
-      <StyledFooter>
+      <StyledFooter style={imageBackground}>
         <div className="footer">
+          <span style={{fontWeight: 800, fontSize: 50, fontFamily: 'Raleway', float: 'left'}}><b>encore!</b></span>
+          <div style={{float: "right"}}>
+            <StyledSocialIcon color="white" style={{background:"transparent", height: 28, color:"red", width: 28, marginLeft: "6px", marginRight: 5, height: 28, width: 28}} network="instagram" url="https://www.instagram.com/encoreapp.co" />
+            <StyledSocialIcon color="white" style={{background:"transparent", marginRight: 5, height: 28, width: 28}} network="facebook" url="https://www.facebook.com/Encore-2079915298988137/" />
+            <StyledSocialIcon color="white" style={{background:"transparent", marginRight: 5, height: 28, width: 28}} network="twitter" url="https://www.facebook.com/Encore-2079915298988137/" />
+            <br/>
+            <br/>
+            <br/>
+            <MessengerMessageUs pageId="2079915298988137" appId="1351728908291385" />
+          </div>
+
+          <br/>
+          <br/>          
+          <br/>           
+          <br/>                             
           <div style={{ marginTop: -4}}>
-            <StyledSocialIcon color="black" style={{background:"radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%)", height: 28, color:"red", width: 28, marginLeft: "6px", marginRight: 5, height: 28, width: 28}} network="instagram" url="https://www.instagram.com/encoreapp.co" />
-            <StyledSocialIcon color="black" style={{background:"white", marginRight: 5, height: 28, width: 28}} network="facebook" url="https://www.facebook.com/Encore-2079915298988137/" />
           { this.props.locales.locales.policy !== undefined ? 
             <Link to='/policy'>{this.props.locales.locales.policy.link}</Link>
           : 
@@ -537,9 +563,6 @@ class MainLayout extends Component {
             // insta
             // radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%)", height: 28, color:"red", width: 28, marginLeft: "6px"}}
           }
-          <div style={{float: "right"}}>
-                <MessengerMessageUs pageId="2079915298988137" appId="1351728908291385" />
-          </div>
           </div>
         </div>
       </StyledFooter>

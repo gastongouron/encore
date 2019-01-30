@@ -1,17 +1,14 @@
 import styled from 'styled-components'
-
+import Bandeau from '../home/images/bandeau.jpg'
 const StyledFooter = styled.div`
    
-   margin: 0 auto;
    width: 100%;
-
    margin: "0 auto",
-   padding: 20px;
    font-size: 12px;
    color: #ffffff;
    bottom: 0;
-   background:rgba(0,0,0,1);
    div.footer {
+      padding: "50px";
    	margin: 0 auto;
       text-align: center,
    }

@@ -43,13 +43,13 @@ const PostItem = (props) => {
 	    objectFit: 'cover',
 	    backgroundSize: 'cover',
 	    width: '100%',
-	    height: 200,
+	    height: 400,
 	}
 
 	return (
 			<Paper
-				style={paperStyle} zDepth={1} 
-				rounded={true} >
+				style={paperStyle} zDepth={0} 
+				rounded={false} >
 				<div style={rootz}>
 					<Grid container>
 

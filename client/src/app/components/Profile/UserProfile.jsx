@@ -220,6 +220,7 @@ class Profile extends Component {
                                 followers={user !== null ? this.props.userProfile.userProfile.followers : undefined}/>
                         </div>
                     </Paper>
+                    <br/>
                     <div>
                         <div>
                             <div>
