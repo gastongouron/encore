@@ -103,8 +103,9 @@ const subLegend = {
 
 const hello = {
   maxWidth: 500,
+  marginBottom: 0,
   fontFamily: 'Raleway',
-  fontWeight: 100,
+  // fontWeight: 100,
 }
 
 const encore = {
@@ -382,9 +383,9 @@ class Home extends Component {
 
             <Grid container style={block2}>     
               <Grid item style={{textAlign: 'center', margin: '0 auto'}}>
-                <h1><b>encore!</b></h1>
+                <span style={{fontWeight: 800, fontSize: 40}}><b>encore!</b></span>
                 <h3 style={hello}>{this.props.locales.locales.lorem}</h3>
-                <h3 style={hello}><b>{this.props.locales.locales.lorem2}</b></h3>
+                <h3 style={hello}>{this.props.locales.locales.lorem2}</h3>
               </Grid>
             </Grid>
 
@@ -401,8 +402,8 @@ class Home extends Component {
                         <img style={artistImage} src={artist.cover_url} /><br/>
                         <span style={artistLegend}>{artist.name}</span><br/>
                         <span style={subLegend}>{artist.tags.split(',').shift().toUpperCase()}</span><br/>
-                        <Star color={theme.palette.starColor} viewBox="-5 -10 30 30"/>
-                        <span style={scoreLegend}>{artist.score}</span><br/>
+                        {/* <Star color={theme.palette.starColor} viewBox="-5 -10 30 30"/>
+                        <span style={scoreLegend}>{artist.score}</span><br/> */}
                       </div>
                     </Grid>
                   ))}
@@ -420,9 +421,9 @@ class Home extends Component {
 
             <Grid container style={block3}>     
               <Grid item style={{textAlign: 'center', margin: '0 auto'}}>
-                <h1><b>encore!</b></h1>
-                <h3 style={hello}>{this.props.locales.locales.lorem}</h3>
-                <h3 style={hello}><b>{this.props.locales.locales.lorem2}</b></h3>
+                <h2 style={hello}>{this.props.locales.locales.lorem3}</h2><h4 style={{marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem4}</h4>
+                <h2 style={hello}>{this.props.locales.locales.lorem5}</h2><h4 style={{marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem6}<br/>{this.props.locales.locales.lorem6bis}</h4>
+                <h2 style={hello}>{this.props.locales.locales.lorem7}</h2><h4 style={{marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem8}<br/>{this.props.locales.locales.lorem8bis}</h4>
               </Grid>
             </Grid>
 
