@@ -10,12 +10,12 @@ class Artist extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{paddingLeft:10, paddingRight: 10}}>
         <InfiniteScroll
           dataLength={this.props.artists.length}
           next={this.fetchMoreData}
           hasMore={this.props.hasMore}
-          loader={<h4 style={{textAlign: 'center', paddingBottom: 10}}>...</h4>}
+          loader={<h4 style={{textAlign: 'center', paddingBottom: 0}}>...</h4>}
 		      endMessage={
 		          <p style={{textAlign: 'center'}}>
 		            <b></b>

@@ -33,6 +33,7 @@ import { SocialIcon } from 'react-social-icons';
 // import Mailto from 'react-mailto'
 import _ from 'underscore'
 import MessengerMessageUs from 'react-messenger-message-us';
+import Bandeau from './bandeau_2.jpg'
 
 const StyledSocialIcon = styled(SocialIcon)`
    background: #ececec;
@@ -112,8 +113,8 @@ capitalizeTxt(txt) {
     const navbarElem = {
       color: textColor,
       fontSize: 12,
-      letterSpacing: '1px',
-      textTransform: 'uppercase',
+      // letterSpacing: '1px',
+      // textTransform: 'uppercase',
     }
 
     if (currentUser && currentUser.isLoggedIn) {
@@ -300,14 +301,14 @@ class MainLayout extends Component {
     const navbarElem = {
       color: palette.alternateTextColor,
       fontSize: 12,
-      letterSpacing: '1px',
-      textTransform: 'uppercase',
+      // letterSpacing: '1px',
+      // textTransform: 'uppercase',
     }
 
     const navbarMobileElem = {
       fontSize: 12,
-      letterSpacing: '1px',
-      textTransform: 'uppercase',
+      // letterSpacing: '1px',
+      // textTransform: 'uppercase',
     }
 
     const defaultNavbarStyle = {
@@ -315,9 +316,12 @@ class MainLayout extends Component {
       margin: '0auto', 
       width: '100%', 
       transition: 'background 0.5s ease', 
-      background:'rgba(0,0,0,0.0)', 
+      // background:'rgba(0,0,0,0.0)', 
+       backgroundImage: "url(" + Bandeau + ")",
+       backgroundSize: '100%', /* Always size the image to the width of the div */
+      backgroundPosition: 'top', /* Position the image to the top center of the div */
       boxShadow: 'none', 
-      // position: 'sticky', 
+      position: 'sticky', 
       top: 0, 
       color: '#ffffff'
     }
@@ -334,12 +338,20 @@ class MainLayout extends Component {
       color: '#ffffff'
     }
 
+    // const testNav = {
+    //    backgroundImage: "url(" + Bandeau + ")",
+
+    //    boxShadow: 'none',
+    //    position: 'sticky',
+    //    top: 0
+    // }
+
     return (
       <div>
-      <Main style={this.props.currentUser.isLoggedIn ? {maxWidth: 840, margin: '0 auto', padding: 10} : {margin: '0 auto'} }>
+      <Main style={this.props.currentUser.isLoggedIn ? {margin: '0 auto'} : {margin: '0 auto'} }>
         <MainAppBar
-          // style={{background: '#283593', boxShadow: 'none', position: 'sticky', top: 0}}
-          style={defaultNavbarStyle}
+          style={(this.props.match.path !== "/" || this.props.currentUser.isLoggedIn ? defaultNavbarStyle : scrolledNavbarStyle)}
+          // style={defaultNavbarStyle}
           showMenuIconButton={ this.state.width < 500 ? true : false}
           iconStyleLeft={{color: "#ffffff"}}
           iconElementLeft={<Hamburger color="#ffffff" style={{marginLeft: 10, marginTop: 13}}/>}
@@ -363,28 +375,34 @@ class MainLayout extends Component {
                     <Badge
                     style={{display: 'inline'}}
                     badgeContent={this.state.counter}
-                    secondary={true}
-                    badgeStyle={{top: -24, right: -35}}
+                    default={true}
+                    badgeStyle={{top: 0, right: 0}}
                     >
-                    <MenuItem
-                      containerElement={<Link to="/hot" />}
-                      primaryText={strings.hot}
-                      style={navbarElem}
-                    />
+                  <IconButton style={{top: 0, right: -20}} containerElement={<Link to="/hot" />} tooltip="Notifications">
+                        <NotificationsIcon color='#ffffff'/>
+                      </IconButton>
+
                     </Badge>
 
                   :
-              <MenuItem
-                containerElement={<Link to="/hot" />}
-                primaryText={strings.hot}
-                style={navbarElem}
-              />
+
+               <IconButton style={{top: 0, right: 0}} containerElement={<Link to="/hot" />} tooltip="Notifications">
+                        <NotificationsIcon color='#ffffff'/>
+                      </IconButton>
 
                 } 
                 </div>
                 :
                 null 
               }
+
+              { this.props.currentUser.isLoggedIn ? 
+              <MenuItem
+                containerElement={<Link to="/" />}
+                primaryText={strings.hot}
+                style={navbarElem}
+              />
+                : null }
 
               <MenuItem
                 containerElement={<Link to="/artists"/>}
@@ -409,13 +427,11 @@ class MainLayout extends Component {
               />
               <MenuItem
                 onClick={this.onSwitchLanguage}
-                // primaryText={strings.getLanguage() === 'en' ? }
-                // style={{color: palette.alternateTextColor}}
-              >
-                <div style={{marginTop: 3}}>
-                  {strings.getLanguage() === 'en' ? <Flag code="usa" height="16" /> : <Flag code="fra" height="16" />}
-                </div>           
-              </MenuItem>
+                primaryText={strings.getLanguage() === 'en' ? "En" : "Fr"}
+                style={navbarElem}
+              />
+        
+
             </ToolbarGroup>
           </MainToolbar>        
         : 
@@ -437,6 +453,11 @@ class MainLayout extends Component {
 
           }
           <MenuItem
+            onClick={this.drawerToggleHome}
+            primaryText={strings.hot}
+            style={navbarMobileElem}
+          />
+          <MenuItem
             onClick={this.drawerToggleArtists}
             primaryText={strings.artists}
             style={navbarMobileElem}
@@ -449,11 +470,9 @@ class MainLayout extends Component {
           {this.props.currentUser.isLoggedIn ? <MenuItem primaryText={strings.logout} onClick={doLogout} style={navbarMobileElem} /> : null }
           <MenuItem
             onClick={this.drawerSwitchLanguage}
-          >
-            <div style={{marginTop: 3}}>
-                  {strings.getLanguage() === 'en' ? <Flag code="usa" height="16" /> : <Flag code="fra" height="16" />}
-            </div>           
-          </MenuItem>
+            primaryText={strings.getLanguage() === 'en' ? "Version française" : "Switch to english"}
+            style={navbarMobileElem}
+          />
         </Drawer> 
           {this.props.currentUser.isLoggedIn ? 
             <div>

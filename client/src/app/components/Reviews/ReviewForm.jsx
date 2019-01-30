@@ -20,6 +20,8 @@ import FileAttachment from 'material-ui/svg-icons/file/attachment';
 import ContentRemove from 'material-ui/svg-icons/action/delete';
 import theme from '../../theme'
 import Divider from 'material-ui/Divider'
+import Star from 'material-ui/svg-icons/toggle/star';
+
 
 class CustomForm extends Component {
 
@@ -150,9 +152,9 @@ changeValue(e, type) {
 
   render(){
 
-    const style = {
-      marginLeft: 10
-    }
+    // const style = {
+    //   marginLeft: 10
+    // }
 
     const sliderStyle = {
       marginTop: '-20px', 
@@ -176,8 +178,9 @@ changeValue(e, type) {
     }
 
     const leftAndRightPadded = {
-      paddingLeft: 20,
-      paddingRight: 20
+      // paddingLeft: 20,
+      // paddingRight: 20
+      paddingBottom: 20,
     }
 
     const title = {
@@ -187,10 +190,10 @@ changeValue(e, type) {
     }
 
     const subtitle = {
-      color: theme.palette.secondaryTextColor,
-      fontSize: 12,
-      paddingTop: 4,
-      paddingBottom: 5
+      color: theme.palette.disabledColor,
+      fontSize: 11,
+      paddingTop: 2,
+      paddingBottom: 2
     }
 
     const label = {
@@ -205,6 +208,13 @@ changeValue(e, type) {
       paddingTop: 4,
     }
 
+    const testLabelRight = {
+      fontSize: 12,
+      float: 'right',
+      paddingTop: 0,
+      marginTop: -7,
+    }
+
     const customContentStyle = {
       width: '100%',
       maxWidth: '460px'
@@ -214,13 +224,15 @@ changeValue(e, type) {
     const create = [ <RaisedButton 
                       label={this.props.locales.locales.save} 
                       disabled={disabled} 
+                      style={{padding: 0}}
                       fullWidth={true} 
                       primary={true} 
                       keyboardFocused={true} 
                       onClick={this.props.onClickSave}/>
                       ]
-    const update = [ <RaisedButton style={style} label={this.props.locales.locales.update} disabled={this.shouldBeDisabled()} primary={true} keyboardFocused={true} onClick={this.props.onClickUpdate}/>,
-                     <RaisedButton style={style} label={this.props.locales.locales.delete} secondary={true} onClick={this.props.onClickDelete}/>]
+    const update = [ 
+                     <RaisedButton style={{width:"50%"}} label={this.props.locales.locales.delete} secondary={true} onClick={this.props.onClickDelete}/>,
+                     <RaisedButton style={{width:"50%"}} label={this.props.locales.locales.update} disabled={this.shouldBeDisabled()} primary={true} keyboardFocused={true} onClick={this.props.onClickUpdate}/>]
 
     const actions = this.props.isUpdate ? update : create
     const user_id = this.props.currentUser.user_id
@@ -233,13 +245,14 @@ changeValue(e, type) {
             open={this.props.onShow}
             repositionOnUpdate={true}
             title={
-              <div style={{padding: 22, paddingTop: 10, paddingBottom: 10, fontSize: 14, fontWeight: 500}}>
-                <span>{strings.formatString(this.props.locales.locales.review, {name: this.props.formTitle || this.props.artistDetail.artistDetail.name})}</span>
+              <div style={{padding: 22, paddingTop: 10, paddingBottom: 0, fontSize: 14, fontWeight: 500}}>
+                <h2>{this.props.formTitle || this.props.artistDetail.artistDetail.name}</h2>
                 <IconButton style={{float: 'right', top: 2, right: 5, position: 'absolute'}} onClick={this.props.onClickClose}><NavigationClose /></IconButton>
               </div>
             }
             modal={false}
             actions={actions}
+            actionsContainerStyle={{padding: 0}}
             autoScrollBodyContent={true}
           >
 
@@ -262,15 +275,18 @@ changeValue(e, type) {
                }
 
         <div style={rootz}>
-          <span style={title}>{this.props.locales.locales.performance}</span>
+          <span style={title}>1/3 {this.props.locales.locales.step1Title}</span>
           <br/>
-          <span style={subtitle}>{this.props.locales.locales.performance}</span>
+          <span style={subtitle}>{this.props.locales.locales.step1Subtitle}</span>
+          <br/>
+          <br/>
+
           <Grid container>
             
             <Grid item xs={3}>
               <span style={label}>{this.props.locales.locales.performance}</span>
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={7}>
               <Slider 
                 style={sliderStyle}
                 step={1} 
@@ -281,14 +297,18 @@ changeValue(e, type) {
                 required={true}
                 />
               </Grid>
-            <Grid item xs={1}>
-              <span style={labelRight}>{this.props.formPerformanceScore ? this.props.formPerformanceScore + " / 5" : "0 / 5" }</span>
+            <Grid item xs={2}>
+              <span style={{color: (this.props.formPerformanceScore && this.props.formPerformanceScore !== null) ? theme.palette.textColor : theme.palette.disabledColor}}>
+	              <span style={testLabelRight}>{this.props.formPerformanceScore ? this.props.formPerformanceScore : "0" }
+					       <Star color={this.props.formPerformanceScore ? theme.palette.starColor : theme.palette.disabledColor} viewBox="-8 -14 34 34"/>
+	              </span>
+              </span>
             </Grid>
 
             <Grid item xs={3}>
               <span style={label}>{this.props.locales.locales.generosity}</span>
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={7}>
               <Slider 
                 style={sliderStyle}
                 step={1} 
@@ -299,14 +319,18 @@ changeValue(e, type) {
                 required={true}
                 />
             </Grid>
-            <Grid item xs={1}>
-              <span style={labelRight}>{this.props.formGenerosityScore ? this.props.formGenerosityScore + " / 5" : "0 / 5" }</span>
+            <Grid item xs={2}>
+              <span style={{color: (this.props.formGenerosityScore && this.props.setGenerosityScore !== null) ? theme.palette.textColor : theme.palette.disabledColor}}>
+                <span style={testLabelRight}>{this.props.formGenerosityScore ? this.props.formGenerosityScore : "0" }
+                 <Star color={this.props.formGenerosityScore ? theme.palette.starColor : theme.palette.disabledColor} viewBox="-8 -14 34 34"/>
+                </span>
+              </span>
             </Grid>
 
             <Grid item xs={3}>
               <span style={label}>{this.props.locales.locales.technics}</span>
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={7}>
               <Slider 
                 style={sliderStyle}
                 step={1} 
@@ -317,13 +341,19 @@ changeValue(e, type) {
                 required={true}
                 />
             </Grid>
-            <Grid item xs={1}>
-              <span style={labelRight}>{this.props.formTechnicsScore ? this.props.formTechnicsScore + " / 5" : "0 / 5" }</span>            </Grid>
+            <Grid item xs={2}>
+              <span style={{color: (this.props.formTechnicsScore && this.props.setGenerosityScore !== null) ? theme.palette.textColor : theme.palette.disabledColor}}>
+                <span style={testLabelRight}>{this.props.formTechnicsScore ? this.props.formTechnicsScore : "0" }
+                 <Star color={this.props.formTechnicsScore ? theme.palette.starColor : theme.palette.disabledColor} viewBox="-8 -14 34 34"/>
+                </span>
+              </span>
+      
+              </Grid>
 
             <Grid item xs={3}>
               <span style={label}>{this.props.locales.locales.ambiant}</span>
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={7}>
               <Slider 
                 style={sliderStyle}
                 step={1} 
@@ -334,16 +364,23 @@ changeValue(e, type) {
                 required={true}
                 />
             </Grid>
-            <Grid item xs={1}>
-              <span style={labelRight}>{this.props.formAmbiantScore ? this.props.formAmbiantScore + " / 5" : "0 / 5" }</span>
+            <Grid item xs={2}>
+              <span style={{color: (this.props.formAmbiantScore && this.props.setGenerosityScore !== null) ? theme.palette.textColor : theme.palette.disabledColor}}>
+                <span style={testLabelRight}>{this.props.formAmbiantScore ? this.props.formAmbiantScore : "0" }
+                 <Star color={this.props.formAmbiantScore ? theme.palette.starColor : theme.palette.disabledColor} viewBox="-8 -14 34 34"/>
+                </span>
+              </span>
+
             </Grid>
 
 
           </Grid>
-        </div>
 
         <Divider />
-
+          <br/>
+          <span style={title}>2/3 {this.props.locales.locales.step2Title}</span>
+          <br/>
+          <span style={subtitle}>{this.props.locales.locales.step2Subtitle}</span>
         <div style={leftAndRightPadded}>
           
             <TextField
@@ -368,11 +405,13 @@ changeValue(e, type) {
             />
          </div>
 
+          <span style={title}>3/3 {this.props.locales.locales.step3Title}</span>
+          <br/>
+          <span style={subtitle}>{strings.formatString(this.props.locales.locales.enrich, {artistname: this.props.artistDetail.artistDetail.name})}</span>
 
-              <div style={{paddingTop: 10, textAlign: 'center', paddingLeft: 40, paddingRight: 40}}>
-              <span style={label}>{strings.formatString(this.props.locales.locales.enrich, {artistname: this.props.artistDetail.artistDetail.name})}</span><br/>
               <br/>
                 <RaisedButton
+                    style={{float: "right", marginBottom: 20,}}
                    default={true}
                    icon={<FileAttachment />}
                    containerElement='label'
@@ -400,9 +439,9 @@ changeValue(e, type) {
                     /> 
                 </RaisedButton>
 
-              </div>
-              <br />
-
+        </div>
+        <br/>
+                <br/>
           </Dialog>
      )
 

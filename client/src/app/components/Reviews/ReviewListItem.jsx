@@ -38,11 +38,11 @@ const ReviewListItem = (props) => {
 
 	const body = {
 		padding: 20,
-		paddingTop: 20,
+		paddingTop: 15,
 		paddingBottom: 20,
 	}
 
-	const paperStyle = { marginBottom: 20 };
+	const paperStyle = { marginBottom: 10 };
 	// const right = { float: 'right', clear: 'none'}
 
     const label = {
@@ -88,66 +88,64 @@ const ReviewListItem = (props) => {
 				       </ListItem>
 					</div>
 				</div>
+				<Divider/>
 
-				<Divider />
+				<div >
+					<div style={body}>
+						<p>{review.body}</p>
+					</div>
 
 				<div>
 					{
 						review.media ? 
 							isImage(review.media) ? <img alt="" style={imageStyle} src={review.media} /> : <ReactPlayer width='100%' height='auto' url={review.media} controls={true} />
 					:
-						null
+						<Divider/>
 					}
 				</div>
-
-				<div >
-					<div style={body}>
-						<p>{review.body}</p>
-					</div>
-					<Divider />
 					<div style={body}>
 						<div style={rootz}>
 							<Grid container spacing={16}>
 
-								<Grid item xs={12} sm={6} md={3}>
+								<Grid item xs={6} sm={3} md={3}>
 									<Grid container>
-										<Grid style={label} item xs={3} sm={3} md={5}>
+										<Grid style={label} item xs={7} sm={6} md={5}>
 											{props.locales.locales.performance}	
 										</Grid> 
-										<Grid item xs={9} sm={9} md={7}>
+										<Grid item xs={5} sm={6} md={7}>
 											<LinearProgress style={{marginTop: 8}} mode="determinate" value={review.score * 20} />
 										</Grid>
 									</Grid>
 								</Grid>
 
-								<Grid item xs={12} sm={6} md={3}>
+								<Grid item xs={6} sm={3} md={3}>
 									<Grid container>
-										<Grid style={label} item xs={3} sm={3} md={5}>
+										<Grid style={label} item xs={7} sm={6} md={5}>
 											{props.locales.locales.generosity}	
 										</Grid> 
-										<Grid item xs={9} sm={9} md={7}>
+										<Grid item xs={5} sm={6} md={7}>
 											<LinearProgress style={{marginTop: 8}} mode="determinate" value={review.generosity * 20} />
 										</Grid>
 									</Grid>
 								</Grid>
 
-								<Grid item xs={12} sm={6} md={3}>
+								<Grid item xs={6} sm={3} md={3}>
 									<Grid container>
-										<Grid style={label} item xs={3} sm={3} md={5}>
+										<Grid style={label} item xs={7} sm={6} md={5}>
 											{props.locales.locales.technics}	
 										</Grid> 
-										<Grid item xs={9} sm={9} md={7}>
+										<Grid item xs={5} sm={6} md={7}>
 											<LinearProgress style={{marginTop: 8}} mode="determinate" value={review.technics * 20} />
 										</Grid>
 									</Grid>
 								</Grid>
 
-								<Grid item xs={12} sm={6} md={3}>
+								<Grid item xs={6} sm={3} md={3}>
 									<Grid container>
-										<Grid style={label} item xs={3} sm={3} md={5}>
+										<Grid style={label} item xs={7} sm={6} md={5}>
 											{props.locales.locales.ambiant}	
 										</Grid> 
-										<Grid item xs={9} sm={9} md={7}>
+										<Grid item xs={5} sm={6} md={7}>
 											<LinearProgress style={{marginTop: 8}} mode="determinate" value={review.ambiant * 20} />
 										</Grid>
 									</Grid>

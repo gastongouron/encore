@@ -15,15 +15,15 @@ import Grid from '@material-ui/core/Grid'
 class PostList extends Component {
 
   render() {
-    console.log(this.props.posts)
+    // console.log(this.props.posts)
     // do grid
     // make first elem 12
     // make others lower
     return (
       <div>
-        <List>
+        <List style={{margin: 0, padding: 0}}>
         <div style={rootz}>
-          <Grid container spacing={16}>
+          <Grid container>
            {this.props.posts.map((post, index) => (
                 index < 1 ? 
                 <Grid item xs={12} sm={12} md={12}>

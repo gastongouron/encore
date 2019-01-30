@@ -8,6 +8,12 @@ const userSearchQuery = (gql`
           last_name
           display_name
           profile_picture
+          reviews {
+          	id
+          }
+          followers {
+          	id
+          }
       }
     }
 `);

@@ -19,20 +19,24 @@ import reviewSubscription from '../../subscriptions/reviewSubscription'
 const coverStyle = {
     objectFit: 'cover',
     backgroundSize: 'cover',
+    // backgroundSize: '100%', /* Always size the image to the width of the div */
+    backgroundPosition: 'top', /* Position the image to the top center of the div */
     width: '100%',
-    height: 200,
+    height: 400,
 }
 
 const rootz = {
     flexGrow: 1,
+    maxWidth: 840,
+    margin: '0 auto',
 }
 
 const padded = {
-    padding: 20,
+    padding: 30,
 }
 
 const marginBottom1 = {
-    marginTop: 20,
+    // marginTop: 20,
     marginBottom: 20,
 }
 
@@ -137,8 +141,9 @@ class ArtistDetail extends Component {
                  this.props.artistDetail.error ? <h1>Error...</h1> :
                 <div>
 
-                        <Paper style={marginBottom1} zDepth={1} rounded={true} >
+                        <Paper style={marginBottom1} zDepth={0} rounded={true} >
                             <img alt="" style={coverStyle} src={artist.cover_url}/>
+                            <div style={{maxWidth: 840, margin: '0 auto'}}>
                            <ActionButtons
                                 edit={(e) => this.toggleEditFromArtist()} 
                                 connected={this.isConnected()} 
@@ -146,6 +151,7 @@ class ArtistDetail extends Component {
                                 enabled={this.state.enabledButton}
                                 redirect={() => this.props.history.push('/users/getstarted')}
                             />
+                            </div>
                             <div style={rootz}>
 
                                 <Grid style={padded} container>
@@ -173,9 +179,7 @@ class ArtistDetail extends Component {
                                         </b></span>
 
                                     </Grid>
-                                </Grid>
-                                <Divider />
-                                <Grid style={padded} container>
+
                                     <Grid style={marginBottom} item xs={12} sm={12}>
                                         {this.props.locales.locales._language === 'en' ? 
                                             <p>{artist.description_en}</p>
@@ -188,7 +192,7 @@ class ArtistDetail extends Component {
                         </Paper>
 
                     
-                    <div>
+                    <div style={{paddingLeft: 10, paddingRight: 10, maxWidth: 840, margin: '0 auto'}}>
                         <ReviewList
                             onReviewSelect={reviewReview => this.show(reviewReview, this)}
                             reviews={artist.reviews}

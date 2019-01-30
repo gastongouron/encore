@@ -40,10 +40,13 @@ const ArtistListItem = (props) => {
 
 	const paperStyle = {
       margin: 2,
-	  marginBottom: 20,
+	  marginBottom:10,
 	};
 
 	const imageStyle = {
+		padding: 20,
+		borderRadius: '50%',
+
 	    objectFit: 'cover',
 	    backgroundSize: 'cover',
 	    height: '100%',
@@ -91,12 +94,9 @@ const ArtistListItem = (props) => {
 					        			{ Number(artist.reviews_count) !== 0 ? (Math.round( artist.score * 10 ) / 10) : ""}
 					        		</h1>
 					        	</Grid>
-					        </Grid>
-					        <Divider />
-							<Grid style={padded} container >
 								<Grid style={floatLeft} item xs={12}>
 
-
+								<br/>
 							<Truncate lines={2} ellipsis={<span>... <Link style={{color: theme.palette.primary1Color}} to={'/artists/'+ artist.id}>{props.locales.locales.readMore}</Link></span>}>
 								{props.locales.locales._language === 'en' ? artist.description_en : artist.description_fr}
             				</Truncate>

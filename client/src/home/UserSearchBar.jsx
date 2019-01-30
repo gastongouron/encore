@@ -1,21 +1,23 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import TextField from 'material-ui/TextField';
+import theme from '../app/theme'
+import Search from 'material-ui/svg-icons/action/search';
 
 const style = {
-	color: "white",
+	color: theme.palette.secondaryTextColor,
 }
 
 const underlineStyle = {
-    borderColor: '#F1F1F1',
+    borderColor: theme.palette.secondaryTextColor,
 }
 
 const underlineFocusStyle = {
-    borderColor: 'white',
+    borderColor: theme.palette.secondaryTextColor,
 }
 
 const hintStyle = {
-    color: 'white',
+    color: theme.palette.secondaryTextColor,
 }
 
 
@@ -44,7 +46,7 @@ class SearchBar extends Component {
 	        	underlineStyle={underlineStyle}
 				underlineFocusStyle={underlineFocusStyle}
 				onChange={event => this.onInputChange(event.target.value)}
-	            hintText={this.props.locales.locales.userSearch} // artist sample
+	            hintText={<div><Search color={theme.palette.secondaryTextColor} viewBox="0 -10 28 28"/>{this.props.locales.locales.userSearch}</div>} // artist sample
 	            fullWidth={true}
 				value={this.state.tag ? this.state.tag : this.state.term}
 	            name='filterValue'

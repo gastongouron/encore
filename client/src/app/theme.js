@@ -7,7 +7,7 @@ import {fade} from 'material-ui/utils/colorManipulator';
 // NOTE: To see what else can be customized visit: https://github.com/callemall/material-ui/blob/master/src/styles/getMuiTheme.js
 
 export default {
-  fontFamily: 'Roboto, sans-serif',
+  fontFamily: 'Raleway, sans-serif',
   borderRadius: 2,
   spacing: {
     iconSize: 24,

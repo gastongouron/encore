@@ -39,7 +39,7 @@ class Posts extends Component {
                     <EncoreLoader />
 
                 : this.props.posts.error ? <h1>Error...</h1> : 
-                    <div style={this.props.currentUser && this.props.currentUser.isLoggedIn ? {margin: '0 auto', maxWidth: 840, padding: 0} : {margin: '0 auto', maxWidth: 840, padding: 20}}>
+                    <div>
                         <PostsList posts={this.props.posts.posts}/>
                     </div> 
                 }

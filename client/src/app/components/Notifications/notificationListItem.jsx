@@ -18,8 +18,8 @@ const NotificationItem = (props) => {
 	  display: "flex",
 	  background: color,
 	  textAlign: 'left',
-      margin: 2,
-	  marginBottom: 20,
+      margin: 0,
+	  marginBottom: 10,
 	  minWidth: '100%',
 	  padding: 20
 	};

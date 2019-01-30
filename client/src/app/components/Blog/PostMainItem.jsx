@@ -34,8 +34,8 @@ const PostListItem = (props) => {
 	}
 
 	const paperStyle = {
-      margin: 2,
-	  marginBottom: 20,
+      margin: 0,
+	  marginBottom: 0,
 	};
 
 	const backgroundImage = {

@@ -14,7 +14,8 @@ import Star from 'material-ui/svg-icons/toggle/star';
 // import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 import styled, { keyframes } from 'styled-components'
-import BackgroundImage from './images/header.jpg'
+import BackgroundImage from './images/header2.jpg'
+import BackgroundImageFooter from './images/header.jpg'
 // import BackgroundImage2 from './images/prefooter.jpg'
 import Divider from 'material-ui/Divider';
 import theme from '../app/theme'
@@ -28,6 +29,12 @@ import Paper from 'material-ui/Paper'
 import {ListItem} from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import EncoreLoader from '../app/components/EncoreLoader'
+import Bandeau from './images/bandeau.jpg'
+import Prefooter from './images/footer.jpg'
+import Face from './icons/user.png'
+import Camera from './icons/camera.png'
+import Stars from './icons/stars.png'
+
 
 const StyledSocialIcon = styled(SocialIcon)`
    background: #ececec;
@@ -100,12 +107,14 @@ const hello = {
 }
 
 const encore = {
+  color: 'white',
   fontWeight:700, 
   fontFamily: 'Roboto',
   fontVariant: 'none'
 }
 
 const hashtag = {
+  color: 'white' ,
   fontFamily: 'Roboto',
   fontVariant: 'uppercase',
   fontWeight: 900,
@@ -114,6 +123,7 @@ const hashtag = {
 }
 
 const baseline = {
+  color: 'white',
   marginTop: 0,
   paddingTop: 0,
   paddingBottom: 20,
@@ -122,22 +132,23 @@ const baseline = {
 }
 
 const baseline2 = {
+  color: 'white',
   marginTop: 0,
   paddingTop: 5,
   paddingBottom: 30,
   fontFamily: 'Roboto',
   fontWeight: 300,
-  textAlign: "center",
-  align: "center",
-  margin: "0 auto",
+  // textAlign: "center",
+  // align: "center",
+  // margin: "0 auto",
   maxWidth: 300,
 }
 
 const header = {
   color: theme.palette.secondaryTextColor,
   marginTop: -70,
-  paddingTop: 120,
-  paddingBottom: 50,
+  paddingTop: 160,
+  paddingBottom: 150,
   background: "url("+BackgroundImage+") no-repeat center fixed",
   backgroundSize: "cover",
   objectFit: 'cover',
@@ -149,16 +160,16 @@ const prefooter = {
   marginTop: -70,
   paddingTop: 100,
   paddingBottom: 100,
-  background: "url("+BackgroundImage+") no-repeat center fixed",
+  background: "url("+Prefooter+") no-repeat center fixed",
   backgroundSize: "cover",
   objectFit: 'cover',
   backgroundSize: 'cover',
   minheight: '600px',
 }
 
-const headerBlock = {maxWidth: 840, margin: '0 auto', textAlign: 'center', marginBottom: 20, padding: 20}
+const headerBlock = {maxWidth: 840, margin: '0 auto', textAlign: 'left', marginBottom: 20, padding: 20}
 
-const prefooterBlock = {maxWidth: 840, margin: '0 auto', textAlign: 'left', marginBottom: 20, padding: 20, textAlign: "center"}
+const prefooterBlock = {color: "white", maxWidth: 840, margin: '0 auto', textAlign: 'left', marginBottom: 20, padding: 20, textAlign: "center"}
 
 const features = {
   paddingTop: 40,
@@ -169,14 +180,15 @@ const features = {
 const featuresBlock = {maxWidth: 840, margin: '0 auto', padding: 20, paddingBottom: 5}
 const artistsBlock = {maxWidth: 840, margin: '0 auto', padding: 20, paddingBottom: 40}
 
-const featureItem = {marginRight: '0px'}
+const featureItem = {height: 80, marginRight: '0px'}
+const featureItem2 = {marginTop: 50, height: 30, marginRight: '0px'}
 
 const artistImage = {borderRadius: '50%', maxWidth: 105}
-const artistImageLoggedIn = {borderRadius: '50%', maxWidth: 50, marginRight: 10}
+const artistImageLoggedIn = {borderRadius: '50%', maxWidth: 80, marginRight: 10}
 const artistsBlockLoggedIn = {maxWidth: 840, margin: '0 auto', paddingBottom: 10, paddingTop: 0}
 
 const block2 = {
-  padding: 40,
+  // padding: 40,
   paddingTop: 50,
   paddingBottom: 50,
   fontSize: "2em",
@@ -184,8 +196,12 @@ const block2 = {
   fontWeight: "200",
   fontFamily: 'Roboto',
   lineHeight: "1.4em",
-  maxWidth: 840, 
-  margin: '0 auto'
+  // maxWidth: 840, 
+  margin: '0 auto',
+  backgroundImage: "url(" + Bandeau + ")",
+      objectFit: 'cover',
+    backgroundSize: 'cover',
+  backgroundPosition: 'top', /* Position the image to the top center of the div */
 }
 
 class Home extends Component {
@@ -220,6 +236,7 @@ class Home extends Component {
           (res) => {
               this.props.setUsers(res.data.allUsers)
               this.setState({users: res.data.allUsers})
+              console.log(res.data)
             },
           (err) => {
               this.props.failedUsers(err.data);
@@ -244,29 +261,31 @@ class Home extends Component {
     if(this.props.currentUser && this.props.currentUser.isLoggedIn){
         return (
           this.props.artists.loading ? <EncoreLoader /> : this.props.artists.error ? <h1>Error...</h1> : 
-          <div style={{paddingTop: 10}}>
+          <div style={{paddingTop: 10, maxWidth: 840, margin: '0 auto'}}>
             {/* <Artists /> */}   
             <div style={{padding:10}}>
+              <h1 style={{marginTop: 20, fontWeight: "100", fontFamilly: "Roboto"}}>{this.state.searchTerm !== "" ? this.state.searchTerm : this.props.locales.locales.contributor}</h1>
               <SearchBar 
                   onRef={ref => (this.child = ref)} 
                   onSearchTermChange={this.userSearch}
               />
-            <h1 style={{marginTop: 0, fontWeight: "100", fontFamilly: "Roboto"}}>{this.state.searchTerm !== "" ? this.state.searchTerm : this.props.locales.locales.contributor}</h1>
-            </div>
+            
 
-              <Grid alignItems="flex-end" container style={artistsBlockLoggedIn}>
+              <Grid style={{paddingLeft: 10, paddingRight: 10}} alignItems="flex-end" container style={artistsBlockLoggedIn}>
                 {this.state.users.length > 0 ? 
                  this.props.users.users.map((user, index) => (
-                    <Grid style={{padding: 10}} key={index} item xs={12} sm={6} md={4} lg={3}>
+                    <Grid key={index} item xs={6} sm={4} md={3} lg={3}>
 
           <ListItem key={user.id} innerDivStyle={{ textDecoration: 'none', padding: 0, margin: 0}}>
             <Link to={'/user/'+ user.id}  style={{ textDecoration: 'none' }}>
-                      <Paper zDepth={1} rounded={true}>
+              <Paper zDepth={0} rounded={false}>
 
-              <ListItem
-                  primaryText={user.last_name}
-                  secondaryText={user.first_name}
-                  leftAvatar={<Avatar src={user.profile_picture} />}/>
+              <ListItem 
+                  primaryText={<div style={{fontSize: 12, paddingLeft: 8, paddingBottom: 0}}><b>{user.last_name.charAt(0).toUpperCase() + user.last_name.slice(1) + " " + user.first_name.charAt(0) + "."}</b></div>}
+                  secondaryText={<div style={{fontSize: 12, paddingLeft: 8, paddingBottom: 38, lineHeight: 1.4}}>{user.reviews.length} {user.reviews.length > 1 ? this.props.locales.locales.reviewsLabel : this.props.locales.locales.reviewLabel}<br/>{user.followers.length} {user.followers.length > 1 ? this.props.locales.locales.followers : this.props.locales.locales.follower}</div>}
+                  leftAvatar={
+                     <Avatar style={{marginRight: 10}} size={58} src={user.profile_picture} />
+                  }/>
                        </Paper>
 
                  </Link>
@@ -286,7 +305,7 @@ class Home extends Component {
               </div>
                 <Grid container style={artistsBlockLoggedIn}>
                    {this.props.artists.artists.map((artist, index) => (
-                      <Grid key={index} item xs={3} sm={2} md={1} lg={1}>
+                      <Grid key={index} item xs={4} sm={2} md={2} lg={2}>
                         <div style={{textAlign: "center", color: "black", padding: 10}}>
                         <Link to={'/artists/'+artist.id}>
                           <img style={artistImageLoggedIn} src={artist.cover_url} /><br/>
@@ -295,7 +314,7 @@ class Home extends Component {
                       </Grid>
                     ))}
                 </Grid>
-
+              </div>
           </div>
         );
 
@@ -312,14 +331,9 @@ class Home extends Component {
                 <h1 style={hashtag}><b>#SHARETHEVIBE</b></h1>
                 <h3 style={baseline}>{this.props.locales.locales.baseline} <b>encore!</b></h3>
                 <h4 style={baseline2}>{this.props.locales.locales.homeHello}</h4>
-                <Link to="/users/getstarted" style={{float: "center", paddingTop: 40}}>
+                <Link to="/users/getstarted" style={{float: "left", paddingTop: 40}}>
                   <RaisedButton primary={true} label={this.props.locales.locales.getStarted}></RaisedButton>
                 </Link>
-                <br/>
-                <div style={{paddingTop: 40}}>
-                  <StyledSocialIcon color="black" style={{background:"white", marginRight: 20, height: 28, width: 28}} network="instagram" url="https://www.instagram.com/encoreapp.co" />
-                  <StyledSocialIcon color="black" style={{background:"white", height: 28, width: 28}} network="facebook" url="https://www.facebook.com/Encore-2079915298988137/" />
-                </div>
               </Grid>
             </Grid>
             <div style={features}>              
@@ -327,7 +341,7 @@ class Home extends Component {
 
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
                   <div style={{paddingTop: 10, textAlign: "center"}}>
-                    <span style={{fontSize: "40px"}}>⭐</span>
+                    <img style={featureItem2} src={Stars}/><br/>
                     <h4 style={legend}> <span style={boldLegend}>{this.props.locales.locales.feature1Bold}</span>{this.props.locales.locales.feature1Light1}<br/>{this.props.locales.locales.feature1Light2}<br/>{this.props.locales.locales.feature1Light3}</h4>
 
                   </div>
@@ -335,15 +349,14 @@ class Home extends Component {
 
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
                   <div style={{paddingTop: 10, textAlign: "center"}}>
-                    <span style={{fontSize: "40px"}}>📸</span>
+                    <img style={featureItem} src={Camera}/><br/>
                     <h4 style={legend}> <span style={boldLegend}>{this.props.locales.locales.feature2Bold1}<br/>{this.props.locales.locales.feature2Bold2}</span>{this.props.locales.locales.feature2Light1}<br/>{this.props.locales.locales.feature2Light2}</h4>
                   </div>
                 </Grid>
 
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
                   <div style={{paddingTop: 10, textAlign: "center"}}>
-                    {/* <img style={featureItem} src={Face}/><br/> */}
-                    <span style={{fontSize: "40px"}}>🤩</span>
+                    <img style={featureItem} src={Face}/><br/>
                     <h4 style={legend}> <span style={boldLegend}>{this.props.locales.locales.feature3Bold}</span><br/>{this.props.locales.locales.feature3Light1}<br/>{this.props.locales.locales.feature3Light2}</h4>
                   </div>
                 </Grid>
@@ -383,7 +396,7 @@ class Home extends Component {
               <Grid style={prefooterBlock} item xs={12} sm={12} md={12}>
                 <h1 style={{fontSize: 60, fontWeight: 900}}>Ready to share the vibe?</h1>
                 <Link to="/users/getstarted" style={{float: "center"}}>
-                  <RaisedButton secondary={true} label={this.props.locales.locales.getStarted}></RaisedButton>
+                  <RaisedButton default={true} label={this.props.locales.locales.getStarted}></RaisedButton>
                 </Link>
               </Grid>
             </Grid>

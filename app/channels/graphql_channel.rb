@@ -31,7 +31,7 @@ class GraphqlChannel < ApplicationCable::Channel
     if result.context[:subscription_id]
       @subscription_ids << context[:subscription_id]
     end
-
+    
     transmit(payload)
   end
 

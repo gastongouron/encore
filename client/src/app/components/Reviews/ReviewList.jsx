@@ -12,6 +12,7 @@ class Review extends Component {
 	render(){
 
 		const reviews = this.props.reviews
+		console.log(reviews)
 		const user = this.props.user
 
 		if(reviews !== undefined){
