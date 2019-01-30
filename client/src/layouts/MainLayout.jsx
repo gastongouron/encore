@@ -535,7 +535,7 @@ class MainLayout extends Component {
         </CookieConsent>
 
       </Main>
-      {currentUser.isLoggedIn ? 
+      {currentUser.isLoggedIn || this.props.match.path.includes("fanzine") ? 
         null
       :
       <StyledFooter style={imageBackground}>
