@@ -548,7 +548,7 @@ class MainLayout extends Component {
             <br/>
             <br/>
             <br/>
-            <MessengerMessageUs pageId="2079915298988137" appId="1351728908291385" />
+            {/* <MessengerMessageUs pageId="2079915298988137" appId="1351728908291385" />*/}
           </div>
 
           <br/>
