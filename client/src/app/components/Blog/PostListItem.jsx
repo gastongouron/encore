@@ -59,6 +59,8 @@ const PostListItem = (props) => {
 				rounded={true} >
 				        <Grid item xs={12} sm={12} md={12}>
 							<Grid container>
+						        <Grid style={backgroundImage} item xs={4}>
+						        </Grid>
 					        	<Grid style={padded} item xs={8}>
 					        		<h2>
 						        		<Link style={{color: theme.palette.textColor}} to={'/fanzine/posts/'+ post.id}>
@@ -76,8 +78,7 @@ const PostListItem = (props) => {
 		                        </div>
 					        	</Grid>
 						        
-						        <Grid style={backgroundImage} item xs={4}>
-						        </Grid>
+						
 
 					        </Grid>
 

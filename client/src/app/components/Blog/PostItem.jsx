@@ -47,13 +47,11 @@ const PostItem = (props) => {
 	}
 
 	return (
-			<Paper
-				style={paperStyle} zDepth={0} 
-				rounded={false} >
+
 				<div style={rootz}>
 					<Grid container>
-
-				        <Grid item xs={12} sm={12} md={12}>
+						<img alt="" style={coverStyle} src={post.image_url}/>
+				        <Grid style={{maxWidth: 840, margin: '0 auto'}} item xs={12} sm={12} md={12}>
 							<Grid style={padded} container>
 					        	<Grid style={floatLeft} item xs={12}>
 					        		<h1 >
@@ -63,7 +61,6 @@ const PostItem = (props) => {
 								<TimeAgo style={{color: 'grey', fontSize: '0.77em'}} date={post.created_at} formatter={props.locales.locales._language === 'en' ? undefined : formatter}/>
 					        	</Grid>
 					        </Grid>
-							<img alt="" style={coverStyle} src={post.image_url}/>
 							<Grid style={padded} container>
 								<p dangerouslySetInnerHTML={{ __html: post.body }}/>
 							</Grid>
@@ -74,7 +71,7 @@ const PostItem = (props) => {
 						</Grid>
 				    </Grid>
 				</div>
-			</Paper>
+
 		)
 
 }

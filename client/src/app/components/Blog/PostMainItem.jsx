@@ -69,7 +69,7 @@ const PostListItem = (props) => {
               <Link  to={"/fanzine/posts/" + post.id} style={{ textDecoration: 'none' }}>
 					<div style={paperStyle}>
 	
-					        		<span style={{color: "white", fontSize: 40, fontWeight: 800, lineHeight: 1}}>
+					        		<span style={{color: "white", fontSize: 60, fontWeight: 800, lineHeight: 1}}>
 						        			{post.title}
 					        		</span>
 					        		<br/>
