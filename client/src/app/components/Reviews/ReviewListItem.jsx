@@ -18,6 +18,7 @@ import Grid from '@material-ui/core/Grid'
 import LinearProgress from 'material-ui/LinearProgress';
 import theme from '../../theme'
 import Star from 'material-ui/svg-icons/toggle/star';
+import StarRatings from 'react-star-ratings';
 
 const ReviewListItem = (props) => {
 
@@ -46,7 +47,7 @@ const ReviewListItem = (props) => {
 	// const right = { float: 'right', clear: 'none'}
 
     const label = {
-      fontSize: 12,
+      fontSize: 10,
     }
 
 	const rootz = {
@@ -109,44 +110,73 @@ const ReviewListItem = (props) => {
 
 								<Grid item xs={6} sm={3} md={3}>
 									<Grid container>
-										<Grid style={label} item xs={7} sm={6} md={5}>
+										<Grid style={label} item xs={7} sm={12} md={12}>
 											{props.locales.locales.performance}	
 										</Grid> 
-										<Grid item xs={5} sm={6} md={7}>
-											<LinearProgress style={{marginTop: 8}} mode="determinate" value={review.score * 20} />
+										<Grid item xs={5} sm={12} md={12}>
+									      <StarRatings
+									          starRatedColor="red"
+									          numberOfStars={5}
+									          name='rating'
+									        rating={review.score}
+									        starDimension="10px"
+									        starSpacing="1px"
+									      />
 										</Grid>
 									</Grid>
 								</Grid>
 
 								<Grid item xs={6} sm={3} md={3}>
 									<Grid container>
-										<Grid style={label} item xs={7} sm={6} md={5}>
+										<Grid style={label} item xs={7} sm={12} md={12}>
 											{props.locales.locales.generosity}	
 										</Grid> 
-										<Grid item xs={5} sm={6} md={7}>
-											<LinearProgress style={{marginTop: 8}} mode="determinate" value={review.generosity * 20} />
+										<Grid item xs={5} sm={12} md={12}>
+									      <StarRatings
+									          starRatedColor="red"
+									          numberOfStars={5}
+									          name='rating'
+									        rating={review.generosity}
+									        starDimension="10px"
+									        starSpacing="1px"
+									      />
 										</Grid>
 									</Grid>
 								</Grid>
 
 								<Grid item xs={6} sm={3} md={3}>
 									<Grid container>
-										<Grid style={label} item xs={7} sm={6} md={5}>
+										<Grid style={label} item xs={7} sm={12} md={12}>
 											{props.locales.locales.technics}	
 										</Grid> 
-										<Grid item xs={5} sm={6} md={7}>
-											<LinearProgress style={{marginTop: 8}} mode="determinate" value={review.technics * 20} />
+										<Grid item xs={5} sm={12} md={12}>
+									      <StarRatings
+									          starRatedColor="red"
+									          numberOfStars={5}
+									          name='rating'
+									        rating={review.technics}
+									        starDimension="10px"
+									        starSpacing="1px"
+									      />
 										</Grid>
 									</Grid>
 								</Grid>
 
 								<Grid item xs={6} sm={3} md={3}>
 									<Grid container>
-										<Grid style={label} item xs={7} sm={6} md={5}>
+										<Grid style={label} item xs={7} sm={12} md={12}>
 											{props.locales.locales.ambiant}	
 										</Grid> 
-										<Grid item xs={5} sm={6} md={7}>
-											<LinearProgress style={{marginTop: 8}} mode="determinate" value={review.ambiant * 20} />
+										<Grid item xs={5} sm={12} md={12}>
+									      <StarRatings
+									          starRatedColor="red"
+									          numberOfStars={5}
+									          name='rating'
+									        rating={review.ambiant}
+									        starDimension="10px"
+									        starSpacing="1px"
+									      />
+
 										</Grid>
 									</Grid>
 								</Grid>

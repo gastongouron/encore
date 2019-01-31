@@ -425,10 +425,10 @@ class Home extends Component {
             </Grid>
 
             <Grid container style={block3}>     
-              <Grid item style={{textAlign: 'center', margin: '0 auto'}}>
+              <Grid item style={{textAlign: 'center', margin: '0 auto', maxWidth: 290}}>
                 <h2 style={hello}>{this.props.locales.locales.lorem3}</h2><h4 style={{fontSize: "12px", marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem4}</h4>
-                <h2 style={hello}>{this.props.locales.locales.lorem5}</h2><h4 style={{fontSize: "12px", marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem6} {this.props.locales.locales.lorem6bis}</h4>
-                <h2 style={hello}>{this.props.locales.locales.lorem7}</h2><h4 style={{fontSize: "12px", marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem8} {this.props.locales.locales.lorem8bis}</h4>
+                <h2 style={hello}>{this.props.locales.locales.lorem5}</h2><h4 style={{fontSize: "12px", marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem6}. {this.props.locales.locales.lorem6bis}</h4>
+                <h2 style={hello}>{this.props.locales.locales.lorem7}</h2><h4 style={{fontSize: "12px", marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem8}. {this.props.locales.locales.lorem8bis}</h4>
               </Grid>
             </Grid>
 
