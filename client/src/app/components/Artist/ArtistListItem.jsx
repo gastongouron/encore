@@ -46,7 +46,7 @@ const ArtistListItem = (props) => {
 	const imageStyle = {
 		padding: 10,
 		borderRadius: '50%',
-
+		
 	    objectFit: 'cover',
 	    backgroundSize: 'cover',
 	    height: '100%',
@@ -62,7 +62,7 @@ const ArtistListItem = (props) => {
 					<Grid container>
 
 				        <Grid item xs={12} sm={4} md={4} onClick={ () => onArtistSelect(artist) }>
-							<img alt="todo" style={imageStyle} src={artist.cover_url}></img>
+							<img alt="sorry :'(" style={imageStyle} src={artist.cover_url}></img>
 				        </Grid>
 
 				        <Grid item xs={12} sm={8} md={8}>

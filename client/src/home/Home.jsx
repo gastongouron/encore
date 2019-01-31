@@ -12,7 +12,7 @@ import {Link} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Star from 'material-ui/svg-icons/toggle/star';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
-
+import Chip from 'material-ui/Chip';
 import styled, { keyframes } from 'styled-components'
 import BackgroundImage from './images/header2.jpg'
 import BackgroundImageFooter from './images/header.jpg'
@@ -30,6 +30,7 @@ import {ListItem} from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import EncoreLoader from '../app/components/EncoreLoader'
 import Bandeau from './images/bandeau.jpg'
+import StarPng from './images/star.png'
 import Prefooter from './images/footer.jpg'
 import Face from './icons/user.png'
 import Camera from './icons/camera.png'
@@ -78,14 +79,14 @@ const scoreLegend = {
   color: theme.palette.textColor,
   fontFamily: 'Raleway',
   textAlign: 'center',
-  fontSize: 16,
+  fontSize: 10,
   fontWeight: 300,
 }
 
 const artistLegend = {
   fontFamily: 'Raleway',
   fontWeight: 500,
-  fontSize: 14,
+  fontSize: 11,
   marginBottom: 0,
   textAlign: 'center',
   color: theme.palette.textColor,
@@ -322,12 +323,13 @@ class Home extends Component {
                    {this.props.artists.artists.map((artist, index) => (
                       <Grid key={index} item xs={4} sm={2} md={2} lg={2}>
                         <div style={{textAlign: "center", color: "black", padding: 10}}>
-                        <Link to={'/artists/'+artist.id}>
+                      <div style={{float:'right', marginTop: -14, paddingBottom: 3, color: theme.palette.secondaryTextColor}}>          
+                      <span >{artist.score.toFixed(1)}</span><Star color={theme.palette.starColor} viewBox="0 -8 38 20"/> <br/>
+                      </div>
+                        <Link to={'/artists/'+artist.id} style={{color: theme.palette.secondaryTextColor, textDecoration: "none"}}>
                           <img style={artistImageLoggedIn} src={artist.cover_url} /><br/>
+                        <span style={artistLegend}><b>{artist.name}</b></span>
                         </Link>
-                        <span style={artistLegend}>{artist.name}</span><br/>
-                        <Star color={theme.palette.starColor} viewBox="-5 -10 30 30"/>
-                        <span style={scoreLegend}>{artist.score}</span><br/>
                         </div>
                       </Grid>
                     ))}
@@ -397,15 +399,18 @@ class Home extends Component {
               </Grid>
               <Grid container style={artistsBlock}>
                  {this.props.artists.artists.map((artist, index) => (
-                    <Grid key={index} item xs={4} sm={2} md={2} lg={2}>
-                      <div style={{textAlign: "center", color: "black", padding: 10}}>
-                        <img style={artistImage} src={artist.cover_url} /><br/>
-                        <span style={artistLegend}>{artist.name}</span><br/>
-                        <span style={subLegend}>{artist.tags.split(',').shift().toUpperCase()}</span><br/>
-                        {/* <Star color={theme.palette.starColor} viewBox="-5 -10 30 30"/>
-                        <span style={scoreLegend}>{artist.score}</span><br/> */}
+                      <Grid key={index} item xs={4} sm={2} md={2} lg={2}>
+                        <div style={{textAlign: "center", color: "black", padding: 10}}>
+                      <div style={{paddingLeft: 7, paddingBottom: 3, color: theme.palette.secondaryTextColor}}>          
+                      <span >{artist.score.toFixed(1)}</span><Star color={theme.palette.starColor} viewBox="0 -8 38 20"/> <br/>
                       </div>
-                    </Grid>
+                        <Link to={'/artists/'+artist.id} style={{color: theme.palette.secondaryTextColor, textDecoration: "none"}}>
+                          <img style={artistImageLoggedIn} src={artist.cover_url} /><br/>
+                        <span style={artistLegend}><b>{artist.name}</b></span>
+                        </Link>
+
+                        </div>
+                      </Grid>
                   ))}
               </Grid>
             </div>
@@ -422,8 +427,8 @@ class Home extends Component {
             <Grid container style={block3}>     
               <Grid item style={{textAlign: 'center', margin: '0 auto'}}>
                 <h2 style={hello}>{this.props.locales.locales.lorem3}</h2><h4 style={{fontSize: "12px", marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem4}</h4>
-                <h2 style={hello}>{this.props.locales.locales.lorem5}</h2><h4 style={{fontSize: "12px", marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem6}<br/>{this.props.locales.locales.lorem6bis}</h4>
-                <h2 style={hello}>{this.props.locales.locales.lorem7}</h2><h4 style={{fontSize: "12px", marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem8}<br/>{this.props.locales.locales.lorem8bis}</h4>
+                <h2 style={hello}>{this.props.locales.locales.lorem5}</h2><h4 style={{fontSize: "12px", marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem6} {this.props.locales.locales.lorem6bis}</h4>
+                <h2 style={hello}>{this.props.locales.locales.lorem7}</h2><h4 style={{fontSize: "12px", marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem8} {this.props.locales.locales.lorem8bis}</h4>
               </Grid>
             </Grid>
 

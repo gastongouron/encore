@@ -4,7 +4,8 @@ import Chip from 'material-ui/Chip';
 const styles = {
   chip: {
     marginLeft: 2,
-    padding:2,
+    marginBottom: 2,
+    // padding:2,
     fontSize: 13,
     background: "#F1F1F1"
   },

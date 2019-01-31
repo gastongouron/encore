@@ -183,8 +183,9 @@ class ArtistDetail extends Component {
                         </Paper>
 
                     
-                    <div style={{paddingLeft: 10, paddingRight: 10, maxWidth: 500, margin: '0 auto'}}>
-                                        <h1 style={{fontWeight: "100", textAlign: 'center',paddingBottom: 10}}>
+                    <div style={{ paddingLeft: 10, paddingRight: 10, maxWidth: 500, margin: '0 auto'}}>
+                                        
+                                        <h1 style={{color: theme.palette.disabledColor, fontWeight: "100", textAlign: 'center',paddingBottom: 10}}>
                                         {
                                             Number(artist.reviews_count) > 1 
                                         ? 

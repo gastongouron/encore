@@ -21,6 +21,7 @@ import ReactS3Uploader from 'react-s3-uploader'
 import FileAttachment from 'material-ui/svg-icons/file/attachment';
 import ContentEdit from 'material-ui/svg-icons/image/edit';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
+import theme from '../../theme'
 
 const style = {
     objectFit: 'cover',
@@ -221,6 +222,8 @@ class Profile extends Component {
                         </div>
                     </Paper>
                     <br/>
+
+                    <h1 style={{color: theme.palette.disabledColor, fontWeight: "100", textAlign: 'center',paddingBottom: 10}}>{ (user !== null && Object.keys(this.props.reviews.reviews).length > 0) ? Object.keys(this.props.reviews.reviews).length + " experiences" : ""}</h1>
                     <div>
                         <div>
                             <div>
