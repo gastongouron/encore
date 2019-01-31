@@ -313,13 +313,13 @@ class MainLayout extends Component {
     }
 
     const imageBackground = {
-        backgroundImage: "url(" + Bandeau1 + ")",
+      background: "url(" + Bandeau1 + ") no-repeat",
       width: '100%',
       margin: '0 auto', 
       padding: 20,
       paddingBottom: 50,
       paddingTop: 50,
-       backgroundSize: '100%', /* Always size the image to the width of the div */
+      backgroundSize: '120%', /* Always size the image to the width of the div */
       backgroundPosition: 'top', /* Position the image to the top center of the div */
  
     }
@@ -330,10 +330,10 @@ class MainLayout extends Component {
       width: '100%', 
       transition: 'background 0.5s ease', 
       // background:'rgba(0,0,0,0.0)', 
-       backgroundImage: "url(" + Bandeau + ")",
-       backgroundSize: '100%', /* Always size the image to the width of the div */
+       background: "url(" + Bandeau + ") no-repeat center",
+       backgroundSize: '120%', /* Always size the image to the width of the div */
       backgroundPosition: 'top', /* Position the image to the top center of the div */
-      boxShadow: 'none', 
+      // boxShadow: 'none', 
       position: 'sticky', 
       top: 0, 
       color: '#ffffff'

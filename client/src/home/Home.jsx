@@ -154,7 +154,7 @@ const header = {
   paddingBottom: 150,
   background: "url("+BackgroundImage+") no-repeat center",
   backgroundSize: "cover",
-  // objectFit: 'cover',
+  objectFit: 'cover',
   // backgroundSize: 'cover',
   minheight: '600px',
 }
@@ -163,7 +163,7 @@ const prefooter = {
   marginTop: -70,
   paddingTop: 100,
   paddingBottom: 100,
-  background: "url("+Prefooter+") no-repeat center fixed",
+  background: "url("+Prefooter+") no-repeat center",
   backgroundSize: "cover",
   objectFit: 'cover',
   backgroundSize: 'cover',
@@ -446,7 +446,7 @@ class Home extends Component {
               </Grid>
             </Grid>
             <Grid container style={block4}>     
-              <Grid item style={{textAlign: 'center', color: theme.palette.disabledColor, margin: '0 auto', maxWidth: 500}}>
+              <Grid item style={{textAlign: 'center', color: theme.palette.disabledColor, margin: '0 auto', maxWidth: 500, fontSize: 20}}>
                 {"Thanks to "}
                 <b><a style={{color: theme.palette.disabledColor,}} href="https://www.last.fm">last.fm</a></b>
                 &nbsp;& 
