@@ -10,8 +10,8 @@ import Grid from '@material-ui/core/Grid'
 
   const rootz = {
     flexGrow: 1,
-    top: 0,
-    position: "absolute"
+    // top: 0,
+    // position: "absolute"
   }
 
 class PostList extends Component {
@@ -22,7 +22,7 @@ class PostList extends Component {
     // make first elem 12
     // make others lower
     return (
-      <div style={{top: 0}}>
+      <div style={{marginTop: -64}}>
         <List style={{margin: 0, padding: 0}}>
         <div style={rootz}>
           <Grid container>

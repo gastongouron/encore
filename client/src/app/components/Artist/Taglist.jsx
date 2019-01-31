@@ -30,7 +30,7 @@ class Taglist extends Component {
 			        	key={index} 
 			        	style={styles.chip}
 			        	onClick={ () => this.props.onClickTag(tag)}>
-			        	<span style={{fontSize: 10}} s>{tag}</span> 
+			        	<span style={{fontSize: 10}}>{tag}</span> 
 			        </Chip>			
 					:
 						null

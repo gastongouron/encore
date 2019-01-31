@@ -17,10 +17,10 @@ const PostItem = (props) => {
 	const formatter = buildFormatter(frenchStrings)
 	
 	const rootz = {
-	top: 0,
+	// top: 0,
 	// maddingBottom: 200,
-	display: "block",
-	position: 'absolute',
+	// display: "block",
+	// position: 'absolute',
 	  flexGrow: 1,
 	}
 
@@ -56,7 +56,7 @@ const PostItem = (props) => {
 	}
 
 	return (
-
+		      <div style={{marginTop: -64}}>
 				<div style={rootz}>
 					<Grid container>
 						<img alt="" style={coverStyle} src={post.image_url}/>
@@ -82,6 +82,7 @@ const PostItem = (props) => {
 						</Grid>
 				    </Grid>
 				</div>
+			</div>
 
 		)
 

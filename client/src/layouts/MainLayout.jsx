@@ -358,7 +358,7 @@ class MainLayout extends Component {
     //    position: 'sticky',
     //    top: 0
     // }
-    console.log(this.props.match.path.includes("fanzine"))
+    // console.log(this.props.match.path.includes("fanzine"))
     return (
       <div>
       <Main style={this.props.currentUser.isLoggedIn ? {margin: '0 auto'} : {margin: '0 auto'} }>
@@ -542,9 +542,9 @@ class MainLayout extends Component {
         <div className="footer">
           <span style={{fontWeight: 800, fontSize: 40, fontFamily: 'Raleway', float: 'left'}}><b>encore!</b></span>
           <div style={{float: "right"}}>
-            <StyledSocialIcon color="white" style={{background:"transparent", height: 28, color:"red", width: 28, marginLeft: "6px", marginRight: 5, height: 28, width: 28}} network="instagram" url="https://www.instagram.com/encoreapp.co" />
-            <StyledSocialIcon color="white" style={{background:"transparent", marginRight: 5, height: 28, width: 28}} network="facebook" url="https://www.facebook.com/Encore-2079915298988137/" />
-            <StyledSocialIcon color="white" style={{background:"transparent", marginRight: 5, height: 28, width: 28}} network="twitter" url="https://twitter.com/CoEncoreapp" />
+            <StyledSocialIcon color="white" style={{background:"transparent", height: 28, color:"red", width: 28, marginLeft: 5, height: 28, width: 28}} network="instagram" url="https://www.instagram.com/encoreapp.co" />
+            <StyledSocialIcon color="white" style={{background:"transparent", marginLeft: 5, height: 28, width: 28}} network="facebook" url="https://www.facebook.com/Encore-2079915298988137/" />
+            <StyledSocialIcon color="white" style={{background:"transparent", marginLeft: 5, height: 28, width: 28}} network="twitter" url="https://twitter.com/CoEncoreapp" />
             <br/>
             <br/>
             <br/>

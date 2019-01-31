@@ -9,14 +9,25 @@ class Review extends Component {
 
 	}
 
+	superSort(reviews){
+		reviews.sort(function(a, b){
+	    var keyA = new Date(a.updated_at),
+	        keyB = new Date(b.updated_at);
+	    // Compare the 2 dates
+	    if(keyA < keyB) return -1;
+	    if(keyA > keyB) return 1;
+	    return 0;
+	});
+	}
+
 	render(){
 
 		const reviews = this.props.reviews
-		console.log(reviews)
 		const user = this.props.user
+		// console.log(ok)
 
 		if(reviews !== undefined){
-								
+
 			const reviewItems = reviews.map((review) => {
 				return (
 					<ReviewListItem

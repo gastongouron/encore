@@ -201,7 +201,7 @@ class ArtistDetail extends Component {
                         />
                         <br/>
                         <br/>
-                        <br/>
+
                     </div>
 
                     <form>

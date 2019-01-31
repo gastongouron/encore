@@ -7,7 +7,7 @@ class SingleReviewValidator < ActiveModel::Validator
 end
 
 class Review < ApplicationRecord
-	default_scope { order("created_at ASC") }
+	default_scope { order("created_at DESC") }
 
 	include ActiveModel::Validations	
 	validates_with SingleReviewValidator
