@@ -547,7 +547,8 @@ class MainLayout extends Component {
             <StyledSocialIcon color="white" style={{background:"transparent", marginRight: 5, height: 28, width: 28}} network="twitter" url="https://twitter.com/CoEncoreapp" />
             <br/>
             <br/>
-            {/* <MessengerMessageUs pageId="2079915298988137" appId="1351728908291385" />*/}
+            <br/>
+            <MessengerMessageUs color='white' pageId="2079915298988137" appId="1351728908291385" />
           </div>
 
           <br/>          

@@ -14,10 +14,11 @@ RootQuery = GraphQL::ObjectType.define do
 
   field :artistsHome, types[Types::ArtistType] do
     resolve(->(_, _, _) {
-      Artist.all.includes(:reviews).order('reviews.score ASC').reverse.last(6)
+      # Review.all.last(6).artists
+      Artist.includes(:reviews).order('reviews.created_at ASC').max(6)
     })
   end
-
+# 
   field :usersHome, types[Types::UserType] do
     resolve(->(_, _, _) {
       User.all.left_joins(:reviews).group(:id).order('COUNT(reviews.id) DESC').limit(12)
