@@ -220,6 +220,20 @@ const block3 = {
   margin: '0 auto',
 }
 
+const block4 = {
+  padding: 20,
+  paddingTop: 20,
+  paddingBottom: 20,
+  fontSize: "2em",
+  background: "#F1F1F1",
+  color: theme.palette.disabledColor,
+  fontWeight: "100",
+  fontFamily: 'Raleway',
+  lineHeight: "1.4em",
+  // maxWidth: 840, 
+  margin: '0 auto',
+}
+
 class Home extends Component {
 
   constructor(props){
@@ -323,7 +337,7 @@ class Home extends Component {
                    {this.props.artists.artists.map((artist, index) => (
                       <Grid key={index} item xs={4} sm={2} md={2} lg={2}>
                         <div style={{textAlign: "center", color: "black", padding: 10}}>
-                      <div style={{float:'right', marginTop: -14, paddingBottom: 3, color: theme.palette.secondaryTextColor}}>          
+                      <div style={{marginTop: -14, paddingBottom: 3, paddingLeft: 5, color: theme.palette.secondaryTextColor}}>          
                       <span >{artist.score.toFixed(1)}</span><Star color={theme.palette.starColor} viewBox="0 -8 38 20"/> <br/>
                       </div>
                         <Link to={'/artists/'+artist.id} style={{color: theme.palette.secondaryTextColor, textDecoration: "none"}}>
@@ -431,7 +445,14 @@ class Home extends Component {
                 <h2 style={hello}>{this.props.locales.locales.lorem7}</h2><h4 style={{fontSize: "12px", marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem8}. {this.props.locales.locales.lorem8bis}</h4>
               </Grid>
             </Grid>
-
+            <Grid container style={block4}>     
+              <Grid item style={{textAlign: 'center', color: theme.palette.disabledColor, margin: '0 auto', maxWidth: 500}}>
+                {"Thanks to "}
+                <b><a style={{color: theme.palette.disabledColor,}} href="https://www.last.fm">last.fm</a></b>
+                &nbsp;& 
+                <b> <a style={{color: theme.palette.disabledColor,}} href="https://www.opensourcefactory.io">osf</a></b>
+              </Grid>
+            </Grid>
 
 {/*        <MessengerCustomerChat
             minimized={true}

@@ -565,8 +565,6 @@ class MainLayout extends Component {
 
             <bf/>
             <br/><a href="mailto:jmc@encoreapp.co">Contact</a>
-            <br/>
-            <span>Thanks to <b>last.fm</b> & <b>opensourcefactory.io</b></span>
 
           </div>
         </div>
