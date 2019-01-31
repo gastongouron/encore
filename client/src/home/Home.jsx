@@ -152,10 +152,10 @@ const header = {
   marginTop: -70,
   paddingTop: 160,
   paddingBottom: 150,
-  background: "url("+BackgroundImage+") no-repeat center fixed",
+  background: "url("+BackgroundImage+") no-repeat center",
   backgroundSize: "cover",
-  objectFit: 'cover',
-  backgroundSize: 'cover',
+  // objectFit: 'cover',
+  // backgroundSize: 'cover',
   minheight: '600px',
 }
 

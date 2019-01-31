@@ -34,7 +34,35 @@ class Resolvers::ArtistsSearch
 
   def apply_first(scope, value)
     # scope.order('score').limit(value)
-    scope.includes(:reviews).order('reviews.created_at ASC').limit(value)
+    # artists = Artist.all.includes(:reviews)
+    # reviewed = []
+    # unreviewed = []
+    # # count = 0
+
+    # artists.each do |artist|
+    #   # unless count >= value
+    #     if artist.reviews.length > 0
+    #       reviewed.push(artist)
+    #       # count += 1
+    #     else
+    #       unreviewed.push(artist)
+    #       # count += 1
+    #     end
+    #   # end
+    # end 
+
+    # reviewed = reviewed.sort_by{|r| r.score}
+    # newscope = reviewed.reverse! + unreviewed
+    # scope = newscope
+    
+    # scope = Artist.all.includes(:reviews).sort_by{|a| a.score}.reverse!.max(value)
+    if value <= 20
+      scope.includes(:reviews).order('reviews.created_at ASC').limit(value)
+    else
+      scope.order('random()').limit(value)
+    end
+    # Artist.all.includes(:reviews).order('reviews.created_at ASC').limit(value).shuffle()
+    # scope.includes(:reviews).order('reviews.created_at ASC').limit(value)
     # scope.order('random()').limit(value)
 
   end

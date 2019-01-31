@@ -1,6 +1,9 @@
 class Artist < ApplicationRecord
 	has_many :reviews
 	has_many :users, through: :reviews
+	# default_scope { order("score ASC") }	
+	# scope :reviewed, -> { joins(:reviews).where('reviews.score', true) }
+	
 	acts_as_taggable 
 
 	def score
