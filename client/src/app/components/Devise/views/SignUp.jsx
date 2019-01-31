@@ -232,12 +232,16 @@ const SignUp = ({doSignUp, locales, ...rest}) => {
   <div>
   <div style={coolParent}>
     <Paper
-        style={paperStyle} zDepth={1} 
+        style={paperStyle} zDepth={0} 
         rounded={true}>
     <View>
-{/*      <Heading>
+      <div style={{textAlign: "center"}}>
+        <span style={{fontWidth: 100, fontSize: 24, paddingTop:10, fontFamilly: 'Raleway' }}>
         {locales.locales.signup}
-      </Heading> */}
+      </span>
+      <br/>
+      <br/>
+      </div>
       <SignUpForm initialValues={{locale: strings.getLanguage()}} locales={locales} onSubmit={doSignUp} {...rest} />
     </View>
     </Paper>

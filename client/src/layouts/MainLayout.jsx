@@ -319,7 +319,7 @@ class MainLayout extends Component {
       padding: 20,
       paddingBottom: 50,
       paddingTop: 50,
-      backgroundSize: '120%', /* Always size the image to the width of the div */
+      backgroundSize: '125%', /* Always size the image to the width of the div */
       backgroundPosition: 'top', /* Position the image to the top center of the div */
  
     }
@@ -331,11 +331,11 @@ class MainLayout extends Component {
       transition: 'background 0.5s ease', 
       // background:'rgba(0,0,0,0.0)', 
        background: "url(" + Bandeau + ") no-repeat center",
-       backgroundSize: '120%', /* Always size the image to the width of the div */
+       backgroundSize: '125%', /* Always size the image to the width of the div */
       backgroundPosition: 'top', /* Position the image to the top center of the div */
       // boxShadow: 'none', 
-      position: 'sticky', 
-      top: 0, 
+      position: 'fixed', 
+      zIndex:10000,
       color: '#ffffff'
     }
 
@@ -346,8 +346,8 @@ class MainLayout extends Component {
       transition: 'background 0.5s ease', 
       background:'rgba(0,0,0,0.4)', 
       boxShadow: 'none', 
-      position: 'sticky', 
-      top: 0, 
+      position: 'fixed', 
+      zIndex:10000,
       color: '#ffffff'
     }
 
@@ -519,7 +519,7 @@ class MainLayout extends Component {
         }
 
         </MainAppBar>
-        <MainContainer style={{margin: '0 auto'}}>
+        <MainContainer style={{paddingTop: 64, margin: '0 auto'}}>
           {notice && <Notice>{notice}</Notice>}
           {children}
         </MainContainer>          

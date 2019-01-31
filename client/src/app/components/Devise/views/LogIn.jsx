@@ -92,17 +92,17 @@ const Login = ({currentUser, locales, doLogin, location: {state: {alert, from: {
     <div>
     <div style={coolParent}>
     <Paper
-        style={paperStyle} zDepth={1} 
+        style={paperStyle} zDepth={0} 
         rounded={true}>
       <View>
-
+      <div style={{textAlign: "center"}}>
+        <span style={{fontWidth: 100, fontSize: 24, paddingTop:10, fontFamilly: 'Raleway' }}>
+          {locales.locales.login}
+        </span>
+        </div>
         {alert && <Alert>{alert}</Alert>}
         <LoginForm locales={locales} onSubmit={submit} {...rest} />
         {/*
-        <Heading>
-          {locales.locales.login}
-        </Heading>
-
         <br />
         <OauthView locales={locales}/>
       */}

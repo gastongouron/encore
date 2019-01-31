@@ -17,6 +17,7 @@ import _ from 'underscore'
 import socialSubscription from '../../subscriptions/socialSubscription'
 
 import RaisedButton from 'material-ui/RaisedButton'
+import FlatButton from 'material-ui/FlatButton'
 import ReactS3Uploader from 'react-s3-uploader'
 import FileAttachment from 'material-ui/svg-icons/file/attachment';
 import ContentEdit from 'material-ui/svg-icons/image/edit';
@@ -41,9 +42,11 @@ const paperStyle = {
   display: 'inline-block',
 };
 
-const right = {
-    float: 'right'
-}
+// const right = {
+//     // float: 'right'
+//     // margin: '0 auto'
+//     align: "center",
+// }
 
 class Profile extends Component {
     constructor(props){
@@ -160,8 +163,8 @@ class Profile extends Component {
             <div style={{padding: 10, maxWidth: 500, margin: '0 auto', }}>
                 {(this.state.loading || this.props.userProfile.loading) ? <EncoreLoader /> : this.props.reviews.error ? <h1>Error...</h1> : 
                 <div>                
-                    <Paper>
-                        <div style={{padding: 16, paddingBottom: 4, marginTop: 60, textAlign: 'center'}}>
+                    <Paper  zDepth={0}>
+                        <div style={{padding: 16, paddingTop: 30, paddingBottom: 0, marginTop: 60, textAlign: 'center'}}>
                             <Paper style={paperStyle} zDepth={1} circle={true}>
                                 <img alt='...' style={style} src={this.state.profilePicture}/>
                             </Paper>
@@ -172,11 +175,11 @@ class Profile extends Component {
                              </h2>
                             { this.props.userProfile.userProfile.email?this.props.userProfile.userProfile.email:'' }
                         </div>
-                        <div style={{padding: 16, paddingBottom: 0}}>
+                        <div style={{padding: 16, textAlign: 'center', paddingBottom: 20}}>
                              {this.props.userInfo.isLoggedIn ? 
                                 this.onCurrentUserProfile() ?  
-                                    <RaisedButton
-                                       style={right}
+                                    <FlatButton
+                                      
                                        default={true}
                                        icon={<ContentEdit />}
                                        containerElement='label'
@@ -203,25 +206,25 @@ class Profile extends Component {
                                         // inputRef={cmp => this.uploadInput = cmp}
                                         autoUpload={true}
                                         /> 
-                                    </RaisedButton>                                
+                                    </FlatButton>                                
                                 : 
-                                <RaisedButton style={right} disabled={this.state.disabled} default={this.alreadyFollows() ? true : false} primary={!this.alreadyFollows() ? true : false} onClick={ (e) => this.onClickFollow(e) } label={this.alreadyFollows() ? this.props.locales.locales.unfollow : this.props.locales.locales.follow}/> 
+                                <RaisedButton disabled={this.state.disabled} default={this.alreadyFollows() ? true : false} primary={!this.alreadyFollows() ? true : false} onClick={ (e) => this.onClickFollow(e) } label={this.alreadyFollows() ? this.props.locales.locales.unfollow : this.props.locales.locales.follow}/> 
                             : 
-                                <RaisedButton style={right} secondary={true} onClick={ () => this.props.history.push('/users/getstarted') } label={this.props.locales.locales.follow}/>
+                                <RaisedButton secondary={true} onClick={ () => this.props.history.push('/users/getstarted') } label={this.props.locales.locales.follow}/>
                             } 
 
-                            <Subheader style={{paddingLeft: 0}}>{ user !== null ? Object.keys(this.props.reviews.reviews).length + " experiences" : ""}</Subheader>
+                            {/* <Subheader style={{paddingLeft: 0}}>{ user !== null ? Object.keys(this.props.reviews.reviews).length + " experiences" : ""}</Subheader> */}
                         </div>
-
-                        <Divider />
+                        <Paper>
                         <div>
                             <SocialList 
                                 followingUsers={user !== null ? this.props.userProfile.userProfile.following_users : undefined}
                                 updateUser={userId => this.getUser(userId)}
                                 followers={user !== null ? this.props.userProfile.userProfile.followers : undefined}/>
                         </div>
+                        </Paper>
                     </Paper>
-                    <br/>
+
 
                     <h1 style={{color: theme.palette.disabledColor, fontWeight: "100", textAlign: 'center',paddingBottom: 10}}>{ (user !== null && Object.keys(this.props.reviews.reviews).length > 0) ? Object.keys(this.props.reviews.reviews).length + " experiences" : ""}</h1>
                     <div>

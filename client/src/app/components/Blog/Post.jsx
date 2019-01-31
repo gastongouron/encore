@@ -20,7 +20,6 @@ class Post extends Component {
         this.props.loadingPost();
         this.props.client.query({query: postQuery, fetchPolicy: 'network-only', variables: {id: this.props.match.params.id}}).then(
             (res) => {
-                console.log('RES ->', res.data.postDetail)
                 this.props.setPost(res.data.postDetail);
                 this.setState({postDetail: res.data.postDetail})
             },

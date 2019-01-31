@@ -34,7 +34,7 @@ const ReviewListItem = (props) => {
 	    backgroundSize: 'cover',
 	    width: '100%',
 	    height: '100%',
-	    maxHeight: 200,
+	    maxHeight: 400,
 	}
 
 	const body = {
@@ -110,10 +110,10 @@ const ReviewListItem = (props) => {
 
 								<Grid item xs={6} sm={3} md={3}>
 									<Grid container>
-										<Grid style={label} item xs={7} sm={12} md={12}>
+										<Grid style={label} item xs={6} sm={12} md={12}>
 											{props.locales.locales.performance}	
 										</Grid> 
-										<Grid item xs={5} sm={12} md={12}>
+										<Grid item xs={6} sm={12} md={12}>
 									      <StarRatings
 									          starRatedColor="red"
 									          numberOfStars={5}
@@ -128,10 +128,10 @@ const ReviewListItem = (props) => {
 
 								<Grid item xs={6} sm={3} md={3}>
 									<Grid container>
-										<Grid style={label} item xs={7} sm={12} md={12}>
+										<Grid style={label} item xs={6} sm={12} md={12}>
 											{props.locales.locales.generosity}	
 										</Grid> 
-										<Grid item xs={5} sm={12} md={12}>
+										<Grid item xs={6} sm={12} md={12}>
 									      <StarRatings
 									          starRatedColor="red"
 									          numberOfStars={5}
@@ -146,10 +146,10 @@ const ReviewListItem = (props) => {
 
 								<Grid item xs={6} sm={3} md={3}>
 									<Grid container>
-										<Grid style={label} item xs={7} sm={12} md={12}>
+										<Grid style={label} item xs={6} sm={12} md={12}>
 											{props.locales.locales.technics}	
 										</Grid> 
-										<Grid item xs={5} sm={12} md={12}>
+										<Grid item xs={6} sm={12} md={12}>
 									      <StarRatings
 									          starRatedColor="red"
 									          numberOfStars={5}
@@ -164,10 +164,10 @@ const ReviewListItem = (props) => {
 
 								<Grid item xs={6} sm={3} md={3}>
 									<Grid container>
-										<Grid style={label} item xs={7} sm={12} md={12}>
+										<Grid style={label} item xs={6} sm={12} md={12}>
 											{props.locales.locales.ambiant}	
 										</Grid> 
-										<Grid item xs={5} sm={12} md={12}>
+										<Grid item xs={6} sm={12} md={12}>
 									      <StarRatings
 									          starRatedColor="red"
 									          numberOfStars={5}
