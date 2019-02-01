@@ -190,8 +190,8 @@ const prefooterBlock = {color: "white", maxWidth: 840, margin: '0 auto', textAli
 const features = {
 boxShadow: "inset 0px 10px 5px -5px #F1F1F1,inset 0px -10px 5px -5px #F1F1F1" ,
 
-  paddingTop: 40,
-  paddingBottom: 60,
+  paddingTop: 20,
+  paddingBottom: 80,
   background: "white"
 }
 
@@ -428,8 +428,8 @@ class Home extends Component {
               <Grid item style={{textAlign: 'center', margin: '0 auto'}}>
                       <Fade cascade>
                 <span style={{fontWeight: 800, fontSize: 40}}><b>encore!</b></span>
-                <h3 style={hello}>{this.props.locales.locales.lorem}</h3>
-                <h3 style={hello}>{this.props.locales.locales.lorem2}</h3>
+                <h3 style={hello}><span>{this.props.locales.locales.lorem}</span></h3>
+                <h3 style={hello}><span>{this.props.locales.locales.lorem2}</span></h3>
                 </Fade>
               </Grid>
             </Grid>
@@ -461,7 +461,7 @@ class Home extends Component {
             <Grid container style={prefooter}>              
               <Grid style={prefooterBlock} item xs={12} sm={12} md={12}>
                <Fade cascade>
-                <h1 style={{fontFamily: 'Raleway', fontSize: 50, fontWeight: 800}}>Ready to share the vibe?</h1>
+                <h1 style={{fontFamily: 'Raleway', fontSize: 50, fontWeight: 800}}><span>Ready to share the vibe?</span></h1>
                 <Link to="/users/getstarted" style={{float: "center"}}>
                   <RaisedButton default={true} label={this.props.locales.locales.getStarted}></RaisedButton>
                 </Link>
