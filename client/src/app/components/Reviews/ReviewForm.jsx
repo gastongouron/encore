@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
-// import FlatButton from 'material-ui/FlatButton'
+import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
 import Slider from 'material-ui/Slider';
@@ -21,6 +21,12 @@ import ContentRemove from 'material-ui/svg-icons/action/delete';
 import theme from '../../theme'
 import Divider from 'material-ui/Divider'
 import Star from 'material-ui/svg-icons/toggle/star';
+import {
+  Step,
+  Stepper,
+  StepLabel,
+  StepContent,
+} from 'material-ui/Stepper';
 
 
 class CustomForm extends Component {
@@ -41,6 +47,8 @@ class CustomForm extends Component {
       hiddenError: true,
       errorText: '',
       disabled: true,
+    finished: false,
+    stepIndex: 0,
     };
   }
 
@@ -112,6 +120,108 @@ changeValue(e, type) {
     nextState[type] = value;
     this.setState(nextState);
 }
+handleNext = () => {
+    const {stepIndex} = this.state;
+    this.setState({
+      stepIndex: stepIndex + 1,
+      finished: stepIndex >= 2,
+    });
+  };
+
+  handlePrev = () => {
+    const {stepIndex} = this.state;
+    if (stepIndex > 0) {
+      this.setState({stepIndex: stepIndex - 1});
+    }
+  };
+
+  shouldBeDisabled(){
+
+    let form = {
+      body: this.props.formValue,
+      performance: this.props.formPerformanceScore,
+      generosity: this.props.formGenerosityScore,
+      technics: this.props.formTechnicsScore,
+      ambiant: this.props.formAmbiantScore
+    }  
+
+
+      for (var prop in form) {
+        if (!form[prop] && this.state.progres !== 0) {
+          return true
+        }      
+      }
+      
+      if (!this.state.hiddenProgress){
+        return true
+      } else if (form["body"].length < 20) {
+        return true
+      } else if (form["body"].length > 1000) {
+        return true
+      } else {
+        return false
+      }
+      return false
+
+  }
+
+  renderStepActions(step) {
+    const {stepIndex} = this.state;
+
+
+
+    // const action : this.props.isUpdate ? update : create
+    //   const create = [ <RaisedButton 
+    //                   label={this.props.locales.locales.save} 
+    //                   disabled={disabled} 
+    //                   style={{padding: 0}}
+    //                   fullWidth={true} 
+    //                   primary={true} 
+    //                   keyboardFocused={true} 
+    //                   onClick={this.props.onClickSave}/>
+    //                   ]
+    // const update = [ 
+    //                  <RaisedButton style={{width:"50%"}} label={this.props.locales.locales.update} disabled={this.shouldBeDisabled()} primary={true} keyboardFocused={true} onClick={this.props.onClickUpdate}/>]
+
+    // const actions = this.props.isUpdate ? update : create
+
+
+    return (
+      <div style={{margin: '0'}}>
+          <FlatButton
+            label="Back"
+            disabled={stepIndex === 0}
+            disableTouchRipple={true}
+            disableFocusRipple={true}
+            style={(this.state.stepIndex === 2 && this.props.isUpdate) ? {width: '33%', padding: 0} : {width: '50%', padding: 0}}
+            onClick={this.handlePrev}
+          />
+
+        {this.state.stepIndex === 2 ? 
+              this.props.isUpdate ? 
+                 <RaisedButton style={{width:"34%"}} label={this.props.locales.locales.delete} secondary={true} onClick={this.props.onClickDelete}/>
+              : 
+                null  
+            : 
+          false
+        }
+
+
+        <RaisedButton
+          label={stepIndex === 2 ? this.props.isUpdate ? this.props.locales.locales.update : this.props.locales.locales.save  : 'Next'}
+          disableTouchRipple={true}
+          disableFocusRipple={true}
+          primary={true}
+          disabled={stepIndex === 0 ? this.step1validation() : this.shouldBeDisabled() }
+          onClick={stepIndex === 2 ? (this.props.isUpdate ? this.props.onClickUpdate : this.props.onClickSave) : this.handleNext}
+          style={(this.state.stepIndex === 2 && this.props.isUpdate) ? {width: '33%', padding: 0} : {width: '50%', padding: 0}}
+        />
+
+      </div>
+    );
+  }
+
+
   // displayError(){
       // console.log("in displayError")
       // console.log('has been called')
@@ -119,6 +229,24 @@ changeValue(e, type) {
       // this.setState({error:"hahaha"})
       // this.setState({hiddenError:false})
   // }
+
+  step1validation(){
+      let form = {
+      performance: this.props.formPerformanceScore,
+      generosity: this.props.formGenerosityScore,
+      technics: this.props.formTechnicsScore,
+      ambiant: this.props.formAmbiantScore
+    }  
+
+
+      for (var prop in form) {
+        if (!form[prop] && this.state.progres !== 0) {
+          return true
+        } 
+      }
+      return false      
+
+  }
   
   shouldBeDisabled(){
 
@@ -151,6 +279,7 @@ changeValue(e, type) {
   }
 
   render(){
+    const {finished, stepIndex} = this.state;
 
     // const style = {
     //   marginLeft: 10
@@ -216,30 +345,36 @@ changeValue(e, type) {
     }
 
     const customContentStyle = {
+      top: 0,
       width: '100%',
-      maxWidth: '460px'
+      height: '100%',
+      maxWidth: '460px',
+      maxHeight: '1000px'
     };
 
-    const disabled = this.shouldBeDisabled()
-    const create = [ <RaisedButton 
-                      label={this.props.locales.locales.save} 
-                      disabled={disabled} 
-                      style={{padding: 0}}
-                      fullWidth={true} 
-                      primary={true} 
-                      keyboardFocused={true} 
-                      onClick={this.props.onClickSave}/>
-                      ]
-    const update = [ 
-                     <RaisedButton style={{width:"50%"}} label={this.props.locales.locales.delete} secondary={true} onClick={this.props.onClickDelete}/>,
-                     <RaisedButton style={{width:"50%"}} label={this.props.locales.locales.update} disabled={this.shouldBeDisabled()} primary={true} keyboardFocused={true} onClick={this.props.onClickUpdate}/>]
+    // const disabled = this.shouldBeDisabled()
 
-    const actions = this.props.isUpdate ? update : create
+    // const create = [ <RaisedButton 
+    //                   label={this.props.locales.locales.save} 
+    //                   disabled={disabled} 
+    //                   style={{padding: 0}}
+    //                   fullWidth={true} 
+    //                   primary={true} 
+    //                   keyboardFocused={true} 
+    //                   onClick={this.props.onClickSave}/>
+    //                   ]
+    // const update = [ 
+    //                  <RaisedButton style={{width:"50%"}} label={this.props.locales.locales.update} disabled={this.shouldBeDisabled()} primary={true} keyboardFocused={true} onClick={this.props.onClickUpdate}/>]
+
+    // const actions = this.props.isUpdate ? update : create
     const user_id = this.props.currentUser.user_id
     const artist_id = this.props.artistDetail.artistDetail.id
 
+    // console.log(this.state.stepIndex)
+
     return (
            <Dialog
+
             contentStyle={customContentStyle}
             bodyStyle={{padding: 0}}
             open={this.props.onShow}
@@ -251,7 +386,8 @@ changeValue(e, type) {
               </div>
             }
             modal={false}
-            actions={actions}
+            // actions={actions}
+            actions={this.state.stepIndex === 0 ? this.renderStepActions(1) : this.state.stepIndex === 1 ? this.renderStepActions(1) : this.renderStepActions(2)}
             actionsContainerStyle={{padding: 0}}
             autoScrollBodyContent={true}
           >
@@ -262,7 +398,7 @@ changeValue(e, type) {
                 </Alert>
                <LinearProgress hidden={this.state.hiddenProgress} variant="determinate" value={this.state.progress} />
               </div>
-
+              
               {isImage(this.props.formMedia) ? <img alt="" style={imageStyle} src={this.props.formMedia} /> : <ReactPlayer width='100%' height='auto' url={this.props.formMedia} controls={true} />}
                {
                 this.props.formMedia ? 
@@ -274,173 +410,189 @@ changeValue(e, type) {
                   null
                }
 
-        <div style={rootz}>
-          <span style={title}>1/3 {this.props.locales.locales.step1Title}</span>
-          <br/>
-          <span style={subtitle}>{this.props.locales.locales.step1Subtitle}</span>
-          <br/>
-          <br/>
 
-          <Grid container>
-            
-            <Grid item xs={3}>
-              <span style={label}>{this.props.locales.locales.performance}</span>
-            </Grid>
-            <Grid item xs={7}>
-              <Slider 
-                style={sliderStyle}
-                step={1} 
-                value={parseFloat(this.props.formPerformanceScore)}
-                min={0}
-                max={5}
-                onChange={this.onSlidePerf.bind(this)}
-                required={true}
-                />
-              </Grid>
-            <Grid item xs={2}>
-              <span style={{color: (this.props.formPerformanceScore && this.props.formPerformanceScore !== null) ? theme.palette.textColor : theme.palette.disabledColor}}>
-	              <span style={testLabelRight}>{this.props.formPerformanceScore ? this.props.formPerformanceScore : "0" }
-					       <Star color={this.props.formPerformanceScore ? theme.palette.starColor : theme.palette.disabledColor} viewBox="-8 -14 34 34"/>
-	              </span>
-              </span>
-            </Grid>
+          <div style={{maxWidth: 380, maxHeight: 400, margin: 'auto'}}>
+                  <Stepper activeStep={stepIndex} orientation="vertical">
+                    <Step>
+                      <StepLabel>{this.props.locales.locales.step1Title}</StepLabel>
+                      <StepContent>
+                        <p>{this.props.locales.locales.step1Subtitle}</p>
 
-            <Grid item xs={3}>
-              <span style={label}>{this.props.locales.locales.generosity}</span>
-            </Grid>
-            <Grid item xs={7}>
-              <Slider 
-                style={sliderStyle}
-                step={1} 
-                value={parseFloat(this.props.formGenerosityScore)}
-                min={0}
-                max={5}
-                onChange={this.onSlideGenerosity.bind(this)}
-                required={true}
-                />
-            </Grid>
-            <Grid item xs={2}>
-              <span style={{color: (this.props.formGenerosityScore && this.props.setGenerosityScore !== null) ? theme.palette.textColor : theme.palette.disabledColor}}>
-                <span style={testLabelRight}>{this.props.formGenerosityScore ? this.props.formGenerosityScore : "0" }
-                 <Star color={this.props.formGenerosityScore ? theme.palette.starColor : theme.palette.disabledColor} viewBox="-8 -14 34 34"/>
-                </span>
-              </span>
-            </Grid>
+                        <Grid container>
+                          <Grid item xs={4}>
+                            <span style={label}>{this.props.locales.locales.performance}</span>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Slider 
+                              style={sliderStyle}
+                              step={1} 
+                              value={parseFloat(this.props.formPerformanceScore)}
+                              min={0}
+                              max={5}
+                              onChange={this.onSlidePerf.bind(this)}
+                              required={true}
+                              />
+                            </Grid>
+                          <Grid item xs={2}>
+                            <span style={{color: (this.props.formPerformanceScore && this.props.formPerformanceScore !== null) ? theme.palette.textColor : theme.palette.disabledColor}}>
+                              <span style={testLabelRight}>{this.props.formPerformanceScore ? this.props.formPerformanceScore : "0" }
+                               <Star color={this.props.formPerformanceScore ? theme.palette.starColor : theme.palette.disabledColor} viewBox="-8 -14 34 34"/>
+                              </span>
+                            </span>
+                          </Grid>
 
-            <Grid item xs={3}>
-              <span style={label}>{this.props.locales.locales.technics}</span>
-            </Grid>
-            <Grid item xs={7}>
-              <Slider 
-                style={sliderStyle}
-                step={1} 
-                value={parseFloat(this.props.formTechnicsScore)}
-                min={0}
-                max={5}
-                onChange={this.onSlideTechnics.bind(this)}
-                required={true}
-                />
-            </Grid>
-            <Grid item xs={2}>
-              <span style={{color: (this.props.formTechnicsScore && this.props.setGenerosityScore !== null) ? theme.palette.textColor : theme.palette.disabledColor}}>
-                <span style={testLabelRight}>{this.props.formTechnicsScore ? this.props.formTechnicsScore : "0" }
-                 <Star color={this.props.formTechnicsScore ? theme.palette.starColor : theme.palette.disabledColor} viewBox="-8 -14 34 34"/>
-                </span>
-              </span>
-      
-              </Grid>
+                          <Grid item xs={4}>
+                            <span style={label}>{this.props.locales.locales.generosity}</span>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Slider 
+                              style={sliderStyle}
+                              step={1} 
+                              value={parseFloat(this.props.formGenerosityScore)}
+                              min={0}
+                              max={5}
+                              onChange={this.onSlideGenerosity.bind(this)}
+                              required={true}
+                              />
+                          </Grid>
+                          <Grid item xs={2}>
+                            <span style={{color: (this.props.formGenerosityScore && this.props.setGenerosityScore !== null) ? theme.palette.textColor : theme.palette.disabledColor}}>
+                              <span style={testLabelRight}>{this.props.formGenerosityScore ? this.props.formGenerosityScore : "0" }
+                               <Star color={this.props.formGenerosityScore ? theme.palette.starColor : theme.palette.disabledColor} viewBox="-8 -14 34 34"/>
+                              </span>
+                            </span>
+                          </Grid>
 
-            <Grid item xs={3}>
-              <span style={label}>{this.props.locales.locales.ambiant}</span>
-            </Grid>
-            <Grid item xs={7}>
-              <Slider 
-                style={sliderStyle}
-                step={1} 
-                value={parseFloat(this.props.formAmbiantScore)}
-                min={0}
-                max={5}
-                onChange={this.onSlideAmbiant.bind(this)}
-                required={true}
-                />
-            </Grid>
-            <Grid item xs={2}>
-              <span style={{color: (this.props.formAmbiantScore && this.props.setGenerosityScore !== null) ? theme.palette.textColor : theme.palette.disabledColor}}>
-                <span style={testLabelRight}>{this.props.formAmbiantScore ? this.props.formAmbiantScore : "0" }
-                 <Star color={this.props.formAmbiantScore ? theme.palette.starColor : theme.palette.disabledColor} viewBox="-8 -14 34 34"/>
-                </span>
-              </span>
+                          <Grid item xs={4}>
+                            <span style={label}>{this.props.locales.locales.technics}</span>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Slider 
+                              style={sliderStyle}
+                              step={1} 
+                              value={parseFloat(this.props.formTechnicsScore)}
+                              min={0}
+                              max={5}
+                              onChange={this.onSlideTechnics.bind(this)}
+                              required={true}
+                              />
+                          </Grid>
+                          <Grid item xs={2}>
+                            <span style={{color: (this.props.formTechnicsScore && this.props.setGenerosityScore !== null) ? theme.palette.textColor : theme.palette.disabledColor}}>
+                              <span style={testLabelRight}>{this.props.formTechnicsScore ? this.props.formTechnicsScore : "0" }
+                               <Star color={this.props.formTechnicsScore ? theme.palette.starColor : theme.palette.disabledColor} viewBox="-8 -14 34 34"/>
+                              </span>
+                            </span>
+                    
+                            </Grid>
 
-            </Grid>
+                          <Grid item xs={4}>
+                            <span style={label}>{this.props.locales.locales.ambiant}</span>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Slider 
+                              style={sliderStyle}
+                              step={1} 
+                              value={parseFloat(this.props.formAmbiantScore)}
+                              min={0}
+                              max={5}
+                              onChange={this.onSlideAmbiant.bind(this)}
+                              required={true}
+                              />
+                          </Grid>
+                          <Grid item xs={2}>
+                            <span style={{color: (this.props.formAmbiantScore && this.props.setGenerosityScore !== null) ? theme.palette.textColor : theme.palette.disabledColor}}>
+                              <span style={testLabelRight}>{this.props.formAmbiantScore ? this.props.formAmbiantScore : "0" }
+                               <Star color={this.props.formAmbiantScore ? theme.palette.starColor : theme.palette.disabledColor} viewBox="-8 -14 34 34"/>
+                              </span>
+                            </span>
+
+                          </Grid>
 
 
-          </Grid>
+                        </Grid>
 
-        <Divider />
-          <br/>
-          <span style={title}>2/3 {this.props.locales.locales.step2Title}</span>
-          <br/>
-          <span style={subtitle}>{this.props.locales.locales.step2Subtitle}</span>
-        <div style={leftAndRightPadded}>
-          
-            <TextField
-              floatingLabelText={this.props.locales.locales.reviewBodyLabel}
-              hintText={this.props.locales.locales.reviewHint}
-              id="body"
-              type="text"
-              label="Review"
-              // onChange={this.onChange.bind(this)}
-              multiLine={true}
-              rows={1}
-              errorText={ this.props.formValue === undefined || (this.props.formValue === "" || (this.props.formValue.length <= 1 || this.props.formValue.length >= 20)) ? false : "must be 20 chars minumum"}
-              // hintText="Hint Text"
-              // errorText={this.value.length > 20 ? "" : "This field is required"}
-              // floatingLabelText="Floating Label Text"
-              // errorStyle={}
-              maxLength="1000"
-              minLength="20"
-              value={this.props.formValue}
-              onChange={this.props.setBody}      
-              fullWidth={true}       
-            />
-         </div>
 
-          <span style={title}>3/3 {this.props.locales.locales.step3Title}</span>
-          <br/>
-          <span style={subtitle}>{strings.formatString(this.props.locales.locales.enrich, {artistname: this.props.artistDetail.artistDetail.name})}</span>
+                      </StepContent>
+                    </Step>
+                    <Step>
+                      <StepLabel>{this.props.locales.locales.step2Title}</StepLabel>
+                      <StepContent>
+                        <p>{this.props.locales.locales.step2Subtitle}</p>
+                           <div style={leftAndRightPadded}>
+                                    
+                                      <TextField
+                                        floatingLabelText={this.props.locales.locales.reviewBodyLabel}
+                                        hintText={this.props.locales.locales.reviewHint}
+                                        id="body"
+                                        type="text"
+                                        label="Review"
+                                        // onChange={this.onChange.bind(this)}
+                                        multiLine={true}
+                                        rows={1}
+                                        errorText={ this.props.formValue === undefined || (this.props.formValue === "" || (this.props.formValue.length <= 1 || this.props.formValue.length >= 20)) ? false : "must be 20 chars minumum"}
+                                        // hintText="Hint Text"
+                                        // errorText={this.value.length > 20 ? "" : "This field is required"}
+                                        // floatingLabelText="Floating Label Text"
+                                        // errorStyle={}
+                                        maxLength="1000"
+                                        minLength="20"
+                                        value={this.props.formValue}
+                                        onChange={this.props.setBody}      
+                                        fullWidth={true}       
+                                      />
+                                   </div>
+                      </StepContent>
+                    </Step>
+                    <Step>
+                      <StepLabel>{this.props.locales.locales.step3Title}</StepLabel>
+                      <StepContent>
+                          {strings.formatString(this.props.locales.locales.enrich, {artistname: this.props.artistDetail.artistDetail.name})}
+                          <FlatButton
+                          style={{marginBottom: 20,}}
+                           primary={true}
+                           icon={<FileAttachment />}
+                           containerElement='label'
+                           label={this.props.formMedia ? this.props.locales.locales.changeMedia : this.props.locales.locales.addMedia}>
+                          <ReactS3Uploader
+                            style={{display:"none"}}
+                            className="btn"
+                            htmlFor="flat-button-file"
+                            signingUrl={`/s3/sign`}
+                            signingUrlMethod="GET"
+                            accept="*"
+                            s3path={"/user_uploads/" + user_id + "/reviews/" + artist_id}
+                            getSignedUrl={this.getSignedUrl}
+                            onSignedUrl={(resp) => this.onSignedUrl(this, resp)}
+                            onProgress={(val) => this.onUploadProgress(this, val)}
+                            onError={(msg) => this.onUploadError(this, msg)}
+                            onFinish={(obj) => this.onUploadFinish(this, obj)}
+                            signingUrlHeaders={ this.headers }
+                            signingUrlQueryParams={{ user_id: user_id, artist_id: artist_id }}
+                            signingUrlWithCredentials={ true }      // in case when need to pass authentication credentials via CORS
+                            contentDisposition="auto"
+                            scrubFilename={(filename) => filename.replace(/[^\w\d_\-.]+/ig, '')}
+                            inputRef={cmp => this.uploadInput = cmp}
+                            autoUpload={true}
+                            /> 
+                        </FlatButton>
+                      </StepContent>
+                    </Step>
+                  </Stepper>
+                  {finished && (
+                    <p style={{margin: '20px 0', textAlign: 'center'}}>
+                      <a
+                        href="#"
+                        onClick={(event) => {
+                          event.preventDefault();
+                        }}
+                      >
+                        Click here
+                      </a> to reset the example.
+                    </p>
+                  )}
+                </div>
 
-              <br/>
-                <RaisedButton
-                    style={{float: "right", marginBottom: 20,}}
-                   default={true}
-                   icon={<FileAttachment />}
-                   containerElement='label'
-                   label={this.props.formMedia ? this.props.locales.locales.changeMedia : this.props.locales.locales.addMedia}>
-                  <ReactS3Uploader
-                    style={{display:"none"}}
-                    className="btn"
-                    htmlFor="flat-button-file"
-                    signingUrl={`/s3/sign`}
-                    signingUrlMethod="GET"
-                    accept="*"
-                    s3path={"/user_uploads/" + user_id + "/reviews/" + artist_id}
-                    getSignedUrl={this.getSignedUrl}
-                    onSignedUrl={(resp) => this.onSignedUrl(this, resp)}
-                    onProgress={(val) => this.onUploadProgress(this, val)}
-                    onError={(msg) => this.onUploadError(this, msg)}
-                    onFinish={(obj) => this.onUploadFinish(this, obj)}
-                    signingUrlHeaders={ this.headers }
-                    signingUrlQueryParams={{ user_id: user_id, artist_id: artist_id }}
-                    signingUrlWithCredentials={ true }      // in case when need to pass authentication credentials via CORS
-                    contentDisposition="auto"
-                    scrubFilename={(filename) => filename.replace(/[^\w\d_\-.]+/ig, '')}
-                    inputRef={cmp => this.uploadInput = cmp}
-                    autoUpload={true}
-                    /> 
-                </RaisedButton>
-
-        </div>
-        <br/>
                 <br/>
           </Dialog>
      )
