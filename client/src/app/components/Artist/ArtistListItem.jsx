@@ -18,15 +18,21 @@ const ArtistListItem = (props) => {
 
 	const rootz = {
 	  flexGrow: 1,
+	  marginBottom: 10,
 	}
 
 	const padded = {
-	  padding: 20,
+	  padding: 15,
+	  paddingLeft: 0,
 	}
 
 	const tagsContainer = {
-	  padding: 20,
-	  paddingTop: 0,
+	  // padding: 10,
+	  borderTop: '1px solid #DAD9D9',
+	  paddingTop: 10,
+	  paddingLeft: 10,
+	  paddingRight: 10,
+	  paddingBottom: 10,
 	}
 
 	const floatLeft = {
@@ -39,12 +45,13 @@ const ArtistListItem = (props) => {
 	}
 
 	const paperStyle = {
-      margin: 2,
+      // margin: 2,
 	  marginBottom:10,
 	};
 
 	const imageStyle = {
 		padding: 10,
+		paddingRight: 10,
 		borderRadius: '50%',
 		
 	    objectFit: 'cover',
@@ -55,25 +62,37 @@ const ArtistListItem = (props) => {
 	}
 
 	return (
-			<Paper
-				style={paperStyle} zDepth={0} 
-				rounded={true} >
-				<div style={rootz}>
-					<Grid container>
 
-				        <Grid item xs={12} sm={4} md={4} onClick={ () => onArtistSelect(artist) }>
+				<div style={rootz}>
+					<Grid container style={{border: '1px solid #DAD9D9'}}>
+
+				        <Grid item xs={4} sm={3} md={3} onClick={ () => onArtistSelect(artist) }>
 							<img alt="sorry :'(" style={imageStyle} src={artist.cover_url}></img>
 				        </Grid>
 
-				        <Grid item xs={12} sm={8} md={8}>
+				        <Grid item xs={8} sm={9} md={9}>
 							<Grid style={padded} container onClick={ () => onArtistSelect(artist) }>
-					        	<Grid style={floatLeft} item xs={9}>
-					        		<h1>
+					        	<Grid style={floatLeft} item xs={8} sm={9}>
+					        		<h2>
 						        		<Link style={{color: theme.palette.textColor}} to={'/artists/'+ artist.id}>
 						        			{artist.name}
 					        			</Link>
-					        		</h1>
-					        		<span><b>
+					        		</h2>
+					        	</Grid>
+
+					        	<Grid item style={floatRight} xs={4} sm={3}>
+					        		<h2 style={floatRight}>
+										{ Number(artist.reviews_count) !== 0 ? 
+											<Star color={theme.palette.starColor} viewBox="0 0 21 21"/>
+										:
+											null
+										}
+					        			{ Number(artist.reviews_count) !== 0 ? (Math.round( artist.score * 10 ) / 10) : ""}
+					        		</h2>
+					        	</Grid>
+
+								<Grid style={floatLeft} item xs={12}>
+					        		<span style={{color: theme.palette.disabledColor }}><b>
 					        		{
 					        			Number(artist.reviews_count) > 1 
 					        		? 
@@ -81,31 +100,17 @@ const ArtistListItem = (props) => {
 					        		: 
 					        			Number(artist.reviews_count) === 1 ? artist.reviews_count + " " + props.locales.locales.reviewLabel : props.locales.locales.beTheFirst
 					        		}
-					        		</b></span>
+					        		</b></span><br/>
 
-					        	</Grid>
-
-					        	<Grid item xs={3}>
-					        		<h1 style={floatRight}>
-										{ Number(artist.reviews_count) !== 0 ? 
-											<Star color={theme.palette.starColor} viewBox="0 0 21 21"/>
-										:
-											null
-										}
-					        			{ Number(artist.reviews_count) !== 0 ? (Math.round( artist.score * 10 ) / 10) : ""}
-					        		</h1>
-					        	</Grid>
-								<Grid style={floatLeft} item xs={12}>
-
-								<br/>
-							<Truncate lines={2} ellipsis={<span>... <Link style={{color: theme.palette.primary1Color}} to={'/artists/'+ artist.id}>{props.locales.locales.readMore}</Link></span>}>
-								{props.locales.locales._language === 'en' ? artist.description_en : artist.description_fr}
-            				</Truncate>
+									<Truncate style={{fontSize: 10, lineHeight: 1}} lines={2} ellipsis={<span>... <Link style={{color: theme.palette.primary1Color}} to={'/artists/'+ artist.id}>{props.locales.locales.readMore}</Link></span>}>
+										{props.locales.locales._language === 'en' ? artist.description_en : artist.description_fr}
+		            				</Truncate>
 
 
 									</Grid>
 							</Grid>
 						</Grid>
+
 							<Grid style={tagsContainer} container>
 								<Grid item xs={12}>
 									<Taglist 
@@ -116,10 +121,11 @@ const ArtistListItem = (props) => {
 
 
 				    </Grid>
+				    <Divider/>
 				</div>
 
-			<Divider/>
-			</Paper>
+
+
 		)
 
 }

@@ -23,16 +23,20 @@ class Taglist extends Component {
 
 	render(){
 
+		const amount = window.innerWidth < 500 ? 3 : 5
+
 		if(this.props.tags !== undefined){
 			const tagItems = this.props.tags.split(',').map((tag, index) => {
 				return (
-					index < 5 ?
+					index < amount ?
+					<div style={{float: 'right'}}>
 			        <Chip 
 			        	key={index} 
 			        	style={styles.chip}
 			        	onClick={ () => this.props.onClickTag(tag)}>
 			        	<span style={{fontSize: 10}}>{tag}</span> 
 			        </Chip>			
+			        </div>
 					:
 						null
 					
