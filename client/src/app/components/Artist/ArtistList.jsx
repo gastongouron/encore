@@ -22,6 +22,7 @@ class Artist extends Component {
 		          </p>
 		       }>
            {this.props.artists.map((artist, index) => (
+
       			  <ArtistItem 
                 onClickTag={this.props.onClickTag}
       			  	onArtistSelect={this.props.onArtistSelect}

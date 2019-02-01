@@ -61,11 +61,12 @@ const ArtistListItem = (props) => {
 		height: 'auto',
 	}
 
+	const val = window.innerWidth < 400 ? 1 : 2
+
 	return (
 
 				<div style={rootz}>
 					<Grid container style={{border: '1px solid #DAD9D9'}}>
-
 				        <Grid item xs={4} sm={3} md={3} onClick={ () => onArtistSelect(artist) }>
 							<img alt="sorry :'(" style={imageStyle} src={artist.cover_url}></img>
 				        </Grid>
@@ -73,22 +74,24 @@ const ArtistListItem = (props) => {
 				        <Grid item xs={8} sm={9} md={9}>
 							<Grid style={padded} container onClick={ () => onArtistSelect(artist) }>
 					        	<Grid style={floatLeft} item xs={8} sm={9}>
-					        		<h2>
+					        		<h3>
 						        		<Link style={{color: theme.palette.textColor}} to={'/artists/'+ artist.id}>
 						        			{artist.name}
 					        			</Link>
-					        		</h2>
+					        		</h3>
 					        	</Grid>
 
 					        	<Grid item style={floatRight} xs={4} sm={3}>
-					        		<h2 style={floatRight}>
+					        		<h3 style={{marginTop: -5, float: 'right'}}>
+					        			<span>
+					        			{ Number(artist.reviews_count) !== 0 ? (Math.round( artist.score * 10 ) / 10) : ""}
 										{ Number(artist.reviews_count) !== 0 ? 
-											<Star color={theme.palette.starColor} viewBox="0 0 21 21"/>
+											<Star color={theme.palette.starColor} viewBox="0 -10 30 30"/>
 										:
 											null
 										}
-					        			{ Number(artist.reviews_count) !== 0 ? (Math.round( artist.score * 10 ) / 10) : ""}
-					        		</h2>
+										</span>
+					        		</h3>
 					        	</Grid>
 
 								<Grid style={floatLeft} item xs={12}>
@@ -102,7 +105,7 @@ const ArtistListItem = (props) => {
 					        		}
 					        		</b></span><br/>
 
-									<Truncate style={{fontSize: 10, lineHeight: 1}} lines={2} ellipsis={<span>... <Link style={{color: theme.palette.primary1Color}} to={'/artists/'+ artist.id}>{props.locales.locales.readMore}</Link></span>}>
+									<Truncate style={{fontSize: 10, lineHeight: 1}} lines={val} ellipsis={<span>... <Link style={{color: theme.palette.primary1Color}} to={'/artists/'+ artist.id}>{props.locales.locales.readMore}</Link></span>}>
 										{props.locales.locales._language === 'en' ? artist.description_en : artist.description_fr}
 		            				</Truncate>
 
