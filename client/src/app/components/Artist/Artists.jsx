@@ -21,8 +21,8 @@ class Artists extends Component {
             searchTerm: '',
             tag: ''
           }
-        // this.artistSearch = this.method = __.debounce(this.artistSearch.bind(this), 1000);
-        this.artistSearch = this.artistSearch.bind(this)
+        this.artistSearch = this.method = __.debounce(this.artistSearch.bind(this), 1000);
+        // this.artistSearch = this.artistSearch.bind(this)
         this.scrollFetch = this.scrollFetch.bind(this)
         this.onClickTag = this.onClickTag.bind(this)
     }

@@ -86,7 +86,7 @@ export const onSave = (e, context) => {
             }).then(
     	    (res) => {
     	        const newArr = res.data.newReview.review
-    	        context.props.addUserReview(newArr)
+    	        // context.props.addUserReview(newArr)
 			    context.setState({ showModal: false })
 				context.setState({ enabledButton: false })
     	    },

@@ -189,7 +189,7 @@ handleNext = () => {
     return (
       <div style={{margin: '0'}}>
           <FlatButton
-            label="Back"
+            label={ this.props.locales.locales.back }
             disabled={stepIndex === 0}
             disableTouchRipple={true}
             disableFocusRipple={true}
@@ -199,7 +199,7 @@ handleNext = () => {
 
         {this.state.stepIndex === 2 ? 
               this.props.isUpdate ? 
-                 <RaisedButton style={{width:"34%"}} label={this.props.locales.locales.delete} secondary={true} onClick={this.props.onClickDelete}/>
+                 <RaisedButton style={{width:"34%"}} label={this.props.locales.locales.delete} default={true} onClick={this.props.onClickDelete}/>
               : 
                 null  
             : 
@@ -208,7 +208,7 @@ handleNext = () => {
 
 
         <RaisedButton
-          label={stepIndex === 2 ? this.props.isUpdate ? this.props.locales.locales.update : this.props.locales.locales.save  : 'Next'}
+          label={stepIndex === 2 ? this.props.isUpdate ? this.props.locales.locales.update : this.props.locales.locales.save  :  this.props.locales.locales.next }
           disableTouchRipple={true}
           disableFocusRipple={true}
           primary={true}
@@ -520,17 +520,19 @@ handleNext = () => {
                       <StepContent>
                         <p>{this.props.locales.locales.step2Subtitle}</p>
                            <div style={leftAndRightPadded}>
-                                    
                                       <TextField
+                                        // floatingLabelText={this.props.locales.locales.reviewBodyLabel}
+                                        // hintText={this.props.locales.locales.reviewHint}
                                         floatingLabelText={this.props.locales.locales.reviewBodyLabel}
-                                        hintText={this.props.locales.locales.reviewHint}
+                                        hintText={strings.formatString(this.props.locales.locales.reviewHint, {artistname: this.props.artistDetail.artistDetail.name})}
+
                                         id="body"
                                         type="text"
                                         label="Review"
                                         // onChange={this.onChange.bind(this)}
                                         multiLine={true}
                                         rows={1}
-                                        errorText={ this.props.formValue === undefined || (this.props.formValue === "" || (this.props.formValue.length <= 1 || this.props.formValue.length >= 20)) ? false : "must be 20 chars minumum"}
+                                        errorText={ this.props.formValue === undefined || (this.props.formValue === "" || (this.props.formValue.length <= 1 || this.props.formValue.length >= 20)) ? false : this.props.locales.locales.reviewLengthError}
                                         // hintText="Hint Text"
                                         // errorText={this.value.length > 20 ? "" : "This field is required"}
                                         // floatingLabelText="Floating Label Text"
@@ -546,11 +548,15 @@ handleNext = () => {
                     </Step>
                     <Step>
                       <StepLabel>{this.props.locales.locales.step3Title}</StepLabel>
+
                       <StepContent>
-                          {strings.formatString(this.props.locales.locales.enrich, {artistname: this.props.artistDetail.artistDetail.name})}
+                        <p>{strings.formatString(this.props.locales.locales.enrich, {artistname: this.props.artistDetail.artistDetail.name})}</p>
+                          <div style={{ paddingTop: 5, paddingLeft: 10, paddingRight: 40, paddingBottom:10}}>
                           <FlatButton
-                          style={{marginBottom: 20,}}
+                           // style={{}}
+                           // backgroundColor="#F1F1F1"
                            primary={true}
+                           fullWidth={true}
                            icon={<FileAttachment />}
                            containerElement='label'
                            label={this.props.formMedia ? this.props.locales.locales.changeMedia : this.props.locales.locales.addMedia}>
@@ -576,7 +582,9 @@ handleNext = () => {
                             autoUpload={true}
                             /> 
                         </FlatButton>
+                        </div>
                       </StepContent>
+
                     </Step>
                   </Stepper>
                   {finished && (
