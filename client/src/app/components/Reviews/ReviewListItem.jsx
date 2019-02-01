@@ -120,7 +120,7 @@ const ReviewListItem = (props) => {
 										</Grid> 
 										<Grid item xs={6} sm={12} md={12}>
 									      <StarRatings
-									          starRatedColor="red"
+									          starRatedColor={theme.palette.textColor}
 									          numberOfStars={5}
 									          name='rating'
 									        rating={review.score}
@@ -138,7 +138,7 @@ const ReviewListItem = (props) => {
 										</Grid> 
 										<Grid item xs={6} sm={12} md={12}>
 									      <StarRatings
-									          starRatedColor="red"
+									          starRatedColor={theme.palette.textColor}
 									          numberOfStars={5}
 									          name='rating'
 									        rating={review.generosity}
@@ -156,7 +156,7 @@ const ReviewListItem = (props) => {
 										</Grid> 
 										<Grid item xs={6} sm={12} md={12}>
 									      <StarRatings
-									          starRatedColor="red"
+									          starRatedColor={theme.palette.textColor}
 									          numberOfStars={5}
 									          name='rating'
 									        rating={review.technics}
@@ -174,7 +174,7 @@ const ReviewListItem = (props) => {
 										</Grid> 
 										<Grid item xs={6} sm={12} md={12}>
 									      <StarRatings
-									          starRatedColor="red"
+									          starRatedColor={theme.palette.textColor}
 									          numberOfStars={5}
 									          name='rating'
 									        rating={review.ambiant}
