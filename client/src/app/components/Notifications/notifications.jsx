@@ -65,7 +65,7 @@ class Notifications extends Component {
 
 		return(
 			<div>
-				<NotificationList hasMore={this.state.hasMore} notifications={this.props.notifications.notifications}/>
+				<NotificationList hasMore={this.state.hasMore} notifications={this.props.notifications.notifications.slice(0, 100)}/>
 			</div>
 		)		
 	}

@@ -10,7 +10,8 @@ import Notifications from '../app/components/Notifications/notifications'
 const Hot = ({currentUser, locales, auth: {AuthLinks}, initLocales, initArtists, initMyReviews}) => {
 
   return (
-    <div style={{maxWidth: 840, margin: "0 auto", padding: 10}}>
+
+    <div style={{maxWidth: 500, margin: "0 auto", padding: 10}}>
         { currentUser.isLoggedIn ? 
           <Notifications userId={currentUser.user_id}/>
           :
