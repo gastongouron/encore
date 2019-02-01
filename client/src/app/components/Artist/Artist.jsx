@@ -250,7 +250,7 @@ class ArtistDetail extends Component {
                 </div>
                 } 
                             <div hidden={this.state.isHidden} style={{maxWidth: 500, margin: '0 auto'}}>
-                            <div style={{bottom: 20, right: 5, position: 'fixed'}}>
+                            <div style={{zIndex: 999, bottom: 20, right: 5, position: 'fixed'}}>
                             <ActionButtons
                                 edit={(e) => this.toggleEditFromArtist()} 
                                 connected={this.isConnected()} 
