@@ -19,6 +19,7 @@ import LinearProgress from 'material-ui/LinearProgress';
 import theme from '../../theme'
 import Star from 'material-ui/svg-icons/toggle/star';
 import StarRatings from 'react-star-ratings';
+import MobileTearSheet from './MobileTearSheet';
 
 const ReviewListItem = (props) => {
 
@@ -43,6 +44,12 @@ const ReviewListItem = (props) => {
 		paddingBottom: 20,
 	}
 
+	const footer = {
+		padding: 20,
+		paddingTop: 15,
+		paddingBottom: 20,
+	}
+
 	const paperStyle = { marginBottom: 10 };
 	// const right = { float: 'right', clear: 'none'}
 
@@ -55,9 +62,7 @@ const ReviewListItem = (props) => {
 	}
 
 	return (
-			<Paper
-				style={paperStyle} zDepth={1} 
-				rounded={true}>
+<MobileTearSheet height={'100%'}>
 				<div>
 				</div>
 
@@ -104,7 +109,7 @@ const ReviewListItem = (props) => {
 						<Divider/>
 					}
 				</div>
-					<div style={body}>
+					<div style={footer}>
 						<div style={rootz}>
 							<Grid container spacing={16}>
 
@@ -199,7 +204,7 @@ const ReviewListItem = (props) => {
 				</div>
 
 
-			</Paper>
+			</MobileTearSheet>
 		)
 
 }

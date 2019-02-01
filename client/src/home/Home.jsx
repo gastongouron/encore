@@ -32,10 +32,12 @@ import EncoreLoader from '../app/components/EncoreLoader'
 import Bandeau from './images/bandeau.jpg'
 import StarPng from './images/star.png'
 import Prefooter from './images/footer.jpg'
+
 import Face from './icons/user.png'
 import Camera from './icons/camera.png'
 import Stars from './icons/stars.png'
-
+import Fade from 'react-reveal/Fade';
+import Bounce from 'react-reveal/Bounce';
 
 const StyledSocialIcon = styled(SocialIcon)`
    background: #ececec;
@@ -109,6 +111,15 @@ const hello = {
   // fontWeight: 100,
 }
 
+const headerType = {
+  maxWidth: 500,
+  marginBottom: 0,
+  maxWidth: 340,
+  color: 'white',
+  fontFamily: 'Raleway',
+  // fontWeight: 100,
+}
+
 const encore = {
   color: 'white',
   fontWeight:700, 
@@ -138,9 +149,11 @@ const baseline2 = {
   color: 'white',
   marginTop: 0,
   paddingTop: 5,
+  fontSize: 24,
   paddingBottom: 30,
   fontFamily: 'Raleway',
-  fontWeight: 300,
+  fontWeight: 400,
+  lineHeight: 1.25,
   // textAlign: "center",
   // align: "center",
   // margin: "0 auto",
@@ -175,6 +188,8 @@ const headerBlock = {maxWidth: 840, margin: '0 auto', textAlign: 'left', marginB
 const prefooterBlock = {color: "white", maxWidth: 840, margin: '0 auto', textAlign: 'left', marginBottom: 20, padding: 20, textAlign: "center"}
 
 const features = {
+boxShadow: "inset 0px 10px 5px -5px #F1F1F1,inset 0px -10px 5px -5px #F1F1F1" ,
+
   paddingTop: 40,
   paddingBottom: 60,
   background: "white"
@@ -362,36 +377,48 @@ class Home extends Component {
 
             <Grid container style={header}>              
               <Grid style={headerBlock} item xs={12} sm={12} md={12}>
+                      <Bounce cascade>
+
                 <h1 style={hashtag}><b>#SHARETHEVIBE</b></h1>
-                <h3 style={baseline}>{this.props.locales.locales.baseline} <b>encore!</b></h3>
-                <h4 style={baseline2}>{this.props.locales.locales.homeHello}</h4>
+                </Bounce>
+            <Fade cascade>
+                <h3 style={headerType}>
+                  <span>{this.props.locales.locales.baseline} <b>encore!</b></span><br/><br/>
+                  <span>{this.props.locales.locales.homeHello}</span>
+                </h3>
                 <Link to="/users/getstarted" style={{float: "left", paddingTop: 40}}>
                   <RaisedButton primary={true} label={this.props.locales.locales.getStarted}></RaisedButton>
                 </Link>
+                </Fade>
               </Grid>
             </Grid>
+
             <div style={features}>              
               <Grid container style={featuresBlock}>
-
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
                   <div style={{paddingTop: 10, textAlign: "center"}}>
                     <img style={featureItem2} src={Stars}/><br/>
+                  <Fade cascade>
                     <h4 style={legend}> <span style={boldLegend}>{this.props.locales.locales.feature1Bold}</span>{this.props.locales.locales.feature1Light1}<br/>{this.props.locales.locales.feature1Light2}<br/>{this.props.locales.locales.feature1Light3}</h4>
-
+                    </Fade>
                   </div>
                 </Grid>
 
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
                   <div style={{paddingTop: 10, textAlign: "center"}}>
                     <img style={featureItem} src={Camera}/><br/>
+                            <Fade cascade>
                     <h4 style={legend}> <span style={boldLegend}>{this.props.locales.locales.feature2Bold1}<br/>{this.props.locales.locales.feature2Bold2}</span>{this.props.locales.locales.feature2Light1}<br/>{this.props.locales.locales.feature2Light2}</h4>
+                    </Fade>
                   </div>
                 </Grid>
 
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
                   <div style={{paddingTop: 10, textAlign: "center"}}>
                     <img style={featureItem} src={Face}/><br/>
+                            <Fade cascade>
                     <h4 style={legend}> <span style={boldLegend}>{this.props.locales.locales.feature3Bold}</span><br/>{this.props.locales.locales.feature3Light1}<br/>{this.props.locales.locales.feature3Light2}</h4>
+                    </Fade>
                   </div>
                 </Grid>
               </Grid>
@@ -399,9 +426,11 @@ class Home extends Component {
 
             <Grid container style={block2}>     
               <Grid item style={{textAlign: 'center', margin: '0 auto'}}>
+                      <Fade cascade>
                 <span style={{fontWeight: 800, fontSize: 40}}><b>encore!</b></span>
                 <h3 style={hello}>{this.props.locales.locales.lorem}</h3>
                 <h3 style={hello}>{this.props.locales.locales.lorem2}</h3>
+                </Fade>
               </Grid>
             </Grid>
 
@@ -431,26 +460,31 @@ class Home extends Component {
 
             <Grid container style={prefooter}>              
               <Grid style={prefooterBlock} item xs={12} sm={12} md={12}>
+               <Fade cascade>
                 <h1 style={{fontFamily: 'Raleway', fontSize: 50, fontWeight: 800}}>Ready to share the vibe?</h1>
                 <Link to="/users/getstarted" style={{float: "center"}}>
                   <RaisedButton default={true} label={this.props.locales.locales.getStarted}></RaisedButton>
                 </Link>
+                </Fade>
               </Grid>
             </Grid>
 
             <Grid container style={block3}>     
               <Grid item style={{textAlign: 'center', margin: '0 auto', maxWidth: 290}}>
-                <h2 style={hello}>{this.props.locales.locales.lorem3}</h2><h4 style={{fontSize: "12px", marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem4}</h4>
-                <h2 style={hello}>{this.props.locales.locales.lorem5}</h2><h4 style={{fontSize: "12px", marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem6}. {this.props.locales.locales.lorem6bis}</h4>
-                <h2 style={hello}>{this.props.locales.locales.lorem7}</h2><h4 style={{fontSize: "12px", marginTop: 5, color: theme.palette.textColor, fontWeight: 300}} >{this.props.locales.locales.lorem8}. {this.props.locales.locales.lorem8bis}</h4>
+        <Bounce cascade>
+                   <h3 style={hello}>{this.props.locales.locales.lorem3} <br/><span style={{color: theme.palette.disabledColor}}> {this.props.locales.locales.lorem4}</span></h3>
+                <h3 style={hello}>{this.props.locales.locales.lorem5} <br/><span style={{color: theme.palette.disabledColor}}> {this.props.locales.locales.lorem6}. {this.props.locales.locales.lorem6bis}</span></h3>
+                <h3 style={hello}>{this.props.locales.locales.lorem7} <br/><span style={{color: theme.palette.disabledColor}}> {this.props.locales.locales.lorem8}. {this.props.locales.locales.lorem8bis}</span></h3>
+        </Bounce>
+
               </Grid>
             </Grid>
             <Grid container style={block4}>     
-              <Grid item style={{textAlign: 'center', color: theme.palette.disabledColor, margin: '0 auto', maxWidth: 500, fontSize: 20}}>
+              <Grid item style={{textAlign: 'center', color: theme.palette.secondaryTextColor, margin: '0 auto', maxWidth: 500, fontWeight: 500, fontSize: 20}}>
                 {"Thanks to "}
-                <b><a style={{color: theme.palette.disabledColor,}} href="https://www.last.fm">last.fm</a></b>
+                <b><a style={{color: theme.palette.secondaryTextColor,}} href="https://www.last.fm">last.fm</a></b>
                 &nbsp;& 
-                <b> <a style={{color: theme.palette.disabledColor,}} href="https://www.opensourcefactory.io">osf</a></b>
+                <b> <a style={{color: theme.palette.secondaryTextColor,}} href="https://www.opensourcefactory.io">osf</a></b>
               </Grid>
             </Grid>
 
