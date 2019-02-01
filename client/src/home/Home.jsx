@@ -31,7 +31,7 @@ import Avatar from 'material-ui/Avatar'
 import EncoreLoader from '../app/components/EncoreLoader'
 import Bandeau from './images/bandeau.jpg'
 import StarPng from './images/star.png'
-import Prefooter from './images/footer.jpg'
+import Prefooter from './images/footer2.jpg'
 
 import Face from './icons/user.png'
 import Camera from './icons/camera.png'
@@ -480,7 +480,7 @@ class Home extends Component {
               </Grid>
             </Grid>
             <Grid container style={block4}>     
-              <Grid item style={{textAlign: 'center', color: theme.palette.secondaryTextColor, margin: '0 auto', maxWidth: 500, fontWeight: 500, fontSize: 20}}>
+              <Grid item style={{textAlign: 'center', color: theme.palette.secondaryTextColor, margin: '0 auto', maxWidth: 500, fontWeight: 500,fontSize: 20}}>
                 {"Thanks to "}
                 <b><a style={{color: theme.palette.secondaryTextColor,}} href="https://www.last.fm">last.fm</a></b>
                 &nbsp;& 
