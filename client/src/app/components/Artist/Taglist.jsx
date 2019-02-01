@@ -29,9 +29,8 @@ class Taglist extends Component {
 			const tagItems = this.props.tags.split(',').map((tag, index) => {
 				return (
 					index < amount ?
-					<div style={{float: 'right'}}>
+					<div key={index}  style={{float: 'right'}}>
 			        <Chip 
-			        	key={index} 
 			        	style={styles.chip}
 			        	onClick={ () => this.props.onClickTag(tag)}>
 			        	<span style={{fontSize: 10}}>{tag}</span> 
