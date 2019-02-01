@@ -102,7 +102,7 @@ const translations = {
       text: "Nous vous informons que ce site utilise des cookies.",
    },
    policy: {
-      link:"confidentialité",
+      link:"Confidentialité",
       title:"Encore: Politique de confidentialité",
       p1:"Votre vie privée est importante pour nous. Encore a pour politique de respecter votre vie privée à l’égard des informations que nous pouvons collecter sur votre site internet. ",
       p2:"Nous ne vous demandons pas vos informations personnelles sauf si nous en avons vraiment besoin. Lorsque nous le faisons, nous ne collectons ce dont nous avons besoin que par des moyens équitables et licites et, le cas échéant, à votre connaissance ou avec votre consentement. Nous allons également vous faire savoir pourquoi nous le recueillons et comment il sera utilisé",

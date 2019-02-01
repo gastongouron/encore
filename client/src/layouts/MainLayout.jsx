@@ -114,6 +114,7 @@ capitalizeTxt(txt) {
     const navbarElem = {
       color: textColor,
       fontSize: 12,
+
       // letterSpacing: '1px',
       // textTransform: 'uppercase',
     }
@@ -128,6 +129,7 @@ capitalizeTxt(txt) {
             style={navbarElem}
           />
           <Popover
+            style={{zIndex: 1000}}
             open={this.state.open}
             anchorEl={this.state.anchorEl}
             anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
@@ -335,7 +337,7 @@ class MainLayout extends Component {
       backgroundPosition: 'top', /* Position the image to the top center of the div */
       // boxShadow: 'none', 
       position: 'fixed', 
-      zIndex:10000,
+      zIndex:999,
       color: '#ffffff'
     }
 
@@ -347,7 +349,7 @@ class MainLayout extends Component {
       background:'rgba(0,0,0,0.4)', 
       boxShadow: 'none', 
       position: 'fixed', 
-      zIndex:10000,
+      zIndex:999,
       color: '#ffffff'
     }
 

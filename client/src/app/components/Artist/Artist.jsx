@@ -46,10 +46,15 @@ const marginBottom = {
 
 class ArtistDetail extends Component {
 
+
+
+
     constructor(props){
 
         super(props);
-
+        
+        this.updateDimensions = this.updateDimensions.bind(this);
+        
         this.save = onSave.bind(this)
         this.update = onUpdate.bind(this)
         this.delete = onDelete.bind(this)
@@ -66,9 +71,11 @@ class ArtistDetail extends Component {
         this.state = {
             showModal: false,
             enabledButton: true,
+            isHidden: true,
             review:null,
             isUpdate:false,
             observable: null,
+            innerHeight: 0,
             subscription: null,
         };
     };
@@ -101,6 +108,8 @@ class ArtistDetail extends Component {
             error(err) { console.error('err', err); },
           });
         this.setState({subscription: subscription})
+       this.updateDimensions();
+       window.addEventListener('scroll', this.updateDimensions);
     }
 
     isConnected() {
@@ -109,6 +118,7 @@ class ArtistDetail extends Component {
 
     componentWillUnmount(){
         this.state.subscription.unsubscribe()
+        window.removeEventListener('scroll', this.updateDimensions);
     }
 
     toggleEditFromArtist(){
@@ -116,6 +126,10 @@ class ArtistDetail extends Component {
         this.show(review, this)
     }
 
+    updateDimensions() {
+        window.scrollY > 550 ? this.setState({isHidden: false}) : this.setState({isHidden: true})
+    }
+    
     checkEnableNewReview(reviews){
         if (this.props.userInfo.user_id) {
             for (var i = 0; i < reviews.length; i++) {
@@ -235,7 +249,17 @@ class ArtistDetail extends Component {
                     </form>
                 </div>
                 } 
-                
+                            <div hidden={this.state.isHidden} style={{maxWidth: 500, margin: '0 auto'}}>
+                            <div style={{bottom: 20, right: 5, position: 'fixed'}}>
+                            <ActionButtons
+                                edit={(e) => this.toggleEditFromArtist()} 
+                                connected={this.isConnected()} 
+                                new={(e) => this.show(null, this)}
+                                enabled={this.state.enabledButton}
+                                redirect={() => this.props.history.push('/users/getstarted')}
+                            />
+                            </div>
+                            </div>
             </div>
         );
     }
