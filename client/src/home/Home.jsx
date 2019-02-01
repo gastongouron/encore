@@ -374,14 +374,14 @@ class Home extends Component {
       } else {
     return (
       <div style={rootz}>
-
+         <Fade cascade>
             <Grid container style={header}>              
               <Grid style={headerBlock} item xs={12} sm={12} md={12}>
                       <Bounce cascade>
 
                 <h1 style={hashtag}><b>#SHARETHEVIBE</b></h1>
                 </Bounce>
-            <Fade cascade>
+              <Fade cascade>
                 <h3 style={headerType}>
                   <span>{this.props.locales.locales.baseline} <b>encore!</b></span><br/><br/>
                   <span>{this.props.locales.locales.homeHello}</span>
@@ -392,7 +392,7 @@ class Home extends Component {
                 </Fade>
               </Grid>
             </Grid>
-
+          </Fade>
             <div style={features}>              
               <Grid container style={featuresBlock}>
                 <Grid style={{paddingTop: 20}} item xs={12} sm={4} md={4}>
