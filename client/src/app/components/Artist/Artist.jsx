@@ -108,8 +108,8 @@ class ArtistDetail extends Component {
             error(err) { console.error('err', err); },
           });
         this.setState({subscription: subscription})
-       this.updateDimensions();
-       window.addEventListener('scroll', this.updateDimensions);
+       // this.updateDimensions();
+       // window.addEventListener('scroll', this.updateDimensions);
     }
 
     isConnected() {
@@ -117,8 +117,8 @@ class ArtistDetail extends Component {
     }
 
     componentWillUnmount(){
-        this.state.subscription.unsubscribe()
-        window.removeEventListener('scroll', this.updateDimensions);
+        // this.state.subscription.unsubscribe()
+        // window.removeEventListener('scroll', this.updateDimensions);
     }
 
     toggleEditFromArtist(){
@@ -249,8 +249,7 @@ class ArtistDetail extends Component {
                     </form>
                 </div>
                 } 
-                            <div hidden={this.state.isHidden} style={{maxWidth: 500, margin: '0 auto'}}>
-                            <div style={{zIndex: 999, bottom: 20, right: 5, position: 'fixed'}}>
+                            <div hidden={false} style={{maxWidth: 500, margin: '0 auto', zIndex: 999,bottom: 20, right: 5, position: 'fixed'}}>
                             <ActionButtons
                                 edit={(e) => this.toggleEditFromArtist()} 
                                 connected={this.isConnected()} 
@@ -258,7 +257,6 @@ class ArtistDetail extends Component {
                                 enabled={this.state.enabledButton}
                                 redirect={() => this.props.history.push('/users/getstarted')}
                             />
-                            </div>
                             </div>
             </div>
         );
