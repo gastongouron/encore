@@ -375,7 +375,7 @@ class Home extends Component {
     return (
       <div style={rootz}>
          <Fade cascade>
-            <Grid container style={header}>              
+            <Grid container style={header}>
               <Grid style={headerBlock} item xs={12} sm={12} md={12}>
                       <Bounce cascade>
 

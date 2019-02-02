@@ -15,13 +15,14 @@ class Artists extends Component {
         super(props);
         this.state = {
             artists: this.props.artists.artists,
+            // foundArtists: this.props.artists.artists,
             locales: this.props.locales.locales,
             selectedArtist: null,
             hasMore: true,
             searchTerm: '',
             tag: ''
           }
-        this.artistSearch = this.method = __.debounce(this.artistSearch.bind(this), 1000);
+        this.artistSearch = this.method = __.debounce(this.artistSearch.bind(this), 2000);
         // this.artistSearch = this.artistSearch.bind(this)
         this.scrollFetch = this.scrollFetch.bind(this)
         this.onClickTag = this.onClickTag.bind(this)
@@ -45,8 +46,9 @@ class Artists extends Component {
     }
     
     artistSearch(term) {
+        let queryParam = term.length > 1 ? {input: term.toLowerCase()} : {first:20} 
         this.setState({searchTerm: term.toLowerCase()})
-        this.props.client.query({query: artistSearchQuery, fetchPolicy: 'network-only', variables: {input: term.toLowerCase() }}).then(
+        this.props.client.query({query: artistSearchQuery, fetchPolicy: 'network-only', variables: queryParam}).then(
             (res) => {
                 this.setState({artists: res.data.allArtists})
                 if (res.data.allArtists.length === 0) { this.setState({hasMore: false}) }
