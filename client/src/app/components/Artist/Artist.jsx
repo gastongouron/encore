@@ -108,8 +108,8 @@ class ArtistDetail extends Component {
             error(err) { console.error('err', err); },
           });
         this.setState({subscription: subscription})
-       // this.updateDimensions();
-       // window.addEventListener('scroll', this.updateDimensions);
+       this.updateDimensions();
+       window.addEventListener('scroll', this.updateDimensions);
     }
 
     isConnected() {
@@ -117,8 +117,8 @@ class ArtistDetail extends Component {
     }
 
     componentWillUnmount(){
-        // this.state.subscription.unsubscribe()
-        // window.removeEventListener('scroll', this.updateDimensions);
+        this.state.subscription.unsubscribe()
+        window.removeEventListener('scroll', this.updateDimensions);
     }
 
     toggleEditFromArtist(){
@@ -127,7 +127,11 @@ class ArtistDetail extends Component {
     }
 
     updateDimensions() {
-        window.scrollY > 550 ? this.setState({isHidden: false}) : this.setState({isHidden: true})
+        if(!this.state.isHidden && window.scrollY > 500 ){
+            return
+        }else{
+            window.scrollY > 550 ? (this.setState({isHidden: false}) && window.removeEventListener('scroll', this.updateDimensions)) : this.setState({isHidden: true})
+        }
     }
     
     checkEnableNewReview(reviews){
@@ -146,7 +150,7 @@ class ArtistDetail extends Component {
         const artist = this.props.artistDetail.artistDetail
         // const uniq = {}
         // const arr = artist.reviews || []
-
+        // console.log(this.state.isHidden)
         // const artist.reviews = arr.filter(obj => !uniq[obj.id] && (uniq[obj.id] = true));
 
         return (
@@ -248,7 +252,7 @@ class ArtistDetail extends Component {
                     </form>
                 </div>
                 } 
-                            <div hidden={false} style={{maxWidth: 500, margin: '0 auto', zIndex: 999,bottom: 20, right: 5, position: 'fixed'}}>
+                            <div hidden={this.state.isHidden} style={{maxWidth: 500, margin: '0 auto', zIndex: 10,bottom: 20, right: 0, position: 'fixed'}}>
                             <ActionButtons
                                 edit={(e) => this.toggleEditFromArtist()} 
                                 connected={this.isConnected()} 

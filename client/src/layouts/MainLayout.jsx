@@ -545,7 +545,7 @@ class MainLayout extends Component {
           <span style={{fontWeight: 800, fontSize: 40, fontFamily: 'Raleway', float: 'left'}}><b>encore!</b></span>
           <div style={{float: "right"}}>
             <StyledSocialIcon color="white" style={{background:"transparent", height: 28, color:"red", width: 28, marginLeft: 5, height: 28, width: 28}} network="instagram" url="https://www.instagram.com/encoreapp.co" />
-            <StyledSocialIcon color="white" style={{background:"transparent", marginLeft: 5, height: 28, width: 28}} network="facebook" url="https://www.facebook.com/Encore-2079915298988137/" />
+            <StyledSocialIcon color="white" style={{background:"transparent", marginLeft: 5, height: 28, width: 28}} network="facebook" url="https://www.facebook.com/EncoreApp-826064754401701/" />
             <StyledSocialIcon color="white" style={{background:"transparent", marginLeft: 5, height: 28, width: 28}} network="twitter" url="https://twitter.com/CoEncoreapp" />
             <br/>
             <br/>

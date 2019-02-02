@@ -396,20 +396,9 @@ handleNext = () => {
                 <Alert style={{marginTop: 0, marginBottom: 0, textAlign: 'center'}} hidden={this.state.hiddenError}>
                   {this.state.error}
                 </Alert>
-               <LinearProgress hidden={this.state.hiddenProgress} variant="determinate" value={this.state.progress} />
-              </div>
-              
-              {isImage(this.props.formMedia) ? <img alt="" style={imageStyle} src={this.props.formMedia} /> : <ReactPlayer width='100%' height='auto' url={this.props.formMedia} controls={true} />}
-               {
-                this.props.formMedia ? 
-                  <div>
-                    <FloatingActionButton mini={true} style={{float: 'right', marginRight: 15, marginTop: -20}} secondary={true} onClick={(e) => this.onClickRemove(e, this)}> <ContentRemove /></FloatingActionButton>
-                    <br />
-                  </div>
-                :
-                  null
-               }
+              </div>  
 
+            
 
           <div style={{maxWidth: 380, maxHeight: 400, margin: 'auto'}}>
                   <Stepper activeStep={stepIndex} orientation="vertical">
@@ -548,10 +537,20 @@ handleNext = () => {
                     </Step>
                     <Step>
                       <StepLabel>{this.props.locales.locales.step3Title}</StepLabel>
-
                       <StepContent>
                         <p>{strings.formatString(this.props.locales.locales.enrich, {artistname: this.props.artistDetail.artistDetail.name})}</p>
-                          <div style={{ paddingTop: 5, paddingLeft: 10, paddingRight: 40, paddingBottom:10}}>
+
+                          <div style={{ paddingTop: 5, paddingLeft: 0, paddingRight: 30, paddingBottom:10}}>
+              <LinearProgress hidden={this.state.hiddenProgress} variant="determinate" value={this.state.progress} />            
+               {
+                this.props.formMedia ? 
+                  <div>
+                    <FloatingActionButton mini={true} style={{float: 'right', marginRight: -20, marginBottom: -20}} secondary={true} onClick={(e) => this.onClickRemove(e, this)}> <ContentRemove /></FloatingActionButton>
+                  </div>
+                :
+                  null
+               }
+                {isImage(this.props.formMedia) ? <img alt="" style={imageStyle} src={this.props.formMedia} /> : <ReactPlayer width='100%' height='auto' url={this.props.formMedia} controls={true} />}
                           <FlatButton
                            // style={{}}
                            // backgroundColor="#F1F1F1"
