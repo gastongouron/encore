@@ -105,7 +105,7 @@ const ArtistListItem = (props) => {
 					        		}
 					        		</b></span><br/>
 
-									<Truncate style={{fontSize: 10, lineHeight: 1}} lines={val} ellipsis={<span>... <Link style={{color: theme.palette.primary1Color}} to={'/artists/'+ artist.id}>{props.locales.locales.readMore}</Link></span>}>
+									<Truncate style={{fontSize: 12, lineHeight: 1}} lines={val} ellipsis={<span>... <Link style={{color: theme.palette.primary1Color}} to={'/artists/'+ artist.id}>{props.locales.locales.readMore}</Link></span>}>
 										{props.locales.locales._language === 'en' ? artist.description_en : artist.description_fr}
 		            				</Truncate>
 

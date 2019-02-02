@@ -97,7 +97,7 @@ class Artists extends Component {
                 : this.props.artists.error ? <h1>Error...</h1> : 
                     <div style={{maxWidth: 500, margin: '0 auto'}}>
                         <div style={{paddingTop: 10, margin: 10}}>
-                        <h1 style={{marginTop: 20, fontWeight: "100", fontFamilly: "Roboto"}}>{this.props.locales.locales.artists}</h1>
+                        <h1 style={{marginTop: 20, fontWeight: "100", fontFamilly: "Raleway"}}>{this.props.locales.locales.artists}</h1>
                         <SearchBar 
                             onRef={ref => (this.child = ref)} 
                             onSearchTermChange={this.artistSearch}

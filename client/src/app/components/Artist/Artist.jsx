@@ -170,7 +170,7 @@ class ArtistDetail extends Component {
 
                                 <Grid style={padded} container>
                                     <Grid item xs={12}>
-                                        <h1>
+                                        <h2>
                                             <span style={{float:'left'}}>{artist.name}</span>
                                             <span style={{float:'right', color: theme.palette.textColor}}>
                                                 { Number(artist.reviews_count) !== 0 ? 
@@ -180,16 +180,24 @@ class ArtistDetail extends Component {
                                                 }
                                                 { Number(artist.reviews_count) !== 0 ? (Math.round( artist.score * 10 ) / 10) : ""} 
                                             </span>
-                                        </h1>
-                                        <br />
-
+                                        </h2>
+                                        <br/>
+                                
+                                        <h4 style={{marginTop: 0, marginBottom:10, color: theme.palette.secondaryTextColor, fontWeight: "100"}}>
+                                        {
+                                            Number(artist.reviews_count) > 1 
+                                        ? 
+                                            artist.reviews_count + " " + this.props.locales.locales.reviewsLabel 
+                                        : 
+                                            Number(artist.reviews_count) === 1 ? artist.reviews_count + " " + this.props.locales.locales.reviewLabel : this.props.locales.locales.beTheFirst
+                                        }
+                                        </h4>
                                     </Grid>
-
                                     <Grid style={marginBottom} item xs={12} sm={12}>
                                         {this.props.locales.locales._language === 'en' ? 
-                                            <p>{artist.description_en}</p>
+                                            <p style={{fontSize: 12, lineHeight: 1.6}}>{artist.description_en}</p>
                                         :
-                                            <p>{artist.description_fr}</p>
+                                            <p style={{fontSize: 12, lineHeight: 1.6}}>{artist.description_fr}</p>
                                         }
                                     </Grid>
                                 </Grid>
@@ -199,15 +207,6 @@ class ArtistDetail extends Component {
                     
                     <div style={{ paddingLeft: 10, paddingRight: 10, maxWidth: 500, margin: '0 auto'}}>
                                         
-                                        <h1 style={{color: theme.palette.disabledColor, fontWeight: "100", textAlign: 'center',paddingBottom: 10}}>
-                                        {
-                                            Number(artist.reviews_count) > 1 
-                                        ? 
-                                            artist.reviews_count + " " + this.props.locales.locales.reviewsLabel 
-                                        : 
-                                            Number(artist.reviews_count) === 1 ? artist.reviews_count + " " + this.props.locales.locales.reviewLabel : this.props.locales.locales.beTheFirst
-                                        }
-                                        </h1>
                         <ReviewList
                             onReviewSelect={reviewReview => this.show(reviewReview, this)}
                             reviews={artist.reviews}
