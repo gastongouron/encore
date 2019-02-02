@@ -370,7 +370,7 @@ class MainLayout extends Component {
           showMenuIconButton={ this.state.width < 500 ? true : false}
           iconStyleLeft={{color: "#ffffff"}}
           iconElementLeft={<Hamburger color="#ffffff" style={{marginLeft: 10, marginTop: 13}}/>}
-          title={<div>
+          title={<div style={{letterSpacing: -1}}>
                   <b>encore!</b>
                 </div>}
           titleStyle={{fontSize: 28, fontWeight: 900, color: palette.alternateTextColor}}
